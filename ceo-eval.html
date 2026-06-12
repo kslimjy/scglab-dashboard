@@ -84,6 +84,25 @@ input.highlight-input{border-color:var(--amber);background:#FFFEF8;}
 .esi-t th{background:var(--bg3);font-weight:600;text-align:center;}
 .esi-t td{text-align:center;font-family:'DM Mono',monospace;}
 .esi-t .ar td{background:var(--amber-dim);color:var(--amber);font-weight:700;}
+.spi2-ref{margin-top:14px;background:var(--bg3);border-radius:8px;padding:12px 14px;}
+.spi2-ref-title{font-size:11px;font-weight:700;color:var(--text2);margin-bottom:8px;display:flex;justify-content:space-between;}
+.spi2-ref-title span{color:var(--text3);font-weight:400;font-family:'DM Mono',monospace;}
+.spi2-ref-table{width:100%;border-collapse:collapse;font-size:11px;}
+.spi2-ref-table th{background:var(--bg2);padding:5px 8px;border:1px solid var(--border);font-weight:600;text-align:center;}
+.spi2-ref-table th:first-child{text-align:left;}
+.spi2-ref-table td{padding:5px 8px;border:1px solid var(--border);text-align:right;font-family:'DM Mono',monospace;}
+.spi2-ref-table td:first-child{text-align:left;font-family:'Noto Sans KR',sans-serif;color:var(--text2);}
+.spi2-ref-table tr.sub td{background:#FEF9F0;font-weight:600;}
+.spi2-ref-table tr.tot td{background:var(--amber-dim);color:var(--amber);font-weight:700;}
+.spi2-ref-note{font-size:10px;color:var(--text3);margin-top:6px;line-height:1.5;}
+.val-good{color:var(--blue)!important;font-weight:700!important;}
+.val-bad{color:var(--red)!important;font-weight:700!important;}
+.reason-box{background:var(--red-dim);border-left:3px solid var(--red);border-radius:0 6px 6px 0;padding:7px 11px;margin:2px 0 4px;font-size:11px;color:var(--red);line-height:1.6;}
+.reason-box strong{font-weight:700;}
+.reason-box.info{background:var(--blue-dim);border-left-color:var(--blue);color:var(--blue);}
+
+
+
 .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .fitem{background:var(--bg3);border-radius:7px;padding:11px 13px;}
 .fitem-title{font-size:11px;font-weight:700;color:var(--text);margin-bottom:3px;}
@@ -183,6 +202,19 @@ input.highlight-input{border-color:var(--amber);background:#FFFEF8;}
             <div class="irow"><input type="text" id="qualitative" value="0" inputmode="numeric" placeholder="음수 가능" oninput="commaFormat(this,true)"><span class="iu">원</span></div>
           </div>
           <button class="calc-btn" onclick="calculate()">📊 계산하기</button>
+
+          <div class="spi2-ref">
+            <div class="spi2-ref-title">📑 26년 SPI2 산출 기준 <span>[백만원]</span></div>
+            <table class="spi2-ref-table">
+              <tr><th>Index</th><th>사업계획(BP)</th><th>12월누계(추정)</th></tr>
+              <tr><td>세전이익</td><td id="ref-nibt-bp">-</td><td id="ref-nibt-est">-</td></tr>
+              <tr><td>판관비(+) CM비용</td><td id="ref-cm-bp">-</td><td id="ref-cm-est">-</td></tr>
+              <tr class="sub"><td>SPI</td><td id="ref-spi-bp">-</td><td id="ref-spi-est">-</td></tr>
+              <tr><td>CEO 성과급</td><td id="ref-ceo-bp">-</td><td id="ref-ceo-est">-</td></tr>
+              <tr class="tot"><td>SPI2</td><td id="ref-spi2-bp">-</td><td id="ref-spi2-est">-</td></tr>
+            </table>
+            <div class="spi2-ref-note">사업계획 SPI2 = <strong>T-SPI2</strong> (BPAR 기준). 12월누계(추정) = <strong>실적 SPI2</strong> (현재 2QF 전망).<br>① 입력값과 자동 연동 — 매월 업데이트 시 함께 갱신됩니다.</div>
+          </div>
         </div>
       </div>
     </div>
@@ -229,10 +261,11 @@ input.highlight-input{border-color:var(--amber);background:#FFFEF8;}
             <tr class="sh"><td colspan="2">성과급 계산 상세</td></tr>
             <tr><td>SPI2</td><td id="r-spi2">-</td></tr>
             <tr><td>BPAR (사업계획 달성률)</td><td id="r-bpar">-</td></tr>
+            <tr id="r-bpar-reason-row" style="display:none;"><td colspan="2" style="padding:0;"><div class="reason-box" id="r-bpar-reason"></div></td></tr>
             <tr><td>ESI 요율</td><td id="r-esi-rate">-</td></tr>
             <tr><td>TAI = SPI2 × 1.5%</td><td id="r-tai">-</td></tr>
             <tr><td>OPI = (SPI2 - T-SPI2) × 1.5%</td><td id="r-opi">-</td></tr>
-            <tr><td>× ESI × PEI</td><td id="r-multiplier">-</td></tr>
+            <tr id="r-opi-reason-row" style="display:none;"><td colspan="2" style="padding:0;"><div class="reason-box" id="r-opi-reason"></div></td></tr>
             <tr class="hl"><td>성과급 정량</td><td id="r-bonusq">-</td></tr>
             <tr><td>정성적 평가</td><td id="r-qual">-</td></tr>
             <tr><td>월급여 한도 (월급여 × 400%)</td><td id="r-limit">-</td></tr>
@@ -246,6 +279,7 @@ input.highlight-input{border-color:var(--amber);background:#FFFEF8;}
             <tr><td>PEI</td><td id="r-pei2">-</td></tr>
             <tr><td>CEO Risk Premium</td><td>120%</td></tr>
             <tr><td>연봉인상률</td><td id="r-raise-rate">-</td></tr>
+            <tr id="r-raise-reason-row" style="display:none;"><td colspan="2" style="padding:0;"><div class="reason-box" id="r-raise-reason"></div></td></tr>
             <tr><td>기준연봉</td><td id="r-base">-</td></tr>
             <tr class="hlb"><td>신규 연봉 (정량)</td><td id="r-new-sal">-</td></tr>
             <tr><td>인상액</td><td id="r-raise-amt">-</td></tr>
@@ -352,6 +386,25 @@ function calculate(){
   document.getElementById('s-ceo').textContent  = fmt(ceoPS,'만');
   document.getElementById('s-spi2').textContent = fmt(spi2,'억')+' ('+fmt(spi2,'만')+')';
 
+  // 26년 SPI2 기준표 갱신 (백만원 단위)
+  var M = 1000000;
+  // 계획(BP) — 세전이익은 실적과 동일 전제, CM/CEO는 계획 고정값
+  var bpNibt = nibt, bpCm = 305496228, bpCeo = 20000000;
+  var bpSpi = bpNibt + bpCm, bpSpi2 = bpSpi + bpCeo;
+  // 추정(실적) — 입력값 그대로
+  var estSpi = nibt + cmCost, estSpi2 = spi2;
+  function pm(n){ return Math.round(n/M).toLocaleString(); }
+  document.getElementById('ref-nibt-bp').textContent = pm(bpNibt);
+  document.getElementById('ref-nibt-est').textContent = pm(nibt);
+  document.getElementById('ref-cm-bp').textContent = pm(bpCm);
+  document.getElementById('ref-cm-est').textContent = pm(cmCost);
+  document.getElementById('ref-spi-bp').textContent = pm(bpSpi);
+  document.getElementById('ref-spi-est').textContent = pm(estSpi);
+  document.getElementById('ref-ceo-bp').textContent = pm(bpCeo);
+  document.getElementById('ref-ceo-est').textContent = pm(ceoPS);
+  document.getElementById('ref-spi2-bp').textContent = pm(bpSpi2);
+  document.getElementById('ref-spi2-est').textContent = pm(estSpi2);
+
   // 연봉 입력 검증
   var warn = document.getElementById('warn-input');
   if(!baseSal){ warn.style.display='block'; }
@@ -386,11 +439,11 @@ function calculate(){
   document.getElementById('r-esi-rate').textContent = (esi.esi_rate*100).toFixed(1)+'%';
   document.getElementById('r-tai').textContent      = fmt(tai,'만');
   document.getElementById('r-opi').textContent      = fmt(opi,'만');
-  document.getElementById('r-multiplier').textContent='ESI '+(esi.esi_rate*100).toFixed(1)+'% × PEI '+(pei*100)+'%';
   document.getElementById('r-bonusq').textContent   = fmt(bonusQ,'만');
   document.getElementById('r-qual').textContent     = fmt(qual,'만');
 
   // 연봉 의존 항목
+  var raiseRateForColor = bparOK ? bpRate*bpar*pei*1.2 : 0;
   if(baseSal){
     var monthSal=baseSal/12, limit=monthSal*4;
     var bonusSum=bonusQ+qual;
@@ -420,6 +473,39 @@ function calculate(){
     });
     document.getElementById('r-bonus-sub').textContent='연봉 입력 후 계산';
     document.getElementById('r-salary-sub').textContent='연봉 입력 후 계산';
+  }
+
+  applyColors(bpar, bparOK, opi, raiseRateForColor);
+}
+
+// 조건별 색상 적용
+function applyColors(bpar, bparOK, opi, raiseRate){
+  function setCls(id, cls){
+    var el = document.getElementById(id);
+    if(!el) return;
+    el.classList.remove('val-good','val-bad');
+    if(cls) el.classList.add(cls);
+  }
+  // BPAR: 100%↑ 파랑 / 90%미만 빨강 / 그사이 기본
+  var bparCls = bpar>=1.0 ? 'val-good' : (!bparOK ? 'val-bad' : null);
+  setCls('r-bpar', bparCls);
+  setCls('r-bpar2', bparCls);
+  // OPI: >0 파랑(초과달성) / =0 빨강(미달)
+  setCls('r-opi', opi>0 ? 'val-good' : 'val-bad');
+  // PEI: A 파랑 / C 빨강
+  var peiCls = currentPEI==='A' ? 'val-good' : (currentPEI==='C' ? 'val-bad' : null);
+  setCls('r-pei2', peiCls);
+  // 연봉인상률: 0 빨강 / >0 파랑
+  setCls('r-raise-rate', raiseRate>0 ? 'val-good' : 'val-bad');
+  // 26년 기준표 SPI2: 추정 > 계획이면 파랑, 미달이면 빨강
+  var estEl = document.getElementById('ref-spi2-est');
+  var bpEl = document.getElementById('ref-spi2-bp');
+  if(estEl && bpEl){
+    var estV = parseFloat(estEl.textContent.replace(/,/g,''))||0;
+    var bpV = parseFloat(bpEl.textContent.replace(/,/g,''))||0;
+    estEl.classList.remove('val-good','val-bad');
+    if(estV>=bpV) estEl.classList.add('val-good');
+    else if(estV < bpV*0.9) estEl.classList.add('val-bad');
   }
 }
 
