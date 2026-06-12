@@ -78,7 +78,30 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
 .fin-table .pos-g{color:var(--green)!important;}
 .table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius);}
 
-/* Legend */
+/* Tooltip */
+.tip{cursor:help;border-bottom:1px dashed var(--text3);}
+#tooltip{
+  position:fixed;
+  background:#1E293B;
+  color:#fff;
+  font-size:12px;
+  font-family:'Noto Sans KR',sans-serif;
+  line-height:1.7;
+  padding:10px 14px;
+  border-radius:8px;
+  max-width:260px;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity .15s;
+  z-index:9999;
+  box-shadow:0 4px 16px rgba(0,0,0,.25);
+  white-space:normal;
+}
+#tooltip.show{opacity:1;}
+#tooltip .tip-formula{color:#93C5FD;font-size:11px;margin-bottom:4px;font-family:'DM Mono',monospace;}
+#tooltip .tip-desc{color:#fff;}
+#tooltip .tip-note{color:#94A3B8;font-size:11px;margin-top:3px;}
+
 .legend{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:14px;}
 .legend-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text2);}
 .legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
@@ -256,25 +279,25 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
 <div id="panel-ratio" class="panel">
   <div class="kpi-grid">
     <div class="kpi">
-      <div class="kpi-label">2025 ROE</div>
+      <div class="kpi-label"><span class="tip" data-formula="당기순이익 ÷ 자본총계 × 100" data-desc="보유 자본으로 얼마나 이익을 냈는지" data-note="높을수록 자본을 효율적으로 활용한 것">2025 ROE ⓘ</span></div>
       <div class="kpi-value">16.2<span>%</span></div>
       <div class="kpi-sub">전년 23.7%</div>
       <div class="kpi-badge down">▼ -7.5%p</div>
     </div>
     <div class="kpi">
-      <div class="kpi-label">2025 자기자본비율</div>
+      <div class="kpi-label"><span class="tip" data-formula="자본총계 ÷ 자산총계 × 100" data-desc="회사 자산 중 내 돈(빚 아닌 것)의 비율" data-note="높을수록 재무적으로 안정적">2025 자기자본비율 ⓘ</span></div>
       <div class="kpi-value">71.0<span>%</span></div>
       <div class="kpi-sub">전년 70.4%</div>
       <div class="kpi-badge up">▲ +0.6%p</div>
     </div>
     <div class="kpi">
-      <div class="kpi-label">2025 유동비율</div>
+      <div class="kpi-label"><span class="tip" data-formula="유동자산 ÷ 유동부채 × 100" data-desc="단기 빚을 갚을 수 있는 여유" data-note="200% 이상이면 안정적">2025 유동비율 ⓘ</span></div>
       <div class="kpi-value">245<span>%</span></div>
       <div class="kpi-sub">전년 263%</div>
       <div class="kpi-badge down">▼ -18%p</div>
     </div>
     <div class="kpi">
-      <div class="kpi-label">2025 부채비율</div>
+      <div class="kpi-label"><span class="tip" data-formula="부채총계 ÷ 자본총계 × 100" data-desc="내 돈 대비 빌린 돈의 비율" data-note="낮을수록 재무 안전">2025 부채비율 ⓘ</span></div>
       <div class="kpi-value">40.9<span>%</span></div>
       <div class="kpi-sub">전년 42.0%</div>
       <div class="kpi-badge up">▼ -1.1%p 개선</div>
@@ -312,14 +335,14 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
       </thead>
       <tbody>
         <tr class="section-row"><td colspan="7">수익성</td></tr>
-        <tr><td>　매출총이익률</td><td>50.7%</td><td>56.5%</td><td>36.5%</td><td>31.8%</td><td>39.3%</td><td>35.3%</td></tr>
-        <tr><td>　영업이익률</td><td>11.7%</td><td>22.5%</td><td class="neg">-5.6%</td><td>5.9%</td><td>12.2%</td><td>6.0%</td></tr>
-        <tr><td>　순이익률</td><td>12.4%</td><td>20.6%</td><td class="neg">-0.1%</td><td>10.3%</td><td>14.7%</td><td>11.1%</td></tr>
-        <tr><td>　ROE</td><td>13.6%</td><td>28.0%</td><td class="neg">-0.1%</td><td>18.9%</td><td>23.7%</td><td>16.2%</td></tr>
+        <tr><td><span class="tip" data-formula="매출총이익 ÷ 매출액 × 100" data-desc="물건 팔고 원가 빼고 남은 비율" data-note="높을수록 원가 경쟁력이 좋은 것">　매출총이익률 ⓘ</span></td><td>50.7%</td><td>56.5%</td><td>36.5%</td><td>31.8%</td><td>39.3%</td><td>35.3%</td></tr>
+        <tr><td><span class="tip" data-formula="영업이익 ÷ 매출액 × 100" data-desc="본업으로 얼마나 남겼는지" data-note="판관비까지 빼고 남은 비율">　영업이익률 ⓘ</span></td><td>11.7%</td><td>22.5%</td><td class="neg">-5.6%</td><td>5.9%</td><td>12.2%</td><td>6.0%</td></tr>
+        <tr><td><span class="tip" data-formula="당기순이익 ÷ 매출액 × 100" data-desc="세금·이자 다 내고 최종으로 남은 비율" data-note="회사의 실질적인 수익성 지표">　순이익률 ⓘ</span></td><td>12.4%</td><td>20.6%</td><td class="neg">-0.1%</td><td>10.3%</td><td>14.7%</td><td>11.1%</td></tr>
+        <tr><td><span class="tip" data-formula="당기순이익 ÷ 자본총계 × 100" data-desc="보유 자본으로 얼마나 이익을 냈는지" data-note="높을수록 자본을 효율적으로 활용한 것">　ROE ⓘ</span></td><td>13.6%</td><td>28.0%</td><td class="neg">-0.1%</td><td>18.9%</td><td>23.7%</td><td>16.2%</td></tr>
         <tr class="section-row"><td colspan="7">안정성</td></tr>
-        <tr><td>　유동비율</td><td>596%</td><td>334%</td><td>274%</td><td>244%</td><td>263%</td><td>245%</td></tr>
-        <tr><td>　자기자본비율</td><td>81.4%</td><td>67.3%</td><td>72.7%</td><td>69.8%</td><td>70.4%</td><td>71.0%</td></tr>
-        <tr><td>　부채비율</td><td>22.8%</td><td>48.5%</td><td>37.6%</td><td>43.3%</td><td>42.0%</td><td>40.9%</td></tr>
+        <tr><td><span class="tip" data-formula="유동자산 ÷ 유동부채 × 100" data-desc="단기 빚을 갚을 수 있는 여유" data-note="200% 이상이면 안정적">　유동비율 ⓘ</span></td><td>596%</td><td>334%</td><td>274%</td><td>244%</td><td>263%</td><td>245%</td></tr>
+        <tr><td><span class="tip" data-formula="자본총계 ÷ 자산총계 × 100" data-desc="회사 자산 중 내 돈(빚 아닌 것)의 비율" data-note="높을수록 재무적으로 안정적">　자기자본비율 ⓘ</span></td><td>81.4%</td><td>67.3%</td><td>72.7%</td><td>69.8%</td><td>70.4%</td><td>71.0%</td></tr>
+        <tr><td><span class="tip" data-formula="부채총계 ÷ 자본총계 × 100" data-desc="내 돈 대비 빌린 돈의 비율" data-note="낮을수록 재무 안전">　부채비율 ⓘ</span></td><td>22.8%</td><td>48.5%</td><td>37.6%</td><td>43.3%</td><td>42.0%</td><td>40.9%</td></tr>
       </tbody>
     </table>
   </div>
@@ -571,6 +594,36 @@ function buildCF() {
 
 // 초기 로드
 window.addEventListener('DOMContentLoaded', function() { buildPL(); });
+</script>
+<!-- Tooltip -->
+<div id="tooltip">
+  <div class="tip-formula" id="tip-formula"></div>
+  <div class="tip-desc"   id="tip-desc"></div>
+  <div class="tip-note"   id="tip-note"></div>
+</div>
+<script>
+var tt = document.getElementById('tooltip');
+document.querySelectorAll('.tip').forEach(function(el) {
+  el.addEventListener('mouseenter', function(e) {
+    document.getElementById('tip-formula').textContent = '계산식: ' + (el.dataset.formula || '');
+    document.getElementById('tip-desc').textContent   = el.dataset.desc   || '';
+    document.getElementById('tip-note').textContent   = el.dataset.note   || '';
+    tt.classList.add('show');
+    posTooltip(e);
+  });
+  el.addEventListener('mousemove', posTooltip);
+  el.addEventListener('mouseleave', function() { tt.classList.remove('show'); });
+});
+function posTooltip(e) {
+  var x = e.clientX + 14;
+  var y = e.clientY - tt.offsetHeight - 14;
+  // 오른쪽 벗어나면 왼쪽으로
+  if (x + tt.offsetWidth > window.innerWidth - 10) x = e.clientX - tt.offsetWidth - 14;
+  // 위로 벗어나면 아래로
+  if (y < 8) y = e.clientY + 18;
+  tt.style.left = x + 'px';
+  tt.style.top  = y + 'px';
+}
 </script>
 </body>
 </html>
