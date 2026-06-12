@@ -6,160 +6,100 @@
 <title>SCGLAB 대표이사 경영평가 시뮬레이터 [TRIAL]</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg:#F8FAFC; --bg2:#FFFFFF; --bg3:#F1F5F9;
-  --border:#E2E8F0; --border2:#CBD5E1;
-  --text:#1E293B; --text2:#475569; --text3:#94A3B8;
-  --blue:#2563EB; --blue-dim:#EFF6FF;
-  --green:#059669; --green-dim:#ECFDF5;
-  --amber:#D97706; --amber-dim:#FFFBEB;
-  --red:#DC2626; --red-dim:#FEF2F2;
-  --purple:#7C3AED; --purple-dim:#F5F3FF;
-  --radius:10px;
-  --shadow:0 1px 3px rgba(0,0,0,.08);
+:root{
+  --bg:#F8FAFC;--bg2:#FFFFFF;--bg3:#F1F5F9;--border:#E2E8F0;
+  --text:#1E293B;--text2:#475569;--text3:#94A3B8;
+  --blue:#2563EB;--blue-dim:#EFF6FF;--green:#059669;--green-dim:#ECFDF5;
+  --amber:#D97706;--amber-dim:#FFFBEB;--red:#DC2626;--red-dim:#FEF2F2;
+  --purple:#7C3AED;--purple-dim:#F5F3FF;--radius:10px;--shadow:0 1px 3px rgba(0,0,0,.08);
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-serif;font-size:14px;line-height:1.6;}
-
-/* Header */
 .header{background:var(--bg2);border-bottom:1px solid var(--border);padding:18px 40px;display:flex;align-items:center;justify-content:space-between;}
 .header-left{display:flex;align-items:center;gap:12px;}
 .logo{width:34px;height:34px;background:var(--purple);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:14px;}
-.header-left h1{font-size:17px;font-weight:700;color:var(--text);}
+.header-left h1{font-size:17px;font-weight:700;}
 .header-left p{font-size:11px;color:var(--text3);font-family:'DM Mono',monospace;margin-top:1px;}
 .header-right{display:flex;gap:8px;align-items:center;}
-.trial-badge{font-size:11px;font-weight:700;background:#FEF3C7;color:#92400E;border:1px solid #FDE68A;border-radius:6px;padding:4px 10px;letter-spacing:.5px;}
+.trial-badge{font-size:11px;font-weight:700;background:#FEF3C7;color:#92400E;border:1px solid #FDE68A;border-radius:6px;padding:4px 10px;}
 .back-btn{font-size:12px;font-weight:500;background:var(--bg3);color:var(--text2);border:1px solid var(--border);border-radius:8px;padding:6px 14px;text-decoration:none;}
-
-/* Layout */
-.main{padding:28px 40px 60px;max-width:1280px;margin:0 auto;}
-.trial-notice{background:#FFFBEB;border:1px solid #FDE68A;border-radius:var(--radius);padding:12px 18px;margin-bottom:24px;font-size:13px;color:#92400E;}
-.trial-notice strong{font-weight:700;}
-
-/* 2-column layout */
-.columns{display:grid;grid-template-columns:420px 1fr;gap:20px;align-items:start;}
-
-/* Input Panel */
-.input-panel{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;}
-.panel-header{background:var(--purple);color:#fff;padding:14px 20px;}
-.panel-header h2{font-size:14px;font-weight:700;}
-.panel-header p{font-size:11px;opacity:.8;margin-top:2px;}
-.panel-body{padding:20px;}
-
-.input-group{margin-bottom:18px;}
-.input-label{font-size:12px;font-weight:600;color:var(--text2);margin-bottom:6px;display:flex;align-items:center;gap:6px;}
-.input-hint{font-size:11px;color:var(--text3);font-weight:400;}
-.input-row{display:flex;gap:8px;}
-input[type="text"], input[type="number"]{
-  width:100%;padding:9px 12px;border:1.5px solid var(--border);
-  border-radius:8px;font-size:13px;font-family:'DM Mono',monospace;
-  color:var(--text);background:var(--bg);outline:none;
-  transition:border-color .15s;
-}
+.main{padding:24px 40px 60px;max-width:1320px;margin:0 auto;}
+.trial-notice{background:#FFFBEB;border:1px solid #FDE68A;border-radius:var(--radius);padding:12px 18px;margin-bottom:20px;font-size:12px;color:#92400E;}
+.page-grid{display:grid;grid-template-columns:410px 1fr;gap:20px;align-items:start;}
+.panel{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;margin-bottom:16px;}
+.panel-hdr{padding:12px 18px;border-bottom:1px solid var(--border);}
+.panel-hdr h2{font-size:13px;font-weight:700;}
+.panel-hdr p{font-size:11px;color:var(--text3);margin-top:1px;}
+.panel-hdr.purple{background:var(--purple);color:#fff;}
+.panel-hdr.purple p{color:rgba(255,255,255,.7);}
+.panel-hdr.amber{background:#D97706;color:#fff;}
+.panel-hdr.amber p{color:rgba(255,255,255,.7);}
+.panel-hdr.gray{background:var(--bg3);}
+.panel-body{padding:18px;}
+.ig{margin-bottom:14px;}
+.il{font-size:11px;font-weight:600;color:var(--text2);margin-bottom:5px;display:flex;align-items:center;gap:5px;flex-wrap:wrap;}
+.ih{font-size:10px;color:var(--text3);font-weight:400;}
+.irow{display:flex;gap:6px;align-items:center;}
+input[type=number],input[type=text]{flex:1;padding:8px 11px;border:1.5px solid var(--border);border-radius:7px;font-size:12px;font-family:'DM Mono',monospace;color:var(--text);background:var(--bg);outline:none;transition:border-color .15s;}
 input:focus{border-color:var(--purple);}
-.input-unit{font-size:12px;color:var(--text3);white-space:nowrap;align-self:center;}
-
-/* PEI 선택 */
-.pei-group{display:flex;gap:8px;}
-.pei-btn{flex:1;padding:10px 0;border:2px solid var(--border);border-radius:8px;background:var(--bg);cursor:pointer;font-size:14px;font-weight:700;color:var(--text3);transition:all .15s;font-family:'Noto Sans KR',sans-serif;}
-.pei-btn.a{border-color:var(--green);color:var(--green);background:var(--green-dim);}
-.pei-btn.b{border-color:var(--blue);color:var(--blue);background:var(--blue-dim);}
-.pei-btn.c{border-color:var(--amber);color:var(--amber);background:var(--amber-dim);}
-.pei-btn:not(.a):not(.b):not(.c){opacity:.5;}
-.pei-desc{font-size:11px;color:var(--text3);margin-top:6px;}
-
-/* BP 인상률 토글 */
-.toggle-group{display:flex;gap:6px;}
-.toggle-btn{flex:1;padding:8px 0;border:1.5px solid var(--border);border-radius:8px;background:var(--bg);cursor:pointer;font-size:13px;font-weight:600;color:var(--text3);transition:all .15s;font-family:'Noto Sans KR',sans-serif;}
-.toggle-btn.active{border-color:var(--purple);color:var(--purple);background:var(--purple-dim);}
-
-.calc-btn{width:100%;padding:12px;background:var(--purple);color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;transition:background .15s;font-family:'Noto Sans KR',sans-serif;margin-top:6px;}
+input.highlight-input{border-color:var(--amber);background:#FFFEF8;}
+.iu{font-size:11px;color:var(--text3);white-space:nowrap;}
+.divider{height:1px;background:var(--border);margin:14px 0;}
+.pei-row{display:flex;gap:7px;}
+.pei-btn{flex:1;padding:9px 0;border:2px solid var(--border);border-radius:8px;background:var(--bg);cursor:pointer;font-size:13px;font-weight:700;color:var(--text3);transition:all .15s;font-family:'Noto Sans KR',sans-serif;text-align:center;}
+.pei-btn.sel-A{border-color:var(--green);color:var(--green);background:var(--green-dim);}
+.pei-btn.sel-B{border-color:var(--blue);color:var(--blue);background:var(--blue-dim);}
+.pei-btn.sel-C{border-color:var(--amber);color:var(--amber);background:var(--amber-dim);}
+.calc-btn{width:100%;padding:11px;background:var(--purple);color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;margin-top:4px;font-family:'Noto Sans KR',sans-serif;}
 .calc-btn:hover{background:#6D28D9;}
-
-/* Divider */
-.divider{height:1px;background:var(--border);margin:16px 0;}
-
-/* Result Panel */
-.result-panel{display:flex;flex-direction:column;gap:16px;}
-
-/* 25년 실적 카드 */
-.actual-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;}
-.actual-header{background:var(--bg3);border-bottom:1px solid var(--border);padding:12px 20px;display:flex;align-items:center;justify-content:space-between;}
-.actual-header h3{font-size:13px;font-weight:700;color:var(--text);}
-.actual-badge{font-size:11px;background:var(--green-dim);color:var(--green);border:1px solid rgba(5,150,105,.2);border-radius:12px;padding:2px 10px;font-family:'DM Mono',monospace;}
-.actual-body{padding:16px 20px;}
-.actual-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
-.actual-item{background:var(--bg3);border-radius:8px;padding:12px 14px;}
-.actual-item-label{font-size:11px;color:var(--text3);font-weight:500;margin-bottom:4px;}
-.actual-item-val{font-size:16px;font-weight:700;color:var(--text);font-family:'DM Mono',monospace;}
-.actual-item-val span{font-size:11px;font-weight:400;color:var(--text3);margin-left:2px;}
-
-/* 시뮬레이션 결과 */
-.sim-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;}
-.sim-header{padding:14px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);}
-.sim-header h3{font-size:14px;font-weight:700;color:var(--text);}
-.sim-pei-badge{font-size:12px;font-weight:700;padding:3px 12px;border-radius:12px;}
-.sim-body{padding:20px;}
-
-/* 결과 수치 강조 */
+.spi2-box{background:var(--amber-dim);border:1px solid #FDE68A;border-radius:8px;padding:12px 14px;margin-top:10px;}
+.spi2-box-title{font-size:11px;font-weight:700;color:var(--amber);margin-bottom:8px;}
+.spi2-line{display:flex;justify-content:space-between;font-size:12px;padding:3px 0;font-family:'DM Mono',monospace;}
+.spi2-line.total{border-top:1px solid #FDE68A;margin-top:4px;padding-top:6px;font-weight:700;color:var(--amber);}
 .result-big{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;}
-.result-box{border-radius:10px;padding:18px;text-align:center;}
-.result-box.bonus{background:var(--purple-dim);border:1px solid rgba(124,58,237,.15);}
-.result-box.salary{background:var(--blue-dim);border:1px solid rgba(37,99,235,.15);}
-.result-box-label{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;}
-.result-box-val{font-size:26px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-1px;}
-.result-box.bonus .result-box-val{color:var(--purple);}
-.result-box.salary .result-box-val{color:var(--blue);}
-.result-box-sub{font-size:11px;color:var(--text3);margin-top:4px;}
-
-/* 계산 상세 테이블 */
-.calc-table{width:100%;border-collapse:collapse;font-size:12px;}
-.calc-table tr{border-bottom:1px solid var(--border);}
-.calc-table tr:last-child{border-bottom:none;}
-.calc-table td{padding:8px 10px;}
-.calc-table td:first-child{color:var(--text3);width:48%;}
-.calc-table td:last-child{text-align:right;font-family:'DM Mono',monospace;font-weight:600;color:var(--text);}
-.calc-table .section-row td{background:var(--bg3);color:var(--text);font-weight:700;font-family:'Noto Sans KR',sans-serif;}
-.calc-table .highlight td{color:var(--purple);}
-.calc-table .highlight-blue td{color:var(--blue);}
-
-/* 조건 경고 */
-.warn-box{background:var(--red-dim);border:1px solid rgba(220,38,38,.2);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--red);margin-bottom:12px;display:none;}
-.info-box{background:var(--green-dim);border:1px solid rgba(5,150,105,.2);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--green);margin-bottom:12px;}
-
-/* 공식 설명 */
-.formula-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);}
-.formula-header{padding:12px 20px;background:var(--bg3);border-bottom:1px solid var(--border);}
-.formula-header h3{font-size:13px;font-weight:700;color:var(--text);}
-.formula-body{padding:16px 20px;display:grid;grid-template-columns:1fr 1fr;gap:14px;}
-.formula-item{background:var(--bg3);border-radius:8px;padding:12px 14px;}
-.formula-item-title{font-size:11px;font-weight:700;color:var(--text);margin-bottom:4px;}
-.formula-item-code{font-size:11px;font-family:'DM Mono',monospace;color:var(--blue);background:var(--blue-dim);border-radius:4px;padding:4px 8px;margin-bottom:4px;line-height:1.5;}
-.formula-item-note{font-size:11px;color:var(--text3);line-height:1.5;}
-
-/* ESI 테이블 */
-.esi-table{width:100%;border-collapse:collapse;font-size:11px;margin-top:6px;}
-.esi-table th,.esi-table td{padding:5px 8px;border:1px solid var(--border);}
-.esi-table th{background:var(--bg3);font-weight:600;text-align:center;}
-.esi-table td{text-align:center;font-family:'DM Mono',monospace;}
-.esi-table tr.active-row td{background:var(--amber-dim);color:var(--amber);font-weight:700;}
-
-@media(max-width:1000px){
-  .columns{grid-template-columns:1fr;}
-  .actual-grid{grid-template-columns:repeat(2,1fr);}
-  .formula-body{grid-template-columns:1fr;}
-}
+.rbox{border-radius:10px;padding:16px;text-align:center;}
+.rbox.bonus{background:var(--purple-dim);border:1px solid rgba(124,58,237,.15);}
+.rbox.salary{background:var(--blue-dim);border:1px solid rgba(37,99,235,.15);}
+.rbox-label{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;}
+.rbox-val{font-size:24px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-1px;}
+.rbox.bonus .rbox-val{color:var(--purple);}
+.rbox.salary .rbox-val{color:var(--blue);}
+.rbox-sub{font-size:10px;color:var(--text3);margin-top:3px;}
+.ct{width:100%;border-collapse:collapse;font-size:12px;}
+.ct tr{border-bottom:1px solid var(--border);}
+.ct tr:last-child{border-bottom:none;}
+.ct td{padding:7px 10px;}
+.ct td:first-child{color:var(--text3);}
+.ct td:last-child{text-align:right;font-family:'DM Mono',monospace;font-weight:600;}
+.ct .sh td{background:var(--bg3);font-weight:700;font-family:'Noto Sans KR',sans-serif;color:var(--text);}
+.ct .hl td{color:var(--purple);}
+.ct .hlb td{color:var(--blue);}
+.warn{background:var(--red-dim);border:1px solid rgba(220,38,38,.2);border-radius:7px;padding:9px 13px;font-size:11px;color:var(--red);margin-bottom:12px;display:none;}
+.ref-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.ref-item{background:var(--bg3);border-radius:7px;padding:10px 12px;}
+.ref-label{font-size:10px;color:var(--text3);}
+.ref-val{font-size:14px;font-weight:700;font-family:'DM Mono',monospace;}
+.esi-t{width:100%;border-collapse:collapse;font-size:11px;margin-top:6px;}
+.esi-t th,.esi-t td{padding:5px 7px;border:1px solid var(--border);}
+.esi-t th{background:var(--bg3);font-weight:600;text-align:center;}
+.esi-t td{text-align:center;font-family:'DM Mono',monospace;}
+.esi-t .ar td{background:var(--amber-dim);color:var(--amber);font-weight:700;}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.fitem{background:var(--bg3);border-radius:7px;padding:11px 13px;}
+.fitem-title{font-size:11px;font-weight:700;color:var(--text);margin-bottom:3px;}
+.fitem-code{font-size:11px;font-family:'DM Mono',monospace;color:var(--blue);background:var(--blue-dim);border-radius:4px;padding:3px 7px;margin-bottom:3px;line-height:1.5;}
+.fitem-note{font-size:10px;color:var(--text3);line-height:1.5;}
+@media(max-width:1000px){.page-grid{grid-template-columns:1fr;}.fgrid{grid-template-columns:1fr;}.ref-grid{grid-template-columns:repeat(2,1fr);}}
 </style>
 </head>
 <body>
 
-<!-- Header -->
 <div class="header">
   <div class="header-left">
     <div class="logo">S</div>
     <div>
       <h1>대표이사 경영평가 시뮬레이터</h1>
-      <p>SCGLAB CEO Performance Evaluation · SCGS Group 기준</p>
+      <p>SCGLAB CEO Performance Evaluation · 2QF 기준</p>
     </div>
   </div>
   <div class="header-right">
@@ -169,363 +109,321 @@ input:focus{border-color:var(--purple);}
 </div>
 
 <div class="main">
-
-  <!-- TRIAL 안내 -->
   <div class="trial-notice">
-    <strong>⚠ TRIAL 버전입니다.</strong>
-    오류가 있을 수 있으며, 공식 평가 결과와 다를 수 있습니다. 수치 확정 전 반드시 SCGS HQ 공식 제도와 교차 검증하세요.
+    <strong>⚠ TRIAL 버전.</strong> 현재 2026년 2QF(1~3월 확정 + 4~12월 추정, 4월 Monthly 반영) 기준값이 입력되어 있습니다. 공식 평가 전 KAIPER 그룹 기준과 교차 검증하세요.
   </div>
 
-  <div class="columns">
+  <div class="page-grid">
 
-    <!-- ── 왼쪽: 입력 패널 ── -->
-    <div class="input-panel">
-      <div class="panel-header">
-        <h2>📝 입력값 설정</h2>
-        <p>변경 후 자동 계산 됩니다</p>
+    <!-- 왼쪽: 입력 -->
+    <div>
+
+      <!-- SPI2 -->
+      <div class="panel">
+        <div class="panel-hdr amber">
+          <h2>① SPI2 구성 (2QF 기준)</h2>
+          <p>SPI2 = 세전이익 + 의장님(CM)비용 + CEO성과급</p>
+        </div>
+        <div class="panel-body">
+          <div class="ig">
+            <div class="il">세전이익 (실적+추정) <span class="ih">2QF 연간 전망</span></div>
+            <div class="irow"><input type="text" id="nibt" value="619,877,545" inputmode="numeric" oninput="commaFormat(this)"><span class="iu">원</span></div>
+          </div>
+          <div class="ig">
+            <div class="il">의장님 (CM) 비용 <span class="ih">CM비용 시트 Total</span></div>
+            <div class="irow"><input type="text" id="cm-cost" value="262,764,296" inputmode="numeric" oninput="commaFormat(this)"><span class="iu">원</span></div>
+          </div>
+          <div class="ig">
+            <div class="il">CEO 성과급(P) <span class="ih">환입분 반영. 25년 -872만 환입</span></div>
+            <div class="irow"><input type="text" id="ceo-ps" value="11,280,000" inputmode="numeric" oninput="commaFormat(this)"><span class="iu">원</span></div>
+          </div>
+
+          <div class="spi2-box">
+            <div class="spi2-box-title">📊 SPI2 자동 계산</div>
+            <div class="spi2-line"><span>세전이익</span><span id="s-nibt">-</span></div>
+            <div class="spi2-line"><span>+ 의장님 비용</span><span id="s-cm">-</span></div>
+            <div class="spi2-line"><span>+ CEO 성과급</span><span id="s-ceo">-</span></div>
+            <div class="spi2-line total"><span>= SPI2</span><span id="s-spi2">-</span></div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="ig">
+            <div class="il">T-SPI2 (사업계획 BP) <span class="ih">BPAR 기준값</span></div>
+            <div class="irow"><input type="text" id="tspi2" value="945,373,773" inputmode="numeric" oninput="commaFormat(this)"><span class="iu">원</span></div>
+          </div>
+        </div>
       </div>
-      <div class="panel-body">
 
-        <!-- SPI2 -->
-        <div class="input-group">
-          <div class="input-label">SPI2 실적 <span class="input-hint">(NIBT + CM비용 ± 조정 + CEO성과급 환입)</span></div>
-          <div class="input-row">
-            <input type="number" id="spi2" value="1267949111" placeholder="원">
-            <span class="input-unit">원</span>
-          </div>
+      <!-- 평가 지표 -->
+      <div class="panel">
+        <div class="panel-hdr purple">
+          <h2>② 평가 지표</h2>
+          <p>PEI / 연봉 / 인상률 (연봉은 직접 입력)</p>
         </div>
-
-        <!-- T-SPI2 (BP) -->
-        <div class="input-group">
-          <div class="input-label">T-SPI2 (사업계획 BP) <span class="input-hint">BPAR 계산 기준</span></div>
-          <div class="input-row">
-            <input type="number" id="tspi2" value="627273190" placeholder="원">
-            <span class="input-unit">원</span>
+        <div class="panel-body">
+          <div class="ig">
+            <div class="il">PEI 등급 <span class="ih">S-ROE 그룹 내 순위 (A=1등)</span></div>
+            <div class="pei-row">
+              <button class="pei-btn sel-A" id="pei-A" onclick="setPEI('A')">A 등급<br><small>130%</small></button>
+              <button class="pei-btn" id="pei-B" onclick="setPEI('B')">B 등급<br><small>100%</small></button>
+              <button class="pei-btn" id="pei-C" onclick="setPEI('C')">C 등급<br><small>80%</small></button>
+            </div>
           </div>
-        </div>
-
-        <div class="divider"></div>
-
-        <!-- PEI -->
-        <div class="input-group">
-          <div class="input-label">PEI 등급 <span class="input-hint">S-ROE 그룹 내 순위 (A=1등)</span></div>
-          <div class="pei-group">
-            <button class="pei-btn a" id="pei-A" onclick="setPEI('A')">A 등급<br><small>130%</small></button>
-            <button class="pei-btn" id="pei-B" onclick="setPEI('B')">B 등급<br><small>100%</small></button>
-            <button class="pei-btn" id="pei-C" onclick="setPEI('C')">C 등급<br><small>80%</small></button>
+          <div class="ig">
+            <div class="il" style="color:var(--amber);font-weight:700;">기준연봉 (전년도 확정) <span class="ih" style="color:var(--text3)">보안 — 직접 입력</span></div>
+            <div class="irow"><input type="text" id="base-salary" class="highlight-input" placeholder="원 단위로 입력하세요" inputmode="numeric" oninput="commaFormat(this)"><span class="iu">원</span></div>
           </div>
-          <div class="pei-desc" id="pei-desc">현재 선택: A등급 (130%) — 그룹 내 S-ROE 1위</div>
-        </div>
-
-        <div class="divider"></div>
-
-        <!-- 기준연봉 -->
-        <div class="input-group">
-          <div class="input-label">기준연봉 (전년도)</div>
-          <div class="input-row">
-            <input type="number" id="base-salary" value="220000080" placeholder="원">
-            <span class="input-unit">원</span>
+          <div class="ig">
+            <div class="il">BP 평균 연봉인상률 <span class="ih">사업계획 기준 (한도 5%, 0% 가능)</span></div>
+            <div class="irow"><input type="number" id="bp-rate" value="0.0" min="0" max="5" step="0.1" placeholder="0.0"><span class="iu">%</span></div>
           </div>
-        </div>
-
-        <!-- BP 평균 연봉인상률 -->
-        <div class="input-group">
-          <div class="input-label">BP 평균 연봉인상률 <span class="input-hint">사업계획 기준 (한도 5%)</span></div>
-          <div class="toggle-group">
-            <button class="toggle-btn" id="rate-4" onclick="setRate(4)">4%</button>
-            <button class="toggle-btn active" id="rate-5" onclick="setRate(5)">5%</button>
+          <div class="ig">
+            <div class="il">정성적 평가 <span class="ih">의장 의사결정 ±3,000만원</span></div>
+            <div class="irow"><input type="text" id="qualitative" value="0" inputmode="numeric" placeholder="음수 가능" oninput="commaFormat(this,true)"><span class="iu">원</span></div>
           </div>
+          <button class="calc-btn" onclick="calculate()">📊 계산하기</button>
         </div>
-
-        <!-- 정성적 평가 -->
-        <div class="input-group">
-          <div class="input-label">정성적 평가 <span class="input-hint">의장 의사결정 (±3,000만원)</span></div>
-          <div class="input-row">
-            <input type="number" id="qualitative" value="0" placeholder="원 (음수 가능)">
-            <span class="input-unit">원</span>
-          </div>
-        </div>
-
-        <button class="calc-btn" onclick="calculate()">📊 계산하기</button>
       </div>
     </div>
 
-    <!-- ── 오른쪽: 결과 패널 ── -->
-    <div class="result-panel">
-
-      <!-- 25년 실제 결과 -->
-      <div class="actual-card">
-        <div class="actual-header">
-          <h3>📌 2025년 실제 적용 결과 (참고)</h3>
-          <span class="actual-badge">25년 확정</span>
-        </div>
-        <div class="actual-body">
-          <div class="actual-grid">
-            <div class="actual-item">
-              <div class="actual-item-label">SPI2</div>
-              <div class="actual-item-val">12.7<span>억원</span></div>
-            </div>
-            <div class="actual-item">
-              <div class="actual-item-label">BPAR</div>
-              <div class="actual-item-val">202<span>%</span></div>
-            </div>
-            <div class="actual-item">
-              <div class="actual-item-label">ESI</div>
-              <div class="actual-item-val">100<span>%</span></div>
-            </div>
-            <div class="actual-item">
-              <div class="actual-item-label">성과급 정량 (A)</div>
-              <div class="actual-item-val">3,722<span>만원</span></div>
-            </div>
-            <div class="actual-item">
-              <div class="actual-item-label">성과급 정량 (B)</div>
-              <div class="actual-item-val">2,863<span>만원</span></div>
-            </div>
-            <div class="actual-item">
-              <div class="actual-item-label">연봉 (A, 4%)</div>
-              <div class="actual-item-val">2.48<span>억원</span></div>
-            </div>
+    <!-- 오른쪽: 결과 -->
+    <div>
+      <div class="panel">
+        <div class="panel-hdr gray"><h2>📌 2025년 실제 적용 결과 (참고)</h2></div>
+        <div class="panel-body">
+          <div class="ref-grid">
+            <div class="ref-item"><div class="ref-label">SPI2</div><div class="ref-val">12.7억</div></div>
+            <div class="ref-item"><div class="ref-label">T-SPI2 (BP)</div><div class="ref-val">6.3억</div></div>
+            <div class="ref-item"><div class="ref-label">BPAR</div><div class="ref-val">202%</div></div>
+            <div class="ref-item"><div class="ref-label">ESI</div><div class="ref-val">100%</div></div>
+            <div class="ref-item"><div class="ref-label">성과급 정량 (A)</div><div class="ref-val">3,722만</div></div>
+            <div class="ref-item"><div class="ref-label">성과급 정량 (B)</div><div class="ref-val">2,863만</div></div>
           </div>
         </div>
       </div>
 
-      <!-- 시뮬레이션 결과 -->
-      <div class="sim-card">
-        <div class="sim-header">
-          <h3>🔢 시뮬레이션 결과</h3>
-          <span class="sim-pei-badge" id="sim-pei-badge" style="background:var(--green-dim);color:var(--green);">PEI A · 130%</span>
+      <div class="panel">
+        <div class="panel-hdr" style="background:var(--bg3);display:flex;align-items:center;justify-content:space-between;">
+          <div><h2>🔢 2QF 기준 시뮬레이션 결과</h2></div>
+          <span id="sim-badge" style="font-size:12px;font-weight:700;padding:3px 12px;border-radius:12px;background:var(--green-dim);color:var(--green);">PEI A · 130%</span>
         </div>
-        <div class="sim-body">
-
-          <div class="warn-box" id="warn-bpar">
-            ⚠️ BPAR이 90% 미만입니다. 지급 조건 미충족 — 성과급 및 연봉 인상이 적용되지 않습니다.
-          </div>
+        <div class="panel-body">
+          <div class="warn" id="warn-bpar">⚠️ BPAR 90% 미만 — 지급 조건 미충족. 성과급 및 연봉인상 없음.</div>
+          <div class="warn" id="warn-input" style="display:block;">⚠️ 기준연봉을 입력 후 계산해주세요. (SPI2/T-SPI2는 2QF 값이 입력되어 있음)</div>
 
           <div class="result-big">
-            <div class="result-box bonus">
-              <div class="result-box-label">성과급 (정량+정성)</div>
-              <div class="result-box-val" id="r-bonus-total">-</div>
-              <div class="result-box-sub" id="r-bonus-sub">정량 - / 정성 -</div>
+            <div class="rbox bonus">
+              <div class="rbox-label">성과급 (최종)</div>
+              <div class="rbox-val" id="r-bonus">-</div>
+              <div class="rbox-sub" id="r-bonus-sub">연봉 입력 후 계산</div>
             </div>
-            <div class="result-box salary">
-              <div class="result-box-label">신규 연봉 (정량)</div>
-              <div class="result-box-val" id="r-salary">-</div>
-              <div class="result-box-sub" id="r-salary-sub">인상률 - / 인상액 -</div>
+            <div class="rbox salary">
+              <div class="rbox-label">신규 연봉 (정량)</div>
+              <div class="rbox-val" id="r-salary">-</div>
+              <div class="rbox-sub" id="r-salary-sub">연봉 입력 후 계산</div>
             </div>
           </div>
 
-          <!-- 성과급 계산 상세 -->
-          <table class="calc-table" style="margin-bottom:14px;">
-            <tr class="section-row"><td colspan="2">성과급 계산 상세</td></tr>
+          <table class="ct" style="margin-bottom:14px;">
+            <tr class="sh"><td colspan="2">성과급 계산 상세</td></tr>
+            <tr><td>SPI2</td><td id="r-spi2">-</td></tr>
             <tr><td>BPAR (사업계획 달성률)</td><td id="r-bpar">-</td></tr>
-            <tr><td>ESI 적용 SPI2</td><td id="r-esi-spi2">-</td></tr>
             <tr><td>ESI 요율</td><td id="r-esi-rate">-</td></tr>
             <tr><td>TAI = SPI2 × 1.5%</td><td id="r-tai">-</td></tr>
             <tr><td>OPI = (SPI2 - T-SPI2) × 1.5%</td><td id="r-opi">-</td></tr>
-            <tr><td>TAI + OPI</td><td id="r-tai-opi">-</td></tr>
-            <tr><td>× ESI × PEI</td><td id="r-after-pei">-</td></tr>
-            <tr class="highlight"><td>성과급 정량 평가</td><td id="r-bonus-q">-</td></tr>
-            <tr><td>정성적 평가 (의장)</td><td id="r-qualitative">-</td></tr>
-            <tr class="highlight"><td>성과급 합계 (정량+정성)</td><td id="r-bonus-sum">-</td></tr>
+            <tr><td>× ESI × PEI</td><td id="r-multiplier">-</td></tr>
+            <tr class="hl"><td>성과급 정량</td><td id="r-bonusq">-</td></tr>
+            <tr><td>정성적 평가</td><td id="r-qual">-</td></tr>
             <tr><td>월급여 한도 (월급여 × 400%)</td><td id="r-limit">-</td></tr>
-            <tr class="highlight"><td>최종 성과급 (한도 적용)</td><td id="r-bonus-final">-</td></tr>
+            <tr class="hl"><td>최종 성과급 (한도 적용)</td><td id="r-bonus-final">-</td></tr>
           </table>
 
-          <!-- 연봉 계산 상세 -->
-          <table class="calc-table">
-            <tr class="section-row"><td colspan="2">연봉 계산 상세</td></tr>
-            <tr><td>BP 평균 연봉인상률</td><td id="r-bp-rate">-</td></tr>
+          <table class="ct">
+            <tr class="sh"><td colspan="2">연봉 계산 상세</td></tr>
+            <tr><td>BP 평균 연봉인상률</td><td id="r-bprate">-</td></tr>
             <tr><td>BPAR</td><td id="r-bpar2">-</td></tr>
             <tr><td>PEI</td><td id="r-pei2">-</td></tr>
             <tr><td>CEO Risk Premium</td><td>120%</td></tr>
-            <tr><td>연봉인상률 = 인상률 × BPAR × PEI × 1.2</td><td id="r-raise-rate">-</td></tr>
+            <tr><td>연봉인상률</td><td id="r-raise-rate">-</td></tr>
             <tr><td>기준연봉</td><td id="r-base">-</td></tr>
-            <tr class="highlight-blue"><td>신규 연봉 (정량)</td><td id="r-new-salary">-</td></tr>
-            <tr><td>연봉 인상액</td><td id="r-raise-amt">-</td></tr>
-            <tr><td>정성적 평가 (의장)</td><td id="r-qual2">-</td></tr>
-            <tr class="highlight-blue"><td>최종 연봉 (정량+정성)</td><td id="r-final-salary">-</td></tr>
+            <tr class="hlb"><td>신규 연봉 (정량)</td><td id="r-new-sal">-</td></tr>
+            <tr><td>인상액</td><td id="r-raise-amt">-</td></tr>
+            <tr><td>정성적 평가</td><td id="r-qual2">-</td></tr>
+            <tr class="hlb"><td>최종 연봉 (정량+정성)</td><td id="r-final-sal">-</td></tr>
           </table>
-
         </div>
       </div>
 
-      <!-- 공식 설명 -->
-      <div class="formula-card">
-        <div class="formula-header">
-          <h3>📐 산정 공식 (SCGS 그룹 기준)</h3>
-        </div>
-        <div class="formula-body">
-          <div class="formula-item">
-            <div class="formula-item-title">SPI2</div>
-            <div class="formula-item-code">SPI - 대표이사 성과급<br>SPI = NIBT ± Modified ± Special</div>
-            <div class="formula-item-note">비경상적 손익 조정 후 지표. 성과급은 환입하여 역산.</div>
-          </div>
-          <div class="formula-item">
-            <div class="formula-item-title">성과급 (정량)</div>
-            <div class="formula-item-code">(TAI + OPI) × ESI × PEI</div>
-            <div class="formula-item-note">BPAR 90% 미만 시 지급 없음. 한도: 월급여 × 400%</div>
-          </div>
-          <div class="formula-item">
-            <div class="formula-item-title">ESI 구간별 가중치</div>
-            <table class="esi-table" id="esi-table">
-              <tr><th>SPI2 구간</th><th>가중치 적용 SPI2</th><th>ESI 요율</th></tr>
-              <tr id="esi-r1"><td>20억 이하</td><td>SPI2 × 100%</td><td>100%</td></tr>
-              <tr id="esi-r2"><td>20억~40억</td><td>SPI2 × 30% + 14억</td><td>가변</td></tr>
-              <tr id="esi-r3"><td>40억~60억</td><td>SPI2 × 20% + 18억</td><td>가변</td></tr>
-              <tr id="esi-r4"><td>60억 초과</td><td>SPI2 × 10% + 24억</td><td>가변</td></tr>
-            </table>
-          </div>
-          <div class="formula-item">
-            <div class="formula-item-title">연봉인상률</div>
-            <div class="formula-item-code">BP인상률 × BPAR × PEI × 1.2</div>
-            <div class="formula-item-note">BPAR 90% 미만 시 인상 없음. 한도 없음(5% BP 기준 상한 별도 협의)</div>
+      <div class="panel">
+        <div class="panel-hdr gray"><h2>📐 산정 공식 (KAIPER 그룹 기준)</h2></div>
+        <div class="panel-body">
+          <div class="fgrid">
+            <div class="fitem">
+              <div class="fitem-title">SPI2 계산 구조</div>
+              <div class="fitem-code">세전이익 + 의장님(CM)비용 + CEO성과급</div>
+              <div class="fitem-note">2QF: 619.9백만 + 262.8백만 + 11.3백만 = 893.9백만 (8.94억)</div>
+            </div>
+            <div class="fitem">
+              <div class="fitem-title">성과급 (정량)</div>
+              <div class="fitem-code">(TAI + OPI) × ESI × PEI</div>
+              <div class="fitem-note">BPAR ≥ 90% 조건. 한도: 월급여 × 400%</div>
+            </div>
+            <div class="fitem">
+              <div class="fitem-title">ESI 구간별 가중치</div>
+              <table class="esi-t" id="esi-table">
+                <tr><th>SPI2 구간</th><th>ESI 요율</th></tr>
+                <tr id="er1"><td>20억 이하</td><td>100%</td></tr>
+                <tr id="er2"><td>20억~40억</td><td>가변</td></tr>
+                <tr id="er3"><td>40억~60억</td><td>가변</td></tr>
+                <tr id="er4"><td>60억 초과</td><td>가변</td></tr>
+              </table>
+            </div>
+            <div class="fitem">
+              <div class="fitem-title">연봉인상률</div>
+              <div class="fitem-code">BP인상률 × BPAR × PEI × 1.2</div>
+              <div class="fitem-note">BPAR ≥ 90% 조건. CEO Risk Premium 120%.</div>
+            </div>
           </div>
         </div>
       </div>
-
-    </div><!-- /result-panel -->
-  </div><!-- /columns -->
-</div><!-- /main -->
+    </div>
+  </div>
+</div>
 
 <script>
 var currentPEI = 'A';
-var currentRate = 5;
 
-function setPEI(grade) {
-  currentPEI = grade;
-  ['A','B','C'].forEach(function(g) {
-    var btn = document.getElementById('pei-' + g);
-    btn.className = 'pei-btn';
-    if (g === grade) btn.classList.add(g.toLowerCase());
+// 숫자 콤마 파싱
+function parseNum(id){
+  var v = document.getElementById(id).value.replace(/,/g,'').trim();
+  if(v==='' || v==='-') return 0;
+  return parseFloat(v)||0;
+}
+// 입력 시 콤마 자동 포맷
+function commaFormat(el, allowNeg){
+  var raw = el.value.replace(/,/g,'');
+  var neg = allowNeg && raw.charAt(0)==='-';
+  raw = raw.replace(/[^0-9]/g,'');
+  if(raw===''){ el.value = neg?'-':''; calculate(); return; }
+  var formatted = parseInt(raw,10).toLocaleString();
+  el.value = (neg?'-':'') + formatted;
+  calculate();
+}
+
+function setPEI(g){
+  currentPEI = g;
+  ['A','B','C'].forEach(function(x){
+    document.getElementById('pei-'+x).className = 'pei-btn'+(x===g?' sel-'+x:'');
   });
-  var descs = {
-    'A': '현재 선택: A등급 (130%) — 그룹 내 S-ROE 1위',
-    'B': '현재 선택: B등급 (100%) — 그룹 내 S-ROE 2위',
-    'C': '현재 선택: C등급 (80%) — 그룹 내 S-ROE 3위'
-  };
-  document.getElementById('pei-desc').textContent = descs[grade];
   calculate();
 }
 
-function setRate(rate) {
-  currentRate = rate;
-  document.getElementById('rate-4').className = 'toggle-btn' + (rate === 4 ? ' active' : '');
-  document.getElementById('rate-5').className = 'toggle-btn' + (rate === 5 ? ' active' : '');
-  calculate();
+function fmt(n,u){
+  if(n===null||n===undefined||isNaN(n))return '-';
+  if(u==='만')return Math.round(n/10000).toLocaleString()+'만원';
+  if(u==='억')return (n/100000000).toFixed(2)+'억원';
+  return Math.round(n).toLocaleString()+'원';
 }
 
-function fmt(n, unit) {
-  if (n === null || n === undefined) return '-';
-  if (unit === '억') return (n / 100000000).toFixed(2) + '억원';
-  if (unit === '만') return Math.round(n / 10000).toLocaleString() + '만원';
-  if (unit === '%') return (n * 100).toFixed(2) + '%';
-  if (unit === '%1') return (n * 100).toFixed(1) + '%';
-  return Math.round(n).toLocaleString() + '원';
+function calcESI(spi2){
+  var es,er;
+  if(spi2<=2e9){es=spi2;er=1.0;}
+  else if(spi2<=4e9){es=spi2*0.3+1.4e9;er=es/spi2;}
+  else if(spi2<=6e9){es=spi2*0.2+1.8e9;er=es/spi2;}
+  else{es=spi2*0.1+2.4e9;er=es/spi2;}
+  return {esi_spi2:es,esi_rate:er};
 }
 
-function calcESI(spi2) {
-  var esi_spi2, esi_rate;
-  if (spi2 <= 2000000000) {
-    esi_spi2 = spi2;
-    esi_rate = 1.0;
-  } else if (spi2 <= 4000000000) {
-    esi_spi2 = spi2 * 0.3 + 1400000000;
-    esi_rate = esi_spi2 / spi2;
-  } else if (spi2 <= 6000000000) {
-    esi_spi2 = spi2 * 0.2 + 1800000000;
-    esi_rate = esi_spi2 / spi2;
+function calculate(){
+  var nibt   = parseNum('nibt');
+  var cmCost = parseNum('cm-cost');
+  var ceoPS  = parseNum('ceo-ps');
+  var spi2   = nibt + cmCost + ceoPS;
+  var tspi2  = parseNum('tspi2');
+  var baseSal= parseNum('base-salary');
+  var bpRatePct = parseFloat(document.getElementById('bp-rate').value)||0;
+  var qual   = parseNum('qualitative');
+  var pei    = {A:1.3,B:1.0,C:0.8}[currentPEI];
+
+  // SPI2 박스
+  document.getElementById('s-nibt').textContent = fmt(nibt,'만');
+  document.getElementById('s-cm').textContent   = fmt(cmCost,'만');
+  document.getElementById('s-ceo').textContent  = fmt(ceoPS,'만');
+  document.getElementById('s-spi2').textContent = fmt(spi2,'억')+' ('+fmt(spi2,'만')+')';
+
+  // 연봉 입력 검증
+  var warn = document.getElementById('warn-input');
+  if(!baseSal){ warn.style.display='block'; }
+  else { warn.style.display='none'; }
+
+  var bpRate = bpRatePct/100;
+  var bpar   = tspi2>0 ? spi2/tspi2 : 0;
+  var bparOK = bpar>=0.9;
+  var esi    = calcESI(spi2);
+  var tai    = spi2*0.015;
+  var opi    = Math.max(0,(spi2-tspi2)*0.015);
+  var afterPEI = (tai+opi)*esi.esi_rate*pei;
+  var bonusQ = bparOK ? afterPEI : 0;
+
+  // 배지
+  var colors={A:['var(--green-dim)','var(--green)'],B:['var(--blue-dim)','var(--blue)'],C:['var(--amber-dim)','var(--amber)']};
+  var bd=document.getElementById('sim-badge');
+  bd.style.background=colors[currentPEI][0];bd.style.color=colors[currentPEI][1];
+  bd.textContent='PEI '+currentPEI+' · '+(pei*100)+'%';
+
+  // ESI 하이라이트
+  ['er1','er2','er3','er4'].forEach(function(id){document.getElementById(id).className='';});
+  if(spi2<=2e9)document.getElementById('er1').className='ar';
+  else if(spi2<=4e9)document.getElementById('er2').className='ar';
+  else if(spi2<=6e9)document.getElementById('er3').className='ar';
+  else document.getElementById('er4').className='ar';
+
+  document.getElementById('warn-bpar').style.display = bparOK?'none':'block';
+
+  document.getElementById('r-spi2').textContent     = fmt(spi2,'억');
+  document.getElementById('r-bpar').textContent     = (bpar*100).toFixed(1)+'% '+(bparOK?'✅':'❌');
+  document.getElementById('r-esi-rate').textContent = (esi.esi_rate*100).toFixed(1)+'%';
+  document.getElementById('r-tai').textContent      = fmt(tai,'만');
+  document.getElementById('r-opi').textContent      = fmt(opi,'만');
+  document.getElementById('r-multiplier').textContent='ESI '+(esi.esi_rate*100).toFixed(1)+'% × PEI '+(pei*100)+'%';
+  document.getElementById('r-bonusq').textContent   = fmt(bonusQ,'만');
+  document.getElementById('r-qual').textContent     = fmt(qual,'만');
+
+  // 연봉 의존 항목
+  if(baseSal){
+    var monthSal=baseSal/12, limit=monthSal*4;
+    var bonusSum=bonusQ+qual;
+    var bonusFinal=bparOK?Math.min(bonusSum,limit):0;
+    var raiseRate=bparOK?bpRate*bpar*pei*1.2:0;
+    var newSal=baseSal*(1+raiseRate);
+    var finalSal=newSal+qual;
+
+    document.getElementById('r-bonus').textContent     = fmt(bonusFinal,'만');
+    document.getElementById('r-bonus-sub').textContent = '정량 '+fmt(bonusQ,'만')+' / 정성 '+fmt(qual,'만');
+    document.getElementById('r-salary').textContent    = fmt(newSal,'억');
+    document.getElementById('r-salary-sub').textContent= '인상률 '+(raiseRate*100).toFixed(2)+'%';
+    document.getElementById('r-limit').textContent     = fmt(limit,'만')+' (월급여 '+fmt(monthSal,'만')+'×4)';
+    document.getElementById('r-bonus-final').textContent=fmt(bonusFinal,'만');
+    document.getElementById('r-bprate').textContent    = bpRatePct.toFixed(1)+'%';
+    document.getElementById('r-bpar2').textContent     = (bpar*100).toFixed(1)+'%';
+    document.getElementById('r-pei2').textContent      = (pei*100)+'%';
+    document.getElementById('r-raise-rate').textContent= (raiseRate*100).toFixed(4)+'%';
+    document.getElementById('r-base').textContent      = fmt(baseSal,'만');
+    document.getElementById('r-new-sal').textContent   = fmt(newSal,'만');
+    document.getElementById('r-raise-amt').textContent = fmt(newSal-baseSal,'만')+' ▲'+(raiseRate*100).toFixed(2)+'%';
+    document.getElementById('r-qual2').textContent     = fmt(qual,'만');
+    document.getElementById('r-final-sal').textContent = fmt(finalSal,'만');
   } else {
-    esi_spi2 = spi2 * 0.1 + 2400000000;
-    esi_rate = esi_spi2 / spi2;
+    ['r-bonus','r-salary','r-limit','r-bonus-final','r-bprate','r-bpar2','r-pei2','r-raise-rate','r-base','r-new-sal','r-raise-amt','r-qual2','r-final-sal'].forEach(function(id){
+      document.getElementById(id).textContent='-';
+    });
+    document.getElementById('r-bonus-sub').textContent='연봉 입력 후 계산';
+    document.getElementById('r-salary-sub').textContent='연봉 입력 후 계산';
   }
-  return { esi_spi2: esi_spi2, esi_rate: esi_rate };
 }
 
-function calculate() {
-  var spi2        = parseFloat(document.getElementById('spi2').value) || 0;
-  var tspi2       = parseFloat(document.getElementById('tspi2').value) || 0;
-  var baseSalary  = parseFloat(document.getElementById('base-salary').value) || 0;
-  var qualitative = parseFloat(document.getElementById('qualitative').value) || 0;
-  var peiMap      = { 'A': 1.3, 'B': 1.0, 'C': 0.8 };
-  var pei         = peiMap[currentPEI];
-  var bpRate      = currentRate / 100;
-
-  // BPAR
-  var bpar = tspi2 > 0 ? spi2 / tspi2 : 0;
-  var bparOK = bpar >= 0.9;
-
-  // ESI
-  var esi = calcESI(spi2);
-
-  // 성과급
-  var tai       = spi2 * 0.015;
-  var opi       = Math.max(0, (spi2 - tspi2) * 0.015);
-  var taiOpi    = tai + opi;
-  var afterPEI  = taiOpi * esi.esi_rate * pei;
-  var bonusQ    = bparOK ? afterPEI : 0;
-  var bonusSum  = bonusQ + qualitative;
-  // 한도: 월급여 × 400% = 연봉 / 12 × 4
-  var monthSalary = baseSalary / 12;
-  var bonusLimit  = monthSalary * 4;
-  var bonusFinal  = bparOK ? Math.min(bonusSum, bonusLimit) : 0;
-
-  // 연봉
-  var raiseRate    = bparOK ? bpRate * bpar * pei * 1.2 : 0;
-  var newSalary    = baseSalary * (1 + raiseRate);
-  var raiseAmt     = newSalary - baseSalary;
-  var finalSalary  = newSalary + qualitative;
-
-  // PEI 배지
-  var peiColors = { 'A': ['var(--green-dim)','var(--green)'], 'B': ['var(--blue-dim)','var(--blue)'], 'C': ['var(--amber-dim)','var(--amber)'] };
-  var badge = document.getElementById('sim-pei-badge');
-  badge.style.background = peiColors[currentPEI][0];
-  badge.style.color       = peiColors[currentPEI][1];
-  badge.textContent       = 'PEI ' + currentPEI + ' · ' + (pei * 100) + '%';
-
-  // BPAR 경고
-  document.getElementById('warn-bpar').style.display = bparOK ? 'none' : 'block';
-
-  // ESI 행 하이라이트
-  ['esi-r1','esi-r2','esi-r3','esi-r4'].forEach(function(id) {
-    document.getElementById(id).className = '';
-  });
-  if (spi2 <= 2000000000)         document.getElementById('esi-r1').className = 'active-row';
-  else if (spi2 <= 4000000000)    document.getElementById('esi-r2').className = 'active-row';
-  else if (spi2 <= 6000000000)    document.getElementById('esi-r3').className = 'active-row';
-  else                             document.getElementById('esi-r4').className = 'active-row';
-
-  // 결과 출력
-  document.getElementById('r-bonus-total').textContent = fmt(bonusFinal, '만');
-  document.getElementById('r-bonus-sub').textContent   = '정량 ' + fmt(bonusQ, '만') + ' / 정성 ' + fmt(qualitative, '만');
-  document.getElementById('r-salary').textContent      = fmt(newSalary, '억');
-  document.getElementById('r-salary-sub').textContent  = '인상률 ' + (raiseRate * 100).toFixed(2) + '% / ' + fmt(raiseAmt, '만') + ' ↑';
-
-  document.getElementById('r-bpar').textContent      = (bpar * 100).toFixed(1) + '% ' + (bparOK ? '✅' : '❌ 90% 미만');
-  document.getElementById('r-esi-spi2').textContent  = fmt(esi.esi_spi2, '만');
-  document.getElementById('r-esi-rate').textContent  = (esi.esi_rate * 100).toFixed(1) + '%';
-  document.getElementById('r-tai').textContent       = fmt(tai, '만');
-  document.getElementById('r-opi').textContent       = fmt(opi, '만');
-  document.getElementById('r-tai-opi').textContent   = fmt(taiOpi, '만');
-  document.getElementById('r-after-pei').textContent = 'ESI ' + (esi.esi_rate * 100).toFixed(1) + '% × PEI ' + (pei * 100) + '%';
-  document.getElementById('r-bonus-q').textContent   = fmt(bonusQ, '만');
-  document.getElementById('r-qualitative').textContent = fmt(qualitative, '만');
-  document.getElementById('r-bonus-sum').textContent  = fmt(bonusSum, '만');
-  document.getElementById('r-limit').textContent     = fmt(bonusLimit, '만') + ' (월 ' + fmt(monthSalary, '만') + ' × 4)';
-  document.getElementById('r-bonus-final').textContent = fmt(bonusFinal, '만');
-
-  document.getElementById('r-bp-rate').textContent   = (bpRate * 100) + '%';
-  document.getElementById('r-bpar2').textContent     = (bpar * 100).toFixed(1) + '%';
-  document.getElementById('r-pei2').textContent      = (pei * 100) + '%';
-  document.getElementById('r-raise-rate').textContent = (raiseRate * 100).toFixed(4) + '%';
-  document.getElementById('r-base').textContent      = fmt(baseSalary, '만');
-  document.getElementById('r-new-salary').textContent = fmt(newSalary, '만');
-  document.getElementById('r-raise-amt').textContent  = fmt(raiseAmt, '만') + ' (▲' + (raiseRate * 100).toFixed(2) + '%)';
-  document.getElementById('r-qual2').textContent      = fmt(qualitative, '만');
-  document.getElementById('r-final-salary').textContent = fmt(finalSalary, '만');
-}
-
-// 초기 계산
-window.onload = function() { calculate(); };
+window.onload=function(){calculate();};
 </script>
 </body>
 </html>
