@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SCGLAB 대표이사 경영평가 시뮬레이터 [TRIAL]</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#F8FAFC;--bg2:#FFFFFF;--bg3:#F1F5F9;--border:#E2E8F0;
@@ -14,12 +15,12 @@
   --purple:#7C3AED;--purple-dim:#F5F3FF;--radius:10px;--shadow:0 1px 3px rgba(0,0,0,.08);
 }
 *{box-sizing:border-box;margin:0;padding:0;}
-body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-serif;font-size:14px;line-height:1.6;}
-.header{background:var(--bg2);border-bottom:1px solid var(--border);padding:18px 40px;display:flex;align-items:center;justify-content:space-between;}
+body{background:var(--bg);color:var(--text);font-family:'Pretendard',sans-serif;font-size:14px;line-height:1.6;}
+.header{background:#0F172A;padding:18px 40px;display:flex;align-items:center;justify-content:space-between;}
 .header-left{display:flex;align-items:center;gap:12px;}
 .logo{width:34px;height:34px;background:var(--purple);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:14px;}
-.header-left h1{font-size:17px;font-weight:700;}
-.header-left p{font-size:11px;color:var(--text3);font-family:'DM Mono',monospace;margin-top:1px;}
+.header-left h1{font-size:17px;font-weight:800;color:#fff;}
+.header-left p{font-size:11px;color:#64748B;font-family:'DM Mono',monospace;margin-top:1px;}
 .header-right{display:flex;gap:8px;align-items:center;}
 .trial-badge{font-size:11px;font-weight:700;background:#FEF3C7;color:#92400E;border:1px solid #FDE68A;border-radius:6px;padding:4px 10px;}
 .back-btn{font-size:12px;font-weight:500;background:var(--bg3);color:var(--text2);border:1px solid var(--border);border-radius:8px;padding:6px 14px;text-decoration:none;}
@@ -46,11 +47,11 @@ input.highlight-input{border-color:var(--amber);background:#FFFEF8;}
 .iu{font-size:11px;color:var(--text3);white-space:nowrap;}
 .divider{height:1px;background:var(--border);margin:14px 0;}
 .pei-row{display:flex;gap:7px;}
-.pei-btn{flex:1;padding:9px 0;border:2px solid var(--border);border-radius:8px;background:var(--bg);cursor:pointer;font-size:13px;font-weight:700;color:var(--text3);transition:all .15s;font-family:'Noto Sans KR',sans-serif;text-align:center;}
+.pei-btn{flex:1;padding:9px 0;border:2px solid var(--border);border-radius:8px;background:var(--bg);cursor:pointer;font-size:13px;font-weight:700;color:var(--text3);transition:all .15s;font-family:'Pretendard',sans-serif;text-align:center;}
 .pei-btn.sel-A{border-color:var(--green);color:var(--green);background:var(--green-dim);}
 .pei-btn.sel-B{border-color:var(--blue);color:var(--blue);background:var(--blue-dim);}
 .pei-btn.sel-C{border-color:var(--amber);color:var(--amber);background:var(--amber-dim);}
-.calc-btn{width:100%;padding:11px;background:var(--purple);color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;margin-top:4px;font-family:'Noto Sans KR',sans-serif;}
+.calc-btn{width:100%;padding:11px;background:var(--purple);color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;margin-top:4px;font-family:'Pretendard',sans-serif;}
 .calc-btn:hover{background:#6D28D9;}
 .spi2-box{background:var(--amber-dim);border:1px solid #FDE68A;border-radius:8px;padding:12px 14px;margin-top:10px;}
 .spi2-box-title{font-size:11px;font-weight:700;color:var(--amber);margin-bottom:8px;}
@@ -71,7 +72,7 @@ input.highlight-input{border-color:var(--amber);background:#FFFEF8;}
 .ct td{padding:7px 10px;}
 .ct td:first-child{color:var(--text3);}
 .ct td:last-child{text-align:right;font-family:'DM Mono',monospace;font-weight:600;}
-.ct .sh td{background:var(--bg3);font-weight:700;font-family:'Noto Sans KR',sans-serif;color:var(--text);}
+.ct .sh td{background:var(--bg3);font-weight:700;font-family:'Pretendard',sans-serif;color:var(--text);}
 .ct .hl td{color:var(--purple);}
 .ct .hlb td{color:var(--blue);}
 .warn{background:var(--red-dim);border:1px solid rgba(220,38,38,.2);border-radius:7px;padding:9px 13px;font-size:11px;color:var(--red);margin-bottom:12px;display:none;}
@@ -91,7 +92,7 @@ input.highlight-input{border-color:var(--amber);background:#FFFEF8;}
 .spi2-ref-table th{background:var(--bg2);padding:5px 8px;border:1px solid var(--border);font-weight:600;text-align:center;}
 .spi2-ref-table th:first-child{text-align:left;}
 .spi2-ref-table td{padding:5px 8px;border:1px solid var(--border);text-align:right;font-family:'DM Mono',monospace;}
-.spi2-ref-table td:first-child{text-align:left;font-family:'Noto Sans KR',sans-serif;color:var(--text2);}
+.spi2-ref-table td:first-child{text-align:left;font-family:'Pretendard',sans-serif;color:var(--text2);}
 .spi2-ref-table tr.sub td{background:#FEF9F0;font-weight:600;}
 .spi2-ref-table tr.tot td{background:var(--amber-dim);color:var(--amber);font-weight:700;}
 .spi2-ref-note{font-size:10px;color:var(--text3);margin-top:6px;line-height:1.5;}
