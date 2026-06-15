@@ -141,12 +141,12 @@ input.highlight-input{border-color:var(--amber);background:#FFFEF8;}
       <div class="panel">
         <div class="panel-hdr amber">
           <h2>① SPI2 구성 (2QF 기준)</h2>
-          <p>SPI2 = 세전이익 + 의장님(CM)비용 + CEO성과급</p>
+          <p>SPI2 = 세전이익 + 의장님(CM)비용 + CEO성과급 · 2QF(4월 실적반영)</p>
         </div>
         <div class="panel-body">
           <div class="ig">
-            <div class="il">세전이익 (실적+추정) <span class="ih">2QF 연간 전망</span></div>
-            <div class="irow"><input type="text" id="nibt" value="619,877,545" inputmode="numeric" oninput="commaFormat(this)"><span class="iu">원</span></div>
+            <div class="il">세전이익 (실적+추정) <span class="ih">2QF 전망 (1~4월 실적+5~12월 추정)</span></div>
+            <div class="irow"><input type="text" id="nibt" value="1,249,174,960" inputmode="numeric" oninput="commaFormat(this)"><span class="iu">원</span></div>
           </div>
           <div class="ig">
             <div class="il">의장님 (CM) 비용 <span class="ih">CM비용 시트 Total</span></div>
@@ -296,7 +296,7 @@ input.highlight-input{border-color:var(--amber);background:#FFFEF8;}
             <div class="fitem">
               <div class="fitem-title">SPI2 계산 구조</div>
               <div class="fitem-code">세전이익 + 의장님(CM)비용 + CEO성과급</div>
-              <div class="fitem-note">2QF: 619.9백만 + 262.8백만 + 11.3백만 = 893.9백만 (8.94억)</div>
+              <div class="fitem-note">2QF(4월실적): 1,249백만 + 263백만 + 11백만 = 1,523백만 (15.23억)</div>
             </div>
             <div class="fitem">
               <div class="fitem-title">성과급 (정량)</div>
@@ -316,7 +316,7 @@ input.highlight-input{border-color:var(--amber);background:#FFFEF8;}
             <div class="fitem">
               <div class="fitem-title">연봉인상률</div>
               <div class="fitem-code">BP인상률 × BPAR × PEI × 1.2</div>
-              <div class="fitem-note">BPAR ≥ 90% 조건. CEO Risk Premium 120%.</div>
+              <div class="fitem-note">BPAR ≥ 90% 조건. CEO Risk Premium 120%. <strong>대표이사 인상 한도 10%.</strong></div>
             </div>
           </div>
         </div>
@@ -327,6 +327,20 @@ input.highlight-input{border-color:var(--amber);background:#FFFEF8;}
 
 <script>
 var currentPEI = 'A';
+
+// ── 상수 정의
+var CEO_SALARY_CAP = 0.10;        // 대표이사 연봉인상 한도 10%
+var CHAIRMAN_MULTIPLIER = 2;       // 의장님: 대표이사 인상액/성과급의 2배 (내부 데이터)
+
+// SPI2 계획 vs 실적 CM비용 항목별 차이 (소명용, 원)
+var CM_DIFF = {
+  '성과급(환입)': {act:14560000, plan:40000000},
+  '감가상각비':   {act:0,        plan:16776648},
+  '퇴직급여':     {act:22527948, plan:17361060},
+  '차량유지비':   {act:201798,   plan:3600000},
+  '보험료':       {act:0,        plan:2500000},
+  '복리후생비':   {act:14307870, plan:16775180}
+};
 
 // 숫자 콤마 파싱
 function parseNum(id){
@@ -389,7 +403,7 @@ function calculate(){
   // 26년 SPI2 기준표 갱신 (백만원 단위)
   var M = 1000000;
   // 계획(BP) — 세전이익은 실적과 동일 전제, CM/CEO는 계획 고정값
-  var bpNibt = nibt, bpCm = 305496228, bpCeo = 20000000;
+  var bpNibt = 619877545, bpCm = 305496228, bpCeo = 20000000;  // 사업계획 고정값(BP)
   var bpSpi = bpNibt + bpCm, bpSpi2 = bpSpi + bpCeo;
   // 추정(실적) — 입력값 그대로
   var estSpi = nibt + cmCost, estSpi2 = spi2;
@@ -443,12 +457,14 @@ function calculate(){
   document.getElementById('r-qual').textContent     = fmt(qual,'만');
 
   // 연봉 의존 항목
-  var raiseRateForColor = bparOK ? bpRate*bpar*pei*1.2 : 0;
+  var raiseRateRaw = bparOK ? bpRate*bpar*pei*1.2 : 0;
+  var raiseRateForColor = Math.min(raiseRateRaw, CEO_SALARY_CAP);
   if(baseSal){
     var monthSal=baseSal/12, limit=monthSal*4;
     var bonusSum=bonusQ+qual;
     var bonusFinal=bparOK?Math.min(bonusSum,limit):0;
-    var raiseRate=bparOK?bpRate*bpar*pei*1.2:0;
+    var raiseRateRawIn=bparOK?bpRate*bpar*pei*1.2:0;
+    var raiseRate=Math.min(raiseRateRawIn, CEO_SALARY_CAP);
     var newSal=baseSal*(1+raiseRate);
     var finalSal=newSal+qual;
 
@@ -475,29 +491,80 @@ function calculate(){
     document.getElementById('r-salary-sub').textContent='연봉 입력 후 계산';
   }
 
-  applyColors(bpar, bparOK, opi, raiseRateForColor);
+  applyColors(bpar, bparOK, opi, raiseRateForColor, spi2, tspi2, cmCost, ceoPS);
 }
 
-// 조건별 색상 적용
-function applyColors(bpar, bparOK, opi, raiseRate){
+// 조건별 색상 + 사유 표시
+function applyColors(bpar, bparOK, opi, raiseRate, spi2, tspi2, cmCost, ceoPS){
   function setCls(id, cls){
     var el = document.getElementById(id);
     if(!el) return;
     el.classList.remove('val-good','val-bad');
     if(cls) el.classList.add(cls);
   }
-  // BPAR: 100%↑ 파랑 / 90%미만 빨강 / 그사이 기본
+  function setReason(rowId, boxId, show, isInfo, htmlText){
+    var row = document.getElementById(rowId);
+    var box = document.getElementById(boxId);
+    if(!row||!box) return;
+    if(show){
+      row.style.display='';
+      box.className = 'reason-box' + (isInfo?' info':'');
+      box.innerHTML = htmlText;
+    } else {
+      row.style.display='none';
+    }
+  }
+  function won(n){ return Math.round(n/10000).toLocaleString()+'만'; }
+
+  // BPAR
   var bparCls = bpar>=1.0 ? 'val-good' : (!bparOK ? 'val-bad' : null);
-  setCls('r-bpar', bparCls);
-  setCls('r-bpar2', bparCls);
-  // OPI: >0 파랑(초과달성) / =0 빨강(미달)
+  setCls('r-bpar', bparCls); setCls('r-bpar2', bparCls);
+  setReason('r-bpar-reason-row','r-bpar-reason', !bparOK, false,
+    '<strong>⚠ BPAR 90% 미만</strong> — 성과급·연봉인상 지급 조건 미달. 사업계획(T-SPI2) 대비 실적 SPI2가 '+(bpar*100).toFixed(1)+'%에 그침.');
+
+  // OPI: >0 파랑 / =0 빨강 + 사유
   setCls('r-opi', opi>0 ? 'val-good' : 'val-bad');
-  // PEI: A 파랑 / C 빨강
+  if(opi<=0){
+    var gap = tspi2 - spi2;  // 미달액
+    // CM비용 주요 감소요인 Top3
+    var diffs = [];
+    for(var k in CM_DIFF){
+      var d = CM_DIFF[k].act - CM_DIFF[k].plan;
+      if(d<0) diffs.push({name:k, diff:d});
+    }
+    diffs.sort(function(a,b){return a.diff-b.diff;});
+    var top = diffs.slice(0,3).map(function(x){
+      return x.name+' '+won(x.diff)+'↓';
+    }).join(', ');
+    var ceoDiff = ceoPS - 20000000;
+    setReason('r-opi-reason-row','r-opi-reason', true, false,
+      '<strong>⚠ OPI = 0 (초과이익 없음)</strong><br>'+
+      '실적 SPI2가 T-SPI2 대비 <strong>'+won(gap)+' 미달</strong>. 세전이익은 계획과 동일하나, 아래 항목이 SPI2를 낮춤:<br>'+
+      '• CM비용(의장) '+top+'<br>'+
+      '• CEO성과급 환입 '+won(ceoDiff)+'<br>'+
+      '<span style="color:var(--text3)">→ 소명 포인트: 계획 대비 미집행/환입된 비용이 SPI2 감소의 주원인 (실적 악화 아님)</span>');
+  } else {
+    setReason('r-opi-reason-row','r-opi-reason', true, true,
+      '<strong>✓ 초과 달성</strong> — 실적 SPI2가 T-SPI2를 '+won(spi2-tspi2)+' 초과.');
+  }
+
+  // PEI
   var peiCls = currentPEI==='A' ? 'val-good' : (currentPEI==='C' ? 'val-bad' : null);
   setCls('r-pei2', peiCls);
-  // 연봉인상률: 0 빨강 / >0 파랑
+
+  // 연봉인상률
   setCls('r-raise-rate', raiseRate>0 ? 'val-good' : 'val-bad');
-  // 26년 기준표 SPI2: 추정 > 계획이면 파랑, 미달이면 빨강
+  if(raiseRate<=0){
+    setReason('r-raise-reason-row','r-raise-reason', true, false,
+      '<strong>⚠ 연봉인상 없음</strong> — BPAR 90% 미달로 인상률 0% 적용.');
+  } else if(raiseRate >= CEO_SALARY_CAP){
+    setReason('r-raise-reason-row','r-raise-reason', true, true,
+      '<strong>ℹ 연봉인상 한도 적용</strong> — 산출 인상률 '+(raiseRate*100).toFixed(2)+'%가 대표이사 한도 10%를 초과하여 <strong>10%로 제한</strong>됨.');
+  } else {
+    setReason('r-raise-reason-row','r-raise-reason', false, false, '');
+  }
+
+  // 26년 기준표 SPI2
   var estEl = document.getElementById('ref-spi2-est');
   var bpEl = document.getElementById('ref-spi2-bp');
   if(estEl && bpEl){
