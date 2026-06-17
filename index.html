@@ -116,7 +116,7 @@ body {
 
 /* ── Stats row */
 .stats-row {
-  display: grid; grid-template-columns: repeat(3, 1fr);
+  display: grid; grid-template-columns: repeat(4, 1fr);
   gap: 18px; margin-top: 20px;
 }
 .stat-box {
@@ -133,10 +133,12 @@ body {
 .stat-box:nth-child(1)::before { background: #2563EB; }
 .stat-box:nth-child(2)::before { background: #059669; }
 .stat-box:nth-child(3)::before { background: #D97706; }
+.stat-box:nth-child(4)::before { background: #7C3AED; }
 .stat-label { font-size: 11px; color: #94A3B8; text-transform: uppercase; letter-spacing: .8px; font-weight: 600; }
 .stat-val   { font-size: 30px; font-weight: 800; color: #0F172A; font-family: 'Pretendard', sans-serif;
               margin-top: 8px; letter-spacing: -1.2px; line-height: 1; }
 .stat-sub   { font-size: 12px; color: #64748B; margin-top: 8px; font-weight: 500; }
+.stat-ref   { font-size: 11px; color: #94A3B8; margin-top: 8px; font-weight: 400; }
 
 /* ── Footer */
 .footer {
@@ -191,17 +193,22 @@ body {
     <div class="stat-box">
       <div class="stat-label">2025 연간 매출</div>
       <div class="stat-val">63.5억</div>
-      <div class="stat-sub">전년비 +8.3%</div>
+      <div class="stat-ref">PATH 46.6억 · 빌링 16.9억</div>
     </div>
     <div class="stat-box">
       <div class="stat-label">2025 영업이익</div>
       <div class="stat-val">3.8억</div>
-      <div class="stat-sub">영업이익률 6.0%</div>
+      <div class="stat-ref">당기순이익 7.0억</div>
     </div>
     <div class="stat-box">
       <div class="stat-label">2026 추정 매출</div>
-      <div class="stat-val">84.5억</div>
-      <div class="stat-sub">2QF 기준</div>
+      <div class="stat-val">85.7억</div>
+      <div class="stat-ref">PATH 65.8억 · 빌링 19.9억</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">2026 추정 영업이익</div>
+      <div class="stat-val">6.4억</div>
+      <div class="stat-ref">당기순이익 9.7억</div>
     </div>
   </div>
 
