@@ -139,6 +139,17 @@ body {
               margin-top: 8px; letter-spacing: -1.2px; line-height: 1; }
 .stat-sub   { font-size: 12px; color: #64748B; margin-top: 8px; font-weight: 500; }
 .stat-ref   { font-size: 11px; color: #94A3B8; margin-top: 8px; font-weight: 400; }
+.data-notice {
+  display: flex; align-items: center; gap: 10px;
+  background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: 10px;
+  padding: 12px 18px; margin-bottom: 24px;
+}
+.notice-dot {
+  width: 8px; height: 8px; border-radius: 50%; background: #2563EB;
+  flex-shrink: 0; box-shadow: 0 0 0 3px rgba(37,99,235,.15);
+}
+.notice-text { font-size: 13px; color: #1E40AF; line-height: 1.5; }
+.notice-text strong { font-weight: 700; }
 
 /* ── Footer */
 .footer {
@@ -187,6 +198,12 @@ body {
 
 <!-- Main -->
 <div class="main">
+
+  <!-- 데이터 기준 안내 -->
+  <div class="data-notice">
+    <span class="notice-dot"></span>
+    <span class="notice-text"><strong>2026년 5월 실적 반영 완료</strong> · 2026년 추정값은 <strong>1~5월 실적 + 6~12월 2QF 추정</strong> 기준입니다.</span>
+  </div>
 
   <!-- Key Metrics -->
   <div class="stats-row" style="margin-bottom:36px; margin-top:0">
