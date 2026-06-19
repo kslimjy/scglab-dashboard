@@ -18,7 +18,8 @@
 body{background:var(--bg);color:var(--text);font-family:'Pretendard',sans-serif;font-size:14px;line-height:1.6;}
 .header{background:#0F172A;padding:18px 40px;display:flex;align-items:center;justify-content:space-between;}
 .header-left{display:flex;align-items:center;gap:12px;}
-.logo{width:34px;height:34px;background:var(--purple);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:14px;}
+.logo{width:34px;height:34px;background:var(--blue);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:14px;text-decoration:none;transition:transform .15s,box-shadow .15s;}
+.logo:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(37,99,235,.4);}
 .header-left h1{font-size:17px;font-weight:800;color:#fff;}
 .header-left p{font-size:11px;color:#64748B;font-family:'DM Mono',monospace;margin-top:1px;}
 .header-right{display:flex;gap:8px;align-items:center;}
@@ -116,7 +117,7 @@ input.highlight-input{border-color:var(--amber);background:#FFFEF8;}
 
 <div class="header">
   <div class="header-left">
-    <div class="logo">S</div>
+    <a href="index.html" class="logo" title="허브로 이동">S</a>
     <div>
       <h1>대표이사 경영평가 시뮬레이터</h1>
       <p>SCGLAB CEO Performance Evaluation · 2QF 기준</p>
