@@ -40,6 +40,11 @@ body{font-family:'Pretendard',sans-serif;background:var(--bg);color:var(--text);
 .resetbtn:hover{color:var(--red);border-color:var(--red)}
 .divider{height:1px;background:var(--border);margin:2px 0 14px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.parthead{grid-column:1/-1;display:flex;align-items:center;gap:10px;margin:8px 0 -4px;padding:0}
+.parthead:first-child{margin-top:0}
+.parthead .ph-name{font-size:13.5px;font-weight:700;color:var(--text);white-space:nowrap;letter-spacing:-.3px}
+.parthead .ph-cnt{font-size:11px;font-weight:600;color:var(--blue);background:#eef4ff;padding:2px 9px;border-radius:10px;white-space:nowrap}
+.parthead .ph-line{flex:1;height:1px;background:var(--border);min-width:20px}
 .card{position:relative;background:var(--white);border:1px solid var(--border);border-radius:14px;padding:20px;box-shadow:var(--shadow);display:flex;gap:16px;align-items:center;cursor:default;transition:box-shadow .18s,border-color .18s;overflow:visible}
 .card:hover{box-shadow:0 4px 16px rgba(0,0,0,.1),0 2px 6px rgba(0,0,0,.06);border-color:var(--blue)}
 .card.hide{display:none}
@@ -183,7 +188,7 @@ tr:hover td{background:#fafbfc}
     <button class="resetbtn" onclick="resetAll()">필터 초기화</button>
   </div>
   <div class="grid" id="cardgrid" style="margin-bottom:280px">
-    <div class="card" data-dept="" data-team="" data-virt="" data-gender="남" data-grade="대표이사" data-name="박동녘   대표이사 대표이사">
+    <div class="card" data-dept="" data-team="" data-virt="" data-gender="남" data-grade="대표이사" data-part="" data-name="박동녘   대표이사 대표이사">
       <div class="photo">박</div>
       <div class="info">
         <div class="name-row">
@@ -218,7 +223,7 @@ tr:hover td{background:#fafbfc}
         </div>
       </div>
     </div>
-    <div class="card" data-dept="" data-team="" data-virt="" data-gender="남" data-grade="대표이사" data-name="김요한   대표이사 대표이사">
+    <div class="card" data-dept="" data-team="" data-virt="" data-gender="남" data-grade="대표이사" data-part="" data-name="김요한   대표이사 대표이사">
       <div class="photo">김</div>
       <div class="info">
         <div class="name-row">
@@ -253,7 +258,7 @@ tr:hover td{background:#fafbfc}
         </div>
       </div>
     </div>
-    <div class="card" data-dept="서비스사업실" data-team="" data-virt="" data-gender="남" data-grade="이사" data-name="송준상   이사 실장">
+    <div class="card" data-dept="서비스사업실" data-team="" data-virt="" data-gender="남" data-grade="이사" data-part="" data-name="송준상   이사 실장">
       <div class="photo">송</div>
       <div class="info">
         <div class="name-row">
@@ -287,7 +292,7 @@ tr:hover td{background:#fafbfc}
         </div>
       </div>
     </div>
-    <div class="card" data-dept="서비스사업실" data-team="" data-virt="" data-gender="남" data-grade="부장" data-name="남기철   부장 ">
+    <div class="card" data-dept="서비스사업실" data-team="" data-virt="" data-gender="남" data-grade="부장" data-part="" data-name="남기철   부장 ">
       <div class="photo">남</div>
       <div class="info">
         <div class="name-row">
@@ -321,7 +326,7 @@ tr:hover td{background:#fafbfc}
         </div>
       </div>
     </div>
-    <div class="card" data-dept="서비스사업실" data-team="기획팀" data-virt="" data-gender="남" data-grade="차장" data-name="신준철 기획팀 기획파트 차장 파트장">
+    <div class="card" data-dept="서비스사업실" data-team="기획팀" data-virt="" data-gender="남" data-grade="차장" data-part="기획파트" data-name="신준철 기획팀 기획파트 차장 파트장">
       <div class="photo">신</div>
       <div class="info">
         <div class="name-row">
@@ -355,7 +360,7 @@ tr:hover td{background:#fafbfc}
         </div>
       </div>
     </div>
-    <div class="card" data-dept="서비스사업실" data-team="기획팀" data-virt="" data-gender="남" data-grade="과장" data-name="박성민 기획팀 기획파트 과장 파트원">
+    <div class="card" data-dept="서비스사업실" data-team="기획팀" data-virt="" data-gender="남" data-grade="과장" data-part="기획파트" data-name="박성민 기획팀 기획파트 과장 파트원">
       <div class="photo">박</div>
       <div class="info">
         <div class="name-row">
@@ -389,7 +394,7 @@ tr:hover td{background:#fafbfc}
         </div>
       </div>
     </div>
-    <div class="card" data-dept="서비스사업실" data-team="기획팀" data-virt="" data-gender="여" data-grade="과장" data-name="이미희 기획팀 기획파트 과장 파트원">
+    <div class="card" data-dept="서비스사업실" data-team="기획팀" data-virt="" data-gender="여" data-grade="과장" data-part="기획파트" data-name="이미희 기획팀 기획파트 과장 파트원">
       <div class="photo">이</div>
       <div class="info">
         <div class="name-row">
@@ -423,7 +428,7 @@ tr:hover td{background:#fafbfc}
         </div>
       </div>
     </div>
-    <div class="card" data-dept="서비스사업실" data-team="기획팀" data-virt="" data-gender="여" data-grade="과장" data-name="조은아 기획팀 기획파트 과장 파트원">
+    <div class="card" data-dept="서비스사업실" data-team="기획팀" data-virt="" data-gender="여" data-grade="과장" data-part="기획파트" data-name="조은아 기획팀 기획파트 과장 파트원">
       <div class="photo">조</div>
       <div class="info">
         <div class="name-row">
@@ -457,7 +462,7 @@ tr:hover td{background:#fafbfc}
         </div>
       </div>
     </div>
-    <div class="card" data-dept="서비스사업실" data-team="기획팀" data-virt="" data-gender="여" data-grade="사원" data-name="김가현 기획팀 기획파트 사원 파트원">
+    <div class="card" data-dept="서비스사업실" data-team="기획팀" data-virt="" data-gender="여" data-grade="사원" data-part="기획파트" data-name="김가현 기획팀 기획파트 사원 파트원">
       <div class="photo">김</div>
       <div class="info">
         <div class="name-row">
@@ -491,7 +496,7 @@ tr:hover td{background:#fafbfc}
         </div>
       </div>
     </div>
-    <div class="card" data-dept="서비스사업실" data-team="기획팀" data-virt="" data-gender="여" data-grade="과장" data-name="배사랑 기획팀 마케팅파트 과장 파트장">
+    <div class="card" data-dept="서비스사업실" data-team="기획팀" data-virt="" data-gender="여" data-grade="과장" data-part="마케팅파트" data-name="배사랑 기획팀 마케팅파트 과장 파트장">
       <div class="photo">배</div>
       <div class="info">
         <div class="name-row">
@@ -525,7 +530,7 @@ tr:hover td{background:#fafbfc}
         </div>
       </div>
     </div>
-    <div class="card" data-dept="서비스사업실" data-team="기획팀" data-virt="" data-gender="여" data-grade="부장" data-name="백하영 기획팀 마케팅파트 부장 파트원">
+    <div class="card" data-dept="서비스사업실" data-team="기획팀" data-virt="" data-gender="여" data-grade="부장" data-part="마케팅파트" data-name="백하영 기획팀 마케팅파트 부장 파트원">
       <div class="photo">백</div>
       <div class="info">
         <div class="name-row">
@@ -559,7 +564,7 @@ tr:hover td{background:#fafbfc}
         </div>
       </div>
     </div>
-    <div class="card" data-dept="서비스사업실" data-team="기획팀" data-virt="" data-gender="여" data-grade="과장" data-name="방민지 기획팀 마케팅파트 과장 파트원">
+    <div class="card" data-dept="서비스사업실" data-team="기획팀" data-virt="" data-gender="여" data-grade="과장" data-part="마케팅파트" data-name="방민지 기획팀 마케팅파트 과장 파트원">
       <div class="photo">방</div>
       <div class="info">
         <div class="name-row">
@@ -594,7 +599,7 @@ tr:hover td{background:#fafbfc}
         </div>
       </div>
     </div>
-    <div class="card" data-dept="서비스사업실" data-team="기획팀" data-virt="" data-gender="여" data-grade="대리" data-name="서희승 기획팀 마케팅파트 대리 파트원">
+    <div class="card" data-dept="서비스사업실" data-team="기획팀" data-virt="" data-gender="여" data-grade="대리" data-part="마케팅파트" data-name="서희승 기획팀 마케팅파트 대리 파트원">
       <div class="photo">서</div>
       <div class="info">
         <div class="name-row">
@@ -628,7 +633,7 @@ tr:hover td{background:#fafbfc}
         </div>
       </div>
     </div>
-    <div class="card" data-dept="서비스사업실" data-team="디자인팀" data-virt="" data-gender="여" data-grade="차장" data-name="박진원 디자인팀 디자인파트 차장 파트장">
+    <div class="card" data-dept="서비스사업실" data-team="디자인팀" data-virt="" data-gender="여" data-grade="차장" data-part="디자인파트" data-name="박진원 디자인팀 디자인파트 차장 파트장">
       <div class="photo">박</div>
       <div class="info">
         <div class="name-row">
@@ -663,7 +668,7 @@ tr:hover td{background:#fafbfc}
         </div>
       </div>
     </div>
-    <div class="card" data-dept="서비스사업실" data-team="디자인팀" data-virt="" data-gender="여" data-grade="대리" data-name="기슬기 디자인팀 디자인파트 대리 파트원">
+    <div class="card" data-dept="서비스사업실" data-team="디자인팀" data-virt="" data-gender="여" data-grade="대리" data-part="디자인파트" data-name="기슬기 디자인팀 디자인파트 대리 파트원">
       <div class="photo">기</div>
       <div class="info">
         <div class="name-row">
@@ -697,7 +702,7 @@ tr:hover td{background:#fafbfc}
         </div>
       </div>
     </div>
-    <div class="card" data-dept="서비스사업실" data-team="디자인팀" data-virt="" data-gender="여" data-grade="대리" data-name="정하은 디자인팀 디자인파트 대리 파트원">
+    <div class="card" data-dept="서비스사업실" data-team="디자인팀" data-virt="" data-gender="여" data-grade="대리" data-part="디자인파트" data-name="정하은 디자인팀 디자인파트 대리 파트원">
       <div class="photo">정</div>
       <div class="info">
         <div class="name-row">
@@ -731,7 +736,7 @@ tr:hover td{background:#fafbfc}
         </div>
       </div>
     </div>
-    <div class="card" data-dept="서비스개발실" data-team="" data-virt="" data-gender="남" data-grade="이사" data-name="최범균   이사 실장">
+    <div class="card" data-dept="서비스개발실" data-team="" data-virt="" data-gender="남" data-grade="이사" data-part="" data-name="최범균   이사 실장">
       <div class="photo">최</div>
       <div class="info">
         <div class="name-row">
@@ -765,7 +770,7 @@ tr:hover td{background:#fafbfc}
         </div>
       </div>
     </div>
-    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="과장" data-name="양진만 개발팀 서버1파트 과장 파트원">
+    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="과장" data-part="서버1파트" data-name="양진만 개발팀 서버1파트 과장 파트원">
       <div class="photo">양</div>
       <div class="info">
         <div class="name-row">
@@ -800,7 +805,7 @@ tr:hover td{background:#fafbfc}
         </div>
       </div>
     </div>
-    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="과장" data-name="염석준 개발팀 서버1파트 과장 파트원">
+    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="과장" data-part="서버1파트" data-name="염석준 개발팀 서버1파트 과장 파트원">
       <div class="photo">염</div>
       <div class="info">
         <div class="name-row">
@@ -834,7 +839,7 @@ tr:hover td{background:#fafbfc}
         </div>
       </div>
     </div>
-    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="여" data-grade="대리" data-name="장혜윤 개발팀 서버1파트 대리 파트원">
+    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="여" data-grade="대리" data-part="서버1파트" data-name="장혜윤 개발팀 서버1파트 대리 파트원">
       <div class="photo">장</div>
       <div class="info">
         <div class="name-row">
@@ -868,7 +873,7 @@ tr:hover td{background:#fafbfc}
         </div>
       </div>
     </div>
-    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="부장" data-name="심익찬 개발팀 서버2파트 부장 파트장">
+    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="부장" data-part="서버2파트" data-name="심익찬 개발팀 서버2파트 부장 파트장">
       <div class="photo">심</div>
       <div class="info">
         <div class="name-row">
@@ -902,7 +907,7 @@ tr:hover td{background:#fafbfc}
         </div>
       </div>
     </div>
-    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="대리" data-name="김진원 개발팀 서버2파트 대리 파트원">
+    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="대리" data-part="서버2파트" data-name="김진원 개발팀 서버2파트 대리 파트원">
       <div class="photo">김</div>
       <div class="info">
         <div class="name-row">
@@ -936,7 +941,7 @@ tr:hover td{background:#fafbfc}
         </div>
       </div>
     </div>
-    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="대리" data-name="이영성 개발팀 서버2파트 대리 파트원">
+    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="대리" data-part="서버2파트" data-name="이영성 개발팀 서버2파트 대리 파트원">
       <div class="photo">이</div>
       <div class="info">
         <div class="name-row">
@@ -970,7 +975,7 @@ tr:hover td{background:#fafbfc}
         </div>
       </div>
     </div>
-    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="부장" data-name="박정우 개발팀 서버3파트 부장 파트장">
+    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="부장" data-part="서버3파트" data-name="박정우 개발팀 서버3파트 부장 파트장">
       <div class="photo">박</div>
       <div class="info">
         <div class="name-row">
@@ -1004,7 +1009,7 @@ tr:hover td{background:#fafbfc}
         </div>
       </div>
     </div>
-    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="대리" data-name="권태헌 개발팀 서버3파트 대리 파트원">
+    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="대리" data-part="서버3파트" data-name="권태헌 개발팀 서버3파트 대리 파트원">
       <div class="photo">권</div>
       <div class="info">
         <div class="name-row">
@@ -1038,7 +1043,7 @@ tr:hover td{background:#fafbfc}
         </div>
       </div>
     </div>
-    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="여" data-grade="대리" data-name="신은진 개발팀 서버3파트 대리 파트원">
+    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="여" data-grade="대리" data-part="서버3파트" data-name="신은진 개발팀 서버3파트 대리 파트원">
       <div class="photo">신</div>
       <div class="info">
         <div class="name-row">
@@ -1072,7 +1077,7 @@ tr:hover td{background:#fafbfc}
         </div>
       </div>
     </div>
-    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="차장" data-name="황승연 개발팀 프론트엔드파트 차장 파트장">
+    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="차장" data-part="프론트엔드파트" data-name="황승연 개발팀 프론트엔드파트 차장 파트장">
       <div class="photo">황</div>
       <div class="info">
         <div class="name-row">
@@ -1107,7 +1112,7 @@ tr:hover td{background:#fafbfc}
         </div>
       </div>
     </div>
-    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="부장" data-name="김윤석 개발팀 프론트엔드파트 부장 파트원">
+    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="부장" data-part="프론트엔드파트" data-name="김윤석 개발팀 프론트엔드파트 부장 파트원">
       <div class="photo">김</div>
       <div class="info">
         <div class="name-row">
@@ -1141,7 +1146,7 @@ tr:hover td{background:#fafbfc}
         </div>
       </div>
     </div>
-    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="대리" data-name="임관우 개발팀 프론트엔드파트 대리 파트원">
+    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="대리" data-part="프론트엔드파트" data-name="임관우 개발팀 프론트엔드파트 대리 파트원">
       <div class="photo">임</div>
       <div class="info">
         <div class="name-row">
@@ -1175,7 +1180,7 @@ tr:hover td{background:#fafbfc}
         </div>
       </div>
     </div>
-    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="여" data-grade="대리" data-name="강다예 개발팀 프론트엔드파트 대리 파트원">
+    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="여" data-grade="대리" data-part="프론트엔드파트" data-name="강다예 개발팀 프론트엔드파트 대리 파트원">
       <div class="photo">강</div>
       <div class="info">
         <div class="name-row">
@@ -1209,7 +1214,7 @@ tr:hover td{background:#fafbfc}
         </div>
       </div>
     </div>
-    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="여" data-grade="대리" data-name="이소현 개발팀 프론트엔드파트 대리 파트원">
+    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="여" data-grade="대리" data-part="프론트엔드파트" data-name="이소현 개발팀 프론트엔드파트 대리 파트원">
       <div class="photo">이</div>
       <div class="info">
         <div class="name-row">
@@ -1243,7 +1248,7 @@ tr:hover td{background:#fafbfc}
         </div>
       </div>
     </div>
-    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="여" data-grade="사원" data-name="최예나 개발팀 프론트엔드파트 사원 파트원">
+    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="여" data-grade="사원" data-part="프론트엔드파트" data-name="최예나 개발팀 프론트엔드파트 사원 파트원">
       <div class="photo">최</div>
       <div class="info">
         <div class="name-row">
@@ -1277,7 +1282,7 @@ tr:hover td{background:#fafbfc}
         </div>
       </div>
     </div>
-    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="빌링사업부" data-gender="남" data-grade="부장" data-name="김명재 개발팀 빌링파트 부장 파트장">
+    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="빌링사업부" data-gender="남" data-grade="부장" data-part="빌링파트" data-name="김명재 개발팀 빌링파트 부장 파트장">
       <div class="photo">김</div>
       <div class="info">
         <div class="name-row">
@@ -1312,7 +1317,7 @@ tr:hover td{background:#fafbfc}
         </div>
       </div>
     </div>
-    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="빌링사업부" data-gender="남" data-grade="차장" data-name="박종탁 개발팀 빌링파트 차장 파트원">
+    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="빌링사업부" data-gender="남" data-grade="차장" data-part="빌링파트" data-name="박종탁 개발팀 빌링파트 차장 파트원">
       <div class="photo">박</div>
       <div class="info">
         <div class="name-row">
@@ -1347,7 +1352,7 @@ tr:hover td{background:#fafbfc}
         </div>
       </div>
     </div>
-    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="빌링사업부" data-gender="남" data-grade="대리" data-name="임윤호 개발팀 빌링파트 대리 파트원">
+    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="빌링사업부" data-gender="남" data-grade="대리" data-part="빌링파트" data-name="임윤호 개발팀 빌링파트 대리 파트원">
       <div class="photo">임</div>
       <div class="info">
         <div class="name-row">
@@ -1381,7 +1386,7 @@ tr:hover td{background:#fafbfc}
         </div>
       </div>
     </div>
-    <div class="card" data-dept="대표이사 직속" data-team="경영관리팀" data-virt="" data-gender="남" data-grade="차장" data-name="임종엽 경영관리팀  차장 팀장">
+    <div class="card" data-dept="대표이사 직속" data-team="경영관리팀" data-virt="" data-gender="남" data-grade="차장" data-part="" data-name="임종엽 경영관리팀  차장 팀장">
       <div class="photo">임</div>
       <div class="info">
         <div class="name-row">
@@ -1415,7 +1420,7 @@ tr:hover td{background:#fafbfc}
         </div>
       </div>
     </div>
-    <div class="card" data-dept="대표이사 직속" data-team="경영관리팀" data-virt="" data-gender="여" data-grade="과장" data-name="황지혜 경영관리팀  과장 팀원">
+    <div class="card" data-dept="대표이사 직속" data-team="경영관리팀" data-virt="" data-gender="여" data-grade="과장" data-part="" data-name="황지혜 경영관리팀  과장 팀원">
       <div class="photo">황</div>
       <div class="info">
         <div class="name-row">
@@ -1449,7 +1454,7 @@ tr:hover td{background:#fafbfc}
         </div>
       </div>
     </div>
-    <div class="card" data-dept="대표이사 직속" data-team="경영관리팀" data-virt="" data-gender="여" data-grade="대리" data-name="전유민 경영관리팀  대리 팀원">
+    <div class="card" data-dept="대표이사 직속" data-team="경영관리팀" data-virt="" data-gender="여" data-grade="대리" data-part="" data-name="전유민 경영관리팀  대리 팀원">
       <div class="photo">전</div>
       <div class="info">
         <div class="name-row">
@@ -1483,7 +1488,7 @@ tr:hover td{background:#fafbfc}
         </div>
       </div>
     </div>
-    <div class="card" data-dept="대표이사 직속" data-team="영업기획팀" data-virt="빌링사업부" data-gender="남" data-grade="부장" data-name="강승봉 영업기획팀  부장 팀장">
+    <div class="card" data-dept="대표이사 직속" data-team="영업기획팀" data-virt="빌링사업부" data-gender="남" data-grade="부장" data-part="" data-name="강승봉 영업기획팀  부장 팀장">
       <div class="photo">강</div>
       <div class="info">
         <div class="name-row">
@@ -1518,7 +1523,7 @@ tr:hover td{background:#fafbfc}
         </div>
       </div>
     </div>
-    <div class="card" data-dept="대표이사 직속" data-team="영업기획팀" data-virt="빌링사업부" data-gender="남" data-grade="부장" data-name="팽무진 영업기획팀  부장 팀원">
+    <div class="card" data-dept="대표이사 직속" data-team="영업기획팀" data-virt="빌링사업부" data-gender="남" data-grade="부장" data-part="" data-name="팽무진 영업기획팀  부장 팀원">
       <div class="photo">팽</div>
       <div class="info">
         <div class="name-row">
@@ -1553,7 +1558,7 @@ tr:hover td{background:#fafbfc}
         </div>
       </div>
     </div>
-    <div class="card" data-dept="대표이사 직속" data-team="영업기획팀" data-virt="빌링사업부" data-gender="남" data-grade="부장" data-name="김정열 영업기획팀  부장 팀원">
+    <div class="card" data-dept="대표이사 직속" data-team="영업기획팀" data-virt="빌링사업부" data-gender="남" data-grade="부장" data-part="" data-name="김정열 영업기획팀  부장 팀원">
       <div class="photo">김</div>
       <div class="info">
         <div class="name-row">
@@ -1588,7 +1593,7 @@ tr:hover td{background:#fafbfc}
         </div>
       </div>
     </div>
-    <div class="card" data-dept="대표이사 직속" data-team="영업기획팀" data-virt="빌링사업부" data-gender="여" data-grade="과장" data-name="지은미 영업기획팀  과장 팀원">
+    <div class="card" data-dept="대표이사 직속" data-team="영업기획팀" data-virt="빌링사업부" data-gender="여" data-grade="과장" data-part="" data-name="지은미 영업기획팀  과장 팀원">
       <div class="photo">지</div>
       <div class="info">
         <div class="name-row">
@@ -2012,7 +2017,38 @@ function applyAll(){
     && (!q || (el.getAttribute('data-name')||'').toLowerCase().includes(q));
   document.querySelectorAll('.card').forEach(c=>c.classList.toggle('hide',!test(c)));
   document.querySelectorAll('#rostertable tbody tr').forEach(r=>r.classList.toggle('hide',!test(r)));
+  renderPartHeads();
   updateStats();
+}
+function renderPartHeads(){
+  document.querySelectorAll('.parthead').forEach(h=>h.remove());
+  let keyAttr;
+  if(curDept.val==='all') keyAttr='data-dept';
+  else if(curDept.type==='dept') keyAttr='data-team';
+  else keyAttr='data-part';
+  const grid=document.getElementById('cardgrid');
+  const shown=[...grid.querySelectorAll('.card')].filter(c=>!c.classList.contains('hide'));
+  if(shown.length<2) return;
+  const keys=shown.map(c=>c.getAttribute(keyAttr)||'');
+  if(new Set(keys).size<2) return;
+  let prev=null;
+  shown.forEach(c=>{
+    const k=c.getAttribute(keyAttr)||'';
+    if(k!==prev){
+      const cnt=shown.filter(x=>(x.getAttribute(keyAttr)||'')===k).length;
+      let label=k;
+      if(!label){
+        if(keyAttr==='data-part') label=(c.getAttribute('data-team')||'파트 미지정');
+        else if(keyAttr==='data-team') label=(c.getAttribute('data-dept')||'')+' 직속';
+        else label='대표이사';
+      }
+      const h=document.createElement('div');
+      h.className='parthead';
+      h.innerHTML=`<span class="ph-name">${label}</span><span class="ph-cnt">${cnt}명</span><span class="ph-line"></span>`;
+      grid.insertBefore(h,c);
+      prev=k;
+    }
+  });
 }
 function doSearch(){ applyAll(); }
 function updateStats(){
