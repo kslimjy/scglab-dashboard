@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
 <title>에스씨지랩 임직원 명부</title>
-<link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#f4f5f7;--white:#fff;--border:#e8eaed;--border2:#d1d5db;--text:#1a1d23;--text2:#52576a;--text3:#9499ab;--blue:#4b7cf3;--mint:#1ec997;--gold:#d97706;--purple:#7c3aed;--red:#ef4444;--green:#059669;--shadow:0 1px 3px rgba(0,0,0,.06),0 2px 8px rgba(0,0,0,.04)}
@@ -15,8 +15,7 @@ body{font-family:'Pretendard',sans-serif;background:var(--bg);color:var(--text);
 .hdr-left{display:flex;align-items:center;gap:14px}
 .hdr-logo{width:36px;height:36px;background:#2563EB;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff;font-weight:700;flex-shrink:0;text-decoration:none;transition:transform .15s,box-shadow .15s}
 .hdr-logo:hover{transform:scale(1.05);box-shadow:0 0 0 3px rgba(37,99,235,.3)}
-.logo{font-size:17px;font-weight:800;color:#fff;letter-spacing:-.4px;font-family:'Pretendard',sans-serif}
-.logo .sub{font-family:inherit;font-weight:400;color:#94A3B8;letter-spacing:-.4px}
+.logo{font-size:17px;font-weight:800;color:#fff;letter-spacing:-.4px}
 .hdr-meta{font-size:11px;color:#64748B}
 .hdr-meta b{color:#CBD5E1}
 .wrap{max-width:1440px;margin:0 auto;padding:24px 32px}
@@ -102,6 +101,7 @@ tr:hover td{background:#fafbfc}
 .tabbtn.on{color:var(--blue);border-bottom-color:var(--blue)}
 .panel{display:none}
 .panel.on{display:block}
+.org-silsub{font-size:11px;font-weight:500;opacity:.75;letter-spacing:-.2px}
 .orgchart{display:flex;flex-direction:column;align-items:center;gap:0}
 .org-ceo{background:#0F172A;color:#fff;padding:14px 36px;border-radius:12px;font-size:15px;font-weight:700;box-shadow:var(--shadow);text-align:center}
 .org-ceo .cnt{font-size:11px;font-weight:500;color:#94A3B8;margin-top:4px}
@@ -130,14 +130,14 @@ tr:hover td{background:#fafbfc}
 </head>
 <body>
 <div class="hdr">
-  <div class="hdr-left"><a href="index.html" class="hdr-logo" title="허브로 이동">S</a><div class="logo">에스씨지랩 <span class="sub">임직원 명부</span></div></div>
+  <div class="hdr-left"><a href="index.html" class="hdr-logo" title="허브로 이동">S</a><div class="logo">에스씨지랩 임직원 명부</div></div>
   <div class="hdr-meta">기준일 <b>2026.06.30</b></div>
 </div>
 <div class="wrap">
   <div class="pagetitle">임직원 명부</div>
   <div class="pagesub">SCGLAB · 매월 1회 갱신 · 내부 인사관리용</div>
   <div class="orgnote">
-    <b>조직도</b> · 대표이사 ─ [서비스사업실] 기획팀(기획·마케팅파트), 디자인팀(디자인파트) · [서비스개발실] 개발팀(서버1·2·3·프론트엔드·빌링파트) · [대표이사 직속] 경영관리팀, 영업기획팀<br>
+    <b>조직도</b> · 대표이사 ─ [서비스사업실] 기획팀(기획·마케팅파트), 디자인팀(디자인파트) · [서비스개발실] 개발팀(서버1·2·3·프론트엔드·빌링파트) · [대표이사 직속 (경영기획실)] 경영관리팀, 영업기획팀<br>
     <span style="color:var(--purple)">※ <b style="color:var(--purple)">빌링사업부</b>는 실제 조직이 아닌 호칭용 그룹으로, 영업기획팀 + 빌링파트를 묶어 조회하기 위한 가상 태그입니다.</span>
   </div>
   <div class="tabs">
@@ -2078,7 +2078,7 @@ function updateStats(){
 const ORG=[
   {sil:"서비스사업실",type:"",teams:["기획팀","디자인팀"]},
   {sil:"서비스개발실",type:"",teams:["개발팀"]},
-  {sil:"대표이사 직속",type:"direct",teams:["경영관리팀","영업기획팀"]},
+  {sil:"대표이사 직속",label:'대표이사 직속 <span class="org-silsub">(경영기획실)</span>',type:"direct",teams:["경영관리팀","영업기획팀"]},
 ];
 function getMembers(){
   return [...document.querySelectorAll('#rostertable tbody tr')].map((r,idx)=>{
@@ -2114,7 +2114,7 @@ function buildOrg(){
   let html=`<div class="org-ceo">대표이사<div style="margin-top:6px;font-size:14px">${ceoHtml||CEO_LABEL}</div><div class="cnt">전체 ${mem.length}명</div></div><div class="org-conn"></div><div class="org-level">`;
   ORG.forEach(u=>{
     const um=mem.filter(m=>m.sil===u.sil && !m.isCEO);
-    html+=`<div class="org-sil"><div class="org-silbox ${u.type}">${u.sil}<div class="cnt">${um.length}명</div></div><div class="org-teams">`;
+    html+=`<div class="org-sil"><div class="org-silbox ${u.type}">${u.label||u.sil}<div class="cnt">${um.length}명</div></div><div class="org-teams">`;
     const direct=um.filter(m=>!m.team).sort(sortM);
     if(direct.length){
       html+=`<div class="org-team"><div class="org-teamhdr">실 직속<span class="tcnt">${direct.length}명</span></div><div class="org-members">`;
@@ -2160,7 +2160,7 @@ function row(m,inPart){
   const lv=m.leave?'<span style="font-size:10px;color:#d97706;margin-left:4px">(휴직)</span>':'';
   return `<div class="org-mem"><span class="mname">${m.name}${sub}${lv}</span><span class="mpos">${lbl(m)}${g}</span></div>`;
 }
-updateStats();
+applyAll();
 </script>
 </body>
 </html>
