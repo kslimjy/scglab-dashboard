@@ -1,0 +1,1694 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>에스씨지랩 임직원 명부</title>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#f4f5f7;--white:#fff;--border:#e8eaed;--border2:#d1d5db;--text:#1a1d23;--text2:#52576a;--text3:#9499ab;--blue:#4b7cf3;--mint:#1ec997;--gold:#d97706;--purple:#7c3aed;--red:#ef4444;--green:#059669;--shadow:0 1px 3px rgba(0,0,0,.06),0 2px 8px rgba(0,0,0,.04)}
+html{background:var(--bg)}
+body{font-family:'Pretendard',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:13px;-webkit-font-smoothing:antialiased;letter-spacing:-.2px}
+.hdr{background:#0F172A;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:60px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(15,23,42,.15)}
+.hdr-left{display:flex;align-items:center;gap:14px}
+.hdr-logo{width:36px;height:36px;background:#2563EB;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff;font-weight:700;flex-shrink:0}
+.logo{font-size:17px;font-weight:800;color:#fff;letter-spacing:-.4px}
+.hdr-meta{font-size:11px;color:#64748B}
+.hdr-meta b{color:#CBD5E1}
+.wrap{max-width:1440px;margin:0 auto;padding:24px 32px}
+.pagetitle{font-size:20px;font-weight:700;margin-bottom:4px}
+.pagesub{font-size:12px;color:var(--text3);margin-bottom:20px}
+.stats{display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+.stat{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:16px 20px;box-shadow:var(--shadow);min-width:110px}
+.stat .num{font-size:22px;font-weight:800;color:var(--text)}
+.stat .lbl{font-size:11px;color:var(--text3);margin-top:2px}
+.fbar{display:flex;align-items:center;gap:6px;margin-bottom:8px;flex-wrap:wrap}
+.flabel{font-size:11px;color:var(--text3);margin-right:4px;font-weight:600;min-width:28px}
+.fb{padding:5px 14px;font-size:12px;font-weight:500;border:1.5px solid var(--border2);border-radius:20px;background:var(--white);color:var(--text2);cursor:pointer;font-family:inherit;transition:all .15s}
+.fb:hover{border-color:var(--blue);color:var(--blue)}
+.fb.on{background:var(--blue);border-color:var(--blue);color:#fff}
+.fb.virt{border-style:dashed}
+.fb.virt.on{background:#6b7280;border-color:#6b7280;color:#fff}
+.fb.gender.on{background:var(--mint);border-color:var(--mint)}
+.fb.grade.on{background:var(--gold);border-color:var(--gold)}
+.searchbox{margin-left:auto;padding:6px 14px;font-size:12px;border:1.5px solid var(--border2);border-radius:20px;font-family:inherit;width:200px;outline:none}
+.searchbox:focus{border-color:var(--blue)}
+.fbar-last{margin-bottom:14px}
+.resetbtn{padding:5px 12px;font-size:11px;font-weight:500;border:1px solid var(--border2);border-radius:20px;background:#f8f9fb;color:var(--text3);cursor:pointer;font-family:inherit}
+.resetbtn:hover{color:var(--red);border-color:var(--red)}
+.divider{height:1px;background:var(--border);margin:2px 0 14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px}
+.card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:20px;box-shadow:var(--shadow);display:flex;gap:16px}
+.card.hide{display:none}
+.photo{width:72px;height:72px;border-radius:12px;object-fit:cover;flex-shrink:0;background:#e8eaed;display:flex;align-items:center;justify-content:center;font-size:24px;color:var(--text3);font-weight:700}
+.info{flex:1;min-width:0}
+.name-row{display:flex;align-items:baseline;gap:8px;margin-bottom:2px;flex-wrap:wrap}
+.name{font-size:16px;font-weight:700}
+.pos{font-size:12px;color:var(--blue);font-weight:600}
+.dept{font-size:12px;color:var(--text2);margin-bottom:10px}
+.meta-list{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;font-size:11.5px}
+.meta-k{color:var(--text3)}
+.meta-v{color:var(--text)}
+.blank{color:#c4c8d4}
+.badge{display:inline-block;font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px}
+.b-active{background:#e6f9f2;color:var(--green)}
+.b-leave{background:#fef3e6;color:var(--gold)}
+.b-quit{background:#fde8e8;color:var(--red)}
+.tag-v{display:inline-block;font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;background:#f3e8ff;color:var(--purple)}
+.note{font-size:11px;color:var(--text2);margin-top:8px;padding-top:8px;border-top:1px dashed var(--border)}
+.tblwrap{background:var(--white);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);overflow:hidden;margin-top:28px}
+.tblwrap h3{font-size:14px;font-weight:700;padding:16px 20px;border-bottom:1px solid var(--border)}
+.tblscroll{overflow-x:auto;max-height:70vh}
+table{width:100%;border-collapse:collapse;font-size:12px;min-width:1400px}
+th{background:#f8f9fb;color:var(--text2);font-weight:600;text-align:left;padding:10px 14px;border-bottom:1px solid var(--border);white-space:nowrap;position:sticky;top:0;z-index:5}
+td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--text);white-space:nowrap}
+tr:last-child td{border-bottom:none}
+tr.hide{display:none}
+tr:hover td{background:#fafbfc}
+.td-name{font-weight:600}
+.updated{font-size:11px;color:var(--text3);margin-top:16px;text-align:right}
+.orgnote{background:#eef4ff;border:1px solid #d6e4ff;border-radius:10px;padding:12px 16px;font-size:11.5px;color:var(--text2);margin-bottom:20px;line-height:1.6}
+.orgnote b{color:var(--blue)}
+.tabs{display:flex;gap:4px;border-bottom:2px solid var(--border);margin-bottom:24px}
+.tabbtn{padding:10px 20px;font-size:13px;font-weight:600;color:var(--text3);background:none;border:none;border-bottom:2px solid transparent;margin-bottom:-2px;cursor:pointer;font-family:inherit;transition:all .15s}
+.tabbtn:hover{color:var(--text2)}
+.tabbtn.on{color:var(--blue);border-bottom-color:var(--blue)}
+.panel{display:none}
+.panel.on{display:block}
+.orgchart{display:flex;flex-direction:column;align-items:center;gap:0}
+.org-ceo{background:#0F172A;color:#fff;padding:14px 36px;border-radius:12px;font-size:15px;font-weight:700;box-shadow:var(--shadow);text-align:center}
+.org-ceo .cnt{font-size:11px;font-weight:500;color:#94A3B8;margin-top:4px}
+.org-conn{width:2px;height:24px;background:var(--border2)}
+.org-level{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;align-items:flex-start}
+.org-sil{display:flex;flex-direction:column;align-items:center;min-width:280px;flex:1;max-width:400px}
+.org-silbox{background:var(--blue);color:#fff;padding:10px 24px;border-radius:10px;font-size:13px;font-weight:700;text-align:center;box-shadow:var(--shadow);white-space:nowrap;width:100%}
+.org-silbox.direct{background:var(--purple)}
+.org-silbox .cnt{font-size:10.5px;font-weight:500;opacity:.85;margin-top:1px}
+.org-teams{display:flex;flex-direction:column;gap:12px;margin-top:20px;width:100%}
+.org-team{background:var(--white);border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow);overflow:hidden}
+.org-teamhdr{background:#f8f9fb;padding:8px 14px;font-size:12.5px;font-weight:700;color:var(--text);border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.org-teamhdr .tcnt{font-size:11px;font-weight:600;color:var(--blue);background:#eef4ff;padding:1px 8px;border-radius:10px}
+.org-members{padding:6px 14px 10px}
+.org-mem{display:flex;justify-content:space-between;align-items:center;padding:5px 0;font-size:12px;border-bottom:1px dashed var(--border)}
+.org-mem:last-child{border-bottom:none}
+.org-mem .mname{font-weight:600;color:var(--text)}
+.org-mem .mpos{font-size:11px;color:var(--blue);font-weight:600}
+.org-part{font-size:10px;color:var(--text3);margin-left:6px;font-weight:500}
+.org-empty{font-size:11px;color:var(--text3);padding:6px 0;font-style:italic}
+</style>
+</head>
+<body>
+<div class="hdr">
+  <div class="hdr-left"><div class="hdr-logo">S</div><div class="logo">에스씨지랩 <span style="font-weight:400;color:#94A3B8">임직원 명부</span></div></div>
+  <div class="hdr-meta">기준일 <b>2026.06.30</b></div>
+</div>
+<div class="wrap">
+  <div class="pagetitle">임직원 명부</div>
+  <div class="pagesub">SCGLAB · 매월 1회 갱신 · 내부 인사관리용</div>
+  <div class="orgnote">
+    <b>조직도</b> · 대표이사 ─ [서비스사업실] 기획팀(기획·마케팅파트), 디자인팀(디자인파트) · [서비스개발실] 개발팀(서버1·2·3·프론트엔드·빌링파트) · [대표이사 직속] 경영관리팀, 영업기획팀<br>
+    <span style="color:var(--purple)">※ <b style="color:var(--purple)">빌링사업부</b>는 실제 조직이 아닌 호칭용 그룹으로, 영업기획팀 + 빌링파트를 묶어 조회하기 위한 가상 태그입니다.</span>
+  </div>
+  <div class="tabs">
+    <button class="tabbtn on" onclick="showTab(this,'panel-roster')">명부</button>
+    <button class="tabbtn" onclick="showTab(this,'panel-org')">조직도</button>
+  </div>
+
+  <div class="panel on" id="panel-roster">
+  <div class="stats">
+    <div class="stat"><div class="num" id="s-total">42</div><div class="lbl">총 인원</div></div>
+    <div class="stat"><div class="num" id="s-active">41</div><div class="lbl">재직</div></div>
+    <div class="stat"><div class="num" id="s-leave">1</div><div class="lbl">휴직</div></div>
+    <div class="stat"><div class="num" id="s-dept">3</div><div class="lbl">노출 부서</div></div>
+  </div>
+  <div class="fbar">
+    <span class="flabel">실</span>
+    <button class="fb dept-f on" data-dfilter="all" onclick="setDept(this,'all')">전체</button>
+    <button class="fb dept-f" data-dfilter="서비스사업실" data-dtype="dept" onclick="setDept(this,'dept')">서비스사업실</button>
+    <button class="fb dept-f" data-dfilter="서비스개발실" data-dtype="dept" onclick="setDept(this,'dept')">서비스개발실</button>
+    <button class="fb dept-f" data-dfilter="대표이사 직속" data-dtype="dept" onclick="setDept(this,'dept')">대표이사 직속</button>
+    <button class="fb dept-f virt" data-dfilter="빌링사업부" data-dtype="virt" onclick="setDept(this,'virt')">빌링사업부 (호칭)</button>
+  </div>
+  <div class="fbar">
+    <span class="flabel">팀</span>
+    <button class="fb dept-f" data-dfilter="기획팀" data-dtype="team" onclick="setDept(this,'team')">기획팀</button>
+    <button class="fb dept-f" data-dfilter="디자인팀" data-dtype="team" onclick="setDept(this,'team')">디자인팀</button>
+    <button class="fb dept-f" data-dfilter="개발팀" data-dtype="team" onclick="setDept(this,'team')">개발팀</button>
+    <button class="fb dept-f" data-dfilter="경영관리팀" data-dtype="team" onclick="setDept(this,'team')">경영관리팀</button>
+    <button class="fb dept-f" data-dfilter="영업기획팀" data-dtype="team" onclick="setDept(this,'team')">영업기획팀</button>
+  </div>
+  <div class="fbar">
+    <span class="flabel">성별</span>
+    <button class="fb gender on" data-sfilter="all" onclick="setGender(this)">전체</button>
+    <button class="fb gender" data-sfilter="남" onclick="setGender(this)">남</button>
+    <button class="fb gender" data-sfilter="여" onclick="setGender(this)">여</button>
+  </div>
+  <div class="fbar fbar-last">
+    <span class="flabel">직급</span>
+    <button class="fb grade on" data-gfilter="all" onclick="setGrade(this)">전체</button>
+    <button class="fb grade" data-gfilter="이사" onclick="setGrade(this)">이사</button>
+    <button class="fb grade" data-gfilter="부장" onclick="setGrade(this)">부장</button>
+    <button class="fb grade" data-gfilter="차장" onclick="setGrade(this)">차장</button>
+    <button class="fb grade" data-gfilter="과장" onclick="setGrade(this)">과장</button>
+    <button class="fb grade" data-gfilter="대리" onclick="setGrade(this)">대리</button>
+    <button class="fb grade" data-gfilter="사원" onclick="setGrade(this)">사원</button>
+    <input class="searchbox" id="search" placeholder="이름·부서·직급 검색" oninput="doSearch()">
+  </div>
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+    <span id="filterInfo" style="font-size:11.5px;color:var(--text3)"></span>
+    <button class="resetbtn" onclick="resetAll()">필터 초기화</button>
+  </div>
+  <div class="grid" id="cardgrid">
+    <div class="card" data-dept="" data-team="" data-virt="" data-gender="남" data-grade="대표이사" data-name="김요한   대표이사 대표이사">
+      <div class="photo">김</div>
+      <div class="info">
+        <div class="name-row">
+          <span class="name">김요한</span>
+          <span class="pos">대표이사 (남)</span>
+          <span class="badge b-active">재직</span>
+          
+        </div>
+        <div class="dept">(대표이사)</div>
+        <div class="meta-list">
+          <span class="meta-k">사번</span><span class="meta-v">L21010</span>
+          <span class="meta-k">생년월일</span><span class="meta-v">1982.01.31</span>
+          <span class="meta-k">직급 · 직위</span><span class="meta-v">대표이사 · 대표이사</span>
+          <span class="meta-k">그룹 입사일</span><span class="meta-v"><span class="blank">-</span></span>
+          <span class="meta-k">회사 입사일</span><span class="meta-v">2021.11.01 (4년 8개월)</span>
+          <span class="meta-k">이메일</span><span class="meta-v">john@scglab.com</span>
+          <span class="meta-k">연락처</span><span class="meta-v">010-2800-3969</span>
+          <span class="meta-k">학교</span><span class="meta-v">텍사스대</span>
+          <span class="meta-k">전공</span><span class="meta-v"><span class="blank">-</span></span>
+          <span class="meta-k">입사경로</span><span class="meta-v">VIP</span>
+        </div>
+        <div class="note">특이사항: 없음</div>
+      </div>
+    </div>
+    <div class="card" data-dept="" data-team="" data-virt="" data-gender="남" data-grade="대표이사" data-name="박동녘   대표이사 대표이사">
+      <div class="photo">박</div>
+      <div class="info">
+        <div class="name-row">
+          <span class="name">박동녘</span>
+          <span class="pos">대표이사 (남)</span>
+          <span class="badge b-active">재직</span>
+          
+        </div>
+        <div class="dept">(대표이사)</div>
+        <div class="meta-list">
+          <span class="meta-k">사번</span><span class="meta-v">N15279</span>
+          <span class="meta-k">생년월일</span><span class="meta-v">1979.06.19</span>
+          <span class="meta-k">직급 · 직위</span><span class="meta-v">대표이사 · 대표이사</span>
+          <span class="meta-k">그룹 입사일</span><span class="meta-v">2013.12.15 (12년 6개월)</span>
+          <span class="meta-k">회사 입사일</span><span class="meta-v">2018.01.01 (8년 6개월)</span>
+          <span class="meta-k">이메일</span><span class="meta-v">eastern@scglab.com</span>
+          <span class="meta-k">연락처</span><span class="meta-v">010-9868-1901</span>
+          <span class="meta-k">학교</span><span class="meta-v"><span class="blank">-</span></span>
+          <span class="meta-k">전공</span><span class="meta-v"><span class="blank">-</span></span>
+          <span class="meta-k">입사경로</span><span class="meta-v"><span class="blank">-</span></span>
+        </div>
+        <div class="note">특이사항: 없음</div>
+      </div>
+    </div>
+    <div class="card" data-dept="서비스사업실" data-team="" data-virt="" data-gender="남" data-grade="이사" data-name="송준상   이사 실장">
+      <div class="photo">송</div>
+      <div class="info">
+        <div class="name-row">
+          <span class="name">송준상</span>
+          <span class="pos">이사 (남)</span>
+          <span class="badge b-active">재직</span>
+          
+        </div>
+        <div class="dept">서비스사업실 · (실장)</div>
+        <div class="meta-list">
+          <span class="meta-k">사번</span><span class="meta-v">L22007</span>
+          <span class="meta-k">생년월일</span><span class="meta-v">1980.04.07</span>
+          <span class="meta-k">직급 · 직위</span><span class="meta-v">이사 · 실장</span>
+          <span class="meta-k">그룹 입사일</span><span class="meta-v">2022.05.01 (4년 2개월)</span>
+          <span class="meta-k">회사 입사일</span><span class="meta-v">2022.05.01 (4년 2개월)</span>
+          <span class="meta-k">이메일</span><span class="meta-v">tris@scglab.com</span>
+          <span class="meta-k">연락처</span><span class="meta-v">010-2934-3138</span>
+          <span class="meta-k">학교</span><span class="meta-v">연세대학교</span>
+          <span class="meta-k">전공</span><span class="meta-v">신문방송학과</span>
+          <span class="meta-k">입사경로</span><span class="meta-v">대표이사 추천</span>
+        </div>
+        <div class="note">특이사항: 없음</div>
+      </div>
+    </div>
+    <div class="card" data-dept="서비스사업실" data-team="" data-virt="" data-gender="남" data-grade="부장" data-name="남기철   부장 ">
+      <div class="photo">남</div>
+      <div class="info">
+        <div class="name-row">
+          <span class="name">남기철</span>
+          <span class="pos">부장 (남)</span>
+          <span class="badge b-active">재직</span>
+          
+        </div>
+        <div class="dept">서비스사업실</div>
+        <div class="meta-list">
+          <span class="meta-k">사번</span><span class="meta-v">L25006</span>
+          <span class="meta-k">생년월일</span><span class="meta-v">1974.01.17</span>
+          <span class="meta-k">직급 · 직위</span><span class="meta-v">부장</span>
+          <span class="meta-k">그룹 입사일</span><span class="meta-v">2025.10.23 (0년 8개월)</span>
+          <span class="meta-k">회사 입사일</span><span class="meta-v">2025.10.23 (0년 8개월)</span>
+          <span class="meta-k">이메일</span><span class="meta-v">spike@scglab.com</span>
+          <span class="meta-k">연락처</span><span class="meta-v">010-2980-0802</span>
+          <span class="meta-k">학교</span><span class="meta-v">수원대학교</span>
+          <span class="meta-k">전공</span><span class="meta-v">영어영문학과</span>
+          <span class="meta-k">입사경로</span><span class="meta-v">대표이사 추천</span>
+        </div>
+        <div class="note">특이사항: 없음</div>
+      </div>
+    </div>
+    <div class="card" data-dept="서비스사업실" data-team="기획팀" data-virt="" data-gender="남" data-grade="차장" data-name="신준철 기획팀 기획파트 차장 파트장">
+      <div class="photo">신</div>
+      <div class="info">
+        <div class="name-row">
+          <span class="name">신준철</span>
+          <span class="pos">차장 (남)</span>
+          <span class="badge b-active">재직</span>
+          
+        </div>
+        <div class="dept">서비스사업실 · 기획팀 · 기획파트 (파트장)</div>
+        <div class="meta-list">
+          <span class="meta-k">사번</span><span class="meta-v">L21004</span>
+          <span class="meta-k">생년월일</span><span class="meta-v">1985.12.06</span>
+          <span class="meta-k">직급 · 직위</span><span class="meta-v">차장 · 파트장</span>
+          <span class="meta-k">그룹 입사일</span><span class="meta-v">2021.09.06 (4년 10개월)</span>
+          <span class="meta-k">회사 입사일</span><span class="meta-v">2021.09.06 (4년 10개월)</span>
+          <span class="meta-k">이메일</span><span class="meta-v">sjun1002@scglab.com</span>
+          <span class="meta-k">연락처</span><span class="meta-v">010-9454-5743</span>
+          <span class="meta-k">학교</span><span class="meta-v">강남대학교</span>
+          <span class="meta-k">전공</span><span class="meta-v">미디어정보공학</span>
+          <span class="meta-k">입사경로</span><span class="meta-v">직원 추천(백하영)</span>
+        </div>
+        <div class="note">특이사항: 없음</div>
+      </div>
+    </div>
+    <div class="card" data-dept="서비스사업실" data-team="기획팀" data-virt="" data-gender="남" data-grade="과장" data-name="박성민 기획팀 기획파트 과장 파트원">
+      <div class="photo">박</div>
+      <div class="info">
+        <div class="name-row">
+          <span class="name">박성민</span>
+          <span class="pos">과장 (남)</span>
+          <span class="badge b-active">재직</span>
+          
+        </div>
+        <div class="dept">서비스사업실 · 기획팀 · 기획파트</div>
+        <div class="meta-list">
+          <span class="meta-k">사번</span><span class="meta-v">L22008</span>
+          <span class="meta-k">생년월일</span><span class="meta-v">1989.07.13</span>
+          <span class="meta-k">직급 · 직위</span><span class="meta-v">과장 · 파트원</span>
+          <span class="meta-k">그룹 입사일</span><span class="meta-v">2022.06.02 (4년 1개월)</span>
+          <span class="meta-k">회사 입사일</span><span class="meta-v">2022.06.02 (4년 1개월)</span>
+          <span class="meta-k">이메일</span><span class="meta-v">summit@scglab.com</span>
+          <span class="meta-k">연락처</span><span class="meta-v">010-5105-5848</span>
+          <span class="meta-k">학교</span><span class="meta-v">추계예술대학교</span>
+          <span class="meta-k">전공</span><span class="meta-v">영상시나리오</span>
+          <span class="meta-k">입사경로</span><span class="meta-v">인재서칭(인사담당)</span>
+        </div>
+        <div class="note">특이사항: 없음</div>
+      </div>
+    </div>
+    <div class="card" data-dept="서비스사업실" data-team="기획팀" data-virt="" data-gender="여" data-grade="과장" data-name="이미희 기획팀 기획파트 과장 파트원">
+      <div class="photo">이</div>
+      <div class="info">
+        <div class="name-row">
+          <span class="name">이미희</span>
+          <span class="pos">과장 (여)</span>
+          <span class="badge b-active">재직</span>
+          
+        </div>
+        <div class="dept">서비스사업실 · 기획팀 · 기획파트</div>
+        <div class="meta-list">
+          <span class="meta-k">사번</span><span class="meta-v">L17001</span>
+          <span class="meta-k">생년월일</span><span class="meta-v">1990.07.11</span>
+          <span class="meta-k">직급 · 직위</span><span class="meta-v">과장 · 파트원</span>
+          <span class="meta-k">그룹 입사일</span><span class="meta-v">2017.07.01 (9년 0개월)</span>
+          <span class="meta-k">회사 입사일</span><span class="meta-v">2017.07.01 (9년 0개월)</span>
+          <span class="meta-k">이메일</span><span class="meta-v">2mihee@scglab.com</span>
+          <span class="meta-k">연락처</span><span class="meta-v">010-2087-5244</span>
+          <span class="meta-k">학교</span><span class="meta-v">서울시립대학교</span>
+          <span class="meta-k">전공</span><span class="meta-v">경제학과</span>
+          <span class="meta-k">입사경로</span><span class="meta-v">지원</span>
+        </div>
+        <div class="note">특이사항: 육아기 단축(26.05~27.04) 9시-4시</div>
+      </div>
+    </div>
+    <div class="card" data-dept="서비스사업실" data-team="기획팀" data-virt="" data-gender="여" data-grade="과장" data-name="조은아 기획팀 기획파트 과장 파트원">
+      <div class="photo">조</div>
+      <div class="info">
+        <div class="name-row">
+          <span class="name">조은아</span>
+          <span class="pos">과장 (여)</span>
+          <span class="badge b-active">재직</span>
+          
+        </div>
+        <div class="dept">서비스사업실 · 기획팀 · 기획파트</div>
+        <div class="meta-list">
+          <span class="meta-k">사번</span><span class="meta-v">L23002</span>
+          <span class="meta-k">생년월일</span><span class="meta-v">1990.10.05</span>
+          <span class="meta-k">직급 · 직위</span><span class="meta-v">과장 · 파트원</span>
+          <span class="meta-k">그룹 입사일</span><span class="meta-v">2023.09.11 (2년 9개월)</span>
+          <span class="meta-k">회사 입사일</span><span class="meta-v">2023.09.11 (2년 9개월)</span>
+          <span class="meta-k">이메일</span><span class="meta-v">euna.jo@scglab.com</span>
+          <span class="meta-k">연락처</span><span class="meta-v">010-4540-6877</span>
+          <span class="meta-k">학교</span><span class="meta-v">강원대학교</span>
+          <span class="meta-k">전공</span><span class="meta-v">스토리텔링학과</span>
+          <span class="meta-k">입사경로</span><span class="meta-v">인재서칭(인사담당)</span>
+        </div>
+        <div class="note">특이사항: 없음</div>
+      </div>
+    </div>
+    <div class="card" data-dept="서비스사업실" data-team="기획팀" data-virt="" data-gender="여" data-grade="사원" data-name="김가현 기획팀 기획파트 사원 파트원">
+      <div class="photo">김</div>
+      <div class="info">
+        <div class="name-row">
+          <span class="name">김가현</span>
+          <span class="pos">사원 (여)</span>
+          <span class="badge b-active">재직</span>
+          
+        </div>
+        <div class="dept">서비스사업실 · 기획팀 · 기획파트</div>
+        <div class="meta-list">
+          <span class="meta-k">사번</span><span class="meta-v">L26003</span>
+          <span class="meta-k">생년월일</span><span class="meta-v">1997.09.07</span>
+          <span class="meta-k">직급 · 직위</span><span class="meta-v">사원 · 파트원</span>
+          <span class="meta-k">그룹 입사일</span><span class="meta-v">2026.05.11 (0년 1개월)</span>
+          <span class="meta-k">회사 입사일</span><span class="meta-v">2026.05.11 (0년 1개월)</span>
+          <span class="meta-k">이메일</span><span class="meta-v">kim.gahyun@scglab.com</span>
+          <span class="meta-k">연락처</span><span class="meta-v">010-2366-8213</span>
+          <span class="meta-k">학교</span><span class="meta-v">중앙대학교</span>
+          <span class="meta-k">전공</span><span class="meta-v">문헌정보학언론학</span>
+          <span class="meta-k">입사경로</span><span class="meta-v">지원</span>
+        </div>
+        <div class="note">특이사항: 없음</div>
+      </div>
+    </div>
+    <div class="card" data-dept="서비스사업실" data-team="기획팀" data-virt="" data-gender="여" data-grade="과장" data-name="배사랑 기획팀 마케팅파트 과장 파트장">
+      <div class="photo">배</div>
+      <div class="info">
+        <div class="name-row">
+          <span class="name">배사랑</span>
+          <span class="pos">과장 (여)</span>
+          <span class="badge b-active">재직</span>
+          
+        </div>
+        <div class="dept">서비스사업실 · 기획팀 · 마케팅파트 (파트장)</div>
+        <div class="meta-list">
+          <span class="meta-k">사번</span><span class="meta-v">L25002</span>
+          <span class="meta-k">생년월일</span><span class="meta-v">1989.06.22</span>
+          <span class="meta-k">직급 · 직위</span><span class="meta-v">과장 · 파트장</span>
+          <span class="meta-k">그룹 입사일</span><span class="meta-v">2025.01.06 (1년 6개월)</span>
+          <span class="meta-k">회사 입사일</span><span class="meta-v">2025.01.06 (1년 6개월)</span>
+          <span class="meta-k">이메일</span><span class="meta-v">bsr@scglab.com</span>
+          <span class="meta-k">연락처</span><span class="meta-v">010-5610-0632</span>
+          <span class="meta-k">학교</span><span class="meta-v">삼육대학교</span>
+          <span class="meta-k">전공</span><span class="meta-v">보건관리학과</span>
+          <span class="meta-k">입사경로</span><span class="meta-v">지원*</span>
+        </div>
+        <div class="note">특이사항: 없음</div>
+      </div>
+    </div>
+    <div class="card" data-dept="서비스사업실" data-team="기획팀" data-virt="" data-gender="여" data-grade="부장" data-name="백하영 기획팀 마케팅파트 부장 파트원">
+      <div class="photo">백</div>
+      <div class="info">
+        <div class="name-row">
+          <span class="name">백하영</span>
+          <span class="pos">부장 (여)</span>
+          <span class="badge b-active">재직</span>
+          
+        </div>
+        <div class="dept">서비스사업실 · 기획팀 · 마케팅파트</div>
+        <div class="meta-list">
+          <span class="meta-k">사번</span><span class="meta-v">L20003</span>
+          <span class="meta-k">생년월일</span><span class="meta-v">1981.01.22</span>
+          <span class="meta-k">직급 · 직위</span><span class="meta-v">부장 · 파트원</span>
+          <span class="meta-k">그룹 입사일</span><span class="meta-v">2020.06.08 (6년 1개월)</span>
+          <span class="meta-k">회사 입사일</span><span class="meta-v">2020.06.08 (6년 1개월)</span>
+          <span class="meta-k">이메일</span><span class="meta-v">bhy@scglab.com</span>
+          <span class="meta-k">연락처</span><span class="meta-v">010-5486-4888</span>
+          <span class="meta-k">학교</span><span class="meta-v">성균관대학교 대학원</span>
+          <span class="meta-k">전공</span><span class="meta-v">마케팅</span>
+          <span class="meta-k">입사경로</span><span class="meta-v">헤드헌팅(프로매치)</span>
+        </div>
+        <div class="note">특이사항: 재택 근무</div>
+      </div>
+    </div>
+    <div class="card" data-dept="서비스사업실" data-team="기획팀" data-virt="" data-gender="여" data-grade="과장" data-name="방민지 기획팀 마케팅파트 과장 파트원">
+      <div class="photo">방</div>
+      <div class="info">
+        <div class="name-row">
+          <span class="name">방민지</span>
+          <span class="pos">과장 (여)</span>
+          <span class="badge b-leave">휴직</span>
+          
+        </div>
+        <div class="dept">서비스사업실 · 기획팀 · 마케팅파트</div>
+        <div class="meta-list">
+          <span class="meta-k">사번</span><span class="meta-v">119041</span>
+          <span class="meta-k">생년월일</span><span class="meta-v">1990.01.29</span>
+          <span class="meta-k">직급 · 직위</span><span class="meta-v">과장 · 파트원</span>
+          <span class="meta-k">그룹 입사일</span><span class="meta-v">2019.10.14 (6년 8개월)</span>
+          <span class="meta-k">회사 입사일</span><span class="meta-v">2020.02.10 (6년 4개월)</span>
+          <span class="meta-k">이메일</span><span class="meta-v">mjbang@scglab.com</span>
+          <span class="meta-k">연락처</span><span class="meta-v">010-4706-0868</span>
+          <span class="meta-k">학교</span><span class="meta-v">성신여자대학교</span>
+          <span class="meta-k">전공</span><span class="meta-v">생활문화소비자학</span>
+          <span class="meta-k">입사경로</span><span class="meta-v">전입(SCGS)</span>
+        </div>
+        <div class="note">특이사항: 육아휴직(~26.09.02), 전량 소진</div>
+      </div>
+    </div>
+    <div class="card" data-dept="서비스사업실" data-team="기획팀" data-virt="" data-gender="여" data-grade="대리" data-name="서희승 기획팀 마케팅파트 대리 파트원">
+      <div class="photo">서</div>
+      <div class="info">
+        <div class="name-row">
+          <span class="name">서희승</span>
+          <span class="pos">대리 (여)</span>
+          <span class="badge b-active">재직</span>
+          
+        </div>
+        <div class="dept">서비스사업실 · 기획팀 · 마케팅파트</div>
+        <div class="meta-list">
+          <span class="meta-k">사번</span><span class="meta-v">L25004</span>
+          <span class="meta-k">생년월일</span><span class="meta-v">1994.10.15</span>
+          <span class="meta-k">직급 · 직위</span><span class="meta-v">대리 · 파트원</span>
+          <span class="meta-k">그룹 입사일</span><span class="meta-v">2025.06.18 (1년 0개월)</span>
+          <span class="meta-k">회사 입사일</span><span class="meta-v">2025.06.18 (1년 0개월)</span>
+          <span class="meta-k">이메일</span><span class="meta-v">hsseo@scglab.com</span>
+          <span class="meta-k">연락처</span><span class="meta-v">010-8299-2060</span>
+          <span class="meta-k">학교</span><span class="meta-v">경기대학교</span>
+          <span class="meta-k">전공</span><span class="meta-v">무역학과</span>
+          <span class="meta-k">입사경로</span><span class="meta-v">직원 추천(배사랑)</span>
+        </div>
+        <div class="note">특이사항: 없음</div>
+      </div>
+    </div>
+    <div class="card" data-dept="서비스사업실" data-team="디자인팀" data-virt="" data-gender="여" data-grade="차장" data-name="박진원 디자인팀 디자인파트 차장 파트장">
+      <div class="photo">박</div>
+      <div class="info">
+        <div class="name-row">
+          <span class="name">박진원</span>
+          <span class="pos">차장 (여)</span>
+          <span class="badge b-active">재직</span>
+          
+        </div>
+        <div class="dept">서비스사업실 · 디자인팀 · 디자인파트 (파트장)</div>
+        <div class="meta-list">
+          <span class="meta-k">사번</span><span class="meta-v">119049</span>
+          <span class="meta-k">생년월일</span><span class="meta-v">1988.02.27</span>
+          <span class="meta-k">직급 · 직위</span><span class="meta-v">차장 · 파트장</span>
+          <span class="meta-k">그룹 입사일</span><span class="meta-v">2019.11.18 (6년 7개월)</span>
+          <span class="meta-k">회사 입사일</span><span class="meta-v">2020.12.01 (5년 7개월)</span>
+          <span class="meta-k">이메일</span><span class="meta-v">jin@scglab.com</span>
+          <span class="meta-k">연락처</span><span class="meta-v">010-8577-7482</span>
+          <span class="meta-k">학교</span><span class="meta-v">홍익대학교 대학원</span>
+          <span class="meta-k">전공</span><span class="meta-v">시각디자인</span>
+          <span class="meta-k">입사경로</span><span class="meta-v">전입(SCGS)</span>
+        </div>
+        <div class="note">특이사항: 없음</div>
+      </div>
+    </div>
+    <div class="card" data-dept="서비스사업실" data-team="디자인팀" data-virt="" data-gender="여" data-grade="대리" data-name="기슬기 디자인팀 디자인파트 대리 파트원">
+      <div class="photo">기</div>
+      <div class="info">
+        <div class="name-row">
+          <span class="name">기슬기</span>
+          <span class="pos">대리 (여)</span>
+          <span class="badge b-active">재직</span>
+          
+        </div>
+        <div class="dept">서비스사업실 · 디자인팀 · 디자인파트</div>
+        <div class="meta-list">
+          <span class="meta-k">사번</span><span class="meta-v">L23003</span>
+          <span class="meta-k">생년월일</span><span class="meta-v">1992.03.28</span>
+          <span class="meta-k">직급 · 직위</span><span class="meta-v">대리 · 파트원</span>
+          <span class="meta-k">그룹 입사일</span><span class="meta-v">2023.09.18 (2년 9개월)</span>
+          <span class="meta-k">회사 입사일</span><span class="meta-v">2023.09.18 (2년 9개월)</span>
+          <span class="meta-k">이메일</span><span class="meta-v">gi@scglab.com</span>
+          <span class="meta-k">연락처</span><span class="meta-v">010-2524-2588</span>
+          <span class="meta-k">학교</span><span class="meta-v">제주대학교</span>
+          <span class="meta-k">전공</span><span class="meta-v">문화조형디자인전공</span>
+          <span class="meta-k">입사경로</span><span class="meta-v">인재서칭(인사담당)</span>
+        </div>
+        <div class="note">특이사항: 없음</div>
+      </div>
+    </div>
+    <div class="card" data-dept="서비스사업실" data-team="디자인팀" data-virt="" data-gender="여" data-grade="대리" data-name="정하은 디자인팀 디자인파트 대리 파트원">
+      <div class="photo">정</div>
+      <div class="info">
+        <div class="name-row">
+          <span class="name">정하은</span>
+          <span class="pos">대리 (여)</span>
+          <span class="badge b-active">재직</span>
+          
+        </div>
+        <div class="dept">서비스사업실 · 디자인팀 · 디자인파트</div>
+        <div class="meta-list">
+          <span class="meta-k">사번</span><span class="meta-v">L25005</span>
+          <span class="meta-k">생년월일</span><span class="meta-v">1996.11.26</span>
+          <span class="meta-k">직급 · 직위</span><span class="meta-v">대리 · 파트원</span>
+          <span class="meta-k">그룹 입사일</span><span class="meta-v">2025.08.19 (0년 10개월)</span>
+          <span class="meta-k">회사 입사일</span><span class="meta-v">2025.08.19 (0년 10개월)</span>
+          <span class="meta-k">이메일</span><span class="meta-v">haney@scglab.com</span>
+          <span class="meta-k">연락처</span><span class="meta-v">010-8716-0399</span>
+          <span class="meta-k">학교</span><span class="meta-v">한국방송통신대학교</span>
+          <span class="meta-k">전공</span><span class="meta-v">미디어영상학과</span>
+          <span class="meta-k">입사경로</span><span class="meta-v">지원</span>
+        </div>
+        <div class="note">특이사항: 없음</div>
+      </div>
+    </div>
+    <div class="card" data-dept="서비스개발실" data-team="" data-virt="" data-gender="남" data-grade="이사" data-name="최범균   이사 실장">
+      <div class="photo">최</div>
+      <div class="info">
+        <div class="name-row">
+          <span class="name">최범균</span>
+          <span class="pos">이사 (남)</span>
+          <span class="badge b-active">재직</span>
+          
+        </div>
+        <div class="dept">서비스개발실 · (실장)</div>
+        <div class="meta-list">
+          <span class="meta-k">사번</span><span class="meta-v">L21006</span>
+          <span class="meta-k">생년월일</span><span class="meta-v">1977.08.31</span>
+          <span class="meta-k">직급 · 직위</span><span class="meta-v">이사 · 실장</span>
+          <span class="meta-k">그룹 입사일</span><span class="meta-v">2021.11.11 (4년 7개월)</span>
+          <span class="meta-k">회사 입사일</span><span class="meta-v">2021.11.11 (4년 7개월)</span>
+          <span class="meta-k">이메일</span><span class="meta-v">madvirus@scglab.com</span>
+          <span class="meta-k">연락처</span><span class="meta-v">010-5730-0731</span>
+          <span class="meta-k">학교</span><span class="meta-v">고려대학교</span>
+          <span class="meta-k">전공</span><span class="meta-v">컴퓨터학과</span>
+          <span class="meta-k">입사경로</span><span class="meta-v">대표이사 추천</span>
+        </div>
+        <div class="note">특이사항: 없음</div>
+      </div>
+    </div>
+    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="과장" data-name="양진만 개발팀 서버1파트 과장 파트원">
+      <div class="photo">양</div>
+      <div class="info">
+        <div class="name-row">
+          <span class="name">양진만</span>
+          <span class="pos">과장 (남)</span>
+          <span class="badge b-active">재직</span>
+          
+        </div>
+        <div class="dept">서비스개발실 · 개발팀 · 서버1파트</div>
+        <div class="meta-list">
+          <span class="meta-k">사번</span><span class="meta-v">L23001</span>
+          <span class="meta-k">생년월일</span><span class="meta-v">1985.04.21</span>
+          <span class="meta-k">직급 · 직위</span><span class="meta-v">과장 · 파트원</span>
+          <span class="meta-k">그룹 입사일</span><span class="meta-v">2019.03.11 (7년 3개월)</span>
+          <span class="meta-k">회사 입사일</span><span class="meta-v">2023.01.01 (3년 6개월)</span>
+          <span class="meta-k">이메일</span><span class="meta-v">jmyang@scglab.com</span>
+          <span class="meta-k">연락처</span><span class="meta-v">010-7610-4106</span>
+          <span class="meta-k">학교</span><span class="meta-v">명지대학교</span>
+          <span class="meta-k">전공</span><span class="meta-v">컴퓨터공학과</span>
+          <span class="meta-k">입사경로</span><span class="meta-v">전입(SCGS)</span>
+        </div>
+        <div class="note">특이사항: 없음</div>
+      </div>
+    </div>
+    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="과장" data-name="염석준 개발팀 서버1파트 과장 파트원">
+      <div class="photo">염</div>
+      <div class="info">
+        <div class="name-row">
+          <span class="name">염석준</span>
+          <span class="pos">과장 (남)</span>
+          <span class="badge b-active">재직</span>
+          
+        </div>
+        <div class="dept">서비스개발실 · 개발팀 · 서버1파트</div>
+        <div class="meta-list">
+          <span class="meta-k">사번</span><span class="meta-v">L22010</span>
+          <span class="meta-k">생년월일</span><span class="meta-v">1991.03.20</span>
+          <span class="meta-k">직급 · 직위</span><span class="meta-v">과장 · 파트원</span>
+          <span class="meta-k">그룹 입사일</span><span class="meta-v">2022.07.18 (3년 11개월)</span>
+          <span class="meta-k">회사 입사일</span><span class="meta-v">2022.07.18 (3년 11개월)</span>
+          <span class="meta-k">이메일</span><span class="meta-v">ysjune@scglab.com</span>
+          <span class="meta-k">연락처</span><span class="meta-v">010-5306-4037</span>
+          <span class="meta-k">학교</span><span class="meta-v">선문대학교</span>
+          <span class="meta-k">전공</span><span class="meta-v">컴퓨터공학과</span>
+          <span class="meta-k">입사경로</span><span class="meta-v">직원 추천(최범균)</span>
+        </div>
+        <div class="note">특이사항: 없음</div>
+      </div>
+    </div>
+    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="대리" data-name="이영성 개발팀 서버1파트 대리 파트원">
+      <div class="photo">이</div>
+      <div class="info">
+        <div class="name-row">
+          <span class="name">이영성</span>
+          <span class="pos">대리 (남)</span>
+          <span class="badge b-active">재직</span>
+          
+        </div>
+        <div class="dept">서비스개발실 · 개발팀 · 서버1파트</div>
+        <div class="meta-list">
+          <span class="meta-k">사번</span><span class="meta-v">L24001</span>
+          <span class="meta-k">생년월일</span><span class="meta-v">1996.03.14</span>
+          <span class="meta-k">직급 · 직위</span><span class="meta-v">대리 · 파트원</span>
+          <span class="meta-k">그룹 입사일</span><span class="meta-v">2024.03.20 (2년 3개월)</span>
+          <span class="meta-k">회사 입사일</span><span class="meta-v">2024.03.20 (2년 3개월)</span>
+          <span class="meta-k">이메일</span><span class="meta-v">yslee@scglab.com</span>
+          <span class="meta-k">연락처</span><span class="meta-v">010-4017-6613</span>
+          <span class="meta-k">학교</span><span class="meta-v">선문대학교</span>
+          <span class="meta-k">전공</span><span class="meta-v">컴퓨터공학과</span>
+          <span class="meta-k">입사경로</span><span class="meta-v">직원 추천(심익찬)</span>
+        </div>
+        <div class="note">특이사항: 없음</div>
+      </div>
+    </div>
+    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="여" data-grade="대리" data-name="장혜윤 개발팀 서버1파트 대리 파트원">
+      <div class="photo">장</div>
+      <div class="info">
+        <div class="name-row">
+          <span class="name">장혜윤</span>
+          <span class="pos">대리 (여)</span>
+          <span class="badge b-active">재직</span>
+          
+        </div>
+        <div class="dept">서비스개발실 · 개발팀 · 서버1파트</div>
+        <div class="meta-list">
+          <span class="meta-k">사번</span><span class="meta-v">L22006</span>
+          <span class="meta-k">생년월일</span><span class="meta-v">1992.02.19</span>
+          <span class="meta-k">직급 · 직위</span><span class="meta-v">대리 · 파트원</span>
+          <span class="meta-k">그룹 입사일</span><span class="meta-v">2022.04.04 (4년 3개월)</span>
+          <span class="meta-k">회사 입사일</span><span class="meta-v">2022.04.04 (4년 3개월)</span>
+          <span class="meta-k">이메일</span><span class="meta-v">hyjang@scglab.com</span>
+          <span class="meta-k">연락처</span><span class="meta-v">010-6417-3888</span>
+          <span class="meta-k">학교</span><span class="meta-v">한신대학교</span>
+          <span class="meta-k">전공</span><span class="meta-v">정보통신학과</span>
+          <span class="meta-k">입사경로</span><span class="meta-v">지원</span>
+        </div>
+        <div class="note">특이사항: 없음</div>
+      </div>
+    </div>
+    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="부장" data-name="심익찬 개발팀 서버2파트 부장 파트장">
+      <div class="photo">심</div>
+      <div class="info">
+        <div class="name-row">
+          <span class="name">심익찬</span>
+          <span class="pos">부장 (남)</span>
+          <span class="badge b-active">재직</span>
+          
+        </div>
+        <div class="dept">서비스개발실 · 개발팀 · 서버2파트 (파트장)</div>
+        <div class="meta-list">
+          <span class="meta-k">사번</span><span class="meta-v">L22001</span>
+          <span class="meta-k">생년월일</span><span class="meta-v">1978.07.11</span>
+          <span class="meta-k">직급 · 직위</span><span class="meta-v">부장 · 파트장</span>
+          <span class="meta-k">그룹 입사일</span><span class="meta-v">2022.01.03 (4년 6개월)</span>
+          <span class="meta-k">회사 입사일</span><span class="meta-v">2022.01.03 (4년 6개월)</span>
+          <span class="meta-k">이메일</span><span class="meta-v">plusperson@scglab.com</span>
+          <span class="meta-k">연락처</span><span class="meta-v">010-3479-3242</span>
+          <span class="meta-k">학교</span><span class="meta-v">호남대학원</span>
+          <span class="meta-k">전공</span><span class="meta-v">인터넷정보통신</span>
+          <span class="meta-k">입사경로</span><span class="meta-v">직원 추천(최범균)</span>
+        </div>
+        <div class="note">특이사항: 없음</div>
+      </div>
+    </div>
+    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="대리" data-name="김진원 개발팀 서버2파트 대리 팀원">
+      <div class="photo">김</div>
+      <div class="info">
+        <div class="name-row">
+          <span class="name">김진원</span>
+          <span class="pos">대리 (남)</span>
+          <span class="badge b-active">재직</span>
+          
+        </div>
+        <div class="dept">서비스개발실 · 개발팀 · 서버2파트</div>
+        <div class="meta-list">
+          <span class="meta-k">사번</span><span class="meta-v">L21011</span>
+          <span class="meta-k">생년월일</span><span class="meta-v">1994.01.01</span>
+          <span class="meta-k">직급 · 직위</span><span class="meta-v">대리 · 팀원</span>
+          <span class="meta-k">그룹 입사일</span><span class="meta-v">2021.12.01 (4년 7개월)</span>
+          <span class="meta-k">회사 입사일</span><span class="meta-v">2021.12.01 (4년 7개월)</span>
+          <span class="meta-k">이메일</span><span class="meta-v">jinwon.kim@scglab.com</span>
+          <span class="meta-k">연락처</span><span class="meta-v">010-7161-6418</span>
+          <span class="meta-k">학교</span><span class="meta-v">한국성서대학교</span>
+          <span class="meta-k">전공</span><span class="meta-v">소프트웨어학과</span>
+          <span class="meta-k">입사경로</span><span class="meta-v">채용플랫폼(원티드)</span>
+        </div>
+        <div class="note">특이사항: 없음</div>
+      </div>
+    </div>
+    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="부장" data-name="박정우 개발팀 서버3파트 부장 파트장">
+      <div class="photo">박</div>
+      <div class="info">
+        <div class="name-row">
+          <span class="name">박정우</span>
+          <span class="pos">부장 (남)</span>
+          <span class="badge b-active">재직</span>
+          
+        </div>
+        <div class="dept">서비스개발실 · 개발팀 · 서버3파트 (파트장)</div>
+        <div class="meta-list">
+          <span class="meta-k">사번</span><span class="meta-v">L22013</span>
+          <span class="meta-k">생년월일</span><span class="meta-v">1979.07.16</span>
+          <span class="meta-k">직급 · 직위</span><span class="meta-v">부장 · 파트장</span>
+          <span class="meta-k">그룹 입사일</span><span class="meta-v">2022.08.08 (3년 11개월)</span>
+          <span class="meta-k">회사 입사일</span><span class="meta-v">2022.08.08 (3년 11개월)</span>
+          <span class="meta-k">이메일</span><span class="meta-v">jwpark7@scglab.com</span>
+          <span class="meta-k">연락처</span><span class="meta-v">010-2798-2900</span>
+          <span class="meta-k">학교</span><span class="meta-v">세종대학교</span>
+          <span class="meta-k">전공</span><span class="meta-v">정보통신공학</span>
+          <span class="meta-k">입사경로</span><span class="meta-v">직원 추천(노지호)</span>
+        </div>
+        <div class="note">특이사항: 없음</div>
+      </div>
+    </div>
+    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="대리" data-name="권태헌 개발팀 서버3파트 대리 파트원">
+      <div class="photo">권</div>
+      <div class="info">
+        <div class="name-row">
+          <span class="name">권태헌</span>
+          <span class="pos">대리 (남)</span>
+          <span class="badge b-active">재직</span>
+          
+        </div>
+        <div class="dept">서비스개발실 · 개발팀 · 서버3파트</div>
+        <div class="meta-list">
+          <span class="meta-k">사번</span><span class="meta-v">L22012</span>
+          <span class="meta-k">생년월일</span><span class="meta-v">1996.06.24</span>
+          <span class="meta-k">직급 · 직위</span><span class="meta-v">대리 · 파트원</span>
+          <span class="meta-k">그룹 입사일</span><span class="meta-v">2022.08.01 (3년 11개월)</span>
+          <span class="meta-k">회사 입사일</span><span class="meta-v">2022.08.01 (3년 11개월)</span>
+          <span class="meta-k">이메일</span><span class="meta-v">pcloud@scglab.com</span>
+          <span class="meta-k">연락처</span><span class="meta-v">010-9251-7624</span>
+          <span class="meta-k">학교</span><span class="meta-v">선문대학교</span>
+          <span class="meta-k">전공</span><span class="meta-v">컴퓨터공학과</span>
+          <span class="meta-k">입사경로</span><span class="meta-v">직원 추천(심익찬)</span>
+        </div>
+        <div class="note">특이사항: 없음</div>
+      </div>
+    </div>
+    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="여" data-grade="대리" data-name="신은진 개발팀 서버3파트 대리 파트원">
+      <div class="photo">신</div>
+      <div class="info">
+        <div class="name-row">
+          <span class="name">신은진</span>
+          <span class="pos">대리 (여)</span>
+          <span class="badge b-active">재직</span>
+          
+        </div>
+        <div class="dept">서비스개발실 · 개발팀 · 서버3파트</div>
+        <div class="meta-list">
+          <span class="meta-k">사번</span><span class="meta-v">L22015</span>
+          <span class="meta-k">생년월일</span><span class="meta-v"><span class="blank">-</span></span>
+          <span class="meta-k">직급 · 직위</span><span class="meta-v">대리 · 파트원</span>
+          <span class="meta-k">그룹 입사일</span><span class="meta-v">2022.09.02 (3년 10개월)</span>
+          <span class="meta-k">회사 입사일</span><span class="meta-v">2022.09.02 (3년 10개월)</span>
+          <span class="meta-k">이메일</span><span class="meta-v">eunjins@scglab.com</span>
+          <span class="meta-k">연락처</span><span class="meta-v">010-5780-1596</span>
+          <span class="meta-k">학교</span><span class="meta-v">선문대학교</span>
+          <span class="meta-k">전공</span><span class="meta-v">컴퓨터공학과</span>
+          <span class="meta-k">입사경로</span><span class="meta-v">현장실습 전환</span>
+        </div>
+        <div class="note">특이사항: 없음</div>
+      </div>
+    </div>
+    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="차장" data-name="황승연 개발팀 프론트엔드파트 차장 파트장">
+      <div class="photo">황</div>
+      <div class="info">
+        <div class="name-row">
+          <span class="name">황승연</span>
+          <span class="pos">차장 (남)</span>
+          <span class="badge b-active">재직</span>
+          
+        </div>
+        <div class="dept">서비스개발실 · 개발팀 · 프론트엔드파트 (파트장)</div>
+        <div class="meta-list">
+          <span class="meta-k">사번</span><span class="meta-v">L25001</span>
+          <span class="meta-k">생년월일</span><span class="meta-v">1982.02.07</span>
+          <span class="meta-k">직급 · 직위</span><span class="meta-v">차장 · 파트장</span>
+          <span class="meta-k">그룹 입사일</span><span class="meta-v">2016.01.18 (10년 5개월)</span>
+          <span class="meta-k">회사 입사일</span><span class="meta-v">2025.01.01 (1년 6개월)</span>
+          <span class="meta-k">이메일</span><span class="meta-v">gusalnim@scglab.com</span>
+          <span class="meta-k">연락처</span><span class="meta-v">010-2706-2529</span>
+          <span class="meta-k">학교</span><span class="meta-v">신한대학교</span>
+          <span class="meta-k">전공</span><span class="meta-v">산업디자인과</span>
+          <span class="meta-k">입사경로</span><span class="meta-v">전입(SCG)</span>
+        </div>
+        <div class="note">특이사항: 없음</div>
+      </div>
+    </div>
+    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="부장" data-name="김윤석 개발팀 프론트엔드파트 부장 파트원">
+      <div class="photo">김</div>
+      <div class="info">
+        <div class="name-row">
+          <span class="name">김윤석</span>
+          <span class="pos">부장 (남)</span>
+          <span class="badge b-active">재직</span>
+          
+        </div>
+        <div class="dept">서비스개발실 · 개발팀 · 프론트엔드파트</div>
+        <div class="meta-list">
+          <span class="meta-k">사번</span><span class="meta-v">L14001</span>
+          <span class="meta-k">생년월일</span><span class="meta-v">1977.03.19</span>
+          <span class="meta-k">직급 · 직위</span><span class="meta-v">부장 · 파트원</span>
+          <span class="meta-k">그룹 입사일</span><span class="meta-v">2014.08.01 (11년 11개월)</span>
+          <span class="meta-k">회사 입사일</span><span class="meta-v">2014.08.01 (11년 11개월)</span>
+          <span class="meta-k">이메일</span><span class="meta-v">mywizz@scglab.com</span>
+          <span class="meta-k">연락처</span><span class="meta-v">010-6601-5106</span>
+          <span class="meta-k">학교</span><span class="meta-v">성균관대학교</span>
+          <span class="meta-k">전공</span><span class="meta-v">법학과</span>
+          <span class="meta-k">입사경로</span><span class="meta-v"><span class="blank">-</span></span>
+        </div>
+        <div class="note">특이사항: 재택 근무(금요일 출근)</div>
+      </div>
+    </div>
+    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="여" data-grade="대리" data-name="강다예 개발팀 프론트엔드파트 대리 파트원">
+      <div class="photo">강</div>
+      <div class="info">
+        <div class="name-row">
+          <span class="name">강다예</span>
+          <span class="pos">대리 (여)</span>
+          <span class="badge b-active">재직</span>
+          
+        </div>
+        <div class="dept">서비스개발실 · 개발팀 · 프론트엔드파트</div>
+        <div class="meta-list">
+          <span class="meta-k">사번</span><span class="meta-v">L22005</span>
+          <span class="meta-k">생년월일</span><span class="meta-v">1992.08.10</span>
+          <span class="meta-k">직급 · 직위</span><span class="meta-v">대리 · 파트원</span>
+          <span class="meta-k">그룹 입사일</span><span class="meta-v">2022.04.04 (4년 3개월)</span>
+          <span class="meta-k">회사 입사일</span><span class="meta-v">2022.04.04 (4년 3개월)</span>
+          <span class="meta-k">이메일</span><span class="meta-v">dayev@scglab.com</span>
+          <span class="meta-k">연락처</span><span class="meta-v">010-2070-9208</span>
+          <span class="meta-k">학교</span><span class="meta-v">서울시립대학교</span>
+          <span class="meta-k">전공</span><span class="meta-v">국사학과</span>
+          <span class="meta-k">입사경로</span><span class="meta-v">채용플랫폼(원티드)</span>
+        </div>
+        <div class="note">특이사항: 없음</div>
+      </div>
+    </div>
+    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="여" data-grade="대리" data-name="이소현 개발팀 프론트엔드파트 대리 파트원">
+      <div class="photo">이</div>
+      <div class="info">
+        <div class="name-row">
+          <span class="name">이소현</span>
+          <span class="pos">대리 (여)</span>
+          <span class="badge b-active">재직</span>
+          
+        </div>
+        <div class="dept">서비스개발실 · 개발팀 · 프론트엔드파트</div>
+        <div class="meta-list">
+          <span class="meta-k">사번</span><span class="meta-v">L22011</span>
+          <span class="meta-k">생년월일</span><span class="meta-v">1995.01.13</span>
+          <span class="meta-k">직급 · 직위</span><span class="meta-v">대리 · 파트원</span>
+          <span class="meta-k">그룹 입사일</span><span class="meta-v">2022.07.25 (3년 11개월)</span>
+          <span class="meta-k">회사 입사일</span><span class="meta-v">2022.07.25 (3년 11개월)</span>
+          <span class="meta-k">이메일</span><span class="meta-v">so_present@scglab.com</span>
+          <span class="meta-k">연락처</span><span class="meta-v">010-3713-9874</span>
+          <span class="meta-k">학교</span><span class="meta-v">한신대학교</span>
+          <span class="meta-k">전공</span><span class="meta-v">디지털문화컨텐츠</span>
+          <span class="meta-k">입사경로</span><span class="meta-v">인재서칭(인사담당)</span>
+        </div>
+        <div class="note">특이사항: 없음</div>
+      </div>
+    </div>
+    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="대리" data-name="임관우 개발팀 프론트엔드파트 대리 팀원">
+      <div class="photo">임</div>
+      <div class="info">
+        <div class="name-row">
+          <span class="name">임관우</span>
+          <span class="pos">대리 (남)</span>
+          <span class="badge b-active">재직</span>
+          
+        </div>
+        <div class="dept">서비스개발실 · 개발팀 · 프론트엔드파트</div>
+        <div class="meta-list">
+          <span class="meta-k">사번</span><span class="meta-v">L22002</span>
+          <span class="meta-k">생년월일</span><span class="meta-v">1986.02.18</span>
+          <span class="meta-k">직급 · 직위</span><span class="meta-v">대리 · 팀원</span>
+          <span class="meta-k">그룹 입사일</span><span class="meta-v">2022.01.03 (4년 6개월)</span>
+          <span class="meta-k">회사 입사일</span><span class="meta-v">2022.01.03 (4년 6개월)</span>
+          <span class="meta-k">이메일</span><span class="meta-v">gwanwoo.john@scglab.com</span>
+          <span class="meta-k">연락처</span><span class="meta-v">010-8616-2745</span>
+          <span class="meta-k">학교</span><span class="meta-v">한양대학교(ERICA)</span>
+          <span class="meta-k">전공</span><span class="meta-v">신문방송학과</span>
+          <span class="meta-k">입사경로</span><span class="meta-v">인재서칭(인사담당)</span>
+        </div>
+        <div class="note">특이사항: 없음</div>
+      </div>
+    </div>
+    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="여" data-grade="사원" data-name="최예나 개발팀 프론트엔드파트 사원 파트원">
+      <div class="photo">최</div>
+      <div class="info">
+        <div class="name-row">
+          <span class="name">최예나</span>
+          <span class="pos">사원 (여)</span>
+          <span class="badge b-active">재직</span>
+          
+        </div>
+        <div class="dept">서비스개발실 · 개발팀 · 프론트엔드파트</div>
+        <div class="meta-list">
+          <span class="meta-k">사번</span><span class="meta-v">L24004</span>
+          <span class="meta-k">생년월일</span><span class="meta-v"><span class="blank">-</span></span>
+          <span class="meta-k">직급 · 직위</span><span class="meta-v">사원 · 파트원</span>
+          <span class="meta-k">그룹 입사일</span><span class="meta-v">2024.12.23 (1년 6개월)</span>
+          <span class="meta-k">회사 입사일</span><span class="meta-v">2024.12.23 (1년 6개월)</span>
+          <span class="meta-k">이메일</span><span class="meta-v">choiyn33@scglab.com</span>
+          <span class="meta-k">연락처</span><span class="meta-v">010-2618-7872</span>
+          <span class="meta-k">학교</span><span class="meta-v">숙명여자대학교</span>
+          <span class="meta-k">전공</span><span class="meta-v">IT공학전공</span>
+          <span class="meta-k">입사경로</span><span class="meta-v">지원*</span>
+        </div>
+        <div class="note">특이사항: 없음</div>
+      </div>
+    </div>
+    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="빌링사업부" data-gender="남" data-grade="부장" data-name="김명재 개발팀 빌링파트 부장 파트장">
+      <div class="photo">김</div>
+      <div class="info">
+        <div class="name-row">
+          <span class="name">김명재</span>
+          <span class="pos">부장 (남)</span>
+          <span class="badge b-active">재직</span>
+          <span class="tag-v">빌링사업부</span>
+        </div>
+        <div class="dept">서비스개발실 · 개발팀 · 빌링파트 (파트장)</div>
+        <div class="meta-list">
+          <span class="meta-k">사번</span><span class="meta-v">200310046</span>
+          <span class="meta-k">생년월일</span><span class="meta-v">1975.02.07</span>
+          <span class="meta-k">직급 · 직위</span><span class="meta-v">부장 · 파트장</span>
+          <span class="meta-k">그룹 입사일</span><span class="meta-v">2003.10.01 (22년 9개월)</span>
+          <span class="meta-k">회사 입사일</span><span class="meta-v">2020.01.01 (6년 6개월)</span>
+          <span class="meta-k">이메일</span><span class="meta-v">doitbest@hanbill.com</span>
+          <span class="meta-k">연락처</span><span class="meta-v">010-6254-9539</span>
+          <span class="meta-k">학교</span><span class="meta-v">경복대학</span>
+          <span class="meta-k">전공</span><span class="meta-v">관광학</span>
+          <span class="meta-k">입사경로</span><span class="meta-v">합병(KIB)</span>
+        </div>
+        <div class="note">특이사항: 없음</div>
+      </div>
+    </div>
+    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="빌링사업부" data-gender="남" data-grade="차장" data-name="박종탁 개발팀 빌링파트 차장 파트원">
+      <div class="photo">박</div>
+      <div class="info">
+        <div class="name-row">
+          <span class="name">박종탁</span>
+          <span class="pos">차장 (남)</span>
+          <span class="badge b-active">재직</span>
+          <span class="tag-v">빌링사업부</span>
+        </div>
+        <div class="dept">서비스개발실 · 개발팀 · 빌링파트</div>
+        <div class="meta-list">
+          <span class="meta-k">사번</span><span class="meta-v">201302015</span>
+          <span class="meta-k">생년월일</span><span class="meta-v">1982.12.18</span>
+          <span class="meta-k">직급 · 직위</span><span class="meta-v">차장 · 파트원</span>
+          <span class="meta-k">그룹 입사일</span><span class="meta-v">2013.02.13 (13년 4개월)</span>
+          <span class="meta-k">회사 입사일</span><span class="meta-v">2020.01.01 (6년 6개월)</span>
+          <span class="meta-k">이메일</span><span class="meta-v">jt1218@hanbill.com</span>
+          <span class="meta-k">연락처</span><span class="meta-v">010-2663-3690</span>
+          <span class="meta-k">학교</span><span class="meta-v">경기공업대학</span>
+          <span class="meta-k">전공</span><span class="meta-v">치공설계학과</span>
+          <span class="meta-k">입사경로</span><span class="meta-v">합병(KIB)</span>
+        </div>
+        <div class="note">특이사항: 없음</div>
+      </div>
+    </div>
+    <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="빌링사업부" data-gender="남" data-grade="대리" data-name="임윤호 개발팀 빌링파트 대리 파트원">
+      <div class="photo">임</div>
+      <div class="info">
+        <div class="name-row">
+          <span class="name">임윤호</span>
+          <span class="pos">대리 (남)</span>
+          <span class="badge b-active">재직</span>
+          <span class="tag-v">빌링사업부</span>
+        </div>
+        <div class="dept">서비스개발실 · 개발팀 · 빌링파트</div>
+        <div class="meta-list">
+          <span class="meta-k">사번</span><span class="meta-v">L24002</span>
+          <span class="meta-k">생년월일</span><span class="meta-v">1994.05.18</span>
+          <span class="meta-k">직급 · 직위</span><span class="meta-v">대리 · 파트원</span>
+          <span class="meta-k">그룹 입사일</span><span class="meta-v">2024.05.16 (2년 1개월)</span>
+          <span class="meta-k">회사 입사일</span><span class="meta-v">2024.05.16 (2년 1개월)</span>
+          <span class="meta-k">이메일</span><span class="meta-v">518youn@hanbill.com</span>
+          <span class="meta-k">연락처</span><span class="meta-v">010-8555-1772</span>
+          <span class="meta-k">학교</span><span class="meta-v">한국공학대학교</span>
+          <span class="meta-k">전공</span><span class="meta-v">전자공학과</span>
+          <span class="meta-k">입사경로</span><span class="meta-v">지원</span>
+        </div>
+        <div class="note">특이사항: 없음</div>
+      </div>
+    </div>
+    <div class="card" data-dept="대표이사 직속" data-team="경영관리팀" data-virt="" data-gender="남" data-grade="차장" data-name="임종엽 경영관리팀  차장 팀장">
+      <div class="photo">임</div>
+      <div class="info">
+        <div class="name-row">
+          <span class="name">임종엽</span>
+          <span class="pos">차장 (남)</span>
+          <span class="badge b-active">재직</span>
+          
+        </div>
+        <div class="dept">대표이사 직속 · 경영관리팀 (팀장)</div>
+        <div class="meta-list">
+          <span class="meta-k">사번</span><span class="meta-v">L21005</span>
+          <span class="meta-k">생년월일</span><span class="meta-v">1986.04.10</span>
+          <span class="meta-k">직급 · 직위</span><span class="meta-v">차장 · 팀장</span>
+          <span class="meta-k">그룹 입사일</span><span class="meta-v">2021.10.05 (4년 9개월)</span>
+          <span class="meta-k">회사 입사일</span><span class="meta-v">2021.10.05 (4년 9개월)</span>
+          <span class="meta-k">이메일</span><span class="meta-v">kslimjy@scglab.com</span>
+          <span class="meta-k">연락처</span><span class="meta-v">010-4230-0410</span>
+          <span class="meta-k">학교</span><span class="meta-v">한신대학교</span>
+          <span class="meta-k">전공</span><span class="meta-v">경제학과</span>
+          <span class="meta-k">입사경로</span><span class="meta-v">지원</span>
+        </div>
+        <div class="note">특이사항: 없음</div>
+      </div>
+    </div>
+    <div class="card" data-dept="대표이사 직속" data-team="경영관리팀" data-virt="" data-gender="여" data-grade="과장" data-name="황지혜 경영관리팀  과장 팀원">
+      <div class="photo">황</div>
+      <div class="info">
+        <div class="name-row">
+          <span class="name">황지혜</span>
+          <span class="pos">과장 (여)</span>
+          <span class="badge b-active">재직</span>
+          
+        </div>
+        <div class="dept">대표이사 직속 · 경영관리팀</div>
+        <div class="meta-list">
+          <span class="meta-k">사번</span><span class="meta-v">L22009</span>
+          <span class="meta-k">생년월일</span><span class="meta-v">1987.09.29</span>
+          <span class="meta-k">직급 · 직위</span><span class="meta-v">과장 · 팀원</span>
+          <span class="meta-k">그룹 입사일</span><span class="meta-v">2022.06.27 (4년 0개월)</span>
+          <span class="meta-k">회사 입사일</span><span class="meta-v">2022.06.27 (4년 0개월)</span>
+          <span class="meta-k">이메일</span><span class="meta-v">jhhwang@scglab.com</span>
+          <span class="meta-k">연락처</span><span class="meta-v">010-4046-2546</span>
+          <span class="meta-k">학교</span><span class="meta-v">한국항공대학교</span>
+          <span class="meta-k">전공</span><span class="meta-v">경영학과</span>
+          <span class="meta-k">입사경로</span><span class="meta-v">지원</span>
+        </div>
+        <div class="note">특이사항: 없음</div>
+      </div>
+    </div>
+    <div class="card" data-dept="대표이사 직속" data-team="경영관리팀" data-virt="" data-gender="여" data-grade="대리" data-name="전유민 경영관리팀  대리 팀원">
+      <div class="photo">전</div>
+      <div class="info">
+        <div class="name-row">
+          <span class="name">전유민</span>
+          <span class="pos">대리 (여)</span>
+          <span class="badge b-active">재직</span>
+          
+        </div>
+        <div class="dept">대표이사 직속 · 경영관리팀</div>
+        <div class="meta-list">
+          <span class="meta-k">사번</span><span class="meta-v">L21003</span>
+          <span class="meta-k">생년월일</span><span class="meta-v">1993.06.07</span>
+          <span class="meta-k">직급 · 직위</span><span class="meta-v">대리 · 팀원</span>
+          <span class="meta-k">그룹 입사일</span><span class="meta-v">2021.07.01 (5년 0개월)</span>
+          <span class="meta-k">회사 입사일</span><span class="meta-v">2021.07.01 (5년 0개월)</span>
+          <span class="meta-k">이메일</span><span class="meta-v">umin@scglab.com</span>
+          <span class="meta-k">연락처</span><span class="meta-v">010-8484-2202</span>
+          <span class="meta-k">학교</span><span class="meta-v">부천대학</span>
+          <span class="meta-k">전공</span><span class="meta-v">비서과</span>
+          <span class="meta-k">입사경로</span><span class="meta-v">추천</span>
+        </div>
+        <div class="note">특이사항: 없음</div>
+      </div>
+    </div>
+    <div class="card" data-dept="대표이사 직속" data-team="영업기획팀" data-virt="빌링사업부" data-gender="남" data-grade="부장" data-name="강승봉 영업기획팀  부장 팀장">
+      <div class="photo">강</div>
+      <div class="info">
+        <div class="name-row">
+          <span class="name">강승봉</span>
+          <span class="pos">부장 (남)</span>
+          <span class="badge b-active">재직</span>
+          <span class="tag-v">빌링사업부</span>
+        </div>
+        <div class="dept">대표이사 직속 · 영업기획팀 (팀장)</div>
+        <div class="meta-list">
+          <span class="meta-k">사번</span><span class="meta-v">H17002</span>
+          <span class="meta-k">생년월일</span><span class="meta-v">1974.09.01</span>
+          <span class="meta-k">직급 · 직위</span><span class="meta-v">부장 · 팀장</span>
+          <span class="meta-k">그룹 입사일</span><span class="meta-v">2015.08.10 (10년 10개월)</span>
+          <span class="meta-k">회사 입사일</span><span class="meta-v">2021.09.01 (4년 10개월)</span>
+          <span class="meta-k">이메일</span><span class="meta-v">telekang@hanbill.com</span>
+          <span class="meta-k">연락처</span><span class="meta-v">010-3153-8786</span>
+          <span class="meta-k">학교</span><span class="meta-v">한양대학교</span>
+          <span class="meta-k">전공</span><span class="meta-v">경영학</span>
+          <span class="meta-k">입사경로</span><span class="meta-v">합병(KIB)</span>
+        </div>
+        <div class="note">특이사항: 없음</div>
+      </div>
+    </div>
+    <div class="card" data-dept="대표이사 직속" data-team="영업기획팀" data-virt="빌링사업부" data-gender="남" data-grade="부장" data-name="김정열 영업기획팀  부장 팀원">
+      <div class="photo">김</div>
+      <div class="info">
+        <div class="name-row">
+          <span class="name">김정열</span>
+          <span class="pos">부장 (남)</span>
+          <span class="badge b-active">재직</span>
+          <span class="tag-v">빌링사업부</span>
+        </div>
+        <div class="dept">대표이사 직속 · 영업기획팀</div>
+        <div class="meta-list">
+          <span class="meta-k">사번</span><span class="meta-v">H19004</span>
+          <span class="meta-k">생년월일</span><span class="meta-v">1977.07.03</span>
+          <span class="meta-k">직급 · 직위</span><span class="meta-v">부장 · 팀원</span>
+          <span class="meta-k">그룹 입사일</span><span class="meta-v">2019.09.02 (6년 10개월)</span>
+          <span class="meta-k">회사 입사일</span><span class="meta-v">2021.09.01 (4년 10개월)</span>
+          <span class="meta-k">이메일</span><span class="meta-v">kjy@hanbill.com</span>
+          <span class="meta-k">연락처</span><span class="meta-v">010-4428-0703</span>
+          <span class="meta-k">학교</span><span class="meta-v">건국대학교 대학원</span>
+          <span class="meta-k">전공</span><span class="meta-v">경영학</span>
+          <span class="meta-k">입사경로</span><span class="meta-v">합병(KIB)</span>
+        </div>
+        <div class="note">특이사항: 없음</div>
+      </div>
+    </div>
+    <div class="card" data-dept="대표이사 직속" data-team="영업기획팀" data-virt="빌링사업부" data-gender="남" data-grade="부장" data-name="팽무진 영업기획팀  부장 팀원">
+      <div class="photo">팽</div>
+      <div class="info">
+        <div class="name-row">
+          <span class="name">팽무진</span>
+          <span class="pos">부장 (남)</span>
+          <span class="badge b-active">재직</span>
+          <span class="tag-v">빌링사업부</span>
+        </div>
+        <div class="dept">대표이사 직속 · 영업기획팀</div>
+        <div class="meta-list">
+          <span class="meta-k">사번</span><span class="meta-v">H18004</span>
+          <span class="meta-k">생년월일</span><span class="meta-v">1974.09.09</span>
+          <span class="meta-k">직급 · 직위</span><span class="meta-v">부장 · 팀원</span>
+          <span class="meta-k">그룹 입사일</span><span class="meta-v">2010.03.16 (16년 3개월)</span>
+          <span class="meta-k">회사 입사일</span><span class="meta-v">2021.09.01 (4년 10개월)</span>
+          <span class="meta-k">이메일</span><span class="meta-v">mjpaeng@hanbill.com</span>
+          <span class="meta-k">연락처</span><span class="meta-v">010-3750-9515</span>
+          <span class="meta-k">학교</span><span class="meta-v">한성대학교</span>
+          <span class="meta-k">전공</span><span class="meta-v">산업공학과</span>
+          <span class="meta-k">입사경로</span><span class="meta-v">합병(KIB)</span>
+        </div>
+        <div class="note">특이사항: 없음</div>
+      </div>
+    </div>
+    <div class="card" data-dept="대표이사 직속" data-team="영업기획팀" data-virt="빌링사업부" data-gender="여" data-grade="과장" data-name="지은미 영업기획팀  과장 팀원">
+      <div class="photo">지</div>
+      <div class="info">
+        <div class="name-row">
+          <span class="name">지은미</span>
+          <span class="pos">과장 (여)</span>
+          <span class="badge b-active">재직</span>
+          <span class="tag-v">빌링사업부</span>
+        </div>
+        <div class="dept">대표이사 직속 · 영업기획팀</div>
+        <div class="meta-list">
+          <span class="meta-k">사번</span><span class="meta-v">L26001</span>
+          <span class="meta-k">생년월일</span><span class="meta-v">1982.12.18</span>
+          <span class="meta-k">직급 · 직위</span><span class="meta-v">과장 · 팀원</span>
+          <span class="meta-k">그룹 입사일</span><span class="meta-v">2026.03.03 (0년 4개월)</span>
+          <span class="meta-k">회사 입사일</span><span class="meta-v">2026.03.03 (0년 4개월)</span>
+          <span class="meta-k">이메일</span><span class="meta-v">jem@scglab.com</span>
+          <span class="meta-k">연락처</span><span class="meta-v">010-5287-1581</span>
+          <span class="meta-k">학교</span><span class="meta-v">오산대학교</span>
+          <span class="meta-k">전공</span><span class="meta-v">호텔관광경영학과</span>
+          <span class="meta-k">입사경로</span><span class="meta-v">지원</span>
+        </div>
+        <div class="note">특이사항: 없음</div>
+      </div>
+    </div>
+  </div>
+  <div class="tblwrap">
+    <h3>전체 명부 (표 형식)</h3>
+    <div class="tblscroll">
+    <table id="rostertable">
+      <thead><tr>
+        <th>사번</th><th>성명</th><th>성별</th><th>생년월일</th><th>실</th><th>팀·파트</th><th>직급</th><th>직위</th>
+        <th>그룹 입사일(근속)</th><th>회사 입사일(근속)</th><th>이메일</th><th>연락처</th><th>학교</th><th>전공</th><th>입사경로</th><th>상태</th><th>특이사항</th>
+      </tr></thead>
+      <tbody>
+        <tr data-dept="" data-team="" data-virt="" data-gender="남" data-grade="대표이사" data-name="김요한   대표이사 대표이사">
+          <td>L21010</td><td class="td-name">김요한</td><td>남</td><td>1982.01.31</td>
+          <td><span class="blank">-</span></td><td>-</td><td>대표이사</td><td>대표이사</td>
+          <td><span class="blank">-</span></td><td>2021.11.01 (4년 8개월)</td>
+          <td>john@scglab.com</td><td>010-2800-3969</td><td>텍사스대</td><td><span class="blank">-</span></td><td>VIP</td>
+          <td><span class="badge b-active">재직</span></td><td><span class="blank">-</span></td>
+        </tr>
+        <tr data-dept="" data-team="" data-virt="" data-gender="남" data-grade="대표이사" data-name="박동녘   대표이사 대표이사">
+          <td>N15279</td><td class="td-name">박동녘</td><td>남</td><td>1979.06.19</td>
+          <td><span class="blank">-</span></td><td>-</td><td>대표이사</td><td>대표이사</td>
+          <td>2013.12.15 (12년 6개월)</td><td>2018.01.01 (8년 6개월)</td>
+          <td>eastern@scglab.com</td><td>010-9868-1901</td><td><span class="blank">-</span></td><td><span class="blank">-</span></td><td><span class="blank">-</span></td>
+          <td><span class="badge b-active">재직</span></td><td><span class="blank">-</span></td>
+        </tr>
+        <tr data-dept="서비스사업실" data-team="" data-virt="" data-gender="남" data-grade="이사" data-name="송준상   이사 실장">
+          <td>L22007</td><td class="td-name">송준상</td><td>남</td><td>1980.04.07</td>
+          <td>서비스사업실</td><td>-</td><td>이사</td><td>실장</td>
+          <td>2022.05.01 (4년 2개월)</td><td>2022.05.01 (4년 2개월)</td>
+          <td>tris@scglab.com</td><td>010-2934-3138</td><td>연세대학교</td><td>신문방송학과</td><td>대표이사 추천</td>
+          <td><span class="badge b-active">재직</span></td><td><span class="blank">-</span></td>
+        </tr>
+        <tr data-dept="서비스사업실" data-team="" data-virt="" data-gender="남" data-grade="부장" data-name="남기철   부장 ">
+          <td>L25006</td><td class="td-name">남기철</td><td>남</td><td>1974.01.17</td>
+          <td>서비스사업실</td><td>-</td><td>부장</td><td><span class="blank">-</span></td>
+          <td>2025.10.23 (0년 8개월)</td><td>2025.10.23 (0년 8개월)</td>
+          <td>spike@scglab.com</td><td>010-2980-0802</td><td>수원대학교</td><td>영어영문학과</td><td>대표이사 추천</td>
+          <td><span class="badge b-active">재직</span></td><td><span class="blank">-</span></td>
+        </tr>
+        <tr data-dept="서비스사업실" data-team="기획팀" data-virt="" data-gender="남" data-grade="차장" data-name="신준철 기획팀 기획파트 차장 파트장">
+          <td>L21004</td><td class="td-name">신준철</td><td>남</td><td>1985.12.06</td>
+          <td>서비스사업실</td><td>기획팀 · 기획파트</td><td>차장</td><td>파트장</td>
+          <td>2021.09.06 (4년 10개월)</td><td>2021.09.06 (4년 10개월)</td>
+          <td>sjun1002@scglab.com</td><td>010-9454-5743</td><td>강남대학교</td><td>미디어정보공학</td><td>직원 추천(백하영)</td>
+          <td><span class="badge b-active">재직</span></td><td><span class="blank">-</span></td>
+        </tr>
+        <tr data-dept="서비스사업실" data-team="기획팀" data-virt="" data-gender="남" data-grade="과장" data-name="박성민 기획팀 기획파트 과장 파트원">
+          <td>L22008</td><td class="td-name">박성민</td><td>남</td><td>1989.07.13</td>
+          <td>서비스사업실</td><td>기획팀 · 기획파트</td><td>과장</td><td>파트원</td>
+          <td>2022.06.02 (4년 1개월)</td><td>2022.06.02 (4년 1개월)</td>
+          <td>summit@scglab.com</td><td>010-5105-5848</td><td>추계예술대학교</td><td>영상시나리오</td><td>인재서칭(인사담당)</td>
+          <td><span class="badge b-active">재직</span></td><td><span class="blank">-</span></td>
+        </tr>
+        <tr data-dept="서비스사업실" data-team="기획팀" data-virt="" data-gender="여" data-grade="과장" data-name="이미희 기획팀 기획파트 과장 파트원">
+          <td>L17001</td><td class="td-name">이미희</td><td>여</td><td>1990.07.11</td>
+          <td>서비스사업실</td><td>기획팀 · 기획파트</td><td>과장</td><td>파트원</td>
+          <td>2017.07.01 (9년 0개월)</td><td>2017.07.01 (9년 0개월)</td>
+          <td>2mihee@scglab.com</td><td>010-2087-5244</td><td>서울시립대학교</td><td>경제학과</td><td>지원</td>
+          <td><span class="badge b-active">재직</span></td><td>육아기 단축(26.05~27.04) 9시-4시</td>
+        </tr>
+        <tr data-dept="서비스사업실" data-team="기획팀" data-virt="" data-gender="여" data-grade="과장" data-name="조은아 기획팀 기획파트 과장 파트원">
+          <td>L23002</td><td class="td-name">조은아</td><td>여</td><td>1990.10.05</td>
+          <td>서비스사업실</td><td>기획팀 · 기획파트</td><td>과장</td><td>파트원</td>
+          <td>2023.09.11 (2년 9개월)</td><td>2023.09.11 (2년 9개월)</td>
+          <td>euna.jo@scglab.com</td><td>010-4540-6877</td><td>강원대학교</td><td>스토리텔링학과</td><td>인재서칭(인사담당)</td>
+          <td><span class="badge b-active">재직</span></td><td><span class="blank">-</span></td>
+        </tr>
+        <tr data-dept="서비스사업실" data-team="기획팀" data-virt="" data-gender="여" data-grade="사원" data-name="김가현 기획팀 기획파트 사원 파트원">
+          <td>L26003</td><td class="td-name">김가현</td><td>여</td><td>1997.09.07</td>
+          <td>서비스사업실</td><td>기획팀 · 기획파트</td><td>사원</td><td>파트원</td>
+          <td>2026.05.11 (0년 1개월)</td><td>2026.05.11 (0년 1개월)</td>
+          <td>kim.gahyun@scglab.com</td><td>010-2366-8213</td><td>중앙대학교</td><td>문헌정보학언론학</td><td>지원</td>
+          <td><span class="badge b-active">재직</span></td><td><span class="blank">-</span></td>
+        </tr>
+        <tr data-dept="서비스사업실" data-team="기획팀" data-virt="" data-gender="여" data-grade="과장" data-name="배사랑 기획팀 마케팅파트 과장 파트장">
+          <td>L25002</td><td class="td-name">배사랑</td><td>여</td><td>1989.06.22</td>
+          <td>서비스사업실</td><td>기획팀 · 마케팅파트</td><td>과장</td><td>파트장</td>
+          <td>2025.01.06 (1년 6개월)</td><td>2025.01.06 (1년 6개월)</td>
+          <td>bsr@scglab.com</td><td>010-5610-0632</td><td>삼육대학교</td><td>보건관리학과</td><td>지원*</td>
+          <td><span class="badge b-active">재직</span></td><td><span class="blank">-</span></td>
+        </tr>
+        <tr data-dept="서비스사업실" data-team="기획팀" data-virt="" data-gender="여" data-grade="부장" data-name="백하영 기획팀 마케팅파트 부장 파트원">
+          <td>L20003</td><td class="td-name">백하영</td><td>여</td><td>1981.01.22</td>
+          <td>서비스사업실</td><td>기획팀 · 마케팅파트</td><td>부장</td><td>파트원</td>
+          <td>2020.06.08 (6년 1개월)</td><td>2020.06.08 (6년 1개월)</td>
+          <td>bhy@scglab.com</td><td>010-5486-4888</td><td>성균관대학교 대학원</td><td>마케팅</td><td>헤드헌팅(프로매치)</td>
+          <td><span class="badge b-active">재직</span></td><td>재택 근무</td>
+        </tr>
+        <tr data-dept="서비스사업실" data-team="기획팀" data-virt="" data-gender="여" data-grade="과장" data-name="방민지 기획팀 마케팅파트 과장 파트원">
+          <td>119041</td><td class="td-name">방민지</td><td>여</td><td>1990.01.29</td>
+          <td>서비스사업실</td><td>기획팀 · 마케팅파트</td><td>과장</td><td>파트원</td>
+          <td>2019.10.14 (6년 8개월)</td><td>2020.02.10 (6년 4개월)</td>
+          <td>mjbang@scglab.com</td><td>010-4706-0868</td><td>성신여자대학교</td><td>생활문화소비자학</td><td>전입(SCGS)</td>
+          <td><span class="badge b-leave">휴직</span></td><td>육아휴직(~26.09.02), 전량 소진</td>
+        </tr>
+        <tr data-dept="서비스사업실" data-team="기획팀" data-virt="" data-gender="여" data-grade="대리" data-name="서희승 기획팀 마케팅파트 대리 파트원">
+          <td>L25004</td><td class="td-name">서희승</td><td>여</td><td>1994.10.15</td>
+          <td>서비스사업실</td><td>기획팀 · 마케팅파트</td><td>대리</td><td>파트원</td>
+          <td>2025.06.18 (1년 0개월)</td><td>2025.06.18 (1년 0개월)</td>
+          <td>hsseo@scglab.com</td><td>010-8299-2060</td><td>경기대학교</td><td>무역학과</td><td>직원 추천(배사랑)</td>
+          <td><span class="badge b-active">재직</span></td><td><span class="blank">-</span></td>
+        </tr>
+        <tr data-dept="서비스사업실" data-team="디자인팀" data-virt="" data-gender="여" data-grade="차장" data-name="박진원 디자인팀 디자인파트 차장 파트장">
+          <td>119049</td><td class="td-name">박진원</td><td>여</td><td>1988.02.27</td>
+          <td>서비스사업실</td><td>디자인팀 · 디자인파트</td><td>차장</td><td>파트장</td>
+          <td>2019.11.18 (6년 7개월)</td><td>2020.12.01 (5년 7개월)</td>
+          <td>jin@scglab.com</td><td>010-8577-7482</td><td>홍익대학교 대학원</td><td>시각디자인</td><td>전입(SCGS)</td>
+          <td><span class="badge b-active">재직</span></td><td><span class="blank">-</span></td>
+        </tr>
+        <tr data-dept="서비스사업실" data-team="디자인팀" data-virt="" data-gender="여" data-grade="대리" data-name="기슬기 디자인팀 디자인파트 대리 파트원">
+          <td>L23003</td><td class="td-name">기슬기</td><td>여</td><td>1992.03.28</td>
+          <td>서비스사업실</td><td>디자인팀 · 디자인파트</td><td>대리</td><td>파트원</td>
+          <td>2023.09.18 (2년 9개월)</td><td>2023.09.18 (2년 9개월)</td>
+          <td>gi@scglab.com</td><td>010-2524-2588</td><td>제주대학교</td><td>문화조형디자인전공</td><td>인재서칭(인사담당)</td>
+          <td><span class="badge b-active">재직</span></td><td><span class="blank">-</span></td>
+        </tr>
+        <tr data-dept="서비스사업실" data-team="디자인팀" data-virt="" data-gender="여" data-grade="대리" data-name="정하은 디자인팀 디자인파트 대리 파트원">
+          <td>L25005</td><td class="td-name">정하은</td><td>여</td><td>1996.11.26</td>
+          <td>서비스사업실</td><td>디자인팀 · 디자인파트</td><td>대리</td><td>파트원</td>
+          <td>2025.08.19 (0년 10개월)</td><td>2025.08.19 (0년 10개월)</td>
+          <td>haney@scglab.com</td><td>010-8716-0399</td><td>한국방송통신대학교</td><td>미디어영상학과</td><td>지원</td>
+          <td><span class="badge b-active">재직</span></td><td><span class="blank">-</span></td>
+        </tr>
+        <tr data-dept="서비스개발실" data-team="" data-virt="" data-gender="남" data-grade="이사" data-name="최범균   이사 실장">
+          <td>L21006</td><td class="td-name">최범균</td><td>남</td><td>1977.08.31</td>
+          <td>서비스개발실</td><td>-</td><td>이사</td><td>실장</td>
+          <td>2021.11.11 (4년 7개월)</td><td>2021.11.11 (4년 7개월)</td>
+          <td>madvirus@scglab.com</td><td>010-5730-0731</td><td>고려대학교</td><td>컴퓨터학과</td><td>대표이사 추천</td>
+          <td><span class="badge b-active">재직</span></td><td><span class="blank">-</span></td>
+        </tr>
+        <tr data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="과장" data-name="양진만 개발팀 서버1파트 과장 파트원">
+          <td>L23001</td><td class="td-name">양진만</td><td>남</td><td>1985.04.21</td>
+          <td>서비스개발실</td><td>개발팀 · 서버1파트</td><td>과장</td><td>파트원</td>
+          <td>2019.03.11 (7년 3개월)</td><td>2023.01.01 (3년 6개월)</td>
+          <td>jmyang@scglab.com</td><td>010-7610-4106</td><td>명지대학교</td><td>컴퓨터공학과</td><td>전입(SCGS)</td>
+          <td><span class="badge b-active">재직</span></td><td><span class="blank">-</span></td>
+        </tr>
+        <tr data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="과장" data-name="염석준 개발팀 서버1파트 과장 파트원">
+          <td>L22010</td><td class="td-name">염석준</td><td>남</td><td>1991.03.20</td>
+          <td>서비스개발실</td><td>개발팀 · 서버1파트</td><td>과장</td><td>파트원</td>
+          <td>2022.07.18 (3년 11개월)</td><td>2022.07.18 (3년 11개월)</td>
+          <td>ysjune@scglab.com</td><td>010-5306-4037</td><td>선문대학교</td><td>컴퓨터공학과</td><td>직원 추천(최범균)</td>
+          <td><span class="badge b-active">재직</span></td><td><span class="blank">-</span></td>
+        </tr>
+        <tr data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="대리" data-name="이영성 개발팀 서버1파트 대리 파트원">
+          <td>L24001</td><td class="td-name">이영성</td><td>남</td><td>1996.03.14</td>
+          <td>서비스개발실</td><td>개발팀 · 서버1파트</td><td>대리</td><td>파트원</td>
+          <td>2024.03.20 (2년 3개월)</td><td>2024.03.20 (2년 3개월)</td>
+          <td>yslee@scglab.com</td><td>010-4017-6613</td><td>선문대학교</td><td>컴퓨터공학과</td><td>직원 추천(심익찬)</td>
+          <td><span class="badge b-active">재직</span></td><td><span class="blank">-</span></td>
+        </tr>
+        <tr data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="여" data-grade="대리" data-name="장혜윤 개발팀 서버1파트 대리 파트원">
+          <td>L22006</td><td class="td-name">장혜윤</td><td>여</td><td>1992.02.19</td>
+          <td>서비스개발실</td><td>개발팀 · 서버1파트</td><td>대리</td><td>파트원</td>
+          <td>2022.04.04 (4년 3개월)</td><td>2022.04.04 (4년 3개월)</td>
+          <td>hyjang@scglab.com</td><td>010-6417-3888</td><td>한신대학교</td><td>정보통신학과</td><td>지원</td>
+          <td><span class="badge b-active">재직</span></td><td><span class="blank">-</span></td>
+        </tr>
+        <tr data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="부장" data-name="심익찬 개발팀 서버2파트 부장 파트장">
+          <td>L22001</td><td class="td-name">심익찬</td><td>남</td><td>1978.07.11</td>
+          <td>서비스개발실</td><td>개발팀 · 서버2파트</td><td>부장</td><td>파트장</td>
+          <td>2022.01.03 (4년 6개월)</td><td>2022.01.03 (4년 6개월)</td>
+          <td>plusperson@scglab.com</td><td>010-3479-3242</td><td>호남대학원</td><td>인터넷정보통신</td><td>직원 추천(최범균)</td>
+          <td><span class="badge b-active">재직</span></td><td><span class="blank">-</span></td>
+        </tr>
+        <tr data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="대리" data-name="김진원 개발팀 서버2파트 대리 팀원">
+          <td>L21011</td><td class="td-name">김진원</td><td>남</td><td>1994.01.01</td>
+          <td>서비스개발실</td><td>개발팀 · 서버2파트</td><td>대리</td><td>팀원</td>
+          <td>2021.12.01 (4년 7개월)</td><td>2021.12.01 (4년 7개월)</td>
+          <td>jinwon.kim@scglab.com</td><td>010-7161-6418</td><td>한국성서대학교</td><td>소프트웨어학과</td><td>채용플랫폼(원티드)</td>
+          <td><span class="badge b-active">재직</span></td><td><span class="blank">-</span></td>
+        </tr>
+        <tr data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="부장" data-name="박정우 개발팀 서버3파트 부장 파트장">
+          <td>L22013</td><td class="td-name">박정우</td><td>남</td><td>1979.07.16</td>
+          <td>서비스개발실</td><td>개발팀 · 서버3파트</td><td>부장</td><td>파트장</td>
+          <td>2022.08.08 (3년 11개월)</td><td>2022.08.08 (3년 11개월)</td>
+          <td>jwpark7@scglab.com</td><td>010-2798-2900</td><td>세종대학교</td><td>정보통신공학</td><td>직원 추천(노지호)</td>
+          <td><span class="badge b-active">재직</span></td><td><span class="blank">-</span></td>
+        </tr>
+        <tr data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="대리" data-name="권태헌 개발팀 서버3파트 대리 파트원">
+          <td>L22012</td><td class="td-name">권태헌</td><td>남</td><td>1996.06.24</td>
+          <td>서비스개발실</td><td>개발팀 · 서버3파트</td><td>대리</td><td>파트원</td>
+          <td>2022.08.01 (3년 11개월)</td><td>2022.08.01 (3년 11개월)</td>
+          <td>pcloud@scglab.com</td><td>010-9251-7624</td><td>선문대학교</td><td>컴퓨터공학과</td><td>직원 추천(심익찬)</td>
+          <td><span class="badge b-active">재직</span></td><td><span class="blank">-</span></td>
+        </tr>
+        <tr data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="여" data-grade="대리" data-name="신은진 개발팀 서버3파트 대리 파트원">
+          <td>L22015</td><td class="td-name">신은진</td><td>여</td><td><span class="blank">-</span></td>
+          <td>서비스개발실</td><td>개발팀 · 서버3파트</td><td>대리</td><td>파트원</td>
+          <td>2022.09.02 (3년 10개월)</td><td>2022.09.02 (3년 10개월)</td>
+          <td>eunjins@scglab.com</td><td>010-5780-1596</td><td>선문대학교</td><td>컴퓨터공학과</td><td>현장실습 전환</td>
+          <td><span class="badge b-active">재직</span></td><td><span class="blank">-</span></td>
+        </tr>
+        <tr data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="차장" data-name="황승연 개발팀 프론트엔드파트 차장 파트장">
+          <td>L25001</td><td class="td-name">황승연</td><td>남</td><td>1982.02.07</td>
+          <td>서비스개발실</td><td>개발팀 · 프론트엔드파트</td><td>차장</td><td>파트장</td>
+          <td>2016.01.18 (10년 5개월)</td><td>2025.01.01 (1년 6개월)</td>
+          <td>gusalnim@scglab.com</td><td>010-2706-2529</td><td>신한대학교</td><td>산업디자인과</td><td>전입(SCG)</td>
+          <td><span class="badge b-active">재직</span></td><td><span class="blank">-</span></td>
+        </tr>
+        <tr data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="부장" data-name="김윤석 개발팀 프론트엔드파트 부장 파트원">
+          <td>L14001</td><td class="td-name">김윤석</td><td>남</td><td>1977.03.19</td>
+          <td>서비스개발실</td><td>개발팀 · 프론트엔드파트</td><td>부장</td><td>파트원</td>
+          <td>2014.08.01 (11년 11개월)</td><td>2014.08.01 (11년 11개월)</td>
+          <td>mywizz@scglab.com</td><td>010-6601-5106</td><td>성균관대학교</td><td>법학과</td><td><span class="blank">-</span></td>
+          <td><span class="badge b-active">재직</span></td><td>재택 근무(금요일 출근)</td>
+        </tr>
+        <tr data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="여" data-grade="대리" data-name="강다예 개발팀 프론트엔드파트 대리 파트원">
+          <td>L22005</td><td class="td-name">강다예</td><td>여</td><td>1992.08.10</td>
+          <td>서비스개발실</td><td>개발팀 · 프론트엔드파트</td><td>대리</td><td>파트원</td>
+          <td>2022.04.04 (4년 3개월)</td><td>2022.04.04 (4년 3개월)</td>
+          <td>dayev@scglab.com</td><td>010-2070-9208</td><td>서울시립대학교</td><td>국사학과</td><td>채용플랫폼(원티드)</td>
+          <td><span class="badge b-active">재직</span></td><td><span class="blank">-</span></td>
+        </tr>
+        <tr data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="여" data-grade="대리" data-name="이소현 개발팀 프론트엔드파트 대리 파트원">
+          <td>L22011</td><td class="td-name">이소현</td><td>여</td><td>1995.01.13</td>
+          <td>서비스개발실</td><td>개발팀 · 프론트엔드파트</td><td>대리</td><td>파트원</td>
+          <td>2022.07.25 (3년 11개월)</td><td>2022.07.25 (3년 11개월)</td>
+          <td>so_present@scglab.com</td><td>010-3713-9874</td><td>한신대학교</td><td>디지털문화컨텐츠</td><td>인재서칭(인사담당)</td>
+          <td><span class="badge b-active">재직</span></td><td><span class="blank">-</span></td>
+        </tr>
+        <tr data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="대리" data-name="임관우 개발팀 프론트엔드파트 대리 팀원">
+          <td>L22002</td><td class="td-name">임관우</td><td>남</td><td>1986.02.18</td>
+          <td>서비스개발실</td><td>개발팀 · 프론트엔드파트</td><td>대리</td><td>팀원</td>
+          <td>2022.01.03 (4년 6개월)</td><td>2022.01.03 (4년 6개월)</td>
+          <td>gwanwoo.john@scglab.com</td><td>010-8616-2745</td><td>한양대학교(ERICA)</td><td>신문방송학과</td><td>인재서칭(인사담당)</td>
+          <td><span class="badge b-active">재직</span></td><td><span class="blank">-</span></td>
+        </tr>
+        <tr data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="여" data-grade="사원" data-name="최예나 개발팀 프론트엔드파트 사원 파트원">
+          <td>L24004</td><td class="td-name">최예나</td><td>여</td><td><span class="blank">-</span></td>
+          <td>서비스개발실</td><td>개발팀 · 프론트엔드파트</td><td>사원</td><td>파트원</td>
+          <td>2024.12.23 (1년 6개월)</td><td>2024.12.23 (1년 6개월)</td>
+          <td>choiyn33@scglab.com</td><td>010-2618-7872</td><td>숙명여자대학교</td><td>IT공학전공</td><td>지원*</td>
+          <td><span class="badge b-active">재직</span></td><td><span class="blank">-</span></td>
+        </tr>
+        <tr data-dept="서비스개발실" data-team="개발팀" data-virt="빌링사업부" data-gender="남" data-grade="부장" data-name="김명재 개발팀 빌링파트 부장 파트장">
+          <td>200310046</td><td class="td-name">김명재</td><td>남</td><td>1975.02.07</td>
+          <td>서비스개발실</td><td>개발팀 · 빌링파트</td><td>부장</td><td>파트장</td>
+          <td>2003.10.01 (22년 9개월)</td><td>2020.01.01 (6년 6개월)</td>
+          <td>doitbest@hanbill.com</td><td>010-6254-9539</td><td>경복대학</td><td>관광학</td><td>합병(KIB)</td>
+          <td><span class="badge b-active">재직</span></td><td><span class="blank">-</span></td>
+        </tr>
+        <tr data-dept="서비스개발실" data-team="개발팀" data-virt="빌링사업부" data-gender="남" data-grade="차장" data-name="박종탁 개발팀 빌링파트 차장 파트원">
+          <td>201302015</td><td class="td-name">박종탁</td><td>남</td><td>1982.12.18</td>
+          <td>서비스개발실</td><td>개발팀 · 빌링파트</td><td>차장</td><td>파트원</td>
+          <td>2013.02.13 (13년 4개월)</td><td>2020.01.01 (6년 6개월)</td>
+          <td>jt1218@hanbill.com</td><td>010-2663-3690</td><td>경기공업대학</td><td>치공설계학과</td><td>합병(KIB)</td>
+          <td><span class="badge b-active">재직</span></td><td><span class="blank">-</span></td>
+        </tr>
+        <tr data-dept="서비스개발실" data-team="개발팀" data-virt="빌링사업부" data-gender="남" data-grade="대리" data-name="임윤호 개발팀 빌링파트 대리 파트원">
+          <td>L24002</td><td class="td-name">임윤호</td><td>남</td><td>1994.05.18</td>
+          <td>서비스개발실</td><td>개발팀 · 빌링파트</td><td>대리</td><td>파트원</td>
+          <td>2024.05.16 (2년 1개월)</td><td>2024.05.16 (2년 1개월)</td>
+          <td>518youn@hanbill.com</td><td>010-8555-1772</td><td>한국공학대학교</td><td>전자공학과</td><td>지원</td>
+          <td><span class="badge b-active">재직</span></td><td><span class="blank">-</span></td>
+        </tr>
+        <tr data-dept="대표이사 직속" data-team="경영관리팀" data-virt="" data-gender="남" data-grade="차장" data-name="임종엽 경영관리팀  차장 팀장">
+          <td>L21005</td><td class="td-name">임종엽</td><td>남</td><td>1986.04.10</td>
+          <td>대표이사 직속</td><td>경영관리팀</td><td>차장</td><td>팀장</td>
+          <td>2021.10.05 (4년 9개월)</td><td>2021.10.05 (4년 9개월)</td>
+          <td>kslimjy@scglab.com</td><td>010-4230-0410</td><td>한신대학교</td><td>경제학과</td><td>지원</td>
+          <td><span class="badge b-active">재직</span></td><td><span class="blank">-</span></td>
+        </tr>
+        <tr data-dept="대표이사 직속" data-team="경영관리팀" data-virt="" data-gender="여" data-grade="과장" data-name="황지혜 경영관리팀  과장 팀원">
+          <td>L22009</td><td class="td-name">황지혜</td><td>여</td><td>1987.09.29</td>
+          <td>대표이사 직속</td><td>경영관리팀</td><td>과장</td><td>팀원</td>
+          <td>2022.06.27 (4년 0개월)</td><td>2022.06.27 (4년 0개월)</td>
+          <td>jhhwang@scglab.com</td><td>010-4046-2546</td><td>한국항공대학교</td><td>경영학과</td><td>지원</td>
+          <td><span class="badge b-active">재직</span></td><td><span class="blank">-</span></td>
+        </tr>
+        <tr data-dept="대표이사 직속" data-team="경영관리팀" data-virt="" data-gender="여" data-grade="대리" data-name="전유민 경영관리팀  대리 팀원">
+          <td>L21003</td><td class="td-name">전유민</td><td>여</td><td>1993.06.07</td>
+          <td>대표이사 직속</td><td>경영관리팀</td><td>대리</td><td>팀원</td>
+          <td>2021.07.01 (5년 0개월)</td><td>2021.07.01 (5년 0개월)</td>
+          <td>umin@scglab.com</td><td>010-8484-2202</td><td>부천대학</td><td>비서과</td><td>추천</td>
+          <td><span class="badge b-active">재직</span></td><td><span class="blank">-</span></td>
+        </tr>
+        <tr data-dept="대표이사 직속" data-team="영업기획팀" data-virt="빌링사업부" data-gender="남" data-grade="부장" data-name="강승봉 영업기획팀  부장 팀장">
+          <td>H17002</td><td class="td-name">강승봉</td><td>남</td><td>1974.09.01</td>
+          <td>대표이사 직속</td><td>영업기획팀</td><td>부장</td><td>팀장</td>
+          <td>2015.08.10 (10년 10개월)</td><td>2021.09.01 (4년 10개월)</td>
+          <td>telekang@hanbill.com</td><td>010-3153-8786</td><td>한양대학교</td><td>경영학</td><td>합병(KIB)</td>
+          <td><span class="badge b-active">재직</span></td><td><span class="blank">-</span></td>
+        </tr>
+        <tr data-dept="대표이사 직속" data-team="영업기획팀" data-virt="빌링사업부" data-gender="남" data-grade="부장" data-name="김정열 영업기획팀  부장 팀원">
+          <td>H19004</td><td class="td-name">김정열</td><td>남</td><td>1977.07.03</td>
+          <td>대표이사 직속</td><td>영업기획팀</td><td>부장</td><td>팀원</td>
+          <td>2019.09.02 (6년 10개월)</td><td>2021.09.01 (4년 10개월)</td>
+          <td>kjy@hanbill.com</td><td>010-4428-0703</td><td>건국대학교 대학원</td><td>경영학</td><td>합병(KIB)</td>
+          <td><span class="badge b-active">재직</span></td><td><span class="blank">-</span></td>
+        </tr>
+        <tr data-dept="대표이사 직속" data-team="영업기획팀" data-virt="빌링사업부" data-gender="남" data-grade="부장" data-name="팽무진 영업기획팀  부장 팀원">
+          <td>H18004</td><td class="td-name">팽무진</td><td>남</td><td>1974.09.09</td>
+          <td>대표이사 직속</td><td>영업기획팀</td><td>부장</td><td>팀원</td>
+          <td>2010.03.16 (16년 3개월)</td><td>2021.09.01 (4년 10개월)</td>
+          <td>mjpaeng@hanbill.com</td><td>010-3750-9515</td><td>한성대학교</td><td>산업공학과</td><td>합병(KIB)</td>
+          <td><span class="badge b-active">재직</span></td><td><span class="blank">-</span></td>
+        </tr>
+        <tr data-dept="대표이사 직속" data-team="영업기획팀" data-virt="빌링사업부" data-gender="여" data-grade="과장" data-name="지은미 영업기획팀  과장 팀원">
+          <td>L26001</td><td class="td-name">지은미</td><td>여</td><td>1982.12.18</td>
+          <td>대표이사 직속</td><td>영업기획팀</td><td>과장</td><td>팀원</td>
+          <td>2026.03.03 (0년 4개월)</td><td>2026.03.03 (0년 4개월)</td>
+          <td>jem@scglab.com</td><td>010-5287-1581</td><td>오산대학교</td><td>호텔관광경영학과</td><td>지원</td>
+          <td><span class="badge b-active">재직</span></td><td><span class="blank">-</span></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+  <div class="updated">최종 갱신: 2026.06.30 · 담당: 경영관리팀 · 총 42명</div>
+  </div><!-- /panel-roster -->
+
+  <div class="panel" id="panel-org">
+    <div class="stats">
+      <div class="stat"><div class="num" id="o-total">42</div><div class="lbl">총 인원</div></div>
+      <div class="stat"><div class="num" id="o-active">41</div><div class="lbl">재직</div></div>
+      <div class="stat"><div class="num" id="o-leave">1</div><div class="lbl">휴직</div></div>
+    </div>
+    <div class="orgchart" id="orgchart"></div>
+  </div><!-- /panel-org -->
+</div><!-- /wrap -->
+
+<script>
+const CEO_LABEL="김요한 · 박동녘";
+let curDept={val:'all',type:'all'}, curGender='all', curGrade='all';
+
+function showTab(btn,id){
+  document.querySelectorAll('.tabbtn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  if(id==='panel-org') buildOrg();
+}
+function setDept(btn,type){
+  // 이미 켜진 버튼(전체 아님) 재클릭 → 전체로 복귀
+  if(btn.classList.contains('on') && btn.getAttribute('data-dfilter')!=='all'){
+    document.querySelectorAll('.dept-f').forEach(b=>b.classList.remove('on'));
+    document.querySelector('.dept-f[data-dfilter="all"]').classList.add('on');
+    curDept={val:'all',type:'all'}; applyAll(); return;
+  }
+  document.querySelectorAll('.dept-f').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  curDept={val:btn.getAttribute('data-dfilter'),type:type};
+  applyAll();
+}
+function setGender(btn){
+  if(btn.classList.contains('on') && btn.getAttribute('data-sfilter')!=='all'){
+    document.querySelectorAll('.gender').forEach(b=>b.classList.remove('on'));
+    document.querySelector('.gender[data-sfilter="all"]').classList.add('on');
+    curGender='all'; applyAll(); return;
+  }
+  document.querySelectorAll('.gender').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  curGender=btn.getAttribute('data-sfilter');
+  applyAll();
+}
+function setGrade(btn){
+  if(btn.classList.contains('on') && btn.getAttribute('data-gfilter')!=='all'){
+    document.querySelectorAll('.grade').forEach(b=>b.classList.remove('on'));
+    document.querySelector('.grade[data-gfilter="all"]').classList.add('on');
+    curGrade='all'; applyAll(); return;
+  }
+  document.querySelectorAll('.grade').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  curGrade=btn.getAttribute('data-gfilter');
+  applyAll();
+}
+function resetAll(){
+  curDept={val:'all',type:'all'}; curGender='all'; curGrade='all';
+  document.querySelectorAll('.dept-f,.gender,.grade').forEach(b=>b.classList.remove('on'));
+  document.querySelector('.dept-f[data-dfilter="all"]').classList.add('on');
+  document.querySelector('.gender[data-sfilter="all"]').classList.add('on');
+  document.querySelector('.grade[data-gfilter="all"]').classList.add('on');
+  document.getElementById('search').value='';
+  applyAll();
+}
+function matchDept(el){
+  if(curDept.val==='all') return true;
+  if(curDept.type==='dept') return el.getAttribute('data-dept')===curDept.val;
+  if(curDept.type==='team') return el.getAttribute('data-team')===curDept.val;
+  if(curDept.type==='virt') return (el.getAttribute('data-virt')||'').includes(curDept.val);
+  return true;
+}
+function applyAll(){
+  const q=document.getElementById('search').value.trim().toLowerCase();
+  const test=(el)=> matchDept(el)
+    && (curGender==='all' || el.getAttribute('data-gender')===curGender)
+    && (curGrade==='all' || el.getAttribute('data-grade')===curGrade)
+    && (!q || (el.getAttribute('data-name')||'').toLowerCase().includes(q));
+  document.querySelectorAll('.card').forEach(c=>c.classList.toggle('hide',!test(c)));
+  document.querySelectorAll('#rostertable tbody tr').forEach(r=>r.classList.toggle('hide',!test(r)));
+  updateStats();
+}
+function doSearch(){ applyAll(); }
+function updateStats(){
+  const rows=[...document.querySelectorAll('#rostertable tbody tr')].filter(r=>!r.classList.contains('hide'));
+  document.getElementById('s-total').textContent=rows.length;
+  let a=0,l=0; const d=new Set();
+  rows.forEach(r=>{
+    const st=r.querySelector('.badge');
+    if(st&&st.classList.contains('b-active')) a++;
+    if(st&&st.classList.contains('b-leave')) l++;
+    if(r.getAttribute('data-dept')) d.add(r.getAttribute('data-dept'));
+  });
+  document.getElementById('s-active').textContent=a;
+  document.getElementById('s-leave').textContent=l;
+  document.getElementById('s-dept').textContent=d.size;
+  // 필터 상태 안내
+  const parts=[];
+  if(curDept.val!=='all') parts.push(curDept.val);
+  if(curGender!=='all') parts.push(curGender);
+  if(curGrade!=='all') parts.push(curGrade);
+  document.getElementById('filterInfo').textContent = parts.length? ('필터: '+parts.join(' + ')+' → '+rows.length+'명') : (rows.length+'명 전체 표시');
+}
+
+// ===== 조직도 =====
+const ORG=[
+  {sil:"서비스사업실",type:"",teams:["기획팀","디자인팀"]},
+  {sil:"서비스개발실",type:"",teams:["개발팀"]},
+  {sil:"대표이사 직속",type:"direct",teams:["경영관리팀","영업기획팀"]},
+];
+function getMembers(){
+  return [...document.querySelectorAll('#rostertable tbody tr')].map(r=>{
+    const td=r.querySelectorAll('td');
+    const b=r.querySelector('.badge');
+    const posTxt=td[7].textContent.trim();
+    return {
+      name:td[1].textContent.trim(), gender:td[2].textContent.trim()==='-'?'':td[2].textContent.trim(),
+      sil:r.getAttribute('data-dept'), team:r.getAttribute('data-team'),
+      part:(td[5].textContent.split('·')[1]||'').trim(),
+      grade:td[6].textContent.trim()==='-'?'':td[6].textContent.trim(),
+      pos:posTxt==='-'?'':posTxt,
+      leave:b&&b.classList.contains('b-leave'), quit:b&&b.classList.contains('b-quit'),
+      isCEO:td[6].textContent.trim()==='대표이사'||posTxt==='대표이사',
+    };
+  }).filter(m=>!m.quit);
+}
+const POSB={"대표이사":0,"실장":1,"팀장":2,"파트장":3,"팀원":5,"파트원":5};
+const GRD={"대표이사":0,"이사":1,"부장":2,"차장":3,"과장":4,"대리":5,"선임":6,"사원":7};
+function rankM(m){ return (m.pos&&POSB[m.pos]!==undefined?POSB[m.pos]:6)*100 + (GRD[m.grade]??9); }
+function sortM(a,b){ return rankM(a)-rankM(b) || a.name.localeCompare(b.name,'ko'); }
+function lbl(m){ return m.grade || m.pos; }  // 조직도는 직급 위주 표기
+function posTag(m){ return (m.pos && m.pos!=='파트원' && m.pos!=='팀원') ? m.pos : ''; }
+function buildOrg(){
+  const mem=getMembers();
+  document.getElementById('o-total').textContent=mem.length;
+  document.getElementById('o-active').textContent=mem.filter(m=>!m.leave).length;
+  document.getElementById('o-leave').textContent=mem.filter(m=>m.leave).length;
+  const ceos=mem.filter(m=>m.isCEO).sort(sortM);
+  const ceoHtml=ceos.map(m=>`<span style="margin:0 10px">${m.name} <span style="font-weight:400;color:#94A3B8">${lbl(m)}${m.gender?' ('+m.gender+')':''}</span></span>`).join('');
+  let html=`<div class="org-ceo">대표이사<div style="margin-top:6px;font-size:14px">${ceoHtml||CEO_LABEL}</div><div class="cnt">전체 ${mem.length}명</div></div><div class="org-conn"></div><div class="org-level">`;
+  ORG.forEach(u=>{
+    const um=mem.filter(m=>m.sil===u.sil && !m.isCEO);
+    html+=`<div class="org-sil"><div class="org-silbox ${u.type}">${u.sil}<div class="cnt">${um.length}명</div></div><div class="org-teams">`;
+    const direct=um.filter(m=>!m.team).sort(sortM);
+    if(direct.length){
+      html+=`<div class="org-team"><div class="org-teamhdr">실 직속<span class="tcnt">${direct.length}명</span></div><div class="org-members">`;
+      direct.forEach(m=>html+=row(m)); html+=`</div></div>`;
+    }
+    u.teams.forEach(t=>{
+      const tm=um.filter(m=>m.team===t).sort(sortM);
+      html+=`<div class="org-team"><div class="org-teamhdr">${t}<span class="tcnt">${tm.length}명</span></div><div class="org-members">`;
+      if(!tm.length) html+=`<div class="org-empty">배정 인원 없음</div>`;
+      else tm.forEach(m=>html+=row(m));
+      html+=`</div></div>`;
+    });
+    html+=`</div></div>`;
+  });
+  html+=`</div>`;
+  document.getElementById('orgchart').innerHTML=html;
+}
+function row(m){
+  const g=m.gender?` (${m.gender})`:'';
+  const pt=posTag(m);
+  const part=m.part?`<span class="org-part">${m.part}${pt?' · '+pt:''}</span>`:(pt?`<span class="org-part">${pt}</span>`:'');
+  const lv=m.leave?'<span style="font-size:10px;color:#d97706;margin-left:4px">(휴직)</span>':'';
+  return `<div class="org-mem"><span class="mname">${m.name}${part}${lv}</span><span class="mpos">${lbl(m)}${g}</span></div>`;
+}
+updateStats();
+</script>
+</body>
+</html>
