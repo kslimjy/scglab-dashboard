@@ -162,7 +162,13 @@ tr:hover td{background:#fafbfc}
 .bar-r .bw .bf:first-child{border-radius:5px 0 0 5px}
 .bar-r .bw .bf:last-child{border-radius:0 5px 5px 0}
 .bar-r .bt>.bw:only-child>.bf:only-child{border-radius:5px}
-.bar-r .bt[title]{cursor:help}
+.bar-r .bt[data-tip]{cursor:pointer}
+.tip{position:fixed;z-index:9999;display:none;max-width:320px;background:#1a1d23;color:#fff;border-radius:9px;padding:10px 12px;font-size:11.5px;line-height:1.65;box-shadow:0 6px 24px rgba(0,0,0,.28);pointer-events:none;letter-spacing:-.1px}
+.tip b{display:block;font-size:12px;font-weight:700;margin-bottom:5px;color:#fff}
+.tip .tnames{color:#cbd0d8;word-break:keep-all}
+.tip.pin{pointer-events:auto;box-shadow:0 0 0 2px var(--blue),0 6px 24px rgba(0,0,0,.28)}
+.tip .tpin{display:none;margin-top:7px;padding-top:6px;border-top:1px solid #343845;color:#8b90a0;font-size:10px}
+.tip.pin .tpin{display:block}
 .bar-r .bf{height:100%;border-radius:5px 0 0 5px;transition:width .5s cubic-bezier(.4,0,.2,1)}
 .bar-r .bf:last-child{border-radius:5px}
 .bar-r .bv{min-width:56px;text-align:right;font-weight:700;flex-shrink:0}
@@ -171,7 +177,8 @@ tr:hover td{background:#fafbfc}
 .cols{display:flex;align-items:stretch;gap:8px;height:178px;padding:8px 0 2px}
 .col-i{flex:1;display:flex;flex-direction:column;align-items:center;height:100%;gap:5px;min-width:0}
 .col-tr{flex:1;width:100%;min-height:0;display:flex;align-items:flex-end;justify-content:center}
-.col-b{width:100%;max-width:44px;background:linear-gradient(180deg,#6f9bf7,#4b7cf3);border-radius:5px 5px 0 0;min-height:3px;transition:height .5s;position:relative;cursor:help}
+.col-b{width:100%;max-width:44px;background:linear-gradient(180deg,#6f9bf7,#4b7cf3);border-radius:5px 5px 0 0;min-height:3px;transition:height .5s;position:relative;cursor:pointer}
+.col-b.z{cursor:default}
 .col-b.z{background:#e4e7ec}
 .col-v{font-size:11px;font-weight:700;height:14px;line-height:14px;flex-shrink:0}
 .col-l{font-size:10px;color:var(--text3);white-space:nowrap;flex-shrink:0;line-height:14px;height:14px}
@@ -2060,7 +2067,7 @@ tr:hover td{background:#fafbfc}
         <div class="sec-t">채용 경로(입사경로)</div>
         <div class="sec-s">내부추천·공개지원 등 채널별 유입 비중</div>
         <div class="bars" id="k-route"></div>
-        <div class="note">막대에 마우스를 올리면 해당 경로의 인원 이름이 표시됩니다.<br>직원 추천 비중이 높으면 리퍼럴 채널이 잘 작동한다는 신호입니다.</div>
+        <div class="note">막대에 마우스를 올리면 이름이 즉시 표시되고, <b>클릭하면 고정</b>됩니다(다시 클릭 시 해제).<br>직원 추천 비중이 높으면 리퍼럴 채널이 잘 작동한다는 신호입니다.</div>
       </div>
     </div>
 
@@ -2352,19 +2359,48 @@ function statRows(){
   }).filter(m=>m.name && m.status!=='퇴사');
 }
 const pct=(a,b)=> b? Math.round(a/b*1000)/10 : 0;
+function esc(x){return String(x).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');}
+function tipAttr(head,names){
+  const body = names&&names.length ? `<span class="tnames">${names.join(' · ')}</span>` : '';
+  return ` data-tip="${esc(`<b>${head}</b>${body}<span class="tpin">클릭하면 고정 해제</span>`)}"`;
+}
+(function initTip(){
+  const tip=document.createElement('div'); tip.className='tip'; document.body.appendChild(tip);
+  let pin=false;
+  const place=(x,y)=>{const r=tip.getBoundingClientRect();
+    let l=x+14, t=y+16;
+    if(l+r.width>innerWidth-8) l=Math.max(8,x-r.width-14);
+    if(t+r.height>innerHeight-8) t=Math.max(8,y-r.height-14);
+    tip.style.left=l+'px'; tip.style.top=t+'px';};
+  const show=(el,x,y)=>{tip.innerHTML=el.getAttribute('data-tip'); tip.style.display='block'; place(x,y);};
+  const hide=()=>{tip.style.display='none'; tip.classList.remove('pin'); pin=false;};
+  document.addEventListener('mousemove',e=>{
+    if(pin) return;
+    const el=e.target.closest&&e.target.closest('[data-tip]');
+    if(el){ if(tip.style.display!=='block'||tip.dataset.k!==el.getAttribute('data-tip')){tip.dataset.k=el.getAttribute('data-tip'); show(el,e.clientX,e.clientY);} else place(e.clientX,e.clientY); }
+    else { tip.style.display='none'; }
+  });
+  document.addEventListener('click',e=>{
+    const el=e.target.closest&&e.target.closest('[data-tip]');
+    if(el){ if(pin){hide();} else {pin=true; tip.dataset.k=el.getAttribute('data-tip'); show(el,e.clientX,e.clientY); tip.classList.add('pin');} e.stopPropagation(); }
+    else if(pin) hide();
+  },true);
+  window.addEventListener('scroll',()=>{if(!pin) tip.style.display='none';},true);
+})();
 const yrs=mo=> mo==null?'-':(Math.round(mo/12*10)/10)+'년';
 function bar(label,val,total,color,extra){
   const w=total?val/total*100:0;
-  const tip=(extra&&extra.title)?` title="${extra.title}"`:'';
-  return `<div class="bar-r${extra&&extra.acc?' acc':''}"><div class="bl">${label}</div><div class="bt"${tip}><div class="bf" style="width:${w}%;background:${color}"></div></div><div class="bv">${val}<small>${pct(val,total)}%</small></div></div>`;
+  const tp=(extra&&extra.names)?tipAttr(`${label} · ${val}명 (${pct(val,total)}%)`,extra.names):'';
+  return `<div class="bar-r${extra&&extra.acc?' acc':''}"><div class="bl">${label}</div><div class="bt"${tp}><div class="bf" style="width:${w}%;background:${color}"></div></div><div class="bv">${val}<small>${pct(val,total)}%</small></div></div>`;
 }
-function barStack(label,segs,total,max){
+function barStack(label,segs,total,max,names){
   const sum=segs.reduce((a,s)=>a+s.v,0);
   const w=max?sum/max*100:0;
   const on=segs.filter(s=>s.v>0);
   const inner=on.map(s=>`<div class="bf" style="width:${sum?s.v/sum*100:0}%;background:${s.c}"></div>`).join('');
-  const tip=on.map(s=>`${s.n} ${s.v}명`).join(' · ');
-  return `<div class="bar-r"><div class="bl">${label}</div><div class="bt" title="${label} — ${tip}"><div class="bw" style="width:${w}%">${inner}</div></div><div class="bv">${sum}<small>${pct(sum,total)}%</small></div></div>`;
+  const head=`${label} · ${sum}명 (${pct(sum,total)}%) — ${on.map(s=>`${s.n} ${s.v}`).join(' / ')}`;
+  const tp=tipAttr(head,names||[]);
+  return `<div class="bar-r"><div class="bl">${label}</div><div class="bt"${tp}><div class="bw" style="width:${w}%">${inner}</div></div><div class="bv">${sum}<small>${pct(sum,total)}%</small></div></div>`;
 }
 function donut(el,dc,leg,items,centerNum,centerLbl){
   const tot=items.reduce((a,i)=>a+i.v,0);
@@ -2396,9 +2432,10 @@ function setTenBase(b){
 function drawTen(M){
   const key=tenBase==='c'?'cten':'gten';
   const has=M.filter(m=>m[key]!=null), miss=M.length-has.length;
-  const cnt=TB.map(([a,b,l])=>({l,v:has.filter(m=>m[key]>=a&&m[key]<=b).length}));
+  const cnt=TB.map(([a,b,l])=>({l,ns:has.filter(m=>m[key]>=a&&m[key]<=b).map(m=>m.name)}));
   const tot=has.length;
-  document.getElementById('k-ten').innerHTML=cnt.map((c,i)=>bar(c.l,c.v,tot,PAL[i])).join('');
+  document.getElementById('k-ten').innerHTML=cnt.map((c,i)=>bar(c.l,c.ns.length,tot,PAL[i],{names:c.ns})).join('');
+  cnt.forEach(c=>c.v=c.ns.length);
   const avg=tot?has.reduce((a,m)=>a+m[key],0)/tot:0;
   const md=[...has.map(m=>m[key])].sort((a,b)=>a-b);
   const med=tot?(tot%2?md[(tot-1)/2]:(md[tot/2-1]+md[tot/2])/2):0;
@@ -2449,8 +2486,8 @@ function buildStat(){
   const noG=M.filter(m=>!m.grade).length;
   const gmax=Math.max(...grs.map(g=>M.filter(m=>m.grade===g).length), noG);
   let gh=grs.map(g=>{const gm=M.filter(m=>m.grade===g);
-    return barStack(g,[{n:'남',v:gm.filter(x=>x.gender==='남').length,c:C_M},{n:'여',v:gm.filter(x=>x.gender==='여').length,c:C_F},{n:'미기재',v:gm.filter(x=>!x.gender).length,c:C_N}],T,gmax);}).join('');
-  if(noG) gh+=barStack('직급 미기재',[{n:'미기재',v:noG,c:C_N}],T,gmax);
+    return barStack(g,[{n:'남',v:gm.filter(x=>x.gender==='남').length,c:C_M},{n:'여',v:gm.filter(x=>x.gender==='여').length,c:C_F},{n:'미기재',v:gm.filter(x=>!x.gender).length,c:C_N}],T,gmax,gm.map(x=>x.name));}).join('');
+  if(noG) gh+=barStack('직급 미기재',[{n:'미기재',v:noG,c:C_N}],T,gmax,M.filter(m=>!m.grade).map(x=>x.name));
   document.getElementById('k-grade').innerHTML=gh;
   const snr=M.filter(m=>['대표이사','이사','부장'].includes(m.grade)).length;
   document.getElementById('k-gradenote').innerHTML=
@@ -2464,7 +2501,7 @@ function buildStat(){
   const amax=M.length;
   document.getElementById('k-age').innerHTML=AB.map(([a,b,l],i)=>{
     const am=ag.filter(m=>{const x=NOW_Y-m.birth; return x>=a&&x<=b;});
-    return barStack(l,[{n:'남',v:am.filter(x=>x.gender==='남').length,c:C_M},{n:'여',v:am.filter(x=>x.gender==='여').length,c:C_F}],ag.length,Math.max(...AB.map(([p,q])=>ag.filter(m=>{const x=NOW_Y-m.birth;return x>=p&&x<=q;}).length)));
+    return barStack(l,[{n:'남',v:am.filter(x=>x.gender==='남').length,c:C_M},{n:'여',v:am.filter(x=>x.gender==='여').length,c:C_F}],ag.length,Math.max(...AB.map(([p,q])=>ag.filter(m=>{const x=NOW_Y-m.birth;return x>=p&&x<=q;}).length)),am.map(x=>`${x.name}(${NOW_Y-x.birth})`));
   }).join('');
   const ages=ag.map(m=>NOW_Y-m.birth).sort((a,b)=>a-b);
   document.getElementById('k-agenote').innerHTML=`최연소 <b>${ages[0]}세</b> · 최연장 <b>${ages[ages.length-1]}세</b> · 평균 <b>${Math.round(avgA*10)/10}세</b> (출생연도 미기재 ${T-ag.length}명 제외)`;
@@ -2473,7 +2510,7 @@ function buildStat(){
   const rc={}; M.forEach(m=>{const k=normRoute(m.route); (rc[k]=rc[k]||[]).push(m.name);});
   const re=Object.entries(rc).sort((a,b)=>b[1].length-a[1].length);
   document.getElementById('k-route').innerHTML=re.map(([k,ns],i)=>
-    bar(k,ns.length,T,PAL[i%PAL.length],{acc:i===0,title:ns.join(', ')})).join('');
+    bar(k,ns.length,T,PAL[i%PAL.length],{acc:i===0,names:ns})).join('');
 
   /* 조직별 */
   const avg=(arr,k)=>{const a=arr.filter(x=>x[k]!=null); return a.length?Math.round(a.reduce((s,x)=>s+x[k],0)/a.length/12*10)/10:'-';};
@@ -2517,8 +2554,9 @@ function buildStat(){
   const yr=[]; for(let y=y0;y<=y1;y++) yr.push([y, ys.filter(x=>x===y).length]);
   const ymax=Math.max(...yr.map(x=>x[1]),1);
   document.getElementById('k-year').innerHTML=yr.map(([y,v])=>{
-    const ns=M.filter(m=>m.cjoin&&m.cjoin.y===y).map(m=>m.name).join(', ');
-    return `<div class="col-i"><div class="col-v">${v||''}</div><div class="col-tr"><div class="col-b ${v?'':'z'}" style="height:${v?Math.max(v/ymax*100,4):2}%" title="${y}년 입사 ${v}명${ns?' — '+ns:''}"></div></div><div class="col-l">${String(y).slice(2)}년</div></div>`;
+    const ns=M.filter(m=>m.cjoin&&m.cjoin.y===y).map(m=>m.name);
+    const tp=v?tipAttr(`${y}년 입사 · ${v}명`,ns):'';
+    return `<div class="col-i"><div class="col-v">${v||''}</div><div class="col-tr"><div class="col-b ${v?'':'z'}" style="height:${v?Math.max(v/ymax*100,4):2}%"${tp}></div></div><div class="col-l">${String(y).slice(2)}년</div></div>`;
   }).join('');
   const peak=yr.slice().sort((a,b)=>b[1]-a[1])[0];
   const y26=ys.filter(x=>x===2026).length;
