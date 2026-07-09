@@ -171,6 +171,52 @@ body {
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 </head>
 <body>
+<style>
+#gate{position:fixed;inset:0;background:#0F172A;z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px;font-family:'Pretendard',sans-serif}
+#gate .g-card{background:#fff;border-radius:18px;padding:40px 36px;width:100%;max-width:380px;box-shadow:0 20px 60px rgba(0,0,0,.4);text-align:center}
+#gate .g-logo{width:48px;height:48px;background:#2563EB;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;color:#fff;margin:0 auto 16px}
+#gate .g-t{font-size:19px;font-weight:800;letter-spacing:-.4px;margin-bottom:6px;color:#1a1d23}
+#gate .g-s{font-size:12px;color:#9499ab;line-height:1.7;margin-bottom:24px}
+#gate .g-in{width:100%;padding:12px 14px;font-size:14px;font-family:inherit;border:1.5px solid #d1d5db;border-radius:10px;outline:none;text-align:center;letter-spacing:2px}
+#gate .g-in:focus{border-color:#4b7cf3;box-shadow:0 0 0 3px rgba(75,124,243,.12)}
+#gate .g-btn{width:100%;margin-top:10px;padding:12px;font-size:13.5px;font-weight:700;font-family:inherit;background:#2563EB;color:#fff;border:0;border-radius:10px;cursor:pointer}
+#gate .g-btn:hover{background:#1d4ed8}
+#gate .g-err{font-size:11.5px;color:#ef4444;margin-top:12px;min-height:16px;font-weight:600}
+#gate .g-note{font-size:10px;color:#b0b5c2;line-height:1.7;margin-top:22px;padding-top:16px;border-top:1px solid #e8eaed}
+html.locked body>*:not(#gate){display:none!important}
+</style>
+<div id="gate">
+  <div class="g-card">
+    <div class="g-logo">S</div>
+    <div class="g-t">에스씨지랩 경영정보</div>
+    <div class="g-s">내부 임직원 전용 페이지입니다.<br>비밀번호를 입력해 주세요.</div>
+    <input type="password" id="g-pw" class="g-in" placeholder="비밀번호" autocomplete="off" autofocus>
+    <button class="g-btn" id="g-go">접속</button>
+    <div class="g-err" id="g-err"></div>
+    <div class="g-note">본 페이지의 정보는 대외비입니다.<br>무단 열람·복제·외부 반출을 금합니다.</div>
+  </div>
+</div>
+<script>
+(function(){
+  const HASH='eda562899f8b89ea55e0c7e1230b3d3a8d8a426989dcc8726e3b616058f5b380';
+  const gate=document.getElementById('gate');
+  document.documentElement.classList.add('locked');
+  const sha=async t=>[...new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t)))]
+    .map(b=>b.toString(16).padStart(2,'0')).join('');
+  function pass(pw){ sessionStorage.setItem('scg_k',pw); document.documentElement.classList.remove('locked'); gate.remove(); }
+  async function go(pw,silent){
+    if(!pw) return false;
+    if(await sha(pw)===HASH){ pass(pw); return true; }
+    if(!silent){ document.getElementById('g-err').textContent='비밀번호가 올바르지 않습니다.';
+      const i=document.getElementById('g-pw'); i.value=''; i.focus(); }
+    sessionStorage.removeItem('scg_k'); return false;
+  }
+  document.getElementById('g-go').onclick=()=>go(document.getElementById('g-pw').value,false);
+  document.getElementById('g-pw').onkeydown=e=>{ if(e.key==='Enter') go(e.target.value,false); };
+  const saved=sessionStorage.getItem('scg_k');
+  if(saved) go(saved,true).then(ok=>{ if(!ok) document.getElementById('g-pw').focus(); });
+})();
+</script>
 
 <!-- Header -->
 <div class="header">
