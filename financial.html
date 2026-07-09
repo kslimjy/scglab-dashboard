@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>에스씨지랩 재무제표 2020–2025</title>
+<title>에스씨지랩</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js" crossorigin="anonymous"></script>
 <style>
 :root {
@@ -130,571 +130,87 @@ body{background:var(--bg);color:var(--text);font-family:'Pretendard',sans-serif;
 }
 </style>
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style id="lock-css">
+#lockbox{position:fixed;inset:0;background:#0F172A;z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px;font-family:'Pretendard',-apple-system,BlinkMacSystemFont,sans-serif}
+#lockbox .lock-card{background:#fff;border-radius:18px;padding:40px 36px;width:100%;max-width:380px;box-shadow:0 20px 60px rgba(0,0,0,.4);text-align:center}
+#lockbox .lock-ico{width:48px;height:48px;background:#2563EB;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 16px}
+#lockbox .lock-t{font-size:19px;font-weight:800;letter-spacing:-.4px;margin-bottom:6px;color:#1a1d23}
+#lockbox .lock-s{font-size:12px;color:#9499ab;line-height:1.7;margin-bottom:24px}
+#lockbox .lock-in{width:100%;padding:12px 14px;font-size:14px;font-family:inherit;border:1.5px solid #d1d5db;border-radius:10px;outline:none;text-align:center;letter-spacing:2px}
+#lockbox .lock-in:focus{border-color:#4b7cf3;box-shadow:0 0 0 3px rgba(75,124,243,.12)}
+#lockbox .lock-btn{width:100%;margin-top:10px;padding:12px;font-size:13.5px;font-weight:700;font-family:inherit;background:#2563EB;color:#fff;border:0;border-radius:10px;cursor:pointer}
+#lockbox .lock-btn:hover{background:#1d4ed8}
+#lockbox .lock-btn:disabled{opacity:.6;cursor:wait}
+#lockbox .lock-err{font-size:11.5px;color:#ef4444;margin-top:12px;min-height:16px;font-weight:600}
+#lockbox .lock-note{font-size:10px;color:#b0b5c2;line-height:1.7;margin-top:22px;padding-top:16px;border-top:1px solid #e8eaed}
+</style>
 </head>
 <body>
-
-<div class="header">
-  <div class="header-left">
-    <a href="index.html" class="header-logo" title="허브로 이동">S</a>
-    <div>
-      <h1>에스씨지랩 재무제표</h1>
-      <p>SCGLAB Financial Statements · 2020 – 2025</p>
-    </div>
-  </div>
-  <div class="header-right">
-    <span class="badge">단위: 억원 (표·차트 공통)</span>
-    <a href="chatbot.html" class="ai-btn">💬 AI에게 묻기</a>
-    <a href="index.html" class="back-btn">← 허브로</a>
+<div id="lockbox">
+  <div class="lock-card">
+    <div class="lock-ico">🔒</div>
+    <div class="lock-t">재무제표</div>
+    <div class="lock-s">대외비 재무자료입니다.<br>비밀번호를 입력해 주세요.</div>
+    <input type="password" id="lock-pw" class="lock-in" placeholder="비밀번호" autocomplete="off" autofocus>
+    <button class="lock-btn" id="lock-go">열람하기</button>
+    <div class="lock-err" id="lock-err"></div>
+    <div class="lock-note">본 페이지의 정보는 대외비입니다.<br>무단 열람·복제·외부 반출을 금합니다.</div>
   </div>
 </div>
-
-<div class="tab-bar">
-  <button class="tab active" onclick="sw('pl',this)">손익계산서</button>
-  <button class="tab" onclick="sw('bs',this)">재무상태표</button>
-  <button class="tab" onclick="sw('ratio',this)">재무비율</button>
-  <button class="tab" onclick="sw('cf',this)">현금흐름</button>
-</div>
-
-<div class="main">
-
-<!-- ① 손익계산서 -->
-<div id="panel-pl" class="panel active">
-  <div class="kpi-grid">
-    <div class="kpi">
-      <div class="kpi-label">2025 매출액</div>
-      <div class="kpi-value">63.5<span>억원</span></div>
-      <div class="kpi-sub">전년 58.7억원</div>
-      <div class="kpi-badge up">▲ +8.3%</div>
-    </div>
-    <div class="kpi">
-      <div class="kpi-label">2025 영업이익</div>
-      <div class="kpi-value">3.8<span>억원</span></div>
-      <div class="kpi-sub">영업이익률 6.0%</div>
-      <div class="kpi-badge down">▼ -46.3%</div>
-    </div>
-    <div class="kpi">
-      <div class="kpi-label">2025 당기순이익</div>
-      <div class="kpi-value">7.0<span>억원</span></div>
-      <div class="kpi-sub">순이익률 11.1%</div>
-      <div class="kpi-badge down">▼ -18.1%</div>
-    </div>
-    <div class="kpi">
-      <div class="kpi-label">2025 매출총이익률</div>
-      <div class="kpi-value">35.3<span>%</span></div>
-      <div class="kpi-sub">전년 39.3%</div>
-      <div class="kpi-badge down">▼ -4.0%p</div>
-    </div>
-  </div>
-
-  <div class="chart-grid chart-grid-2">
-    <div class="card">
-      <div class="card-title">손익 추이 (억원)</div>
-      <div class="card-sub">매출액 · 매출총이익 · 영업이익 · 순이익(꺾은선)</div>
-      <div class="legend">
-        <div class="legend-item"><div class="legend-dot" style="background:#3B82F6"></div>매출액</div>
-        <div class="legend-item"><div class="legend-dot" style="background:#10B981"></div>매출총이익</div>
-        <div class="legend-item"><div class="legend-dot" style="background:#F59E0B"></div>영업이익</div>
-        <div class="legend-item"><div class="legend-line" style="background:#7C3AED"></div>순이익(선)</div>
-      </div>
-      <div class="chart-wrap"><canvas id="plC"></canvas></div>
-    </div>
-    <div class="card">
-      <div class="card-title">이익률 추이 (%)</div>
-      <div class="card-sub">매출총이익률 · 영업이익률 · 순이익률</div>
-      <div class="legend">
-        <div class="legend-item"><div class="legend-line" style="background:#10B981"></div>매출총이익률</div>
-        <div class="legend-item"><div class="legend-line" style="background:#F59E0B"></div>영업이익률</div>
-        <div class="legend-item"><div class="legend-line" style="background:#7C3AED"></div>순이익률</div>
-      </div>
-      <div class="chart-wrap"><canvas id="marginC"></canvas></div>
-    </div>
-  </div>
-
-  <div class="sec-title" style="margin-top:28px">손익계산서 연간 상세 (단위: 억원)</div>
-  <div class="table-wrap">
-    <table class="fin-table">
-      <thead>
-        <tr><th>항목</th><th>2020</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th></tr>
-      </thead>
-      <tbody>
-        <tr class="highlight-row"><td>매출액</td><td>17.7</td><td>30.6</td><td>39.0</td><td>50.8</td><td>58.7</td><td>63.5</td></tr>
-        <tr><td>　매출원가</td><td>8.7</td><td>13.3</td><td>24.8</td><td>34.7</td><td>35.6</td><td>41.1</td></tr>
-        <tr class="section-row"><td>매출총이익</td><td>9.0</td><td>17.3</td><td>14.3</td><td>16.1</td><td>23.1</td><td>22.4</td></tr>
-        <tr><td>　매출총이익률</td><td>50.7%</td><td>56.5%</td><td>36.5%</td><td>31.8%</td><td>39.3%</td><td>35.3%</td></tr>
-        <tr><td>　판매관리비</td><td>6.9</td><td>10.4</td><td>16.4</td><td>13.1</td><td>15.9</td><td>18.6</td></tr>
-        <tr class="section-row"><td>영업이익</td><td class="pos-g">2.1</td><td class="pos-g">6.9</td><td class="neg">-2.2</td><td class="pos-g">3.0</td><td class="pos-g">7.1</td><td class="pos-g">3.8</td></tr>
-        <tr><td>　영업이익률</td><td>11.7%</td><td>22.5%</td><td class="neg">-5.6%</td><td>5.9%</td><td>12.2%</td><td>6.0%</td></tr>
-        <tr><td>　영업외수익</td><td>0.4</td><td>0.4</td><td>2.4</td><td>3.2</td><td>2.9</td><td>4.9</td></tr>
-        <tr><td>　영업외비용</td><td>0.3</td><td>1.0</td><td>0.2</td><td>1.0</td><td>1.4</td><td>1.6</td></tr>
-        <tr class="highlight-row"><td>당기순이익</td><td class="pos-g">2.2</td><td class="pos-g">6.3</td><td class="neg">-0.0</td><td class="pos-g">5.2</td><td class="pos-g">8.6</td><td class="pos-g">7.0</td></tr>
-        <tr><td>　순이익률</td><td>12.4%</td><td>20.6%</td><td class="neg">-0.1%</td><td>10.3%</td><td>14.7%</td><td>11.1%</td></tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<!-- ② 재무상태표 -->
-<div id="panel-bs" class="panel">
-  <div class="kpi-grid">
-    <div class="kpi">
-      <div class="kpi-label">2025 자산총계</div>
-      <div class="kpi-value">61.0<span>억원</span></div>
-      <div class="kpi-sub">전년 51.5억원</div>
-      <div class="kpi-badge up">▲ +18.5%</div>
-    </div>
-    <div class="kpi">
-      <div class="kpi-label">2025 자본총계</div>
-      <div class="kpi-value">43.3<span>억원</span></div>
-      <div class="kpi-sub">자기자본비율 71.0%</div>
-      <div class="kpi-badge up">▲ +19.4%</div>
-    </div>
-    <div class="kpi">
-      <div class="kpi-label">2025 부채총계</div>
-      <div class="kpi-value">17.7<span>억원</span></div>
-      <div class="kpi-sub">부채비율 40.9%</div>
-      <div class="kpi-badge flat">▲ +16.3%</div>
-    </div>
-    <div class="kpi">
-      <div class="kpi-label">2025 유동비율</div>
-      <div class="kpi-value">245<span>%</span></div>
-      <div class="kpi-sub">전년 263%</div>
-      <div class="kpi-badge down">▼ -18%p</div>
-    </div>
-  </div>
-
-  <div class="chart-grid chart-grid-1">
-    <div class="card">
-      <div class="card-title">자산 · 부채 · 자본 추이 (억원)</div>
-      <div class="card-sub">6개년 재무상태 변화</div>
-      <div class="legend">
-        <div class="legend-item"><div class="legend-dot" style="background:#3B82F6"></div>자산총계</div>
-        <div class="legend-item"><div class="legend-dot" style="background:#EF4444"></div>부채총계</div>
-        <div class="legend-item"><div class="legend-dot" style="background:#10B981"></div>자본총계</div>
-      </div>
-      <div class="chart-wrap" style="height:280px"><canvas id="bsC"></canvas></div>
-    </div>
-  </div>
-
-  <div class="sec-title" style="margin-top:28px">재무상태표 연간 상세 (단위: 억원)</div>
-  <div class="table-wrap">
-    <table class="fin-table">
-      <thead>
-        <tr><th>항목</th><th>2020</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th></tr>
-      </thead>
-      <tbody>
-        <tr class="section-row"><td>자산총계</td><td>19.9</td><td>33.4</td><td>30.9</td><td>39.7</td><td>51.5</td><td>61.0</td></tr>
-        <tr class="section-row"><td>부채총계</td><td>3.7</td><td>10.9</td><td>8.4</td><td>12.0</td><td>15.2</td><td>17.7</td></tr>
-        <tr class="highlight-row"><td>자본총계</td><td>16.2</td><td>22.5</td><td>22.4</td><td>27.7</td><td>36.3</td><td>43.3</td></tr>
-        <tr><td>　자기자본비율</td><td>81.4%</td><td>67.3%</td><td>72.7%</td><td>69.8%</td><td>70.4%</td><td>71.0%</td></tr>
-        <tr><td>　부채비율</td><td>22.8%</td><td>48.5%</td><td>37.6%</td><td>43.3%</td><td>42.0%</td><td>40.9%</td></tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<!-- ③ 재무비율 -->
-<div id="panel-ratio" class="panel">
-  <div class="kpi-grid">
-    <div class="kpi">
-      <div class="kpi-label"><span class="tip" data-formula="당기순이익 ÷ 자본총계 × 100" data-desc="보유 자본으로 얼마나 이익을 냈는지" data-note="높을수록 자본을 효율적으로 활용한 것">2025 ROE ⓘ</span></div>
-      <div class="kpi-value">16.2<span>%</span></div>
-      <div class="kpi-sub">전년 23.7%</div>
-      <div class="kpi-badge down">▼ -7.5%p</div>
-    </div>
-    <div class="kpi">
-      <div class="kpi-label"><span class="tip" data-formula="자본총계 ÷ 자산총계 × 100" data-desc="회사 자산 중 내 돈(빚 아닌 것)의 비율" data-note="높을수록 재무적으로 안정적">2025 자기자본비율 ⓘ</span></div>
-      <div class="kpi-value">71.0<span>%</span></div>
-      <div class="kpi-sub">전년 70.4%</div>
-      <div class="kpi-badge up">▲ +0.6%p</div>
-    </div>
-    <div class="kpi">
-      <div class="kpi-label"><span class="tip" data-formula="유동자산 ÷ 유동부채 × 100" data-desc="단기 빚을 갚을 수 있는 여유" data-note="200% 이상이면 안정적">2025 유동비율 ⓘ</span></div>
-      <div class="kpi-value">245<span>%</span></div>
-      <div class="kpi-sub">전년 263%</div>
-      <div class="kpi-badge down">▼ -18%p</div>
-    </div>
-    <div class="kpi">
-      <div class="kpi-label"><span class="tip" data-formula="부채총계 ÷ 자본총계 × 100" data-desc="내 돈 대비 빌린 돈의 비율" data-note="낮을수록 재무 안전">2025 부채비율 ⓘ</span></div>
-      <div class="kpi-value">40.9<span>%</span></div>
-      <div class="kpi-sub">전년 42.0%</div>
-      <div class="kpi-badge up">▼ -1.1%p 개선</div>
-    </div>
-  </div>
-
-  <div class="chart-grid chart-grid-2">
-    <div class="card">
-      <div class="card-title">안정성 지표 (%)</div>
-      <div class="card-sub">유동비율 · 자기자본비율 · 부채비율 · ROE</div>
-      <div class="legend">
-        <div class="legend-item"><div class="legend-line" style="background:#3B82F6"></div>유동비율</div>
-        <div class="legend-item"><div class="legend-line" style="background:#10B981"></div>자기자본비율</div>
-        <div class="legend-item"><div class="legend-line" style="background:#EF4444"></div>부채비율</div>
-        <div class="legend-item"><div class="legend-line" style="background:#F59E0B"></div>ROE</div>
-      </div>
-      <div class="chart-wrap"><canvas id="ratioC"></canvas></div>
-    </div>
-    <div class="card">
-      <div class="card-title">수익성 지표 (%)</div>
-      <div class="card-sub">영업이익률 · 순이익률</div>
-      <div class="legend">
-        <div class="legend-item"><div class="legend-line" style="background:#F59E0B"></div>영업이익률</div>
-        <div class="legend-item"><div class="legend-line" style="background:#7C3AED"></div>순이익률</div>
-      </div>
-      <div class="chart-wrap"><canvas id="profitC"></canvas></div>
-    </div>
-  </div>
-
-  <div class="sec-title" style="margin-top:28px">재무비율 연간 상세</div>
-  <div class="table-wrap">
-    <table class="fin-table">
-      <thead>
-        <tr><th>지표</th><th>2020</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th></tr>
-      </thead>
-      <tbody>
-        <tr class="section-row"><td colspan="7">수익성</td></tr>
-        <tr><td><span class="tip" data-formula="매출총이익 ÷ 매출액 × 100" data-desc="물건 팔고 원가 빼고 남은 비율" data-note="높을수록 원가 경쟁력이 좋은 것">　매출총이익률 ⓘ</span></td><td>50.7%</td><td>56.5%</td><td>36.5%</td><td>31.8%</td><td>39.3%</td><td>35.3%</td></tr>
-        <tr><td><span class="tip" data-formula="영업이익 ÷ 매출액 × 100" data-desc="본업으로 얼마나 남겼는지" data-note="판관비까지 빼고 남은 비율">　영업이익률 ⓘ</span></td><td>11.7%</td><td>22.5%</td><td class="neg">-5.6%</td><td>5.9%</td><td>12.2%</td><td>6.0%</td></tr>
-        <tr><td><span class="tip" data-formula="당기순이익 ÷ 매출액 × 100" data-desc="세금·이자 다 내고 최종으로 남은 비율" data-note="회사의 실질적인 수익성 지표">　순이익률 ⓘ</span></td><td>12.4%</td><td>20.6%</td><td class="neg">-0.1%</td><td>10.3%</td><td>14.7%</td><td>11.1%</td></tr>
-        <tr><td><span class="tip" data-formula="당기순이익 ÷ 자본총계 × 100" data-desc="보유 자본으로 얼마나 이익을 냈는지" data-note="높을수록 자본을 효율적으로 활용한 것">　ROE ⓘ</span></td><td>13.6%</td><td>28.0%</td><td class="neg">-0.1%</td><td>18.9%</td><td>23.7%</td><td>16.2%</td></tr>
-        <tr class="section-row"><td colspan="7">안정성</td></tr>
-        <tr><td><span class="tip" data-formula="유동자산 ÷ 유동부채 × 100" data-desc="단기 빚을 갚을 수 있는 여유" data-note="200% 이상이면 안정적">　유동비율 ⓘ</span></td><td>596%</td><td>334%</td><td>274%</td><td>244%</td><td>263%</td><td>245%</td></tr>
-        <tr><td><span class="tip" data-formula="자본총계 ÷ 자산총계 × 100" data-desc="회사 자산 중 내 돈(빚 아닌 것)의 비율" data-note="높을수록 재무적으로 안정적">　자기자본비율 ⓘ</span></td><td>81.4%</td><td>67.3%</td><td>72.7%</td><td>69.8%</td><td>70.4%</td><td>71.0%</td></tr>
-        <tr><td><span class="tip" data-formula="부채총계 ÷ 자본총계 × 100" data-desc="내 돈 대비 빌린 돈의 비율" data-note="낮을수록 재무 안전">　부채비율 ⓘ</span></td><td>22.8%</td><td>48.5%</td><td>37.6%</td><td>43.3%</td><td>42.0%</td><td>40.9%</td></tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<!-- ④ 현금흐름 -->
-<div id="panel-cf" class="panel">
-  <div class="kpi-grid">
-    <div class="kpi">
-      <div class="kpi-label">2025 영업활동 CF</div>
-      <div class="kpi-value">11.6<span>억원</span></div>
-      <div class="kpi-sub">전년 12.3억원</div>
-      <div class="kpi-badge down">▼ -5.6%</div>
-    </div>
-    <div class="kpi">
-      <div class="kpi-label">2025 투자활동 CF</div>
-      <div class="kpi-value" style="color:var(--red)">-13.1<span>억원</span></div>
-      <div class="kpi-sub">전년 -14.0억원</div>
-      <div class="kpi-badge up">투자규모 축소</div>
-    </div>
-    <div class="kpi">
-      <div class="kpi-label">2025 기말현금</div>
-      <div class="kpi-value">10.6<span>억원</span></div>
-      <div class="kpi-sub">전년 12.0억원</div>
-      <div class="kpi-badge down">▼ -11.8%</div>
-    </div>
-    <div class="kpi">
-      <div class="kpi-label">영업CF / 순이익</div>
-      <div class="kpi-value">165<span>%</span></div>
-      <div class="kpi-sub">현금전환율</div>
-      <div class="kpi-badge up">양호</div>
-    </div>
-  </div>
-
-  <div class="chart-grid chart-grid-1">
-    <div class="card">
-      <div class="card-title">현금흐름 추이 (억원)</div>
-      <div class="card-sub">영업 · 투자활동 현금흐름 및 기말현금(꺾은선)</div>
-      <div class="legend">
-        <div class="legend-item"><div class="legend-dot" style="background:#10B981"></div>영업활동</div>
-        <div class="legend-item"><div class="legend-dot" style="background:#EF4444"></div>투자활동</div>
-        <div class="legend-item"><div class="legend-line" style="background:#3B82F6"></div>기말현금(선)</div>
-      </div>
-      <div class="chart-wrap" style="height:280px"><canvas id="cfC"></canvas></div>
-    </div>
-  </div>
-
-  <div class="sec-title" style="margin-top:28px">현금흐름표 연간 상세 (단위: 억원)</div>
-  <div class="table-wrap">
-    <table class="fin-table">
-      <thead>
-        <tr><th>항목</th><th>2020</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th></tr>
-      </thead>
-      <tbody>
-        <tr class="highlight-row"><td>영업활동 현금흐름</td><td class="pos-g">2.5</td><td class="pos-g">10.9</td><td class="neg">-0.2</td><td class="pos-g">7.7</td><td class="pos-g">12.3</td><td class="pos-g">11.6</td></tr>
-        <tr class="highlight-row"><td>투자활동 현금흐름</td><td>-0.2</td><td class="neg">-8.8</td><td>1.8</td><td class="neg">-3.2</td><td class="neg">-14.0</td><td class="neg">-13.1</td></tr>
-        <tr><td>재무활동 현금흐름</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
-        <tr class="section-row"><td>기말현금</td><td>5.5</td><td>7.6</td><td>9.2</td><td>13.7</td><td>12.0</td><td>10.6</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- 자금현황 (마감 기준 스냅샷) -->
-  <div class="sec-title" style="margin-top:36px">보유 자금 현황 <span style="font-size:12px;color:#94A3B8;font-weight:400">— 2026년 5월 말일 기준 (정산 마감 시점)</span></div>
-  <div style="background:#FFFBEB;border:1px solid #FDE68A;border-radius:8px;padding:10px 14px;margin-bottom:16px;font-size:12px;color:#92400E;">
-    ※ 실시간 잔액이 아니라 <strong>정산 완료된 월의 말일 기준</strong> 스냅샷입니다. 가장 최근 마감 자료(5월) 기준이며, 이후 거래는 반영되지 않습니다.
-  </div>
-  <div class="cash-grid">
-    <div class="cash-card">
-      <div class="cash-label">현금성 자산 (가용시재+금융상품)</div>
-      <div class="cash-value">41.3<span>억원</span></div>
-      <div class="cash-sub">즉시·단기 동원 가능</div>
-    </div>
-    <div class="cash-card">
-      <div class="cash-label">가용시재 (즉시 사용 가능)</div>
-      <div class="cash-value">11.3<span>억원</span></div>
-      <div class="cash-sub">보통예금 0.6억 + MMT 10.7억</div>
-    </div>
-    <div class="cash-card">
-      <div class="cash-label">금융상품 (사용제한)</div>
-      <div class="cash-value">30.0<span>억원</span></div>
-      <div class="cash-sub">발행어음·회사채·정기예금</div>
-    </div>
-    <div class="cash-card">
-      <div class="cash-label">퇴직연금 (신한 DB)</div>
-      <div class="cash-value">10.7<span>억원</span></div>
-      <div class="cash-sub">사외적립</div>
-    </div>
-  </div>
-  <div class="table-wrap" style="margin-top:16px">
-    <table class="fin-table">
-      <thead>
-        <tr><th>구분</th><th>상세</th><th>금액(억원)</th><th>금리</th><th>가입~만기</th><th>총 추정이자</th></tr>
-      </thead>
-      <tbody>
-        <tr class="highlight-row"><td>가용시재 합계</td><td>원화 보통예금 + MMT</td><td class="pos-g">11.3</td><td>—</td><td>—</td><td>—</td></tr>
-        <tr><td>　보통예금</td><td>신한 외 다수 계좌</td><td>0.6</td><td>—</td><td>수시</td><td>—</td></tr>
-        <tr><td>　MMT</td><td>NH투자증권</td><td>10.7</td><td>변동(수시물)</td><td>수시</td><td>변동</td></tr>
-        <tr class="highlight-row"><td>금융상품 소계</td><td>사용제한 예금</td><td>30.0</td><td>평균 3.23%</td><td>—</td><td class="pos-g">약 1억 506만원</td></tr>
-        <tr><td>　NH 발행어음</td><td>—</td><td>15.0</td><td>연 2.90%</td><td>25.10.29~26.10.29 <span class="term">(1년)</span></td><td>4,350만원</td></tr>
-        <tr><td>　NH 회사채(삼성에프엔리츠)</td><td>—</td><td>5.0</td><td>연 3.771%</td><td>26.04.10~27.09.13 <span class="term">(약 1년 5개월)</span></td><td>2,706만원</td></tr>
-        <tr><td>　NH 정기예금(지역수협)</td><td>—</td><td>10.0</td><td>연 3.45%</td><td>26.04.29~27.04.29 <span class="term">(1년)</span></td><td>3,450만원</td></tr>
-        <tr class="highlight-row"><td>퇴직연금</td><td>신한 DB형</td><td>10.7</td><td>—</td><td>사외적립</td><td>—</td></tr>
-        <tr class="section-row"><td>총 보유자금</td><td>가용시재 + 금융상품 + 퇴직연금</td><td>52.1</td><td>—</td><td>차입금 0</td><td>—</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div style="font-size:11px;color:#94A3B8;margin-top:8px;line-height:1.6">
-    ※ 총 추정이자는 각 상품의 <strong>원금 × 표면금리(세전) × 가입~만기 기간</strong>으로 산정한, 해당 상품을 만기까지 보유할 때 발생하는 전체 이자입니다(특정 연도 수익이 아님). 실제 수령액은 세금(이자소득세 등)에 따라 달라질 수 있고, MMT는 변동금리 수시물이라 별도입니다.
-  </div>
-
-</div><!-- /main -->
-
+<div id="vault"></div>
+<script id="sealed" type="application/json">{"s": "Lp3fkXM4Ahh4RsHwK+EBeg==", "i": "dlWqGUNG38/mumXk", "c": "Ti+jy8AzYthz3StlE+SMaLgur3u3XYYHtXiHgAYqP0DlMZY8Qoc+x7/4yzPemyTCS2rq2Z0J8XJt7TpKzEQA7qnGmtYGPaDCFEXsBMwU5zsXI4asYNt1FpIP4SRnLMro/nxRitQyUNFGzA7c2PVJ24o1XdEHMfXb4fqVx10Y7SKBrKc67Ptp/bZhw69slt2vLF1t/mCp/foxlfqfNtYYiHcdwgdMocCUYUFcAepHDEhPiie76Bwv73091+qCfCLIXGI8DLN+Wvi8u/mhIZwEJRYE0K/B3sVsMgB/DxOhxd+VL4bFVnpijBpRxCckr2ALWBQNmtPIse4BWb0Pa1VTdtHqHcwCfwdXqgBDZzawk0UJjLQ/pByTKVvht90nz8ba7fJSxZryk6pdhMrboTAsIz0bn1vWsjz/EEVO90LrKrcTUvF1pXSXr2pl4UQSNhpBGgZ2MHPXUf8IvJb8GgYw6WITxaqPWY/k2qVgkOZUTqh3we0eyfFLSWZMVXw9w5sP6VozXf8JuMivR9JjDoME8RAV6TnwgzTMZ9VYOwNP73N9vi87NZNFpSADc8Forw2wEZbnA/0vZfsHkbh/MPZ5Xfu1Lna7aXdshG+DABTcYF3VGzm1S4uaZPxPXFScN+U3ub5D8TsB1HyTxbSakdEEn8Sez3hJh5gbmhWpz2xaTlaGYELvwW1jcwHQXahAfdl2wUrB79nsdTsS1qByls9ZcQ8b93SJYpEJQx+r9yK69tO1Z/26Kl2QaCFt69GLtAqQY6q2dkvIj0LAbrUlfwdzauwgc+FdG53lFP2NoQR1eHZ1BzUIFA15FH9ED1y/GAc3cSsfXMw7D/m0ffwINsA809qyaPM1EALonWYzuuzVNcrxRxvFVuNC68F3jspM+qnEX0zIxQ/BFVAcSFUm0yngV4b7cP3DCyJL3Y+YmCrLhm++yIN6Sg1ThsQ1SX10JFU3e0Y+LmqG2nrsR3cC+gp7O0P/VdFBEWxFiVWQspKR8ENjp62AgRHfRB5AiYseplR0ceRjWIZWcPTypV0Jm/i8DXWvLktnpzue6pgg9uDQhkbrOqXNw92juRwD1jgnD/W/2TOGMHVtkZWoIvpNxoTy4dR6ZGaDci2mOvvX3jMSjxDc+1M/mGdxJPG0PBB7OgWKc56bZaR4+PH2F9RIo1L3KnuqvlNh0dzdR/UL/oL/RMOdCSSgrcQF+UA9nMJ11HyqRjCwwQ5nEQHw7oQvZL5GR0s1Za55DhdPICGLylvwH2cnt4Qo8Pl3IIl5lEOXS834x0n5r09C02YHU/1BT1UmEVlyoTDDcaGbhTgBRKIRY8OFN0V2wAcW9KVwXYbjAlJD78CcsY3TIrD96oeirhK/JWzu2KTZHlWI6/LykMO/i5zhMErqKBVzmLndxjZT4p9KbOItPLpmjdVqvNGtaCZ9+qKw+BF0pxl/LT8j0wbesIn36xfvz2/Acc2md+uo5VRiN9pIXOZrR+iu7xKCHjQAICpaUCV+AFA6gRM15MoF8pLEhNq3oBoV5lm5s+kTxB/c+ULdSgO98N9l+iQVnBzdIhL3+3Yu/RWQNg2gBzs9yPpmyPfaSSsKp6Nr/kO5j3DcL1Wg7WK399P4v1916ERgKnRKyQBFi3olpnUg8HAmQAz+9Wy+jbvWYcz7NK4NccvTN2bk+hsPPC5CxDHpMyv/HCxau15gle5hRbrB+yYNEb3lfeNtQ9PtfSkYCSnJMKkp/efM+mw+Ix2AETADrkbfTQ8yUuw1IkvjFzzfRGMwMiRsr14JDbqs5m31fpvnzOtndefIek2VrPLiwGFi7xESxEeEEL0ULWdVRYo8Zx2nk8BY/WZMc/maTFDbJh+SNTxHvTP5HPO1iiVDsWP3lux6maGj1COSJP5efH61i/Rf2M9lomkvh+nTb5TbD5Y7qHR78ER5Xw8wq8j/BCA/8PAzrG/ifDUYUsyLMYnOfjwajmOgmQaUO5/m1pR2CbTnVZOCxZD5N7dwKYmg7kt2iqEzJ7wtbveUQQhqxZj5VEbVP6J93tRhJrHvkQZ0IzJNNTsb2kOlCiSJDL0gFb3GjyXQ6iNVVKVGphWTqL5INCmaZ6KpDPLeyi5bzlCJIew6I4g2E47ldQKfAXZxk7s20VV9+2t66HuEFhudniGw8wb/fWVPK33RMU1yY3UQyyBrYfu+nV5BUKxBmbaH0SSkoQwvlgPW/L/5pmHWPDCygNl/FWLQij5SPpqUoJkPLHR+RtXXbRaW0u5IGshKo5eSY7ZkNKOX12rFqB5L/0sjvw9pvzUuAfYuyDU3XZUWMKb1BR5WICuqJAJUaV+6R7C74mut0IYYHOX/PGVlQoxEzSatUMSISfMUN1vlxOI9jFgrS/rdaSioXXeT8BdAKj0WZgV/E/dCxpQbKyOmkbqy421/Dg0INpoDORpHt0LlCfHl6RPgztPVxM9K50W/kZa/Wi7HCZxLpJTwQj0L8HSO3/OsKb48EAxmXR2YAMDZC0yhRwWhRnMCTpuN7Uj5k9ZxElESaETfb56rvGGClbOIallywfxhasvh2Iwr5kEsXUVnS8VCaW/vcz5H/V9R5plWFX+IjaxczmlkEJn3u1IUBo8n92B0vK2/U7+JeFo8mzDGfZzjxUGVFNRMERpQCWsSuWCfq91uroMuezuD/YZIjHXtGKSWoFq861mXsvQQKHEp4arvf5HyF20NsRWPC53HL5TXVYOgE0tbJoSAjJi19zqUfw/jCdLeeleJGStD6W92oRgOmFXm3sjgTveuX53Zu+sQS/TjD0VuFM1Qn1JoKIN/Bv4L6emb56ADvhOB1W0ZegC2i0qd7ETyQfLUnefNSHTwulFKyZ3t5MrxYemViEF9Knfq+TtTAnG/DXuV3HZo6tu2JXRKR+dlZkx/5SuC27PRCEK3OBIUSFdJlmqYKek5xmoze37jNZ/3YM6/+ssqSQvSwd1ANzQhRj25wxC0Cg2tEkevlHUrtgLMeAhYDyohfeg6uPsHe6QJRcdebmlwe/f5X7+C0/+wFWFm8qkM4E5O1S7+1+TebS4FwQv6TPnqVo8xHN/IKZ5+pD4p/Q/N3Nic469M02Etkm6A3PXaTeoZwM/c1bgt4SrSP33PT7RnVtup5/0kyilRacFBVY9mZnBDTgmNsLO/+OT0e6cEI1F1MGbVGWIhBoLWclGaRGxs1wzbWxXokRVGtHEf91q2TuIpOavuD9CINUjhArAxT9fuMFp9yWk3JmPj6Wj/A+0tulsg2mBmZTwyJ7j7wbDpHQEA1iunywRvVrMeaxIjOA3fENgtNetB8pOg608baNfgxek1VOP/lULgpTqmrlL2HCF9kLjQsq5Asp+LCLT3x6EmSi+FrFFeQ9AHfRtYVHx20DnfAkiuXZae5yAEy0bhLjKUZ3eQ+QbtBLlaK2rBuS5vMjJKYW4sL0JJg551osTexx4PC7/7hjz2B7J6Vlip0cYPw0lExkNQbDBe7QtbEUAjb1WOgDZ5LqO8rZwXdTC9pKZpjg6QE2gf2LyAt0E7kDMfKpRIkMZ8ueSQ3OFXNOH1YN9GHnyjmhgmbJj50SvCc4o6/9i+NUU/ZXBOHbssCu86PgfiRBxvBU1UCmIMqYHXp+NqBfqmCZ3Wrhc2Ag3y0/qssIxOsANGC6Y82p4L5ZF/UJszifVntORjMJaszOd3a98Rx1DvW8UhkEQcljVN2WpIHslsNVob5LGBtfaEAbx6RqQlWe5e0Yfg3ApHEPPe62dVn+IzvwBOvDpNunrn1Hd1LFLKzbovpIePCgUJ0t+yvKfoypHKdevbPHObHY3j09SFTOv1c9pc+LxCJ94LIK7Hy3FF1ZGTa2e+oRdyEiNGa8PrUCHSGPQwM+8T7KuaNsVCgVibqkWTxQimwMEfmMuX5euF4ersLc4XX5HBlzLK7azHsoX8qxNLeOpjZoV+pPpMYU8swKQCe1iP5COfnIijf/Dh1ThsrD8r6Tfnq+VOvex8+iY+oaZxxb8TOFZU5nGiHtx54KVK2kHfg0vmZhzPGMf6wxwmWCmKz5+Use4fmCrrkbKy+/4vdRlmucMHRoXiq+w7ZXjqH15ssxiq7GWs8spsMPmo/ro60u4wv+rAZlB8cHnJ36meemadiVM2NScevucT9qViLrPy69QWVXycaMA+4HaSX6K3WCRqPhzJjccrWOFb9MUXfmRrHwrzxUY+sGwPr59RgqVpSWUPsi7NqdUhW7ZAE2U717HcULl9+6wFzN0XCht6SWZvjHEUamUxH7KeChx4Aj+0R1jS6zTYKkSGTqY46DTb2vEUdQP+hOHPgr9IUevjDqKF1YcMEQgGRRPjdvVfYtKYysTDSNIN0jic8wQL4+4ehwt3o3oC8i8heAv7V5lBNnlZBGBeXxNLf8SItGl6pCFkgMvpr+HiJIxcm/Cap0E8l7K/Om7Pa7u8XuPtMaJbeSPCy2SmzWt8btNPtSdZrdnUw5JSt5CyUrtqz5vY/izz9pwt+jI/HuchyJ47DPWfPNX0Wl81Jk2t/kSVwjwTdFczh+33ONmhP2C/h3K320zypSpB99YlQIqUXkaB0E14OIhLHvw73gdL2alknWzSW7TzrzSNIIrz5Jq12vVypMNhW4FaZAYwey/Qqhami5f1PXhTAs3NlLx1kecTOlQJsAErpnDX16AjWUAzAPbJhXzd+AhT34CCW/z4tnDA9GiGRZjnPm726dheDxgY0QHkM5scrcqWI9JemdsSqHIxHFI54zrqtDgIBSGZHe6HoQydnfSxFctR1vkR2/CAOlu8z1lhEUd8xRbp9lDcq0kLKmD025HmZ5NFuugjxTTZJJ6d9RXze3tLU+W0XKrdJ5Vgdu2HvXYfJH9BNMafDncFJYnaVWwhErCfmza770vzpRbv8UbOJcDVffNJUNpf28fY3NFjJZTur8VBUiVCipbIxCw5lZchgETC8LmQwaGS01UZ5itwRSpqf7rbGFdTr426OLLmRAPneCaz5I73r3Al9Y8GJhnePWUza8wxuzIilpjhFChlNP+GKw39yHCEz7qgCTCKnfzabvw8JXDsifotLW/Z1QTYa0Q8UhgmoqOg4BWHKB9NIGPrPFgoR6Q6rusnXTucRpe3L5qBdQeXkpjeSN6xDcxLh6B13PJ32+SfZEN2KRmChk/TQc/Svi77yP66n6nnCoLEpyqTj5TRAuQnlHff+PEkMYsvepGHFmayGPxPxvKTL6UWmktEFeFaib97it/+PSuJspA4po0GWS2GI/a8bYK2FroF0MS+t7IeCgSrFTwThDjn+FS9ekmqwB7eO/fzMVbstwyglrITbX/+DZKzYI9Gt2f9mXxDFd6h+wMJKtt1r1tH8LDZKscxhJ05VMkOtDS8f/8IOxCclNPFYDz07IhFUWTYdjza/WZsM/mK2cG4dLQ4Dj5TKuvUUbGkbWZ+dxeKvpRLm+F5lxVAMbLmTiEz2GZPLDRc0ILAFcqqinfkngKmz62NFjwwlCsu+MZUg5sGDDAvYm3wXf1/iksogmwOl2l9tX6fjqud28vW60c4fZ2Px9KPODv7hcASVcmPjZ2Rutx7mu/56cXhog4qW6/COiQt88tJB2sbndJ3p2KRqAeARNubm90R4zjVrjZMiWXYHDST/195Y9WdMnglG38x95921eVoA4cJKCgfsI214KVa9/SqPrw9+dcXVflvdYtNtIrO0rWpo5FQQ/Xc89Ho18pqGXSXCyef5LQVgLMm8SWntAR8FF/uop/SlYKkIXG3UfRMrYl14v7i8Bkw2NHg4HXv1/KD4vu2QWOz5XZK7v5IXXNeC3/lXT9W+C9IphP3/6g5dQxx4wsIsVRGCNumiMvuTAW/jbPCVnuTMfV9F7w6vQRjpeXo52qWEZQo0dAPqFlDrVZBPXfBKJjquDhiqLjZCvWbbwbK8e1zFx8Kb6O6A3TXJTr4bDdL++9U71CotUK7NT0QfNpz7pL80hTEUdUjmlV0q0a5AXrOrMW1IQIJiT6G+MQ57XlkHJW1VEpKDzr0Aw0JtvmuUj+vintZTmYOmbisUjkttBra9htMdW6N4UyTuJvOO23ZXT2teXogpgHBG8JDYAlOMcAGdIsNVhS121CZYwFl6WFKwBPaFUYr1GrdS34CY7djE1fx8fCZM0XjQEH0BcPo5LornjrYTtyxZqoGFpZwU9TmdoVV72zAV2NfubOoB0VzOb4teURC8gkHl7nw0BxmScrvKIg5iiccifT2ek9KEbGT3Jep1saODBZodts1YJW4/NQaBcDPkl1Q20W0JS1SNB9I7FJP4UqlEyRzOW6AvUqG3fBqwPqkOpECKCkKbMEhetbupVLlAHX9+uEIHyveHXpDborPJXj3erg+CVGoo7oCi3SYDhiBVwrtT6B/cpOToW/8GcVJJ8CxjBMTE4FzOsl1B8ndeOVaLlGaKK/tOl5fZ+boeal1ys5sGAHYI2W+XmckmM3b/4WiT8xpVLNe8eFcHMz05iM5zygqx5Hu6SyOATyD9npfAr+Y3NGfzaRMRDBGUHa06Z2CGBAOyWMY8waLri6BhrrJuaPXyrTuX9ZZ6TIWvQ4zfOCjQnIS+mj3SpmLX5kVGAFiA6mI+3z1IHg+qn7LLM74uCWejxwcWMzxaiM9E08c4F9o2k8ny5Wh/AV6+WYcjm13y5S/RGmIps51+g8RIoUTo2DRGJCWNvYZdcOMd6K7P6WXo4K0IXxMRyu40i3bveAl2nmajibfN0qmWlnhqgOKE7i7OpMShe7OfIQnGbMOLxFPKcaTuB8WVgvzGmUF75jOICAzlpVylijdyNiP2w5AeTiZKRi4JE/yu18+qCNFc3SPum6SSZ5HsgRff2RUlfB27NhcbGtK/ZeRLaH/LHsbXsszN27+b5tJRko0AFvHAAvqabQKdLCQ++rQxl161vjvkQC/v2N8PAMmCRlSdWscOT3Y3l25gd0AIs76bx24t8g2Z5jnOfG8DU34Rzbp5sUgAQ/GZkXHjQPv6wWGY+qxhcfBTX4DwdJFLCrj99Xt1/nHHDFnsesI9vgRV4RRothhErv2NNSEb07mSluq8FB455XUOZywO1tx27gV/2LTfshuR/cM86TiZmvcsq7w8HTWJInxYmBsnXaN93QIqllLj+WAwtt4JDZGpFONuKrD84of9epBTszAuEaEl6/h6C3efZduX/NwxB0vPAc0A0qN9A7lqz4aFNSA6embbXqOX0OFkpaqpAjhpusMWt7aKySW4oUWx/jdCUOCRDF4byh+5uwXALce5QtPD4zxBa2wW3YuxdxDth6oG+mKzF2bZ6UyceorliNynMppEeWtu21fFRtJBxVFMnYw3zff/EGNg+5NXPxDXWCo8Zpni3pYFaMZeD+nK2KT+eBmK00hR4QDp4/Q55We78fAC1LWTO40hSt4uscRNBt8KQubBR5ejlZiE0lyl8GFaQAuNw+y8df9N2WoZc9WTweN7vOBaP4H8IuH7eT0U6kBNHkgJpLbynFldUnj/+1zk+mqenxYIDdMkyiTNgWl2NOJYPPL/s2OlxhIdizkjFf9YsqOVMJDW82fX10gcqcqQI6psGErj7rh1YlGp6ls14s1KKMjlltrxI4U6fDYniSArk2HBkR+ThBAv4XfhhoMWAz6KVFULR77Q8Rm93nvri4q2dsGWt36dSlCGVDzvkDfbwX/+BnbkGmRo94EFvJuLfozEgRrfnQCIZNyNOodCxWSEQA3tB3KGAXirf/IxZjqyQ4QluLykjqiGARnxlahklwrUDlbgnxL7zCvS1+CpcLirIMp+6Vfmi18v/gZFnU1DQ08aekdH8DlqBZUTiM2rAqOUwsIt4p5SK0IX4Vxftkjlx3YVNb5JiXAmVgAa7aXipe4E5+0A8vMUxSheh0DUGlI9pKaiMlWXPJNwLCNjepQ5lAV93RNfdbDKkI2a/NkjHDtPqTxvmDtSGAIh5PvGPdNFf0iLHyNlYkBdD63+VhwCQ9Y2jpyZ3rR995iR10Cc6FWnDLHgvZCE9fSIhd84bLzThmweah94s1kna+4FYhhAcfrscmKu3ShcrWU6/T1ygnAmEqYa8EZCwjuL7jrGPnkaVh9Ss5tPURQU8ZKRrD0lBXQvuNbtswR36bI7Q6Gwj72fFtpJeih0VpnMLIvgQwPM9miN93VAIU/Xwj4Fx1ijDyiiYlAJqJhIKUOLL3+oGijeXaOVSh5U8yZ1cHhQz4IMuaUkxM44A+ykxuP24NStu9rxV0WwX5lj65XlN5P8b4zJWiVdkzP2JyKO7v0sRK27U1G6XNv1A5kco8yhbVCD1if1j0ompfhBGKmlvbhXR5XM93VS/iM4OuJAJxVtsRDHqQ39CalRPL9JBWpPtSGPksdF6NzsvgGQU3PJwMYBQIuKx9QoxVqJHcEIiGnnYTdPY+dXGHVUX0vqIE5eSDhD1JLNgcgB7c7/cEPa0ZMJczM0h0yDRWYWUvOqR8K+FWTZssEyf1v1geOC8rfJqfMoM38G5E812sk5Kss1azaGOAqkzZfETU4bHq/igG93aeq1/wMbV6et7h9CIVRWE9A9yhIOGepYUcI8f+Ea6QKOLQNTcZaWa2/rPhmdOyJieutA7t1xRTVbfhnEkbL8BMRHp7u1yfbuWpojXvZN7+HSFpxqNFRBWkCl6OnviHV+dMJD8zvnToXZpNk8xV1oY7c8aXrT7wh3h47mFD2UBwP4k4w3hOiA9gNUsCYdsAU30Ddq9BTDOFZf6p3m2vxxrk6l9bIN/ItIt3qK/wEdBI8cLINEG94he9hxS+7GPSKI6uAFEKTLInGPA1FDQzOAnIaw2+5crIjwCNHGgr1Pnv8uPASiZgx1scaBT6lDc/4lTbRB6R9kFXVgIODwtnhllBf51I5V+bX8ZrbrXh+FcweL2qTYNhisRjwvVNIZjBqt7m5b8Yd8g/8XeuBcKFWugX6fwH6owENYffd6175L1caAlZKSIaxAB9LwpOpXXeLSYvqFyOEjRz4r8ouZDgzlakNKgieoa4ZuD2Vg7e5sVscH2sRexxOXj+MmeW2FfN5i8cZqGexrm2mmHVRQ0OupiZrmtlq9ptErm78vXJSiNtAxVUbDWP4YH33JgzcJBG3Og8DVP0RMY1arzzyaRRPNfvrLFUYKW7JDvFTUrSsZcNm5/xyo9ER3T/yLiHeLheoglZ5f2m/4aiHWiqDPXXxiw5cJZAOMjRka+xNqGgh7e7oMz5UHwj5U1CRTfRBz7PV2lRkwJtlY+6LS/2UeoUakgEb9fsOmoULs5hu8GLQ+jBlMi7SzUJXUcltftIwd2G1f1Ut9314U6J84KIbM18Kw2qpTR+TUwQWUJ5MQVxJ2T64I3OjDUTyu3oUI9XZsEEuPbzOR5Iu4cMfx2aq/4QrI6NwK3PCdGIroMoA9A7CNdtacqHARY2m0d8tqqmz8sN+oxebemK1Xh1H22h0EP1IfXhPXaIwBOlYCxMml9YmvgzPXKBKxWuoXZj7RX8hVQQrd/mPHVPYN/iIoKxGBOLTnRgxDwYggeLbtWEIvfK7iRFXEztjAZQMQzUBdEbgzZ/3EtArJaj2JhKyAMODtJT3XnVUgpH4zZVB4AsDHMkM5+yrsDNW8wOx0Zk+VK2j304Hiu03ZRD4YkPdjJ4GQQJNadAJGWeVPgKPdzVn9D/jwErvVMJDwQTCxKKrhFlYB6xilGj934b6jFmd+UgJKffT1guZ4b5kgdQBSpGG8BFRn1F6EYHowS6t5rQrp68ohQbXgM96ZPDG+lIrrkNcd3qCUleCJLvTTz5rlDjRca+QCPbcWcLzMV6ajP4mN4US7RA6ksX/qCPzVCaliFsQi7UUrBnBa2s2vv6SjS2svsaqEHrzTaFDPKp86HFMfAxQCnFGGdvP7CPSHw+0rLbRMiUL5ax7Xv0n8GWUD2Vn7e0ckPO++l8p1C61tCzik3lww2c/eq8KjHL/P4TAgX2p1see+MzLxU0e2VzjrVLdu+Ozle2akA5dEPOj46gHXCBc1DwBSeF3/L6SN6t374Vt32aZnoVONXVicRA7UrG74rla93FVgpwrrhnvZ7xxF1HKQ4c6GAPOMkdg9dx4c9kI5ks5D9VpG5JBYAA5xp7fV5kcYDx1MEauffijclcS0EJYs5P+p36J85+EFiGyi1alqm+ZkkFgTAEwO3qRGAI1LORxT/Y6pb1mI7AgYlIjjsbJEImKJLGNH1jGtFQVjN0dk30cEY/NDI8nPQVWzauFXMil0CJGoa8f4/s9jF9nl840g0XsZTOMGnnXZmxt1kNUdotXNoLktlGQgTDt4G1ayogSM2NIKQUB/T+sAq/GOGRnamLX3O9YMQpZp2vU1SG3AYuteQR0e7uOUfFJ8/852IWhU/LQ4AkousGiaoDuo8TR49vIxQCgNe0Sg5+rD0xUxZkbIZy+kGbxJfgUcgsIuXkUDQOUSzxMU7unZjYbmIMORqn7WExfHf4z/X0niYeKQHVM0UIKyakqWg4OmwikkuSCaIfk9NZpHp8nq0d8XZyNS8QvIuSyE2WCvWGTTNBU3llRr/7kwUEO+YnpQ6T3t7lDfCzum+hvU7O8EJUyz/KbkR6abws7GehxyOV3wZVYKf7BSz4GRvSaKXqcAfrLNXqk1+1IgM9WUgIYoWRSifeiIXrzPIs4UbdtaIS+qUwQkQbdg4WeDhV/QOP9Gsvh3rGTPg9lnV04FbGlXwbdkz5V9OqAtABpdQ28RITDqZFIrm2pgPWV+LyPPpV9uCvvt2B10bzcKf7B8hhWtidR1XLkdxuX2wR2Q90AeytFSYHsPDngf25oZH7c66Cn3BT3XqfWBk4nHpbZD1BTTmHU+PTQ56fJyqFV55+O0rCLdtYE0XhWYPgXwzRrZGoyIytsA41CCtGBWS7eirv7soEtU7MrHKRAiZNA3aUGsMFBdUPIEt6n0TVhWQtKWQDqf+J9ZucSEnLSj7nhB6rz4TOoW8O/T1TEBbiXgJ/vbFwnIgu7IZv7XmopG4Rw/sNBgORyf9jkw8daRhFCzy/A295XWD3rdWS5h54m6xPJBD4uGs8o4x+UoVT3dSYBsXaL3b/z+zpdRHqF0ikY9GRPhL7Izt+zwY7/m2S26rbPDDRomc1tc4imBmBTP5EtZrT878+j+QkwQHviCdVengtRWCtbe7KWpDscmmEYT88t8p7y0PnlYa5suKj3NdtCsAlOGhmnLRX6ga8XIx4vIC34CseHGM0jxQIdIMhTkdTkNq6xXB2NBCv+3z3qaRINxxvKfXxHtA2JYaQJuUevWHSgHU490D/JErPjjk0wyQdPTrLPYpseYxHlrECb8rav66p4M7706U8eWP86BAJVHfAEXnVYsjub2m2JNbGb+o/sz8Y6xmpjncKQPptUrKDflPEsxzl9sKMV/i+tjB9vKLv75u4vxsURfnLjOmjByJdUh349bi1io9VEqfI7Yjun5DAj1l8/FTseIOW+6Scl6WjMUvfA99mETMArIS14pgCvj+CIqoq6q4UfZtEzHGKRzuM8Qo9RuHeixn47X8Br256LqhYbEndfSQmZ5PsKpoYVtXDLFmNaUD5JmnD6kLAgsjAIIoPGqV2jR2DqsdDkqsBQtGttIkIA3Z7tcqOOkD+AGppZob4m98YU2wGjX5zTWW85aQ5FNNKmA9DNvz3imBbh+j1QG6w3fDxNz4uFfUsfFU2Uaxpt48xfOywAagj31eWQYtRKKfqZnrllhqpMUbtiXjIJbnl9PRlfaCjmikCaPUkYfteTy7WNqUHeQQ9seMffZNamk8iQVOBCJxGCIhJeA4H2zJRP+PNhuirer+Yjlmvmpq2m/QJvHGKCgQxaojMtiHijTOU2ovWYf4Yzn61Bn/evgzA7OQVEa8L1LNYFZAliSzIKlhO7V+Eosbsmz3Uis8jnssh79ps71ImS3vSS4s//k5xVtrN7NldaL8hkZdCbT6JTBmXkl2JYFycPgggHTXFDsIi1w2/bisMKG+homziiE7lziU/yZC36EHw77u5iu1KwsXIPBl7cgSHOY68vHE3v6nNbvD8wsmlmBiBUsPdVX6O0hGdbBI+F4poRseXxAeEnA8Zga0A30+bdUnZpDrLm8bFzoiCj/N7wXiINgZVJUK1MHCt3KrgsG8FokVuEDJwDHZqPzlKDe4j2AuO1TBg9YAOLzzKHT6Mkf4ES7DoDl57L5/Vw4D0AF2NCc1qbt4yY9LufROTepn1VLNxWohlPDUc1Zj66CF2f6aCr890LbCo/gol2GVU3OB2bfHgPIJuzg6fFsP29bqKA5/V444+fuGgbWG8a+RSr53AS8F2M0ixMaYSMIATJ8B0p0liOl2j5P+aKOLaaNDwl7QRItzdReqAb1QXEQg7zUF9ffYHiQnDDJpxqTYbCxFI2ezby+8ooCTqD/j8F5CZiTWJ/a7ip1stKxH5BLjfERoYP+ySFSTV+40evHC4JruUj+eEVU7GxwAxBXmjW83k3OOVLK94mr5CK3I4eSW2kQ1mCVAYcukgkjb2keHrfwwXAa00h7Y99cVDfcl6iSYaRvMFbtcvmYPt2ZHpazHfPtUgXsTnPARWBHIu2qttKL+KSdVYmEFYFr0M+HS1LfWrLBZVA+YrQDZ+1cTX1nOMO98Sf9++ckGwTrweEAdWLMLXOezuoCBfgXFreelFGECjJPUocwMKoxOs+ocd8Hg+yqSHqFOZLWz+YpCVqekCBen1TNy4e31Lv02HDL2s8dw327XzsWgfGyuC7jd7J3y7mZEAxXPsD0x9JQyZu2GpJjQYfId/RPHd+dawpGcBFOMUfTczSZ1dAgybqWRcdXZIK07vnI/NkchEJAM4BwDGySiAHiuOgOg8qM5NInNC9bjNZwMirSQdE+IAdlndykbINnKNTQ/DSDs22jY7Afu5ryA1QHZdhWPJJrAx9DZ3/frhz6fzaIuOidVUPf0wwE4CZAxC67ECVwVJJv+Nqzye//8afFUUZOUwyjwcouhRghU0JvNbR5FOJUjAoW+FGxtN7SU3s7uYF0J9VzGH9uJ8p+xpBDlBIRd8DjS1OTK2z8omrMifGyXnEXSmMypPxpBAMMwpzcA7IO5mTLUUFoFJ4btuXFWtwLc66lRMfJFUgruEdtqdAY0d8yMFpn/lzWLA/kztOTY5BQ/cxurK0KzZvO6SbcYngGAlJBr6Kb+t4/N7gctbECrEnah9cdGcsaya8JVa9jkfps2AmIyq6Rl4Unbq/h2kEvE/lzVnn+aETBQS23z79sPoNpXRlmOWR/DstAigSSe9fldJAcwrLbml9SLia9/3XTADrhHhPUS181tlKRXesRG10sS+ModGxyX/47PwScjgJd69skYLpTZOazOej1m4OXVj0F01lCRMe3loqQba8d3IIjWuXycCUKdDcDBZi4lJTzGBBU5th3BR1zh07SEstHm4haGFq2gjpgLsFRJY46ORQL0vpkriXrAKXGfqsdFZYv7GHYyHEuu4ESpJEkmo+21JG14n0WtLirjs1BEoFmZcvRZHEeOOuXnyaBDchdRIMAFS8k95SeQ3ihwx7xUA143zjWaCEtUCOpEdS/Xqlv/AxhehFHQLoORHTDFNnH2ChhSNekvwmIKNMYXosmjODMSvdD1EFlBAmG25e8/sb1BsLuf5IA6RCXjFGxxd0VjD265qE/vkGB56RrNxS+PSoQA6P/T+HW8mFgMGGh5Ghgtznl3JLTcxwivBmRE+4QsPP6jNXwu6INF85uzteVdKdwLPB7w3SZoAMF4YxsSFkEGwK9c9gRyXj+jEQ5zhBQ2PGDie7La+XsFkpN3KRhGcK3gdR3OeFBDRB3S3vgPqNg3LTH0FA8Z8r8yK2BJHgq6bawGoiU4LpMW4N9dfzXOPyKCB2m47PTPlqUck1zPmjYSqv5KifrTsm6ILpsjo2AjLO08vdODSzjXauFMsmF+amsWu81LYkOd2futlBgCVMp/sFzmFD1au0Ydh6aMmMOm59lCZmxDwl4VxM2OmRjQ0lzYVDRe+akDnPIDoNZr2z/khTePgtNdG30mrp55PDP+xDvO3yur4I43sf/GLvPC5i+WANjG5ThHBPOHNHwLw58SVI1VaijSgOQGfQABuUqwnjMibgf4PdgIfNmD+u7UsK9rDdatQX1FkLVGiHsKqBz8eO0B0ge4twN+rLfeWAO6/UzXyWvUgzF68pBoALfU7WBr3QqkfmDnm/uX4aOZI7IKyJaagHtMcAmQak+ks/XFR87KHNpLD4D53s/oqgwao23PSKFC1Ex2SSePIK7YlLm5uSaT7lOby1sIxWKC/Z1D6MMzpB+w72FI09oDkzyvs4y6CSggcNjIlfjxNA+xFoZWg+maiLkZkvxPgDp9OelGF8cc/NsW7AdeGXYNPfcTgZRR0r+3KsluQxTRLN83BhhlkARwHFWjVzbsk0aipdAVa7GqnnzYTcmccDDwjhdIg6Fu5dtWitzvi++ANaEh+BbA8hehlu03PMuBzHCEmRo0eWtCRuriQVwc1pihCVaOgIkqSvejSi95bSb1o9WF5AhLFdLQ8/2YcZJyNTW2fQ+TBKMRV76y3Xh7yxFT3R2zgEUeIRShRdB17XwDhP1GRxqPF1hF2du8CcRUZtknLS6Q8/w8cyvnVlHhs0abZVpbG1n6wBGByWzDVKi9aSNLENBcF8qdADF0kspdy2nAu6Sg0Q+yqkPz7hs72u1P9iYVpo5Gw8O1ROECJxxu275w9ENRGoSs7zOS2aFqULSwBa1twGkTNZOPh48ADTHI5EquvZtCYKKbLBq/wQMDCpW8d+W/3F1j4w8QjrMokpN9OnVTk2dwvc7UH6r0UXP+dyml21hOV0Y8vnjAWlPwv6ufCvAocwxEpRLmAZtUCOitRuK67P9h77QXGFnt5YZ3Qqv/EwgkqTt6ClypLZUzVinaQms+84HTZ1Y2Z3iThRxL+wehEcMCNPy1jg/NvuBD7gvXyX6squKARV1o/fiz5hjixryMtVEuK02FD8vBFV1xd8HU2FmNNDBwwFYsWVMWMihyWaZao3zueQItbCoHar6UDHduyWGFb9zLratSZAgyaHgNoBFGdmzqHvcwxWQAXqcSqfBXDbdTHuuBfKluV2VZ5Xswz70yBffRLY0jzZKOcDRQmO5+k/AH7dAl+/HwqsaRmsdzo4KE/xbuZO9p2BrQB9MI0LvbL+Ln/ig/FWYAktl/9CP3ZUTaSaqYx2cjdwR2CTkITVxm3PoUwo1TqeE9X5mR2Mf47zKQsGg/zToVs+8rrDMAfiNzXkt++osZwi+k5b1myMbd9Lx78oamRte/5uzrN+wvS2AWIO0hnz8JPVap+vb/g80IB2BwwnVu9v7DeS0F9kcV461EAfekMp4OtXmkILdwaerVuBqDuPHGeNxmQml2p2WHFTFMSkZ3ENK9d/B5BWmpxkKfJfIoVsCOEi9qRZYoXxe04eGgSMQAkh0j90KJXK3ZyHG/fa1lwAMCAMJzpPX2EdA2X2577GUkbrGvsIww23aJ61Sx8ZMMU++aTCVd8+GLWfxmIT9GAfG2yzNqr+SiihoYLqs42m6eTm8lMicSgpDLF3fVlYfUeqzkD+tMKRQljSaeZZJbEAz7LqlDpL2WUv4zdeaneglZ/McDVYX1rrt+ry/CrIEKsHHJyk7q+k5QXFsmFBKeYdj5uLZupROCgRE8U7bbQNxB1oLvNvxiIlkhLY6HdRvXyEFxVczmshHbUaakxyTLPfAeBYdReGs2TSzHCkafqt6/BaGPHXJEYPcIKtfQDinhxiUmknjvwTsN61aeQFX9kP5REqFDSuqgyKFnLb3HspuRvBnf+GSby2ciqJc9iL99PgEjCjLc5n96y8RWSEzUyfv0ZkCbwRdZb4Pd3dYbThoNCK9AR1oBeHlb1zKgDqEOonBBDTZAyHgHCzC2wXjTlntd8wBEQbW1l1ft67LbB2EMeqVBazs6xV28vG1pPVb8ij5vExbxSpM3j6caqO+AFVA3eb0hhVXxV2KLwGxFJzE1hffhe1fOl3hjOj9KQM9p5UHFMf27oyZ3H6YsBVXMqyotjBStYIYd3yhfF5pZYldZ1xKo+7CF7bazh6mwa/UijxQefeS2cZ7sGKoQgrlZ6udKjaiCK7efiJRNXjuMxM784IU513AW0rtqIfNtlYlpwqIxezNwgeOVxnLMwhWknc7lPW21j2GcOqlmKqHcOZH76LS/j6en89McKW48u1atCTmFzBFjCZKhCsxgzeSMoKDZqAWA0iWKwvHwdpvj1zmQOk0OvDph5UdwoOpv4xQ7MnFZlI1ODfZN/nc5N3pZRstaX3Gcttul6fGRHBRbz+ymLKg337iXmGjP6z3sT7Hcq1pCbKaCU9ttBR7IZd+xbJmyj+XHGY32/TWBEs+C42S51NJZjxLKUl2htxJmytTtvGxGXAOLwG8sKTuG2c5bkSdMdfa/w4iqFe2XOsxi5mIjnr1ofrN18CaI6aiTJmgCD4dOH88Cyqp7TVq0zp/MQwc6HMAi+fVPrPc8AVVgRnD91wNH5C0dSUkEKIfRgHFefJRQMPNIZwq1V8MmzcH1zBftWDrIjzG9GeGujZZFFgBbe77E10OGTI44MKy7TWOeWw0LFTdWQnRbUwpXs1QezRWsvbcIpuk1Ivev834tcbC9RApoDIjmyioiTENEMPDNpt9MUSNdGHcC1VngD1+oocLxSZPJuJ/qUdJOS3/QzKF6NG6v6mJ26H50GV4SwLThi6KMa8IrTOWBhGRykv0LOQLD/byhzVditu9o/IaH0691LjIm8WqaAf0Dp5XCxS4Da1Gmdb/P6jKAda/KdRbALU8TbofxqzptSY5MxlXb/Rd2zyRoN3GKp29Vk6HjuPYKGF5Lmc5g89OWII9dvu0sCNY9QbeY/FXzXrS92WRvyPAGAJXRHY824j3b6UyO5XfhMVYeH3fxFkkVvEkKyky5lbwuEwT32qb7EpirLPxogjwGSmfmPKu10Sxe+ax5XTy1baJur9z/zjjrnH30tPSVxFUfVFQ8arnOPLeOSLgpx14n7qNVvmi0NOGDTwnOE1hfpDmQfkhXLqTgogddkoW9M/ArCulUlxixMKk96PNQXqw/VFTOMHdeA3g4rBUB9DWNIOmY8tM0gxHaNjJDXx+PIN8d4r+EPzyKaT5AMjUV+DwHvsscWwxciBIhY7LFSHzLJF718/81lxJa0KlYTRrkLnrW601xaOffCLQVsfY3pc6IDBBiRfxDquEq5C1BYFObkU8wAMdCmcC/QoYl5HJ8lve5DgCFnDj6czNUsRQD7jPS9GblmxUIIkS5j3udtg3I1agyWJn0vrm6bf/Jug6F+lVYBufQeswq8VJsTh+2zWCsU2MejUTUTIBIMq0MaJ8WYtsP6BPSpp9zFjEjRl5uVB7JZd0k1qlOKkd7GO1EY6l2RSOAjIIUqO88ykk4OQ/pTc+/UVdpl36h0BjcdzrDjmVeGTdxfKVJhaIcg0efJfi/nmDkbICXHOmMDmhx0MPFgQ+aiEj1JYQqJGeZuX3Psv8NStsiYq6DunCbuMGtolKp/CBIdNsUKJNWHZU17qrOctDGyJWhhaHNJZpb2Ng0T3DQO9lzdSHBWaSQGHhJGzkcGNIPPu1ikpC0zATaHlJydoY6C3lMnj8YtvXOTIExJ+d7saJ8yyI1z8Nmj858Y6M4Ubw74pN81kz8nJCPAC9yepeto0wwF/v1HLctk4XX7m5T9WusDRZmTjSMdvrD/CGtkcdnLygUSSgeuULN2/9fYarYglovYGGH97EK2amCRtRkGC4ubwIAnSOUUSiorzCREjghWJ3FWPjsSGMMe+T934lrHcWbx8a33lDPBIb2O1Ul33GGanL9n8J213pWIE+R8V2EfKDyPz4pBx4+VmPkZCKUEYvmwDxeHYjUGMNiZuqciYkPy1FCtiVOIM4RtqJj2pHYE6zEbBoSI5qi+1sh/9Z2DTm5auzoKuJSp6KB7/drdBkzjjsI+88ROlkz5BajfSvGeh63IY7o9t/Umx0jcR9PWe8aObkjJQ9bGo9vEZxSD+CzPh/EHeacu0Y7zKfrqVCqicD2j6QAu+AWU/Fel63Zw8X8C9qf1NYs7KiKWP5w7CHVUTpuf/Kgdlp0XD5RrjokKJifi6QL/Y6NVYsBzwNGHwauiXk3x8IXXo9YCOoVLCsd08qoVgcC2IhmODEvDNb9yRcPd6TCWXWe0vU/u5VsWldvjkiPI1XgJKCqyzxSGViuBEarKcw4AIEiGQ0dR6DVM/qVQgpEqanU62LBgdrmJyzBPlH9WlmPQmo4HYNpSUtQZ2lR7q2Spy99eThDHE8BkQTzRihJbfHIZgrHk/KtjHdL4tquTqp3JDHqzXI9Vkz3WxWKSwMY5T5oEM+5rU8tqYoESQuaPjzWfTGqsnvq/ABzrGw87HNclv/yfW8qJ0s7vINNsLee7Q6ifmddC8ck833LZ0B+3t2uFKeEkiLcPy9WAqO7sFox960+6UT9QH9w2+DNlyTWb8WSJoEI9dhGedfIgoInnumqPxFS80BnxoXcJQSBfqNhoIl/E3I/dyzQSem77ZbUwl99t/VSDL01C2JwvsNof5NOrZp2eGBTXH91o19BWti5Epule/JennTY83QNWIvxmZwZD2DMWWzL47ipCb9HUrw31c6hIccU+Nbynm8Pnne0rDM/KYEASs+v2Ijz4x7aPJNy7oWtX7zgyzqa0nAlrz5iVxlrsGxw2bm2uQEVAz/Q9Kpkv00hJwSrBWkM3NJvGDaa9/2Aj4bTQxDFqxZT/iAFQGNjtmfDG5hYm9eDfwZAQL7xF8o2X4+P1mD37DZEELPtbtBQzvPN/dqD0pf68WXIWY1vD9xQDkmC+kG9WrXtonfe+HPyhkv2bI7ByMBrbVF3NaOPQP62ZiSw75olzoxX6R3Aanx3dwShbefqVKXqphgdkLBJGS42necubBPRncmW+l3e5ib1rNUsIBZTEzP9yvruHqMuaqTriMmcf8xZ4V6Racp9DzCQlE1YW1/+IH2+ORu9PJ3mKPd9ByJPyf0/39tMSv863vHHycFDLbL9UcVK25wJ1v6npogkFABgwnB7le3LxY5U8Tor3mJKTWSDKWCj7GTJwoGrZhKFNSOE86Wg59gLc4ILPqtM8OWR+9W6yoC9CR8KrGHhc0bc9R4zKDTB5WPdI4Nwu5e8cp2AnnE6tIysWyzUU9PGpyK6m97UvTazcfeAOZUYWRrYoePsoVuxHbCm1pfEkvhiB0L+ap528vrxjFsnUeuZW0XVW30Q4JOMofedOqx91csjSGr8FGqbnipWbakr84xP3Us3JuQiigi1MZDgI6vbwbavxhApa/cf4p5Uw9gpr5OVrxk3zB/u1epELU4ZFIBlW2UUQoQ516tz5953sf8BEX8AZzkl0GGDWXFZc6cMDVbFn1hQiD9augO2YJGevDUZDAJpWDm5ntYokhJmn7bSAleaVGw/WOQbWhMgH2vxz41F50y7f6aUM5wtqCw20Yv+oms5BRXly596ww7hncD0HkeoFXIpC3b3I/p5IAETKxQmTh7z7wtTVZDWokN4BrRCFYL2IzX7IIg4+5Br0Gxmjdva0++AApJQHQDZKwzRpiar4Vm0/7EK3gZLFwsHsOID80rHqLquhKrboFdheRbOBdnuhGp954ZEpYgLFyneyBjASU7U9mm3E+vvRbSBEoMpVMwppUIhxCUKblXHk9tCsOXQa3hvCHZ7pCg6btTJPuaJDk5X2a355QqD+ux9+H5bud+Zxw2L54McKGJ++gaZ5mLc3pMbUMj5+86afo6c+jw/hBEWFpsAQ4vVhbDo6r2BS8PaCJgEpzdRp2xdnmS4LJ5KetOEaX0nr9GgfkV93jT6GdHLNva5qZKcHuThhOwkar4e2SeyBpNhHfMd5OM0NvguRRR49rgm5FVguRMWwzNKjkq/rXkshl/rR29xSoAfszoaQDzmyd2PPfcVk1CerpmKyr5QgQ3VLEj+dKloTKyZKMnYs4LUp74bCCU34jlokO2WG2QOsj6rimG/PByZl7nna6WFJzRrVCsVMkXZJHPs2Hz32nXUPTvVL1z8znZ5Do9seb1tx8hFwCmx/Mt/qkkXt8sy4vcLGisVn9KLnQQG40XmGX9iSRFEkl/OZwnXccZAYRKwW0vNjXnZwRukJyEXegXodasdsEPESN4Sunu61rXpw4KAnFHOxGF/+oxcfeK3aQqjaPtoItcx/YkmCVD5Rf9SUJFN/Z7HamsmTn9fabwg2j6S3FOUplRHVgTNfsrgzJnXuGJJ+juptHhnWzAZNz/EUfzZctuz2oVptKUw0RmWSwGKgEMjDH4V1WXrwyN4HzYchwuQNtL8MIxb+e3RhzOr2nUd9wOiLHDbCeoORTjsAXqKhM3XNyYjSJlHq4l8Aydw3jJIX4y+DgmpOcyww7jUhMXchSCDiIyLmiHY3i9uu+VaQvocxiZfNJMIifJN4gc82ODX4BCS0rE0kajkx/S2wW582R6xup5nTDD91kZYJP1NVDdPKYUobvi/lpdhn/aK7qtD5fufIahCcnDPRHMDmyg8QOuSCuxme2vn/lA5bYEpsvZWhRehsSFwT4nCUhbnX0dLhHny0uMDX41J/zHTMWYpV0r4JlOnOOHRTp1NbiJcbCFQcNMWGTddy8l2UcJEFpVj6Y8JRlOW9jdAEcXCJpgDWxvjoLMKM7NS1hqQ4AyIT8UwotCKWNaryJmv5aW/z0I5QYvLFhFijey49h29jIgNTn+s1qrnpp38bMlvNMOQazNNZw0qnAquSziXyxgXCA+ilGhl4VGjbu6+Oloxpzsul6EYNqEdXAfMugO+N5ok+VnLT/bOfl5AhL9AN/nrmOQgLD5GR1jwqTRMlECMj4EjhmJqVT9Hv2L7eujDo5visf6wBFOD6ZFL1E7ZLKQ7IdDD4GaskNdxYQEgag62ycqXRk2Bd7oCu6EOjgNaN0rh9Q2wfr9B0WWF2+lPwcCikO9GYky8EmIxI4TgjRgaNNSgcJUvbPGlWySplSbz6iYlh4cIf6Rx4VUxgaHmAxe6Tfo1kRc4cadbxvQ2jpEgFvx/8Vacy6u0NzI+4BVVbjlgbAPWRMXdoC1aHweydpvOOQDQrIm1UhjaMInvIe7k6PyuLDeR7zgL3t3cR7K2SIfsF7LucfvDis/ZdFe2Cgb+GcmQAmwooW5ZIn+26xFATjvkCBPZZybLrISs/qcrqyTzHfjrU37tIxmiDA6gi2NNwpf7HoKI0krLu5WCv+QrXa4CIB+b8ByHr6zrtoatHRGoXj4lIzwpx9BhPT5kOxDJoYA1Gh+TRt/rhOpgFMjC7ThiS/khdpxQLv/+1qS44skjA+abX2/Prea3CNmylNWsUpHTsAEODEBYjOqvTMIB+KhOHMvaRDXJ9h5CCyUUentoeczLrSUMxyPJ+SMw1tz3Ow8etEb4SuQvWG37HdxMQp92Km48Aq6AxceyUr7EBtCdO4P3BfdrDpvGq24geKZNdzqsM1JBPAh0tWfcNHRVoI6YnB/nmx8OucVCxLyHd4yhoS1/0xbRUekVwjntARw2S5WOoHXGNfB1eHLJih25SH7TvdenuLC4bn8XitedijSxRDE5LwDxhq4vcaKb6pulgd76m2RQAc7WGaKrOIEzjyhNtpNqGpcnXI0C1uFBfILSUG/Mv3qdcOG9lV10hrQEnuNDaW0q3iOyPIhnvZNHr75BNiFH1BQ2BICEHc/CxiGg11KvArZfZ2q+g/UTETatjOQKFHTtyYtvrH7130OZvp0vlYBlCgYZ0Chb1b480EYtIyAuylOWXdvrvP0Kf6r65bZ9NUDb3ZHQfndhG37LyF8sEn7qZHnLsRXfX7aPihy+kv941dScQM0EN4C6xtgw62ok8XIqMMvY0ojKcBV6OS6w1i0xbpE0ZsW+BZvZaJDFEUi65sOUfAnT9EBikIychhqs9/Rj75MhkPiKqD/A5RcgdfAKbnSK6b1C9mtIfcJ5ECDP80wD8j0+a5kkXeCVIIscAk1d6ZA+lMEt0VBTqxRoFsELyVkm4QDpw6I+UAylx4jm3mbSlpImZ8XdprRjqGqOIQ8fvgfa29gLnRup6tJiRrjyOGZTkmCA6S1Erbw1057RKkJkdNo8Djei3EDMtnLadL8SjGM+QKO3KHmItUBiQLf59C436juniVsh/U4qR9Wu7wxiZ62+YwDOWQ2kkzi56kEwKDG01VM6NsOKYuKmnC1tDqG13alQK5mvGketeUzjLPG3Bc4D+uhDbdodiyu61gx2w7yBGlFyiacBq7MGt4CqOwb90hhxjXdvTPGwAhdlki2SUqYK/XHrN2c3mDqCnR1JCwMAjpwJMIl4wNkOUWpaucmxgb0PKWR7z6vcafo4SaouPsOaNAffVigP9Sq/+MZkWMag269lG7B+SwStGcllbSXP7OuqZFIwCc59v0kjdLVh2BoxijJNpLekoKwOgaZQ9iFQnTL/8VyUvHUGcie66OZyCjVb7y8aldQGGe5DBim81nhyQq2X/5R7L1tDOGa8M63BGg/dOffWJ06IOnWQTvOJHuOWvM8HsqvI9DHcvwbWvZuk4jVAEvVKwEc4o7VQShfGvk0zStylD5n8VkhtL4w6Y7JwTm/3w4lOTqXy5Xhh43Zzls/fTyrSbWpX1wbe+jA1kdj1kCbGKpadWPvitW+znRHcrUvyhUL7TRKCwsqnqSLF+QMe1uijnXJNeE+6h1QWLT8ifEeqypFRs8R/3YgfS+EO9675vvuyFfpQX12XD8WXR7mIgQVSSjngR06B/DfJaAC6ADhhVmxpLHJzZi4MyY1euXKotS12BUo67139EQ3ZdNJ9/vwy6KFQeGxBrZevMWxyQXeHZ1YkOCAotaLe0jFJRMlK8VbSi5pZac2KxhoEJtOQlNSg9NhPijHTs1VX1EHftYEWnygYXwEvZLFZacwZz3gCs4JTxGNaQ9q9JoQqKKThXwMumZWMCTJ1AIh/e4hZzNIKNoW6Dn46qRv95umiF9zJH5Bjtj017P8r546fRXC4H0D2gf/6/znHLykUWmaScAZgQEBt56WluAcXHbUP+fu3sfJWHNSyPkqGI/PNuUjsJkVtoLOynOPqsbM46ceDYicC7M5sIeP5ojuLv6mILOETOvKzsbdVuBF24Gkd7fxqA0OmivZFxqtIA/0E2EA18LKaBWUPcNgw3M3Rku7wpBFsIjE+8VD3AOSS5tF/5YH83x6+RyigyRSzAiFbBnBZN1Pz0dtXIyz3yXyFJg0SeO27QNjeYJkg09MXI2rUxZ7XTCHjjZJyL/UnF2IPOabZu0Bb7lclnjFarkuyhrxOhXZoaFl9r+/PitUmTSwtBJTYvbOyzeMOlGEMTM61fJVF2LBtZZeLYgu8qfinm6CSZ2j12ikTWLbFKx0K/jwvUunFSN+8fvJlZH21MV4mI3uo8As5jfgUweEBE+M+konP0LUB0UBahbaBd7Od1wjFo8rqerZzuU+/KzBg1skYugmDki29t9HunNcQsR8tzTjvFeOzmDWRASChMtY+ak/DGIlPVJBKooWbuQHlgsBIITrMukoUbpCSgkBcWvzctbekthm8uuo07+Np1vOljmEe+5/Y1w2U0kiECMdhfIXDsCKYq1jjMp9hx3Zl91yExqtWKvCuGdWFlU7GK6mJN4fgbg+BvouPtNwYbA1SuVtUQiPPj9HIacVaqTCnIBaJFQv9Rc+Pns9xus1JvHBTDyNO90kDAOsgeaczDupF4Xr+iofk+6JD7gATi+4eKY/n37x66U+VbmwRG1W3D8Eh0ScfKVh8jMr2U0pb65ZXSqyAcn+ckVjYloV5+A1ocTLSfGqxhZ3kMwdZUn/fuq7iOivGfmFnbNjueoyY+ccn20O90+L8GC9kCoa1kEmixNc+eva8DbhAeBc74I/ZtYiCGNFNi+H8EVM19Ci9nesUDN7/EJn4aKBF7Koo37iPwBEbHLhm9b+y4o1WvYdXdbFkwB0UhiBFVHmNVnmmDCKeRTqKAZnwYL2gkPr4NNstRqyae2Eb3fq466JHo3w8x1en4n3sMDV01XwAS/vzKbuws0+y59hNhSXx1AvIoIsH9oU6cxG8+muoTeycpIwrFOS2kT+jayAj4T/nbLvf6NbnZjYpdgN1EcL/su0rFwUKQ+7vHUNLN/f5AFCa9KhTRVL4btjPXpFK+PfPUJ4txay5R5Uv9gfFyOvFgnVUQtdygNS32fB0PO5esraDuKmqNol+infSu5HEEfodmkQmAd+9DIiCf7hyznvOH+Kf3oW5FJurRZomMevKWM8OxoDP5VvlXoPcFImp61D7lg7/EHPvljk0ZywwE0lOI3iAYboLbEzeBYFzOQPOrTfEVcAOYMxu5et/UJVW+m3TiVbb6SqdRLfLGElSFZgC+hEI0CW3D3VJYzAOIXnCOoMkTMl865cKkAtfxzst4W1KgEa/GL3e3Fr5btiXzI+qwMDmdAdMwhf7Qj3RWgwL/1WfUS8mEGNMg+MpnSfas4IpUAvsHTvf4PCINa9gsjfpTzXLr+9FxM4HnhJU9J9r5vqegMaQqn8Cs3I5RmFrGWRvcMeuoX4KPxoT5MCTLih3Tmm4ccs9L86/7Mod8jW+bYFJ1zX02V164tEcGhrJln0bz9Yh6PucP1ozRawvtNvL8z5GwD1VQu5NJhEjctjKYxSKt3XdFvXX+DBX38Kii9w1hRoAqu5BvbW8i5T5tZS6ODkFlHrOBUSc2NNZjQw8lPu3a6bcNreg88au9+voxZjCeqPTVyT2eefak4JKfHybD4GvRoHfom6kiLwQ4LbBea1D0KF94Ilt0rmuxjnxW1hAQQj49yx1obPYzyoC34VSmUS8RncpKI73dATRyBkFYqDIRxdRqPKin8S6l8MFSG1KQFxmjSE3BXPV7xWRZaosDNw4iOs2iy5E5cs27yJU3H7V9ffn08zUiIhQIEoTBih73WfKul60aFpMOzOjtf/wIYwxJ3+nRlOMlkkRzeTU7xFqzHFgOTA1WYC761yf/kJ/NbYaGnFMzGZRpFRtBqBQKpC/5jbY6wtkNYhICJpeTFi3ZKZ/tvuoOqr6tQyYrwpQ6FRgP5sdum42n8zjs3zdUPc9oriIIfOu/IUp5oPF7QW7IObug0lcmjoYJU7pP/wGoS63JBW71yPYdCaHJ2af/yDeR6dRPHJlrX6NaISmixA97J/Vg9E4kHTqCeUobC/mHJU8S7ICse3GhMDlH2e3hJisAn4sKZ3nQFrMK/oTnmBpjZxhpVnpBOkZ/wa8TS4BeRnWEkSCxV7CQoqzHl/z4XjK3ESNR1ndmGtzI/zXCCYUvdNP2KAbIdMBOcOLhwemPy76iRRiRPF8P37hf4vefBpbfEbUM73Zneujl6f0kyyOdBUKDIdLfp9D6WGh/LSHjDjsEqEgHJdv3rH6isq4VizFiGUGtGAIhx3//zHC2Jc1hD5/MgODengUZsZbv89UrNQTK2rGkFFPK4qr/zKvha6AdtPZgwqOvd/Sw57GX1+h274fel6Je+c44Ob+XyyyBq/5hYl8k7mLdZDfHLHwp7fc6OEFHXm/Q+w5F5/JN8OKQ3ZEkyRC/MVrA/pNcvXokcIvhiEmOLBV7EVUFMoPcSD5KhPJLndmStF8EynL3PvHRuXYbFM8+DOjwv1nM9FFr+jpa3QUv8fJpQgaARHJlZ709mrE6W7kySM1+7OrMbghZ0YYOUKMCWwa+gf8oNmUImNwkrsIPq7WWXffhcf4WqTwRSQvlT/0mwTtQZNmHfHf/WGYubV8vjJ3nqBk4Xk3b/412np/EgUQExvzDNVpQVBrk6bnc+5W00Zk2n4eoz9UR267lv/wEqdAgto6GuCbs4ErwrwfB4SpVrB8VRXIGBAgXzPCaBSOh5IV7KDPGlt55UX2iKMKa+kY8C8G+Gh/FV+X1neH9ZsJ2iF2fbLXeS0Au970wL1zUnab1Irqj0HPv1eF20HVvuePV7uXn4qKAaW4eoVyWdh+TffUXXXdLzc2OB8gEsBNIPnpNRmYMCa48zour3PlglBKHB5PUoCp4ZG16GFerFwPP5xnPI80SMez/U3WWWR9+2zAj1BQvhmqtXgMrasw9Q3V5JDf8cm5VnEKbcvTFb0A/veiq3jafqJw3B8bYQhc0d3h0GBh3WukTExnUD2B9rw1zLsHZ7Hr4oM/SX6/2pVGIF6jedKX6En69RC26K6VrdCoVUViVaC9nIRiMa/t3lRr67HwN8iG2lsK8VgsRkUuMRrOta5Kn8eCy8WJLqOMWj2C5w+/zEu3KDw9vmeYmZOLPTWo4jsFHHwYBrOVaJDd5o2TmMWY8L+BSA+V5zq9/X3TsFs9Vw5kqhhKh8oRKghIAO878KsE9F3zm79mcWSgXoU9pRcJLOCFwUJvAkvjuOmo+JDRYDR/5EgN32v2wM67QSM5OgQbPH3HR9KEW3Fz4ijJMyH6+2w0nNozdz2gf8aCRnMqXokw0lmurpRPItFrOmVsuC+uOeDmfx5EnXbyMhMoQL2tfTr6xU/Lu931fYVglBGG6XjZRMIx+mtvxI2KoCOHdQEc+VKzvw5wXsa/x6qdeFUee6OeAxOgrjfLMuTRpUmaEhzfsCNVmqOm9PRFr+/mn2xsbdyHo20WDr1GCCz1t0wjGbrcIt86ij2GaBcQbndkbAJ5KztdbmpIOVi5sdZKMvFM/LADkLkksMEoEIpWQY5+yV1QNwXLttg8NFo8sU2tm1dyLQi2rwZihMWM0WRk5qUHqU+765je2pi/j2Df2zwA1F+J+OCzbIBcUgUQY/qs95UETyh2Fa/kKGANTVaT8nBbEIHrhI8ivDpecr/OZoiiiUQjxgW5SJyPwbp+yDzsBWBLCXOmHKpSjeqpRrTeb7bVO3FaqLPJ0+YCnwtiT0R33RQoEdEQCTwkmC2psp+uG5sBEkA8TKFlLAvCx0mETCUtqgZQ3EM+XPoe1YcWHK2aJe5mR/TCgiOJR1/iw/kS+ghbJg+AhBmksqXkybETmg7NMBXej0ca6X+P7e3E3j9HtJ5sGljphS5k7Q7EAekmyfSIiu5G51oX3/X8IG9uUYXRVBGdKgUauhMnmda7tXx1TdQn2GnEkyMyMxOqLn1ALkBA6Eqw/MdhDUsuWj4GrcECulMed5Jqo20GGBNI06GJ9Nc8qcRHngIOyoPWQZTYHJbzPVTLUtI6x5MyMCgdB//rm+S2jbqXXeWP6wVvG/hVId7zC4H7mV+6e7yNp6gxusBLgbQ5G9IWty17NMgjUezpUG4EMyBF7XolyeVZk5gc+MJe8b0NSAmYEdGKx63NEJ+pa7PT2H2dehHVdmrZta+isHQnlblWXTZKUB63SvYX9FR1REJlQ/sQaHmNaC6wb2Q4eDVqwA2YvUeypES7j1FtD3yIvhNIony2jBKT+7ZT8rgEZ6Rz0wG28fbff/TKWTcAWGFSFrPEi8qYpqygT7x33+WhskBemiXsa56bdI9fgZ8UJAyQ/0325QvLafx2QCchHSL4uF4p2h9Ld1fr9Al31JXdBH4WIj6gVRqjo0YuXGhvxV18dDbcDGLVK0OTfeYw1qL+Gi82zJm70o4ivCCGSfF29ZnGT9wUHuJzO9Rdl40AL/gNai9yLemExB8GTzZxCjN9Y+b8bT60mbXXtb5zu6fq50erOP1S1m//iYgZM2FAPbjacih/7Zyz5zV2MC6BpFCTHwtIHisC2KcGFiOGsOqRfvHhCWF/1VvyOPUriGv/OGN/6o6vet73Sag58ZbFEnDH8d4veHBbV10mh/reHMLNl1a/UMBlzFjYz2Pr/mWRiUbtNLJzSukCLWx4KPp7QvhywL0vNPMcNUwWX2V8oNF4cmXg/JWCPPeXAp3VvrxiazM72NU8t7RVg8TXRo7u1hX61bJIf+w74M4+b5LruQqInO1VZB1Psr4UDzDxXvuGiZADqZeDpl+gL4xB+yA3zfVtUFzNxcgt//bbmE9S+yQ+mwF7OqTbY1EDmWaZPjZkYJpZVv8z8zHhZoz3sy4WBSYT57h9Akk/4S69BaQqoCWt9Y6uWDUkVA1Q0PWQfOLd3c2XWousZPlDiKwi0S8NLJEl7g3dYs/xa926iA6kTYaC30MyOnqju0umL2OF0r3qZCoL/P3trbeTwEgNHi42ZlIUlf4ciKEDzbY0zzR+++FbtDPsOFPDmdanfi4JAiCunOr5xkqe3wVZVojiHci6O0tAJUSGIxCRAlWVSdodwMvsfWMn7J6diqi0EU7KrGE4Xq4cxFjNbKq1VwX84D/W8xwaDVMRcTZuzB4LsN4gDMj2aWqB/lFm8NZkgy6Q80Kfd6j9WuGFX9jB34KYVi/nOIc3G7VyrKL7Wyenk7KglogL351/XFNpY3A/3uKaKs9jtOZNEX8ek9xkddH9l4gyCiAcWtd2y8LFIWCFYjjivDB1w7uMTkvoOiuR39vE+1EOjZqOAD63K/vu+0TaS+WDjcT7T08ieTRf3ZKYvSLEhW7rToYH19MSbh7vTO03xjj7hQLEcJPjik7IPpcAhK6+cHh7CgPfWnqeJWUKYWB0tB/2SzoKrYVXCOKL9bupL7VWCMpQBAGWlwSeExE9q1SErfuS7dKX6EVfXbnsOTUy677QCT7APW6/xCdQZxQrCrMFNlbIcamU9WGeWneYKUoaVhkk+PXstbyd5hQA+g87JkMhvZlT5us+HZzPA1tL8BpE9yLVmyNN9n1tTWwHEoVLqU2qOv8kJuTo2v3+8SqmW7DyR83G0BhNtTmcFSkO3gwZoP4jaHvo8ej36h89tJKSnB2p4HkwCdbgfSSsl7DB/JvGmQ1qWbKm4LSD10+6+GebyIkpggOAf29h56pLaO1lcLoKlMUtmA8mkeqV/lwFgj4Z+QkQEbXraxUg+rxT76P4ETsxcnnkAUjOTz6AtCoVE44VOg494Ay01TbdQCyoJhnncQD9t+9GdebqnS/pztb8anyLwm8c7JBH9mXaGoMG2wUAwBcLCGbohftt2XdkKs1rLX/d1UYMQqmeEKoLLkk6cNF8u+SvMPKqA/1lvhKWJ2TsOJALbLt1wb2KtZrEDz2WsTKk4Yswlb8+3BrPJ/VFhMS+NfOYjWeZ6mIGE59CT82g33aXluyw7wdkgqfDIOpGdlIjPbZ+g5WfwOk66qLF97N+8OHl+N/oQeC9utRoe4JzTBq9ZVFPhdQnLrZZXMzqkwCex7n8AJpdXkCRvH9buwKzTlzFdLyGRZQb7/86S/gA9uXyqj82gz0sW8wAYTchr5FyolNFbSkoEnS0pRism7abHGSmDdopyz1htqlklJz0ZXoY2/jGPGAS/k+V4A6/ZNlODU0bT43b35f2kPSvpA8PyFhcbRs5UliSeqQoMZsILH4oZQ/Xt1wg2iEAftfyBz7EtHZwGAvDJ/EiWkOaVobH4rg2GvRTNZoKVeokMVa5MCJDGZK6uRCKUkPJpxj7EI9K+bXEx58mPzF0RU0C/Eo0R56UBH9lLH9owVZOjWzR6eG+DHI0A3DOa2dkRkGiOmq1zz2GOv2YEog6hqKUBAYTeH6EQPIazK/rtN4Y6EUr747cO2DjzLiykAFzyz+cujxpPaF1QIWtryuUnLa+8NcoOY0a6A5jNvgDMDzI1gADFr37gheOQj3ZRjDOzngJNf4n2gXziXRcckr7U81sxVPPj0sYp20ImBOxhywEkabP6JTcHgX2RKY46zzugM428ogCsSOKhJmhz7idqN2CqqPBkbDHsE6M7vzHTnC8mDWSHZ8Pw9JcDxfDC8vZj+95BuLmD+2AcWnyOjBWZ2edA3+sBfoZpF/oRerntAj/cV97FiDjcMIZEquSVfVJKT8N1Dwj05TZbs6ou+q8QAkjrJjIim1W3kiF1SP8IGBefhmKERkiKCTviBKiDK0rUykd2naSRgOpSChVwH6qrGuArNpqJpFILw+NcHH6ZqAmimtyQCFEzQBg5kc79u56eE8xv0ORfYEzAdFdV4gOkaUs9ELYPoMWM5nIS7zK8+ErRTzsi+4EpCUn9t8+SvCqMzhZLeQR39lav/Qt5N2kKlDSws0diUIgJSg1/z5FaMg4D0i9v+T0nc4awBBWvwYZZHnfrJKevKPKSGIl5UEuK7ZKvKYNpF09R5/KgumAVTIy6XiNwQFRERDOYnsATJnKkkNaTPyQCLpC7Hen7xM1niKp0zwLs8kBOEkv6XhxXyN8xlbPbwfuY8rlIJm7yHMIqaeShQXuYl9+HkN3mKypdCC1fla7IDcd2BiUZngL1OZJW/ajl9zBfE0fX6UGvfY55StOpDYvmqYrucBrRPQlmnGbAQkWSDfi0Jrr0P5gMS93INDZn4EpntzTKf+HiFY8RMHjeETz/773G6vKPTKpETMemyc+zehbSjZDK5TiNo457X6kEH6BC0PERaDgSI4ERS/dTQUNJcdAccALITxCWUoJRS1dIUFD0EdM6KwwHYHCxOHLQJI4mSQWQBgKpVrTC4DD+YHuqwmkV3YL2bcnglmei1VrM9tU/ZqlZ/6yAoeHcR/VJvqmgnjfxt4fFkFmDOsKdGym1x6CdzHOHZUUCn8VbYSZilaqy9yZoXlakhVjR5xnqHJ6Beru8GUfG6osDc6m+ihEsekXGHgEmhI/GNuJiiNBJtKutGZnu6D3AI9kk3X6IVC4AeiYbsfZDIrjFJW8oMzbGmyPw9XgvX6f9dJSRcCkzD3CFGuSINSbSty0NnRnQQ4W17h/3n/SVYR3bXcO3WMSu8YTNDTsqcmfRQF4tYnplJ9ZzQY9b74fn3OsqMzbQPhrjeNtHjM3kAWLL4JPlnmL4fsrUMRusBYCAwZ75OQ+qrav0yIeMAbAZSfqSSaMjUud5SfHVpyVclC6lyukefTlhLb6/B2KQeMXLtw6ipbAOl5Tn6pQtJuLS2HzI/yzJk1QV80/mZYyi2ZkvNV8yU1WNT0zIttRM9XGcEmwms6cgawjxy95h9IvE/11xgtrSrlNOeswB1vkiZOg5zYUqU4iXPJtTqsIlhwLE5Vzzrn3I8/6qjn4xagwAF7l08+z4xhOVIVL/gR01odT5kmXJLrLeFEyEsfXdXD31aiIfjFf2fEnbVHcqc5e7s2NpeA36RfgRejso1rv+86eA0AyTtfVHhVt0C/kFoHt/OOkmTgcRZO7GwEMOIJg0VQR65RdervT2THDdoS0s5UMwDZTwa4J5GBSfk7Pq7e8ZF5ng+bb99CA9pyNXiJcIC2yOdQd+mAXuJxnlMJNICPXrh22doRZeudqFBjq8El9iy7ikRYrX4FuLapJ8CLSHZwbX/rzwkAkQIFaL0npwZlVLNlIKTvsutTynSWtMav0W7V7VJP9Wl7XQXzWT2isz5gziwg36sH/RjlhrqO6PtNSDxb7capSxzYv5ATC/HswQoLgzKcB8zjwSCvw4HsVs9ssTxHoDDT7Ya5NbW8Ywl6MYAu81pb4Kvvc4zNhKTp63UEq/Mx5X05CdMvvyFbf9gF9s54XU6QHFyAfMdFiLXXyz1OepaVPJPLaFS5YrLK9t4p4ofglMID3kYX1x4cBAJqPpttbot8SmATuKJcrBpbC5tMS8ud1UV5KXyfUNNjmaz2pcUWhVR74vyDeBbiA/rlHryrqltu/rKlwGkrpMHNFu5j7JvO+eNlKBLEMtbcS95UYunn30z01ZquDfkGBsCChVKPtB6tWkF+vT+iPylOccRiP/y79zTiggvPzSE7IBu+FpQrKaIQg1YHcIBkIrZEDwMAbJGTmwN4noje2R4Dl+bGEq6sP3m7rBE/zwWSrIdOpREXxCN3+VIO9GyhtZ7csiUOcrWbYGbsSqfJLJeAuJ+bwuszr5RTnrYDtW57J/nnWqNorbuuasmKIw5jpkAxqiJhughrQO4YeBLLkaAQKwdw98jcPwhloNG13Or0Vipoh8gZJnJsUs4syU6E8f9RAefHdcxK+RJ9jtT0rQ7U8s+mBgBy4ulwTe2VhIU2fjVBr3cZnrLbn3u2p7yjFRH852f5IJRYKOWyx1bQ1mT4kIJ7zpPO2jLaxFrRxbVPop+6YmfLHlCReVDwCC5vGu9kI5d6f/36qt2qKmHYVyMYGaofv3zNpuTeQpT6FYzPh2zl41nji2uxhlHlDVUXXw/Zrpt3A9XXFEAJg2+mMnvDsPR0ZF0Q4kihty5SrTnXCyMro01yZy6NVHyqkHx2DLiW6jobTUPu2h8slzFVGVO6lwZXPR27gp4cLSDU3WuM3BpS9/uTTYpSHCRmoX0msullvjqvsx96YB4IaMd1xWkfJ3oUJ8FFAt5ywAyLdJu9cqBgsozNQyUsAoVkbDU0Y7FFv6VvggW2+Ax7vLFiZgJJltgmN9mbxUL0qaZZ7vqRY+ov/MptX0Lk1/sVuB/vZiQCJW5v/b9Yal9I8o6+L9sGHhZc5vdz1bu+9P9l5a5r6l3pWa+EF5Z/MeyRY2ExB9/P2BH7Ta0JPYIncGH2cGQl9ddDqRLSAkIIVBKc4ZjvrzcvG4BjfhVSatJVjSszp8OQdU2ggeoAVcRS/x+3/TPy2cFc1BQcHdIzxFK7fQDdQ0cHljqYcEM3uArMt2WZn+SHq/f9xUN2dSYsac5KiqAubW0dHmnNokrOtGTLXVLqXXHzaQDfb96BA1qZExq57qOO0Ep3ZPu7OzcwXWFX2GrQj4SHL73rwIIAzfKsRv1CZp7Lsd+k4H2e7FojrpdNVvkZRpRD8Y2sClCRE1aFs/bJhxSjP2n+awiI8EBU55wPKI2jqEl7fqVY2cBzyNv01EnhW9D1RD34wmB+bHv2QQtdiW6JmVoBLY1HYEejY8QQNM9RbDulx4YOLOzL09SxVOv9Io7sd9hfk6LcyoIm4rzVwpfCFwGsCImc+0Ciq9Iv1kJM0LYdaYTZuE4oj7358KfT6mfSGf8s5BKEjRpmjAyiUxy9rzXZDtEE98/f+MEbAeU0/8AixL0zJdAME+urA+CFOvjnXOZ/2R4UoT882jeZ78ODUPQSt0aX38ShRBVas0oq2WygCOrBKDSRsP+13qiLVD7AH1vFfq69cnvko5dRVEHPYKZ7mnT4YEpoL5VvCOJSmpszXkVETfFqOIu5uEkhMA73xssOaWgSxnwLCeHnLSjAQlplczWGwXK4VsJ8PhWaf5OpDUVcicYkFKGlZ84qss37ceSNh5TlkmR+3BkOBuwALM1vG7SFMmUL+e63hB22It8P8Q9s0M07EVJY3BaE5ii6ahvTSCyFcs9dEVL9kGbZGVdgWVTOXWJMYY/IZN3FX6+rgi3rpHy00iBU4ZihmWIP1zXRJmeU9kdb9uR0oyWCsXbF3EX7KsS2sH0Ea4C3V9F5ggDzM+jNw6hEPxleIZzybw4acdo9kjodThSpPcebz/nfLxAiT9P+Wsb/cmEimUAuet5PxVnx47lTkn3QGySgEATT7VHSKGjQkyT8OoE5UklV02Is3EaVlOEAVRQvLoAyc2GORYJsAAizFkAelOIWKU+GMMObK9Rc3UGAM4BSBxdWt3sonJ3FH2CCbHG98sC+EawYCkavTKcmvxwLmV2rjjSWGHg59AAjGfP2Tto8QythHUQlt9tPHp4DjCj1Rue3hsTjM1VP1XbP3nTuxMeED+jFWpQMACOC93znKU6ZhOnrdaoSJlpzFJ+dI1CfTSF/5iZiLWnv79Lyd1/WPUV36t7hmW62FaJ1oFMdR8egO7VANSGX5aW1pRFLkUEgwvChnOxXsp+wMbB+m2LC9jXcCzvacyM/marXGzJ9C9zu1ZteTagSqMH1+XeTXg+SkfaZI4BIvlVfebKrKhhZL+0VcsbKNaaEA60FYupedW9nWL5X1XrIq4ajLaR0UheG1L7QQCQlK0bpxCIQp7yBvLNJ25VoVwFDA9RCBZWWsZlsB7aDq6EQEdDkOZ9JgOjzb24j4gSLWrZ1elge715oYopCQhsR+GWjvmH0LhizfBhzoMAn74cw/DDciEcLQ+lHv95Pq61r+BaXhhOFAq8fs/MaqJP3fA0R6xlQhWn+euaj1hByNif0fahBguF8vkO/LOQCgqMFUKhltV840o7GbEQ+bNAhN2McgVWpEcfz0QKPPpwD15lWgxqQrTgFeTeIw6Z9QQbtA7hngo8kFmJkUbDVC/MMs00Qxx2YclPP8tY8GTwB2fvil6HXJzQubwkYbut5nbawEmte/1Op7F9MSJyUi1cfmZ+ut/Ar8fDhAe6nvBFbWMQI9zVUIlYBuQWTa/j4+pQhu/bP+Gb2i4JxVcHcWWZE6aQ9yjsx/QdNRybO6ljM/KiPAtDb24w9rYr4NCK2Lx1qnWD06ft19mS5V9HH+LV4dbeCpebln0seCvAF5d0h1yCU4qndYhwCiLuP/vctyRCU22HAuBkWIKFbNaUths4vYvc70WwRP43p7FAYVSTTNYm8Z7BXdHzGhM2dgWdtyvbdjn4fCuEcD1/YcSWysc82o8DhxDbffQpcCY3sdFzuCl2xYMqM7IOiG6b0uPiDJLfeVeMEE4e3gMTknbaVPtJ7TRV0/0C1isaWbzG813SvOesYfFXOMG/fjr4PTozjNeWLvdFhQjGe2OcX/DYmhygDN5Lqm9Lzy1YyeMyf0gMAyfdMLcOvM9i+7qbVMflqbCjRz4xS1Irc0F86KDQeDaahLz+cN2G2ZRnSz8mqkns2iJtWpsnu1Qk1bm8mBtg9eqlNr/T5C8BauDKjhSe3hWj/9wv3njsCqK525IA12EcsOm3dJcQoa8QqBhBQxnJ60GkJlEyMVxtU/7lm+znssp5y7poU7HwSVJg8WJkPbVoxb4TaMqMXe4Fwz0R9tNtQA6rNOLJ/vuOasyJ97L2pAft0B7HY6YIFKb/MSvZI+c0fjXX+CCnBAk6qREM0KtiVgRZDKP/ioMkAoaUscqHhct6hLfsEsGfvjzG0ZWyvYFh9VOfGaBnMVdBWTzTNOyXRmzivPBpyKjxlDzusv+H8yhc6fHrevKtgaCRdpGbD6yrDaUR/Hyn7JGv5P/0iGfQ66P36ARKRX0lvePCyaYgBAW6jh65pM6ytVDidwqS7m5IyzDIyczNRapQTFJ5Y7hGM6Cj9Hs5EnTLXrurM/5ynNOsx/1Ek4lgJwYXSjAzaA+KI+M8AtJHjeRpvUCbbWQ5g+grM3o3QMC29ALqsSMHAjhvmwY4Rfol2DeEaGJCmaf+BOe44ByTUKIxxhzA+fhApCntsZ/yhQz17yhcc1/fSgkfkNTvthof89uU4C2q0JwEaWATxGZwCapQAwF8Lb9bIISp7Bxamn2SNMiCtPOXZyQdY3ikXD+2lUn+ygBVv53YXpxamI7JFARw/UnXhG7sqBatGZhPGsyR+a83Ergn3tTjJlrANBu1nrWaHSNZ4FTM/Gzk9UYofrsIRPv/5vbIDB4v4c1cwVKUEcXODYmdm9Qqd32RUEOM3BG/YQe6QU9hl2Zj5RZpZxXed6dFKpVQwFNMr3d/PpVKbJfyJE7/80cWiHGYk5pKHB7MwTxWAODwb7948WgjkY6YmrUyG4jeiiut1EG7e2GQB4+CUZcvjKyLTFZrf+ctR2zj8Ig2r140BGrskjpOxb53xQzR7KXwOaWU9pS2gyhRhxdoETLsWcSQ/zARGphMjHr+DL3poHgnIjQULjFI8XK3ZWrFpsS2uHrXkgWaEkNT7jSU7dm9ekGcDoHtt/HOPJFzWEvLCzZ7DjcIyf8xPPsJrNjCofi6OzO9NPs8z2r4bRy6XeSZ4i5Lx5P5kBg0CpKRUNG6R3RZFRUaR7A4JhGHSuOd0/bNLPhx8F9N1QZWdsDbJ4i6vIfDaQbITtXLip2RL97bCzls+ZyNUoOsO1xzAk4mWicTPK7fVZsmAAU5YSosT8g8LaTzUE+KRr/pZ/xd3IIxKo2T9+Wx1/x1bELPUyunuwpF9nA88PHMTlhBng6ak2Ub3UgddX+f61o/RVu6dk7F/s67YsQBmMx4nhMnX9wu3ECWdGaT5XraHvRE4tBw8m8MTxCetekwXIFguyHMZUBH7PavtvJA6TPlbLf3IOxhKA1fGabzIwxq/XMrfelk1Zb5vfA4whv6ZV9oBAW0IDYPXLJdLK8paYPdZad84YlFyAzTFjzVXAsr/PX+A8YbvpuQO4FJZpzGSmwx+z/ZXI9PdkGrFkr7GvVJS97vHBIM6T8B/hnL3wiTZvFEvdWU4te8FKGpOuEiMU3qP34oHean/pDLRaRY5tnW8luUUNN8B2g/7fZYXKMDZFGOioxceGdVeb2XpJYT2qI5AChfSFVa43jJIOdaGcfmC6ApFuPbqZK9zmQ/1Cx5p5RLHmC3fs6E2/FWCCSrkq+tlL6dMxvkrESmzw1wne4LYOEPssXuAoZQV+ze++cVsRsRMWqKcHdBWdEGXMGVx8nk7E5fE2ag0R4QfWu5zJs2FyXj3q3vhdkzuIfEUljQnzQjkvy9cBHixBf4NR0a9oiiLwN05IaeKeRT2L9aj20bnPC8ONpCXwcWge8M7xGXV6cxd3qnVtTb8F942gYXkgGActTN9LtJsoBqzlBPo1W7AdQcTF0h1O0kmR14r76MbgidamC6Yw55QMDKqvs/Rmet/BgJJ0tvwMEuBkbnY6rZF6ZS1R04XTLwkwskhiyVVcfYlT7YnAdSOXNB8Dxi+s3D7Nt1N2miA+QMAEewWUZgd/Ax+AXPSTMBf22t5EhivOJxdNQYoq/4LsXEuLAdE9rkasIlSkSu5ZVLDcb4vPv3IHzMuCWMptpFYYdLlHAzGiL6xIvpY69jJ7J/JpxbgOgUXNNxOLv4qrmOQXI0WtnFjanbUQleKpIfgoIFxH0LKpifMRnMTbaogGSEkyC2rFf2wfAIsIldYu/RB/TZoB+rL/KvwTdlgswjSA6maxlFpofkLEfsFZh/NY/A8kFVgCADnX4M1qftsCTGITEckXkivxfGtqTEmhe2gtMySTPCyyIAHM3FCtCfRk3jpB4dX3PrqzSOR7h+AuSAmvDSFyIlNRXsYKLoq8ucDhdG8VeXPn3zAl96hMEA9iT950OvSaZu0gnFQyto/UrXPBFHuwvbbruTqhGAOQqvYcaHcZOqSLZ1eOV+XqWhJ/jxDi1YOAX70mq04QmDSzy4gfR5f9lKQ3lqUkyM3D89sRYvv5lTG1pS310fFFxwpybSHforMLGC1ca1QF1Yhjd33zq05PiMyegpiof4YjQnGrQqeAOLZNAcwIzE7npnU9E7t03BNFbPeT/HheqVxqUzpgsRkFRlRl9DdFtNNJ093D4Wg+rcMfyee06q7m6+flnZEazpZqDrqOSn8CgYHe2SPzhScU3YZvrgT2V03JzCNpj99q5H0gzTvYfxPWZcd3G3SKXZFaxpdekj23oCUfkCP6leK8aH1KUjCNme/HMg0oRzmXW9WRsB6labIKdr4+zfkXluYAcPLIPh+HFClldA+bj6SR5Y+ZHXKX1/6anIzjitwHK+WgHG5eGkhQiXqPt7fWurnKDBCUgFKTg72rhz7QrPitgxz+x2WSaNbPSyeuYFjZ1bsXQPIhjXG+AWvevIwgXrDf6YQgq25Ljk51opzmI6V2mgAoGoyVXk/SKClD58aEHaP1foSb3LSIKnna3114tREx9LMPURlk/bLHEF6sQEIaTl4O/U4m3H0ftzI4ojCWyRaAkSdxDDHamlQVEa41V2I27HlKjBipIqalqsp00dNa7UZPP+uksSlbEuL5VfXNDu6zl48AwEVeyzJmszI23mCi+au4G/kQ4DmOoAX44qyZoP8SMUFKNrYEByNR0nw82BqSJciNYYJbcpe6SGevbUGDIi0nS4vUJGAhjqV5uqZzZ0XNmwDzxG7EuB1XSp5GG609skbUx9mZU8YBaRqsImYVtzbm7ZTNTQ1TFG4If6Ee1dzQ6I2wbGICEbNA18h9ijSC7GspV6FweWgf0toefzLXfLXMY+FR5QLlpSTVC9MVzgG43gC8VTSTvlA+29ErT6Tl2XYY4V3pH6FJ8VusaWTMpwoMsIPOr3VpntQvtb8MmwixWQajMeeVz2dHVzAcYkt5RgJqOUcVuT4fKP80xZTKnLiEfQKpzyM1gMnVslB59pYQSF/vTjLN3QV35wDCpE8YFo4f2Ty8Acs10gDPWlrxrzd6MBO084F+EBwNs/qCvfKoF5znoazPiSCEv3JLtTthnmnOrs31dmwIcu5UCp/lzAU4yxOLuIPFZ3Ezo/rFCvP0N+6DbQ+PCVZxvHwB7CmAwzFiOdTnNIE2brTA8Ca0lrSeYRaz7zVZwzzCpMkvidzkqGMvuc45UWNZgKxTuQv4F42cDdg1VQ3irroJlYLx8HJWNM/v1tFgSBnQ49zfzcveZD9kgYjVcdBvqsZ3y1x2pguAshekLDLnxCqKD7y2VE3qrjL7fcKHaReT1wfKLaFtIBd/KVMsUFwYNDkmmqxvUNBVlsrQ==", "n": 310000}</script>
 <script>
-// ── 공통 설정
-var yr  = ['2020','2021','2022','2023','2024','2025'];
-var GC  = 'rgba(0,0,0,0.05)';
-var TC  = '#94A3B8';
+(function(){
+  const B=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+  const P=JSON.parse(document.getElementById('sealed').textContent);
+  const box=document.getElementById('lockbox'), vault=document.getElementById('vault');
+  const inp=document.getElementById('lock-pw'), btn=document.getElementById('lock-go'), err=document.getElementById('lock-err');
+  let busy=false;
 
-// 억원 단위 포맷 함수 (축 눈금용)
-function fmtAuk(v) {
-  var abs = Math.abs(v);
-  if (abs === 0) return '0';
-  if (abs >= 100) return (v / 100).toFixed(0) + '억';
-  return (v / 100).toFixed(1) + '억';
-}
+  async function unseal(pw){
+    const ks=await crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveKey']);
+    const key=await crypto.subtle.deriveKey(
+      {name:'PBKDF2',salt:B(P.s),iterations:P.n,hash:'SHA-256'},ks,
+      {name:'AES-GCM',length:256},false,['decrypt']);
+    const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:B(P.i)},key,B(P.c));
+    return new TextDecoder().decode(pt);
+  }
 
-// 툴팁용 포맷 (항상 소수점 1자리)
-function fmtAukTip(v) {
-  if (v === 0) return '0.0억';
-  return (v / 100).toFixed(1) + '억';
-}
+  function open_(html){
+    vault.innerHTML=html;
+    // 봉인 해제 후 내부 <script> 재실행 (innerHTML은 스크립트를 실행하지 않음)
+    vault.querySelectorAll('script').forEach(function(old){
+      const s=document.createElement('script');
+      for(const a of old.attributes) s.setAttribute(a.name,a.value);
+      s.textContent=old.textContent;
+      old.parentNode.replaceChild(s,old);
+    });
+    box.remove();
+    document.getElementById('sealed').remove();
+    document.getElementById('lock-css').remove();
+  }
 
-// 공통 플러그인 옵션
-var pluginOpts = {
-  legend: { display: false },
-  tooltip: {
-    callbacks: {
-      label: function(ctx) {
-        var v = ctx.parsed.y;
-        return ' ' + ctx.dataset.label + ': ' + fmtAukTip(v) + '원';
-      }
+  async function tryPw(pw,silent){
+    if(busy||!pw) return false;
+    busy=true; btn.textContent='해독 중…'; btn.disabled=true; err.textContent='';
+    try{
+      const html=await unseal(pw);
+      sessionStorage.setItem('scg_k',pw);
+      open_(html); return true;
+    }catch(e){
+      sessionStorage.removeItem('scg_k');
+      if(!silent){ err.textContent='비밀번호가 올바르지 않습니다.'; inp.value=''; inp.focus(); }
+      btn.textContent='열람하기'; btn.disabled=false; busy=false; return false;
     }
   }
-};
 
-// 공통 스케일 (금액용)
-function moneyScale() {
-  return {
-    x: { grid: { color: GC }, ticks: { color: TC, font: { size: 11 } } },
-    y: { grid: { color: GC }, ticks: { color: TC, font: { size: 11 }, callback: fmtAuk } }
-  };
-}
-// 공통 스케일 (% 비율용)
-function pctScale() {
-  return {
-    x: { grid: { color: GC }, ticks: { color: TC, font: { size: 11 } } },
-    y: { grid: { color: GC }, ticks: { color: TC, font: { size: 11 }, callback: function(v){ return v + '%'; } } }
-  };
-}
-// 비율 tooltip
-var pctPlugin = {
-  legend: { display: false },
-  tooltip: {
-    callbacks: {
-      label: function(ctx) { return ' ' + ctx.dataset.label + ': ' + ctx.parsed.y + '%'; }
-    }
-  }
-};
+  btn.onclick=()=>tryPw(inp.value,false);
+  inp.onkeydown=e=>{ if(e.key==='Enter') tryPw(inp.value,false); };
 
-// ── 탭 전환
-function sw(id, el) {
-  document.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
-  document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('active'); });
-  el.classList.add('active');
-  document.getElementById('panel-' + id).classList.add('active');
-  if (id === 'pl'    && !window._pl)  { buildPL();    window._pl    = true; }
-  if (id === 'bs'    && !window._bs)  { buildBS();    window._bs    = true; }
-  if (id === 'ratio' && !window._rt)  { buildRatio(); window._rt    = true; }
-  if (id === 'cf'    && !window._cf)  { buildCF();    window._cf    = true; }
-}
-
-// ── 손익계산서
-function buildPL() {
-  // 손익 추이 (혼합 차트)
-  new Chart(document.getElementById('plC'), {
-    type: 'bar',
-    data: {
-      labels: yr,
-      datasets: [
-        { label: '매출액',     data: [1771,3062,3904,5078,5866,6352], backgroundColor: 'rgba(59,130,246,0.7)', order: 2 },
-        { label: '매출총이익', data: [898,1729,1425,1613,2307,2243],  backgroundColor: 'rgba(16,185,129,0.7)',  order: 2 },
-        { label: '영업이익',   data: [207,689,-217,301,713,383],      backgroundColor: 'rgba(245,158,11,0.7)',  order: 2 },
-        { label: '순이익', type: 'line', data: [220,630,-3,524,860,704],
-          borderColor: '#7C3AED', backgroundColor: 'transparent',
-          pointBackgroundColor: '#7C3AED', pointRadius: 5, tension: 0.35, order: 1 }
-      ]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      plugins: pluginOpts,
-      scales: moneyScale()
-    }
-  });
-
-  // 이익률
-  new Chart(document.getElementById('marginC'), {
-    type: 'line',
-    data: {
-      labels: yr,
-      datasets: [
-        { label: '매출총이익률', data: [50.7,56.5,36.5,31.8,39.3,35.3], borderColor: '#10B981', backgroundColor: 'transparent', pointRadius: 4, tension: 0.3 },
-        { label: '영업이익률',   data: [11.7,22.5,-5.6,5.9,12.2,6.0],   borderColor: '#F59E0B', backgroundColor: 'transparent', pointRadius: 4, tension: 0.3, borderDash: [5,3] },
-        { label: '순이익률',     data: [12.4,20.6,-0.1,10.3,14.7,11.1], borderColor: '#7C3AED', backgroundColor: 'transparent', pointRadius: 4, tension: 0.3, borderDash: [3,3] }
-      ]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      plugins: pctPlugin,
-      scales: pctScale()
-    }
-  });
-}
-
-// ── 재무상태표
-function buildBS() {
-  new Chart(document.getElementById('bsC'), {
-    type: 'bar',
-    data: {
-      labels: yr,
-      datasets: [
-        { label: '자산총계', data: [1986,3336,3087,3965,5150,6103], backgroundColor: 'rgba(59,130,246,0.65)' },
-        { label: '부채총계', data: [369,1090,843,1197,1523,1771],   backgroundColor: 'rgba(239,68,68,0.65)' },
-        { label: '자본총계', data: [1616,2246,2244,2767,3627,4332], backgroundColor: 'rgba(16,185,129,0.65)' }
-      ]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      plugins: pluginOpts,
-      scales: moneyScale()
-    }
-  });
-}
-
-// ── 재무비율
-function buildRatio() {
-  new Chart(document.getElementById('ratioC'), {
-    type: 'line',
-    data: {
-      labels: yr,
-      datasets: [
-        { label: '유동비율',     data: [596,334,274,244,263,245],     borderColor: '#3B82F6', backgroundColor: 'rgba(59,130,246,0.04)', fill: true, tension: 0.35, pointRadius: 5 },
-        { label: '자기자본비율', data: [81.4,67.3,72.7,69.8,70.4,71.0], borderColor: '#10B981', backgroundColor: 'transparent', tension: 0.35, pointRadius: 5, borderDash: [6,3] },
-        { label: '부채비율',     data: [22.8,48.5,37.6,43.3,42.0,40.9],  borderColor: '#EF4444', backgroundColor: 'transparent', tension: 0.35, pointRadius: 5, borderDash: [3,3] },
-        { label: 'ROE',          data: [13.6,28.0,-0.1,18.9,23.7,16.2],   borderColor: '#F59E0B', backgroundColor: 'transparent', tension: 0.35, pointRadius: 5, borderDash: [8,3] }
-      ]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      plugins: pctPlugin,
-      scales: pctScale()
-    }
-  });
-
-  new Chart(document.getElementById('profitC'), {
-    type: 'line',
-    data: {
-      labels: yr,
-      datasets: [
-        { label: '영업이익률', data: [11.7,22.5,-5.6,5.9,12.2,6.0],   borderColor: '#F59E0B', backgroundColor: 'rgba(245,158,11,0.05)', fill: true, tension: 0.3, pointRadius: 5 },
-        { label: '순이익률',   data: [12.4,20.6,-0.1,10.3,14.7,11.1], borderColor: '#7C3AED', backgroundColor: 'transparent', tension: 0.3, pointRadius: 5, borderDash: [4,3] }
-      ]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      plugins: pctPlugin,
-      scales: pctScale()
-    }
-  });
-}
-
-// ── 현금흐름
-function buildCF() {
-  new Chart(document.getElementById('cfC'), {
-    type: 'bar',
-    data: {
-      labels: yr,
-      datasets: [
-        { label: '영업활동', data: [249,1088,-16,770,1232,1163],    backgroundColor: 'rgba(16,185,129,0.7)',  order: 2 },
-        { label: '투자활동', data: [-17,-878,176,-321,-1401,-1305], backgroundColor: 'rgba(239,68,68,0.65)', order: 2 },
-        { label: '기말현금', type: 'line', data: [554,764,924,1373,1204,1062],
-          borderColor: '#3B82F6', backgroundColor: 'transparent',
-          pointBackgroundColor: '#3B82F6', pointRadius: 5, tension: 0.35, order: 1 }
-      ]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      plugins: pluginOpts,
-      scales: moneyScale()
-    }
-  });
-}
-
-// 초기 로드
-window.addEventListener('DOMContentLoaded', function() { buildPL(); });
-</script>
-<!-- Tooltip -->
-<div id="tooltip">
-  <div class="tip-formula" id="tip-formula"></div>
-  <div class="tip-desc"   id="tip-desc"></div>
-  <div class="tip-note"   id="tip-note"></div>
-</div>
-<script>
-var tt = document.getElementById('tooltip');
-document.querySelectorAll('.tip').forEach(function(el) {
-  el.addEventListener('mouseenter', function(e) {
-    document.getElementById('tip-formula').textContent = '계산식: ' + (el.dataset.formula || '');
-    document.getElementById('tip-desc').textContent   = el.dataset.desc   || '';
-    document.getElementById('tip-note').textContent   = el.dataset.note   || '';
-    tt.classList.add('show');
-    posTooltip(e);
-  });
-  el.addEventListener('mousemove', posTooltip);
-  el.addEventListener('mouseleave', function() { tt.classList.remove('show'); });
-});
-function posTooltip(e) {
-  var x = e.clientX + 14;
-  var y = e.clientY - tt.offsetHeight - 14;
-  // 오른쪽 벗어나면 왼쪽으로
-  if (x + tt.offsetWidth > window.innerWidth - 10) x = e.clientX - tt.offsetWidth - 14;
-  // 위로 벗어나면 아래로
-  if (y < 8) y = e.clientY + 18;
-  tt.style.left = x + 'px';
-  tt.style.top  = y + 'px';
-}
+  // 세션에 저장된 비번으로 자동 해제 (페이지 이동 시 재입력 불필요)
+  const saved=sessionStorage.getItem('scg_k');
+  if(saved) tryPw(saved,true).then(ok=>{ if(!ok){ btn.textContent='열람하기'; btn.disabled=false; busy=false; inp.focus(); } });
+})();
 </script>
 </body>
 </html>

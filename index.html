@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>에스씨지랩 경영정보 허브</title>
+<title>에스씨지랩</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
@@ -169,259 +169,87 @@ body {
 }
 </style>
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style id="lock-css">
+#lockbox{position:fixed;inset:0;background:#0F172A;z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px;font-family:'Pretendard',-apple-system,BlinkMacSystemFont,sans-serif}
+#lockbox .lock-card{background:#fff;border-radius:18px;padding:40px 36px;width:100%;max-width:380px;box-shadow:0 20px 60px rgba(0,0,0,.4);text-align:center}
+#lockbox .lock-ico{width:48px;height:48px;background:#2563EB;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 16px}
+#lockbox .lock-t{font-size:19px;font-weight:800;letter-spacing:-.4px;margin-bottom:6px;color:#1a1d23}
+#lockbox .lock-s{font-size:12px;color:#9499ab;line-height:1.7;margin-bottom:24px}
+#lockbox .lock-in{width:100%;padding:12px 14px;font-size:14px;font-family:inherit;border:1.5px solid #d1d5db;border-radius:10px;outline:none;text-align:center;letter-spacing:2px}
+#lockbox .lock-in:focus{border-color:#4b7cf3;box-shadow:0 0 0 3px rgba(75,124,243,.12)}
+#lockbox .lock-btn{width:100%;margin-top:10px;padding:12px;font-size:13.5px;font-weight:700;font-family:inherit;background:#2563EB;color:#fff;border:0;border-radius:10px;cursor:pointer}
+#lockbox .lock-btn:hover{background:#1d4ed8}
+#lockbox .lock-btn:disabled{opacity:.6;cursor:wait}
+#lockbox .lock-err{font-size:11.5px;color:#ef4444;margin-top:12px;min-height:16px;font-weight:600}
+#lockbox .lock-note{font-size:10px;color:#b0b5c2;line-height:1.7;margin-top:22px;padding-top:16px;border-top:1px solid #e8eaed}
+</style>
 </head>
 <body>
-<style>
-#gate{position:fixed;inset:0;background:#0F172A;z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px;font-family:'Pretendard',sans-serif}
-#gate .g-card{background:#fff;border-radius:18px;padding:40px 36px;width:100%;max-width:380px;box-shadow:0 20px 60px rgba(0,0,0,.4);text-align:center}
-#gate .g-logo{width:48px;height:48px;background:#2563EB;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;color:#fff;margin:0 auto 16px}
-#gate .g-t{font-size:19px;font-weight:800;letter-spacing:-.4px;margin-bottom:6px;color:#1a1d23}
-#gate .g-s{font-size:12px;color:#9499ab;line-height:1.7;margin-bottom:24px}
-#gate .g-in{width:100%;padding:12px 14px;font-size:14px;font-family:inherit;border:1.5px solid #d1d5db;border-radius:10px;outline:none;text-align:center;letter-spacing:2px}
-#gate .g-in:focus{border-color:#4b7cf3;box-shadow:0 0 0 3px rgba(75,124,243,.12)}
-#gate .g-btn{width:100%;margin-top:10px;padding:12px;font-size:13.5px;font-weight:700;font-family:inherit;background:#2563EB;color:#fff;border:0;border-radius:10px;cursor:pointer}
-#gate .g-btn:hover{background:#1d4ed8}
-#gate .g-err{font-size:11.5px;color:#ef4444;margin-top:12px;min-height:16px;font-weight:600}
-#gate .g-note{font-size:10px;color:#b0b5c2;line-height:1.7;margin-top:22px;padding-top:16px;border-top:1px solid #e8eaed}
-html.locked body>*:not(#gate){display:none!important}
-</style>
-<div id="gate">
-  <div class="g-card">
-    <div class="g-logo">S</div>
-    <div class="g-t">에스씨지랩 경영정보</div>
-    <div class="g-s">내부 임직원 전용 페이지입니다.<br>비밀번호를 입력해 주세요.</div>
-    <input type="password" id="g-pw" class="g-in" placeholder="비밀번호" autocomplete="off" autofocus>
-    <button class="g-btn" id="g-go">접속</button>
-    <div class="g-err" id="g-err"></div>
-    <div class="g-note">본 페이지의 정보는 대외비입니다.<br>무단 열람·복제·외부 반출을 금합니다.</div>
+<div id="lockbox">
+  <div class="lock-card">
+    <div class="lock-ico">🔒</div>
+    <div class="lock-t">에스씨지랩 경영정보</div>
+    <div class="lock-s">내부 임직원 전용 페이지입니다.<br>비밀번호를 입력해 주세요.</div>
+    <input type="password" id="lock-pw" class="lock-in" placeholder="비밀번호" autocomplete="off" autofocus>
+    <button class="lock-btn" id="lock-go">열람하기</button>
+    <div class="lock-err" id="lock-err"></div>
+    <div class="lock-note">본 페이지의 정보는 대외비입니다.<br>무단 열람·복제·외부 반출을 금합니다.</div>
   </div>
 </div>
+<div id="vault"></div>
+<script id="sealed" type="application/json">{"s": "L5qlHHLsDprK/PepNs3+8w==", "i": "C0E62pgTykbXogu/", "c": "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", "n": 310000}</script>
 <script>
 (function(){
-  const HASH='eda562899f8b89ea55e0c7e1230b3d3a8d8a426989dcc8726e3b616058f5b380';
-  const gate=document.getElementById('gate');
-  document.documentElement.classList.add('locked');
-  const sha=async t=>[...new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t)))]
-    .map(b=>b.toString(16).padStart(2,'0')).join('');
-  function pass(pw){ sessionStorage.setItem('scg_k',pw); document.documentElement.classList.remove('locked'); gate.remove(); }
-  async function go(pw,silent){
-    if(!pw) return false;
-    if(await sha(pw)===HASH){ pass(pw); return true; }
-    if(!silent){ document.getElementById('g-err').textContent='비밀번호가 올바르지 않습니다.';
-      const i=document.getElementById('g-pw'); i.value=''; i.focus(); }
-    sessionStorage.removeItem('scg_k'); return false;
+  const B=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+  const P=JSON.parse(document.getElementById('sealed').textContent);
+  const box=document.getElementById('lockbox'), vault=document.getElementById('vault');
+  const inp=document.getElementById('lock-pw'), btn=document.getElementById('lock-go'), err=document.getElementById('lock-err');
+  let busy=false;
+
+  async function unseal(pw){
+    const ks=await crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveKey']);
+    const key=await crypto.subtle.deriveKey(
+      {name:'PBKDF2',salt:B(P.s),iterations:P.n,hash:'SHA-256'},ks,
+      {name:'AES-GCM',length:256},false,['decrypt']);
+    const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:B(P.i)},key,B(P.c));
+    return new TextDecoder().decode(pt);
   }
-  document.getElementById('g-go').onclick=()=>go(document.getElementById('g-pw').value,false);
-  document.getElementById('g-pw').onkeydown=e=>{ if(e.key==='Enter') go(e.target.value,false); };
+
+  function open_(html){
+    vault.innerHTML=html;
+    // 봉인 해제 후 내부 <script> 재실행 (innerHTML은 스크립트를 실행하지 않음)
+    vault.querySelectorAll('script').forEach(function(old){
+      const s=document.createElement('script');
+      for(const a of old.attributes) s.setAttribute(a.name,a.value);
+      s.textContent=old.textContent;
+      old.parentNode.replaceChild(s,old);
+    });
+    box.remove();
+    document.getElementById('sealed').remove();
+    document.getElementById('lock-css').remove();
+  }
+
+  async function tryPw(pw,silent){
+    if(busy||!pw) return false;
+    busy=true; btn.textContent='해독 중…'; btn.disabled=true; err.textContent='';
+    try{
+      const html=await unseal(pw);
+      sessionStorage.setItem('scg_k',pw);
+      open_(html); return true;
+    }catch(e){
+      sessionStorage.removeItem('scg_k');
+      if(!silent){ err.textContent='비밀번호가 올바르지 않습니다.'; inp.value=''; inp.focus(); }
+      btn.textContent='열람하기'; btn.disabled=false; busy=false; return false;
+    }
+  }
+
+  btn.onclick=()=>tryPw(inp.value,false);
+  inp.onkeydown=e=>{ if(e.key==='Enter') tryPw(inp.value,false); };
+
+  // 세션에 저장된 비번으로 자동 해제 (페이지 이동 시 재입력 불필요)
   const saved=sessionStorage.getItem('scg_k');
-  if(saved) go(saved,true).then(ok=>{ if(!ok) document.getElementById('g-pw').focus(); });
+  if(saved) tryPw(saved,true).then(ok=>{ if(!ok){ btn.textContent='열람하기'; btn.disabled=false; busy=false; inp.focus(); } });
 })();
-</script>
-
-<!-- Header -->
-<div class="header">
-  <div class="brand">
-    <div class="logo">S</div>
-    <div class="brand-text">
-      <h1>에스씨지랩</h1>
-      <p>SCGLAB · 경영정보 허브</p>
-    </div>
-  </div>
-  <div class="header-meta" id="curDate"></div>
-</div>
-
-<!-- Hero -->
-<div class="hero">
-  <div class="hero-text">
-    <h2>경영정보 대시보드</h2>
-    <p>에스씨지랩의 경영현황과 재무성과를 한눈에 확인하세요.<br>월별 실적부터 6개년 재무제표까지 통합 제공합니다.</p>
-    <div class="hero-badges">
-      <span class="hero-badge b-blue">2020 – 2026</span>
-      <span class="hero-badge b-green">매출 · 손익 · 재무비율</span>
-      <span class="hero-badge b-amber">거래처별 · 사업부별</span>
-    </div>
-  </div>
-</div>
-
-<!-- Main -->
-<div class="main">
-
-  <!-- 데이터 기준 안내 -->
-  <div class="data-notice">
-    <span class="notice-dot"></span>
-    <span class="notice-text"><strong>2026년 5월 실적 반영 완료</strong> · 2026년 추정값은 <strong>1~5월 실적 + 6~12월 2QF 추정</strong> 기준입니다.</span>
-  </div>
-
-  <!-- Key Metrics -->
-  <div class="stats-row" style="margin-bottom:36px; margin-top:0">
-    <div class="stat-box">
-      <div class="stat-label">2025 연간 매출</div>
-      <div class="stat-val">63.5억</div>
-      <div class="stat-ref">PATH 46.6억 · 빌링 16.9억</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-label">2025 영업이익</div>
-      <div class="stat-val">3.8억</div>
-      <div class="stat-ref">당기순이익 7.0억</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-label">2026 추정 매출</div>
-      <div class="stat-val">85.7억</div>
-      <div class="stat-ref">PATH 65.8억 · 빌링 19.9억</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-label">2026 추정 영업이익</div>
-      <div class="stat-val">6.4억</div>
-      <div class="stat-ref">당기순이익 9.7억</div>
-    </div>
-  </div>
-
-  <div class="grid-label">대시보드 선택</div>
-  <div class="card-grid">
-
-    <!-- 경영현황 카드 -->
-    <a href="scglab_dashboard_12m.html" class="dash-card">
-      <div class="card-header">
-        <div class="card-icon icon-blue">📊</div>
-        <span class="card-tag">월별 · 사업부별</span>
-      </div>
-      <div class="card-title">경영현황 대시보드</div>
-      <div class="card-desc">
-        <span id="mgmt-desc"></span>
-      </div>
-      <div class="card-meta">
-        <div class="meta-row">
-          <div class="meta-items">
-            <span class="meta-chip active">2026 월별</span>
-            <span class="meta-chip active">성과비교</span>
-            <span class="meta-chip active">추정(2QF)</span>
-            <span class="meta-chip">히스토리</span>
-          </div>
-          <div class="arrow-btn">열기 →</div>
-        </div>
-      </div>
-    </a>
-
-    <!-- 재무제표 카드 -->
-    <a href="financial.html" class="dash-card">
-      <div class="card-header">
-        <div class="card-icon icon-green">📑</div>
-        <span class="card-tag">6개년 · 연간</span>
-      </div>
-      <div class="card-title">재무제표 대시보드</div>
-      <div class="card-desc">
-        2020~2025년 손익계산서, 재무상태표, 재무비율,<br>
-        현금흐름을 연도별로 비교 분석합니다.
-      </div>
-      <div class="card-meta">
-        <div class="meta-row">
-          <div class="meta-items">
-            <span class="meta-chip active">손익계산서</span>
-            <span class="meta-chip active">재무상태표</span>
-            <span class="meta-chip active">재무비율</span>
-            <span class="meta-chip active">현금흐름</span>
-          </div>
-          <div class="arrow-btn" style="background:#ECFDF5; color:#059669;">열기 →</div>
-        </div>
-      </div>
-    </a>
-
-    <!-- 챗봇 카드 -->
-    <a href="chatbot.html" class="dash-card">
-      <div class="card-header">
-        <div class="card-icon icon-purple">🤖</div>
-        <span class="card-tag">AI · 질의응답</span>
-      </div>
-      <div class="card-title">경영 AI 챗봇</div>
-      <div class="card-desc">
-        매출·손익·거래처 데이터를 자연어로 질문하면<br>
-        Claude AI가 즉시 분석해서 답변합니다.
-      </div>
-      <div class="card-meta">
-        <div class="meta-row">
-          <div class="meta-items">
-            <span class="meta-chip active">실적 조회</span>
-            <span class="meta-chip active">비교 분석</span>
-            <span class="meta-chip active">재무비율</span>
-          </div>
-          <div class="arrow-btn" style="background:#F5F3FF;color:#7C3AED;">열기 →</div>
-        </div>
-      </div>
-    </a>
-
-    <!-- CEO 경영평가 카드 -->
-    <a href="ceo-eval.html" class="dash-card">
-      <div class="card-header">
-        <div class="card-icon" style="background:#FFFBEB;">📋</div>
-        <span class="card-tag" style="background:#FEF3C7;color:#92400E;">TRIAL</span>
-      </div>
-      <div class="card-title">대표이사 경영평가 <span style="font-size:11px;color:#D97706;font-weight:600;">TRIAL</span></div>
-      <div class="card-desc">
-        KAIPER 그룹 기준 SPI2 기반 성과급·연봉을<br>
-        PEI 등급별로 시뮬레이션합니다.
-      </div>
-      <div class="card-meta">
-        <div class="meta-row">
-          <div class="meta-items">
-            <span class="meta-chip active" style="background:#FFFBEB;color:#92400E;border-color:#FDE68A;">성과급</span>
-            <span class="meta-chip active" style="background:#FFFBEB;color:#92400E;border-color:#FDE68A;">연봉책정</span>
-            <span class="meta-chip active" style="background:#FFFBEB;color:#92400E;border-color:#FDE68A;">ESI</span>
-          </div>
-          <div class="arrow-btn" style="background:#FFFBEB;color:#D97706;">열기 →</div>
-        </div>
-      </div>
-    </a>
-
-    <!-- 임직원 명부 카드 -->
-    <a href="roster.html" class="dash-card">
-      <div class="card-header">
-        <div class="card-icon icon-indigo">👥</div>
-        <span class="card-tag">인사 · 조직</span>
-      </div>
-      <div class="card-title">임직원 명부</div>
-      <div class="card-desc">
-        실·팀·파트별 임직원 명단과 조직도를<br>
-        한눈에 확인합니다. 매월 갱신됩니다.
-      </div>
-      <div class="card-meta">
-        <div class="meta-row">
-          <div class="meta-items">
-            <span class="meta-chip active" style="background:#EEF2FF;color:#4F46E5;border-color:#C7D2FE;">명단</span>
-            <span class="meta-chip active" style="background:#EEF2FF;color:#4F46E5;border-color:#C7D2FE;">조직도</span>
-            <span class="meta-chip active" style="background:#EEF2FF;color:#4F46E5;border-color:#C7D2FE;">부서조회</span>
-          </div>
-          <div class="arrow-btn" style="background:#EEF2FF;color:#4F46E5;">열기 →</div>
-        </div>
-      </div>
-    </a>
-
-  </div>
-</div>
-
-<!-- Footer -->
-<div class="footer">
-  <div class="footer-left">SCGLAB · 경영정보 허브 · 내부용</div>
-  <div class="footer-right">Powered by Claude</div>
-</div>
-
-<script>
-
-  const d    = new Date();
-  const yyyy = d.getFullYear();
-  const mm   = String(d.getMonth()+1).padStart(2,'0');
-  const dd   = String(d.getDate()).padStart(2,'0');
-  document.getElementById('curDate').textContent = yyyy + '.' + mm + '.' + dd;
-
-  // 경영현황 설명 — 연도 자동
-  const cy   = yyyy;          // 현재연도 (예: 2027)
-  const py   = cy - 1;        // 전년도   (예: 2026)
-  const hist = cy - 5;        // 히스토리 시작 (예: 2022)
-  document.getElementById('mgmt-desc').innerHTML =
-    cy + '년 월별 확정·계획부터 ' + py + '년 연간 손익,<br>' +
-    hist + '~' + cy + '년 5개년 히스토리까지 사업부별로 확인합니다.';
-
-
-
 </script>
 </body>
 </html>
