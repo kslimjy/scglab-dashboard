@@ -49,7 +49,8 @@ body{font-family:'Pretendard',sans-serif;background:var(--bg);color:var(--text);
 .card{position:relative;background:var(--white);border:1px solid var(--border);border-radius:14px;padding:20px;box-shadow:var(--shadow);display:flex;gap:16px;align-items:center;cursor:default;transition:box-shadow .18s,border-color .18s;overflow:visible}
 .card:hover{box-shadow:0 4px 16px rgba(0,0,0,.1),0 2px 6px rgba(0,0,0,.06);border-color:var(--blue)}
 .card.hide{display:none}
-.photo{width:76px;height:76px;border-radius:14px;object-fit:cover;flex-shrink:0;background:#e8eaed;display:flex;align-items:center;justify-content:center;font-size:28px;color:var(--text3);font-weight:700}
+.photo{position:relative;width:76px;height:76px;border-radius:14px;overflow:hidden;flex-shrink:0;background:#e8eaed;display:flex;align-items:center;justify-content:center;font-size:28px;color:var(--text3);font-weight:700}
+.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block}
 .info{flex:1;min-width:0}
 .name-row{display:flex;align-items:baseline;gap:8px;margin-bottom:6px;flex-wrap:wrap}
 .name{font-size:19px;font-weight:700}
@@ -191,7 +192,7 @@ tr:hover td{background:#fafbfc}
   </div>
   <div class="grid" id="cardgrid" style="margin-bottom:280px">
     <div class="card" data-dept="" data-team="" data-virt="" data-gender="남" data-grade="대표이사" data-part="" data-name="박동녘   대표이사 대표이사">
-      <div class="photo">박</div>
+      <div class="photo"><img src="photos/N15279.jpg" alt="" loading="lazy" onerror="this.remove()">박</div>
       <div class="info">
         <div class="name-row">
           <span class="name">박동녘</span><span class="gdot g-m" title="남"></span>
@@ -226,7 +227,7 @@ tr:hover td{background:#fafbfc}
       </div>
     </div>
     <div class="card" data-dept="" data-team="" data-virt="" data-gender="남" data-grade="대표이사" data-part="" data-name="김요한   대표이사 대표이사">
-      <div class="photo">김</div>
+      <div class="photo"><img src="photos/L21010.jpg" alt="" loading="lazy" onerror="this.remove()">김</div>
       <div class="info">
         <div class="name-row">
           <span class="name">김요한</span><span class="gdot g-m" title="남"></span>
@@ -261,7 +262,7 @@ tr:hover td{background:#fafbfc}
       </div>
     </div>
     <div class="card" data-dept="서비스사업실" data-team="" data-virt="" data-gender="남" data-grade="이사" data-part="" data-name="송준상   이사 실장">
-      <div class="photo">송</div>
+      <div class="photo"><img src="photos/L22007.jpg" alt="" loading="lazy" onerror="this.remove()">송</div>
       <div class="info">
         <div class="name-row">
           <span class="name">송준상</span><span class="gdot g-m" title="남"></span>
@@ -295,7 +296,7 @@ tr:hover td{background:#fafbfc}
       </div>
     </div>
     <div class="card" data-dept="서비스사업실" data-team="" data-virt="" data-gender="남" data-grade="부장" data-part="" data-name="남기철   부장 ">
-      <div class="photo">남</div>
+      <div class="photo"><img src="photos/L25006.jpg" alt="" loading="lazy" onerror="this.remove()">남</div>
       <div class="info">
         <div class="name-row">
           <span class="name">남기철</span><span class="gdot g-m" title="남"></span>
@@ -329,7 +330,7 @@ tr:hover td{background:#fafbfc}
       </div>
     </div>
     <div class="card" data-dept="서비스사업실" data-team="기획팀" data-virt="" data-gender="남" data-grade="차장" data-part="기획파트" data-name="신준철 기획팀 기획파트 차장 파트장">
-      <div class="photo">신</div>
+      <div class="photo"><img src="photos/L21004.jpg" alt="" loading="lazy" onerror="this.remove()">신</div>
       <div class="info">
         <div class="name-row">
           <span class="name">신준철</span><span class="gdot g-m" title="남"></span>
@@ -363,7 +364,7 @@ tr:hover td{background:#fafbfc}
       </div>
     </div>
     <div class="card" data-dept="서비스사업실" data-team="기획팀" data-virt="" data-gender="남" data-grade="과장" data-part="기획파트" data-name="박성민 기획팀 기획파트 과장 파트원">
-      <div class="photo">박</div>
+      <div class="photo"><img src="photos/L22008.jpg" alt="" loading="lazy" onerror="this.remove()">박</div>
       <div class="info">
         <div class="name-row">
           <span class="name">박성민</span><span class="gdot g-m" title="남"></span>
@@ -397,7 +398,7 @@ tr:hover td{background:#fafbfc}
       </div>
     </div>
     <div class="card" data-dept="서비스사업실" data-team="기획팀" data-virt="" data-gender="여" data-grade="과장" data-part="기획파트" data-name="이미희 기획팀 기획파트 과장 파트원">
-      <div class="photo">이</div>
+      <div class="photo"><img src="photos/L17001.jpg" alt="" loading="lazy" onerror="this.remove()">이</div>
       <div class="info">
         <div class="name-row">
           <span class="name">이미희</span><span class="gdot g-f" title="여"></span>
@@ -431,7 +432,7 @@ tr:hover td{background:#fafbfc}
       </div>
     </div>
     <div class="card" data-dept="서비스사업실" data-team="기획팀" data-virt="" data-gender="여" data-grade="과장" data-part="기획파트" data-name="조은아 기획팀 기획파트 과장 파트원">
-      <div class="photo">조</div>
+      <div class="photo"><img src="photos/L23002.jpg" alt="" loading="lazy" onerror="this.remove()">조</div>
       <div class="info">
         <div class="name-row">
           <span class="name">조은아</span><span class="gdot g-f" title="여"></span>
@@ -465,7 +466,7 @@ tr:hover td{background:#fafbfc}
       </div>
     </div>
     <div class="card" data-dept="서비스사업실" data-team="기획팀" data-virt="" data-gender="여" data-grade="사원" data-part="기획파트" data-name="김가현 기획팀 기획파트 사원 파트원">
-      <div class="photo">김</div>
+      <div class="photo"><img src="photos/L26003.jpg" alt="" loading="lazy" onerror="this.remove()">김</div>
       <div class="info">
         <div class="name-row">
           <span class="name">김가현</span><span class="gdot g-f" title="여"></span>
@@ -499,7 +500,7 @@ tr:hover td{background:#fafbfc}
       </div>
     </div>
     <div class="card" data-dept="서비스사업실" data-team="기획팀" data-virt="" data-gender="여" data-grade="과장" data-part="마케팅파트" data-name="배사랑 기획팀 마케팅파트 과장 파트장">
-      <div class="photo">배</div>
+      <div class="photo"><img src="photos/L25002.jpg" alt="" loading="lazy" onerror="this.remove()">배</div>
       <div class="info">
         <div class="name-row">
           <span class="name">배사랑</span><span class="gdot g-f" title="여"></span>
@@ -533,7 +534,7 @@ tr:hover td{background:#fafbfc}
       </div>
     </div>
     <div class="card" data-dept="서비스사업실" data-team="기획팀" data-virt="" data-gender="여" data-grade="부장" data-part="마케팅파트" data-name="백하영 기획팀 마케팅파트 부장 파트원">
-      <div class="photo">백</div>
+      <div class="photo"><img src="photos/L20003.jpg" alt="" loading="lazy" onerror="this.remove()">백</div>
       <div class="info">
         <div class="name-row">
           <span class="name">백하영</span><span class="gdot g-f" title="여"></span>
@@ -567,7 +568,7 @@ tr:hover td{background:#fafbfc}
       </div>
     </div>
     <div class="card" data-dept="서비스사업실" data-team="기획팀" data-virt="" data-gender="여" data-grade="과장" data-part="마케팅파트" data-name="방민지 기획팀 마케팅파트 과장 파트원">
-      <div class="photo">방</div>
+      <div class="photo"><img src="photos/119041.jpg" alt="" loading="lazy" onerror="this.remove()">방</div>
       <div class="info">
         <div class="name-row">
           <span class="name">방민지</span><span class="gdot g-f" title="여"></span>
@@ -602,7 +603,7 @@ tr:hover td{background:#fafbfc}
       </div>
     </div>
     <div class="card" data-dept="서비스사업실" data-team="기획팀" data-virt="" data-gender="여" data-grade="대리" data-part="마케팅파트" data-name="서희승 기획팀 마케팅파트 대리 파트원">
-      <div class="photo">서</div>
+      <div class="photo"><img src="photos/L25004.jpg" alt="" loading="lazy" onerror="this.remove()">서</div>
       <div class="info">
         <div class="name-row">
           <span class="name">서희승</span><span class="gdot g-f" title="여"></span>
@@ -636,7 +637,7 @@ tr:hover td{background:#fafbfc}
       </div>
     </div>
     <div class="card" data-dept="서비스사업실" data-team="디자인팀" data-virt="" data-gender="여" data-grade="차장" data-part="디자인파트" data-name="박진원 디자인팀 디자인파트 차장 파트장">
-      <div class="photo">박</div>
+      <div class="photo"><img src="photos/119049.jpg" alt="" loading="lazy" onerror="this.remove()">박</div>
       <div class="info">
         <div class="name-row">
           <span class="name">박진원</span><span class="gdot g-f" title="여"></span>
@@ -671,7 +672,7 @@ tr:hover td{background:#fafbfc}
       </div>
     </div>
     <div class="card" data-dept="서비스사업실" data-team="디자인팀" data-virt="" data-gender="여" data-grade="대리" data-part="디자인파트" data-name="기슬기 디자인팀 디자인파트 대리 파트원">
-      <div class="photo">기</div>
+      <div class="photo"><img src="photos/L23003.jpg" alt="" loading="lazy" onerror="this.remove()">기</div>
       <div class="info">
         <div class="name-row">
           <span class="name">기슬기</span><span class="gdot g-f" title="여"></span>
@@ -705,7 +706,7 @@ tr:hover td{background:#fafbfc}
       </div>
     </div>
     <div class="card" data-dept="서비스사업실" data-team="디자인팀" data-virt="" data-gender="여" data-grade="대리" data-part="디자인파트" data-name="정하은 디자인팀 디자인파트 대리 파트원">
-      <div class="photo">정</div>
+      <div class="photo"><img src="photos/L25005.jpg" alt="" loading="lazy" onerror="this.remove()">정</div>
       <div class="info">
         <div class="name-row">
           <span class="name">정하은</span><span class="gdot g-f" title="여"></span>
@@ -739,7 +740,7 @@ tr:hover td{background:#fafbfc}
       </div>
     </div>
     <div class="card" data-dept="서비스개발실" data-team="" data-virt="" data-gender="남" data-grade="이사" data-part="" data-name="최범균   이사 실장">
-      <div class="photo">최</div>
+      <div class="photo"><img src="photos/L21006.jpg" alt="" loading="lazy" onerror="this.remove()">최</div>
       <div class="info">
         <div class="name-row">
           <span class="name">최범균</span><span class="gdot g-m" title="남"></span>
@@ -773,7 +774,7 @@ tr:hover td{background:#fafbfc}
       </div>
     </div>
     <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="과장" data-part="서버1파트" data-name="양진만 개발팀 서버1파트 과장 파트원">
-      <div class="photo">양</div>
+      <div class="photo"><img src="photos/L23001.jpg" alt="" loading="lazy" onerror="this.remove()">양</div>
       <div class="info">
         <div class="name-row">
           <span class="name">양진만</span><span class="gdot g-m" title="남"></span>
@@ -808,7 +809,7 @@ tr:hover td{background:#fafbfc}
       </div>
     </div>
     <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="과장" data-part="서버1파트" data-name="염석준 개발팀 서버1파트 과장 파트원">
-      <div class="photo">염</div>
+      <div class="photo"><img src="photos/L22010.jpg" alt="" loading="lazy" onerror="this.remove()">염</div>
       <div class="info">
         <div class="name-row">
           <span class="name">염석준</span><span class="gdot g-m" title="남"></span>
@@ -842,7 +843,7 @@ tr:hover td{background:#fafbfc}
       </div>
     </div>
     <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="여" data-grade="대리" data-part="서버1파트" data-name="장혜윤 개발팀 서버1파트 대리 파트원">
-      <div class="photo">장</div>
+      <div class="photo"><img src="photos/L22006.jpg" alt="" loading="lazy" onerror="this.remove()">장</div>
       <div class="info">
         <div class="name-row">
           <span class="name">장혜윤</span><span class="gdot g-f" title="여"></span>
@@ -876,7 +877,7 @@ tr:hover td{background:#fafbfc}
       </div>
     </div>
     <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="부장" data-part="서버2파트" data-name="심익찬 개발팀 서버2파트 부장 파트장">
-      <div class="photo">심</div>
+      <div class="photo"><img src="photos/L22001.jpg" alt="" loading="lazy" onerror="this.remove()">심</div>
       <div class="info">
         <div class="name-row">
           <span class="name">심익찬</span><span class="gdot g-m" title="남"></span>
@@ -910,7 +911,7 @@ tr:hover td{background:#fafbfc}
       </div>
     </div>
     <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="대리" data-part="서버2파트" data-name="김진원 개발팀 서버2파트 대리 파트원">
-      <div class="photo">김</div>
+      <div class="photo"><img src="photos/L21011.jpg" alt="" loading="lazy" onerror="this.remove()">김</div>
       <div class="info">
         <div class="name-row">
           <span class="name">김진원</span><span class="gdot g-m" title="남"></span>
@@ -944,7 +945,7 @@ tr:hover td{background:#fafbfc}
       </div>
     </div>
     <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="대리" data-part="서버2파트" data-name="이영성 개발팀 서버2파트 대리 파트원">
-      <div class="photo">이</div>
+      <div class="photo"><img src="photos/L24001.jpg" alt="" loading="lazy" onerror="this.remove()">이</div>
       <div class="info">
         <div class="name-row">
           <span class="name">이영성</span><span class="gdot g-m" title="남"></span>
@@ -978,7 +979,7 @@ tr:hover td{background:#fafbfc}
       </div>
     </div>
     <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="부장" data-part="서버3파트" data-name="박정우 개발팀 서버3파트 부장 파트장">
-      <div class="photo">박</div>
+      <div class="photo"><img src="photos/L22013.jpg" alt="" loading="lazy" onerror="this.remove()">박</div>
       <div class="info">
         <div class="name-row">
           <span class="name">박정우</span><span class="gdot g-m" title="남"></span>
@@ -1012,7 +1013,7 @@ tr:hover td{background:#fafbfc}
       </div>
     </div>
     <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="대리" data-part="서버3파트" data-name="권태헌 개발팀 서버3파트 대리 파트원">
-      <div class="photo">권</div>
+      <div class="photo"><img src="photos/L22012.jpg" alt="" loading="lazy" onerror="this.remove()">권</div>
       <div class="info">
         <div class="name-row">
           <span class="name">권태헌</span><span class="gdot g-m" title="남"></span>
@@ -1046,7 +1047,7 @@ tr:hover td{background:#fafbfc}
       </div>
     </div>
     <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="여" data-grade="대리" data-part="서버3파트" data-name="신은진 개발팀 서버3파트 대리 파트원">
-      <div class="photo">신</div>
+      <div class="photo"><img src="photos/L22015.jpg" alt="" loading="lazy" onerror="this.remove()">신</div>
       <div class="info">
         <div class="name-row">
           <span class="name">신은진</span><span class="gdot g-f" title="여"></span>
@@ -1080,7 +1081,7 @@ tr:hover td{background:#fafbfc}
       </div>
     </div>
     <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="차장" data-part="프론트엔드파트" data-name="황승연 개발팀 프론트엔드파트 차장 파트장">
-      <div class="photo">황</div>
+      <div class="photo"><img src="photos/L25001.jpg" alt="" loading="lazy" onerror="this.remove()">황</div>
       <div class="info">
         <div class="name-row">
           <span class="name">황승연</span><span class="gdot g-m" title="남"></span>
@@ -1115,7 +1116,7 @@ tr:hover td{background:#fafbfc}
       </div>
     </div>
     <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="부장" data-part="프론트엔드파트" data-name="김윤석 개발팀 프론트엔드파트 부장 파트원">
-      <div class="photo">김</div>
+      <div class="photo"><img src="photos/L14001.jpg" alt="" loading="lazy" onerror="this.remove()">김</div>
       <div class="info">
         <div class="name-row">
           <span class="name">김윤석</span><span class="gdot g-m" title="남"></span>
@@ -1149,7 +1150,7 @@ tr:hover td{background:#fafbfc}
       </div>
     </div>
     <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="남" data-grade="대리" data-part="프론트엔드파트" data-name="임관우 개발팀 프론트엔드파트 대리 파트원">
-      <div class="photo">임</div>
+      <div class="photo"><img src="photos/L22002.jpg" alt="" loading="lazy" onerror="this.remove()">임</div>
       <div class="info">
         <div class="name-row">
           <span class="name">임관우</span><span class="gdot g-m" title="남"></span>
@@ -1183,7 +1184,7 @@ tr:hover td{background:#fafbfc}
       </div>
     </div>
     <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="여" data-grade="대리" data-part="프론트엔드파트" data-name="강다예 개발팀 프론트엔드파트 대리 파트원">
-      <div class="photo">강</div>
+      <div class="photo"><img src="photos/L22005.jpg" alt="" loading="lazy" onerror="this.remove()">강</div>
       <div class="info">
         <div class="name-row">
           <span class="name">강다예</span><span class="gdot g-f" title="여"></span>
@@ -1217,7 +1218,7 @@ tr:hover td{background:#fafbfc}
       </div>
     </div>
     <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="여" data-grade="대리" data-part="프론트엔드파트" data-name="이소현 개발팀 프론트엔드파트 대리 파트원">
-      <div class="photo">이</div>
+      <div class="photo"><img src="photos/L22011.jpg" alt="" loading="lazy" onerror="this.remove()">이</div>
       <div class="info">
         <div class="name-row">
           <span class="name">이소현</span><span class="gdot g-f" title="여"></span>
@@ -1251,7 +1252,7 @@ tr:hover td{background:#fafbfc}
       </div>
     </div>
     <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="" data-gender="여" data-grade="사원" data-part="프론트엔드파트" data-name="최예나 개발팀 프론트엔드파트 사원 파트원">
-      <div class="photo">최</div>
+      <div class="photo"><img src="photos/L24004.jpg" alt="" loading="lazy" onerror="this.remove()">최</div>
       <div class="info">
         <div class="name-row">
           <span class="name">최예나</span><span class="gdot g-f" title="여"></span>
@@ -1285,7 +1286,7 @@ tr:hover td{background:#fafbfc}
       </div>
     </div>
     <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="빌링사업부" data-gender="남" data-grade="부장" data-part="빌링파트" data-name="김명재 개발팀 빌링파트 부장 파트장">
-      <div class="photo">김</div>
+      <div class="photo"><img src="photos/200310046.jpg" alt="" loading="lazy" onerror="this.remove()">김</div>
       <div class="info">
         <div class="name-row">
           <span class="name">김명재</span><span class="gdot g-m" title="남"></span>
@@ -1320,7 +1321,7 @@ tr:hover td{background:#fafbfc}
       </div>
     </div>
     <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="빌링사업부" data-gender="남" data-grade="차장" data-part="빌링파트" data-name="박종탁 개발팀 빌링파트 차장 파트원">
-      <div class="photo">박</div>
+      <div class="photo"><img src="photos/201302015.jpg" alt="" loading="lazy" onerror="this.remove()">박</div>
       <div class="info">
         <div class="name-row">
           <span class="name">박종탁</span><span class="gdot g-m" title="남"></span>
@@ -1355,7 +1356,7 @@ tr:hover td{background:#fafbfc}
       </div>
     </div>
     <div class="card" data-dept="서비스개발실" data-team="개발팀" data-virt="빌링사업부" data-gender="남" data-grade="대리" data-part="빌링파트" data-name="임윤호 개발팀 빌링파트 대리 파트원">
-      <div class="photo">임</div>
+      <div class="photo"><img src="photos/L24002.jpg" alt="" loading="lazy" onerror="this.remove()">임</div>
       <div class="info">
         <div class="name-row">
           <span class="name">임윤호</span><span class="gdot g-m" title="남"></span>
@@ -1389,7 +1390,7 @@ tr:hover td{background:#fafbfc}
       </div>
     </div>
     <div class="card" data-dept="대표이사 직속" data-team="경영관리팀" data-virt="" data-gender="남" data-grade="차장" data-part="" data-name="임종엽 경영관리팀  차장 팀장">
-      <div class="photo">임</div>
+      <div class="photo"><img src="photos/L21005.jpg" alt="" loading="lazy" onerror="this.remove()">임</div>
       <div class="info">
         <div class="name-row">
           <span class="name">임종엽</span><span class="gdot g-m" title="남"></span>
@@ -1423,7 +1424,7 @@ tr:hover td{background:#fafbfc}
       </div>
     </div>
     <div class="card" data-dept="대표이사 직속" data-team="경영관리팀" data-virt="" data-gender="여" data-grade="과장" data-part="" data-name="황지혜 경영관리팀  과장 팀원">
-      <div class="photo">황</div>
+      <div class="photo"><img src="photos/L22009.jpg" alt="" loading="lazy" onerror="this.remove()">황</div>
       <div class="info">
         <div class="name-row">
           <span class="name">황지혜</span><span class="gdot g-f" title="여"></span>
@@ -1457,7 +1458,7 @@ tr:hover td{background:#fafbfc}
       </div>
     </div>
     <div class="card" data-dept="대표이사 직속" data-team="경영관리팀" data-virt="" data-gender="여" data-grade="대리" data-part="" data-name="전유민 경영관리팀  대리 팀원">
-      <div class="photo">전</div>
+      <div class="photo"><img src="photos/L21003.jpg" alt="" loading="lazy" onerror="this.remove()">전</div>
       <div class="info">
         <div class="name-row">
           <span class="name">전유민</span><span class="gdot g-f" title="여"></span>
@@ -1491,7 +1492,7 @@ tr:hover td{background:#fafbfc}
       </div>
     </div>
     <div class="card" data-dept="대표이사 직속" data-team="영업기획팀" data-virt="빌링사업부" data-gender="남" data-grade="부장" data-part="" data-name="강승봉 영업기획팀  부장 팀장">
-      <div class="photo">강</div>
+      <div class="photo"><img src="photos/H17002.jpg" alt="" loading="lazy" onerror="this.remove()">강</div>
       <div class="info">
         <div class="name-row">
           <span class="name">강승봉</span><span class="gdot g-m" title="남"></span>
@@ -1526,7 +1527,7 @@ tr:hover td{background:#fafbfc}
       </div>
     </div>
     <div class="card" data-dept="대표이사 직속" data-team="영업기획팀" data-virt="빌링사업부" data-gender="남" data-grade="부장" data-part="" data-name="팽무진 영업기획팀  부장 팀원">
-      <div class="photo">팽</div>
+      <div class="photo"><img src="photos/H18004.jpg" alt="" loading="lazy" onerror="this.remove()">팽</div>
       <div class="info">
         <div class="name-row">
           <span class="name">팽무진</span><span class="gdot g-m" title="남"></span>
@@ -1561,7 +1562,7 @@ tr:hover td{background:#fafbfc}
       </div>
     </div>
     <div class="card" data-dept="대표이사 직속" data-team="영업기획팀" data-virt="빌링사업부" data-gender="남" data-grade="부장" data-part="" data-name="김정열 영업기획팀  부장 팀원">
-      <div class="photo">김</div>
+      <div class="photo"><img src="photos/H19004.jpg" alt="" loading="lazy" onerror="this.remove()">김</div>
       <div class="info">
         <div class="name-row">
           <span class="name">김정열</span><span class="gdot g-m" title="남"></span>
@@ -1596,7 +1597,7 @@ tr:hover td{background:#fafbfc}
       </div>
     </div>
     <div class="card" data-dept="대표이사 직속" data-team="영업기획팀" data-virt="빌링사업부" data-gender="여" data-grade="과장" data-part="" data-name="지은미 영업기획팀  과장 팀원">
-      <div class="photo">지</div>
+      <div class="photo"><img src="photos/L26001.jpg" alt="" loading="lazy" onerror="this.remove()">지</div>
       <div class="info">
         <div class="name-row">
           <span class="name">지은미</span><span class="gdot g-f" title="여"></span>
