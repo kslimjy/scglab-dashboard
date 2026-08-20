@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>에스씨지랩 경영정보 허브</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #F8FAFC;
+  font-family: 'Pretendard', sans-serif;
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+}
+
+/* ── Header */
+.header {
+  background: #0F172A;
+  padding: 22px 48px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.brand { display: flex; align-items: center; gap: 14px; }
+.logo {
+  width: 44px; height: 44px;
+  background: linear-gradient(135deg, #2563EB, #1D4ED8);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; color: white; font-weight: 800;
+  box-shadow: 0 2px 8px rgba(37,99,235,.25);
+}
+.brand-text h1 { font-size: 20px; font-weight: 800; color: #fff; letter-spacing: -.6px; }
+.brand-text p  { font-size: 12px; color: #64748B; font-family: 'Pretendard', sans-serif; margin-top: 2px; }
+.header-meta { font-size: 11px; color: #64748B; font-family: 'Pretendard', sans-serif; }
+
+/* ── Hero */
+.hero {
+  background: linear-gradient(160deg, #EFF6FF 0%, #F8FAFC 60%);
+  border-bottom: 1px solid #E2E8F0;
+  padding: 52px 48px 44px;
+
+}
+.hero h2 { font-size: 32px; font-weight: 800; color: #0F172A; letter-spacing: -1px; line-height: 1.25; }
+.hero p  { font-size: 15px; color: #64748B; margin-top: 12px; line-height: 1.7; max-width: 520px; letter-spacing: -.2px; }
+.hero-badges { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+.hero-badge {
+  font-size: 11px; font-family: 'Pretendard', sans-serif;
+  padding: 4px 12px; border-radius: 20px; font-weight: 500;
+}
+.b-blue   { background: #EFF6FF; color: #2563EB; border: 1px solid rgba(37,99,235,.15); }
+.b-green  { background: #ECFDF5; color: #059669; border: 1px solid rgba(5,150,105,.15); }
+.b-amber  { background: #FFFBEB; color: #D97706; border: 1px solid rgba(217,119,6,.15); }
+
+/* ── Main Grid */
+.main { padding: 44px 48px 60px; flex: 1; }
+.grid-label {
+  font-size: 13px; font-weight: 700; color: #0F172A;
+  letter-spacing: -.3px; margin-bottom: 18px;
+  display: flex; align-items: center; gap: 8px;
+}
+.grid-label::before {
+  content: ''; width: 4px; height: 16px; background: #2563EB; border-radius: 2px;
+}
+
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+
+/* ── Dashboard Card */
+.dash-card {
+  background: #fff;
+  border: 1px solid #E2E8F0;
+  border-radius: 16px;
+  padding: 30px;
+  text-decoration: none;
+  transition: transform .18s, box-shadow .18s, border-color .18s;
+  display: block;
+  box-shadow: 0 2px 8px rgba(15,23,42,.05);
+}
+.dash-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 32px rgba(15,23,42,.12);
+  border-color: #BFDBFE;
+}
+.card-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 16px; }
+.card-icon {
+  width: 48px; height: 48px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+}
+.icon-blue   { background: #EFF6FF; }
+.icon-green  { background: #ECFDF5; }
+.icon-purple { background: #F5F3FF; }
+.icon-indigo { background: #EEF2FF; }
+.card-tag {
+  font-size: 10px; font-family: 'Pretendard', sans-serif;
+  padding: 3px 10px; border-radius: 20px; font-weight: 500;
+  background: #F1F5F9; color: #64748B;
+}
+
+.card-title { font-size: 18px; font-weight: 700; color: #0F172A; letter-spacing: -.5px; }
+.card-desc  { font-size: 13px; color: #64748B; margin-top: 6px; line-height: 1.6; }
+
+.card-meta { margin-top: 20px; padding-top: 16px; border-top: 1px solid #F1F5F9; }
+.meta-row { display: flex; justify-content: space-between; align-items: center; }
+.meta-items { display: flex; gap: 6px; flex-wrap: wrap; }
+.meta-chip {
+  font-size: 11px; padding: 3px 9px; border-radius: 6px;
+  background: #F8FAFC; color: #64748B; border: 1px solid #E2E8F0;
+}
+.meta-chip.active { background: #EFF6FF; color: #2563EB; border-color: rgba(37,99,235,.2); }
+.arrow-btn {
+  font-size: 12px; font-weight: 600; color: #2563EB;
+  display: flex; align-items: center; gap: 4px;
+  background: #EFF6FF; padding: 6px 14px; border-radius: 8px;
+  transition: background .15s;
+}
+.dash-card:hover .arrow-btn { background: #DBEAFE; }
+
+/* ── Stats row */
+.stats-row {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 18px; margin-top: 20px;
+}
+.stat-box {
+  position: relative; overflow: hidden;
+  background: #fff; border: 1px solid #E2E8F0;
+  border-radius: 14px; padding: 22px 24px;
+  box-shadow: 0 2px 10px rgba(15,23,42,.05);
+  transition: transform .15s, box-shadow .15s;
+}
+.stat-box:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(15,23,42,.09); }
+.stat-box::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+}
+.stat-box:nth-child(1)::before { background: #2563EB; }
+.stat-box:nth-child(2)::before { background: #059669; }
+.stat-box:nth-child(3)::before { background: #D97706; }
+.stat-box:nth-child(4)::before { background: #7C3AED; }
+.stat-label { font-size: 11px; color: #94A3B8; text-transform: uppercase; letter-spacing: .8px; font-weight: 600; }
+.stat-val   { font-size: 30px; font-weight: 800; color: #0F172A; font-family: 'Pretendard', sans-serif;
+              margin-top: 8px; letter-spacing: -1.2px; line-height: 1; }
+.stat-sub   { font-size: 12px; color: #64748B; margin-top: 8px; font-weight: 500; }
+.stat-ref   { font-size: 11px; color: #94A3B8; margin-top: 8px; font-weight: 400; }
+.data-notice {
+  display: flex; align-items: center; gap: 10px;
+  background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: 10px;
+  padding: 12px 18px; margin-bottom: 24px;
+}
+.notice-dot {
+  width: 8px; height: 8px; border-radius: 50%; background: #2563EB;
+  flex-shrink: 0; box-shadow: 0 0 0 3px rgba(37,99,235,.15);
+}
+.notice-text { font-size: 13px; color: #1E40AF; line-height: 1.5; }
+.notice-text strong { font-weight: 700; }
+
+/* ── Footer */
+.footer {
+  background: #fff; border-top: 1px solid #E2E8F0;
+  padding: 20px 48px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-left  { font-size: 12px; color: #94A3B8; font-family: 'Pretendard', sans-serif; }
+.footer-right { font-size: 11px; color: #CBD5E1; }
+
+@media (max-width: 768px) {
+  .header, .hero, .main, .footer { padding-left: 20px; padding-right: 20px; }
+  .hero { flex-direction: column; align-items: flex-start; }
+  .hero h2 { font-size: 24px; }
+  .stats-row { grid-template-columns: 1fr 1fr; }
+}
+</style>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <div class="brand">
+    <div class="logo">S</div>
+    <div class="brand-text">
+      <h1>에스씨지랩</h1>
+      <p>SCGLAB · 경영정보 허브</p>
+    </div>
+  </div>
+  <div class="header-meta" id="curDate"></div>
+</div>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-text">
+    <h2>경영정보 대시보드</h2>
+    <p>에스씨지랩의 경영현황과 재무성과를 한눈에 확인하세요.<br>월별 실적부터 6개년 재무제표까지 통합 제공합니다.</p>
+    <div class="hero-badges">
+      <span class="hero-badge b-blue">2020 – 2026</span>
+      <span class="hero-badge b-green">매출 · 손익 · 재무비율</span>
+      <span class="hero-badge b-amber">거래처별 · 사업부별</span>
+    </div>
+  </div>
+</div>
+
+<!-- Main -->
+<div class="main">
+
+  <!-- 데이터 기준 안내 -->
+  <div class="data-notice">
+    <span class="notice-dot"></span>
+    <span class="notice-text"><strong>2026년 7월 실적 반영 완료</strong> · 2026년 추정값은 <strong>1~7월 실적 + 8~12월 3QF 추정</strong> 기준입니다. <span style="opacity:.75">(재무제표·자금현황 7월말 기준)</span></span>
+  </div>
+
+  <!-- Key Metrics -->
+  <div class="stats-row" style="margin-bottom:36px; margin-top:0">
+    <div class="stat-box">
+      <div class="stat-label">2025 연간 매출</div>
+      <div class="stat-val">63.5억</div>
+      <div class="stat-ref">PATH 46.6억 · 빌링 16.9억</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">2025 영업이익</div>
+      <div class="stat-val">3.8억</div>
+      <div class="stat-ref">당기순이익 7.0억</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">2026 추정 매출</div>
+      <div class="stat-val">90.1억</div>
+      <div class="stat-ref">PATH 71.0억 · 빌링 19.1억</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">2026 추정 영업이익</div>
+      <div class="stat-val">9.0억</div>
+      <div class="stat-ref">당기순이익 11.6억</div>
+    </div>
+  </div>
+
+  <div class="grid-label">대시보드 선택</div>
+  <div class="card-grid">
+
+    <!-- 경영현황 카드 -->
+    <a href="scglab_dashboard_12m.html" class="dash-card">
+      <div class="card-header">
+        <div class="card-icon icon-blue">📊</div>
+        <span class="card-tag">월별 · 사업부별</span>
+      </div>
+      <div class="card-title">경영현황 대시보드</div>
+      <div class="card-desc">
+        <span id="mgmt-desc"></span>
+      </div>
+      <div class="card-meta">
+        <div class="meta-row">
+          <div class="meta-items">
+            <span class="meta-chip active">2026 월별</span>
+            <span class="meta-chip active">성과비교</span>
+            <span class="meta-chip active">추정(3QF)</span>
+            <span class="meta-chip">히스토리</span>
+          </div>
+          <div class="arrow-btn">열기 →</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- 재무제표 카드 -->
+    <a href="financial.html" class="dash-card">
+      <div class="card-header">
+        <div class="card-icon icon-green">📑</div>
+        <span class="card-tag">6개년 · 연간</span>
+      </div>
+      <div class="card-title">재무제표 대시보드</div>
+      <div class="card-desc">
+        2020~2025년 손익계산서, 재무상태표, 재무비율,<br>
+        현금흐름을 연도별로 비교 분석합니다.
+      </div>
+      <div class="card-meta">
+        <div class="meta-row">
+          <div class="meta-items">
+            <span class="meta-chip active">손익계산서</span>
+            <span class="meta-chip active">재무상태표</span>
+            <span class="meta-chip active">재무비율</span>
+            <span class="meta-chip active">현금흐름</span>
+          </div>
+          <div class="arrow-btn" style="background:#ECFDF5; color:#059669;">열기 →</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- 챗봇 카드 -->
+    <a href="chatbot.html" class="dash-card">
+      <div class="card-header">
+        <div class="card-icon icon-purple">🤖</div>
+        <span class="card-tag">AI · 질의응답</span>
+      </div>
+      <div class="card-title">경영 AI 챗봇</div>
+      <div class="card-desc">
+        매출·손익·거래처 데이터를 자연어로 질문하면<br>
+        Claude AI가 즉시 분석해서 답변합니다.
+      </div>
+      <div class="card-meta">
+        <div class="meta-row">
+          <div class="meta-items">
+            <span class="meta-chip active">실적 조회</span>
+            <span class="meta-chip active">비교 분석</span>
+            <span class="meta-chip active">재무비율</span>
+          </div>
+          <div class="arrow-btn" style="background:#F5F3FF;color:#7C3AED;">열기 →</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- CEO 경영평가 카드 -->
+    <a href="ceo-eval.html" class="dash-card">
+      <div class="card-header">
+        <div class="card-icon" style="background:#FFFBEB;">📋</div>
+        <span class="card-tag" style="background:#FEF3C7;color:#92400E;">TRIAL</span>
+      </div>
+      <div class="card-title">대표이사 경영평가 <span style="font-size:11px;color:#D97706;font-weight:600;">TRIAL</span></div>
+      <div class="card-desc">
+        KAIPER 그룹 기준 K-PI² 기반 성과급·연봉을<br>
+        PEI 등급별로 시뮬레이션합니다.
+      </div>
+      <div class="card-meta">
+        <div class="meta-row">
+          <div class="meta-items">
+            <span class="meta-chip active" style="background:#FFFBEB;color:#92400E;border-color:#FDE68A;">성과급</span>
+            <span class="meta-chip active" style="background:#FFFBEB;color:#92400E;border-color:#FDE68A;">연봉책정</span>
+            <span class="meta-chip active" style="background:#FFFBEB;color:#92400E;border-color:#FDE68A;">ESI</span>
+          </div>
+          <div class="arrow-btn" style="background:#FFFBEB;color:#D97706;">열기 →</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- 임직원 명부 카드 -->
+    <a href="roster.html" class="dash-card">
+      <div class="card-header">
+        <div class="card-icon icon-indigo">👥</div>
+        <span class="card-tag">인사 · 조직</span>
+      </div>
+      <div class="card-title">임직원 명부</div>
+      <div class="card-desc">
+        실·팀·파트별 임직원 명단과 조직도를<br>
+        한눈에 확인합니다. 매월 갱신됩니다.
+      </div>
+      <div class="card-meta">
+        <div class="meta-row">
+          <div class="meta-items">
+            <span class="meta-chip active" style="background:#EEF2FF;color:#4F46E5;border-color:#C7D2FE;">명단</span>
+            <span class="meta-chip active" style="background:#EEF2FF;color:#4F46E5;border-color:#C7D2FE;">조직도</span>
+            <span class="meta-chip active" style="background:#EEF2FF;color:#4F46E5;border-color:#C7D2FE;">부서조회</span>
+          </div>
+          <div class="arrow-btn" style="background:#EEF2FF;color:#4F46E5;">열기 →</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- 경영정보 연구소 카드 -->
+    <a href="lab.html" class="dash-card" style="border-color:#FDE68A;">
+      <div class="card-header">
+        <div class="card-icon" style="background:#FFFBEB;">🧪</div>
+        <span class="card-tag" style="background:#FEF3C7;color:#92400E;">참고자료</span>
+      </div>
+      <div class="card-title">경영정보 연구소 <span style="font-size:11px;color:#B45309;font-weight:600;">TRIAL</span></div>
+      <div class="card-desc">
+        가정을 얹어 계산한 시나리오 분석입니다.<br>
+        <b style="color:#B45309;">회사 공식 전망·계획이 아닙니다.</b>
+      </div>
+      <div class="card-meta">
+        <div class="meta-row">
+          <div class="meta-items">
+            <span class="meta-chip active" style="background:#FFFBEB;color:#92400E;border-color:#FDE68A;">리워드 단가</span>
+            <span class="meta-chip active" style="background:#FFFBEB;color:#92400E;border-color:#FDE68A;">27년 전망</span>
+            <span class="meta-chip" style="background:#FFFBEB;color:#B45309;border-color:#FDE68A;">가정 명세</span>
+          </div>
+          <div class="arrow-btn" style="background:#FFFBEB;color:#B45309;">열기 →</div>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <div class="footer-left">SCGLAB · 경영정보 허브 · 내부용</div>
+  <div class="footer-right">Powered by Claude</div>
+</div>
+
+<script>
+
+  const d    = new Date();
+  const yyyy = d.getFullYear();
+  const mm   = String(d.getMonth()+1).padStart(2,'0');
+  const dd   = String(d.getDate()).padStart(2,'0');
+  document.getElementById('curDate').textContent = yyyy + '.' + mm + '.' + dd;
+
+  // 경영현황 설명 — 연도 자동
+  const cy   = yyyy;          // 현재연도 (예: 2027)
+  const py   = cy - 1;        // 전년도   (예: 2026)
+  const hist = cy - 5;        // 히스토리 시작 (예: 2022)
+  document.getElementById('mgmt-desc').innerHTML =
+    cy + '년 월별 확정·계획부터 ' + py + '년 연간 손익,<br>' +
+    hist + '~' + cy + '년 5개년 히스토리까지 사업부별로 확인합니다.';
+
+
+
+</script>
+</body>
+</html>
