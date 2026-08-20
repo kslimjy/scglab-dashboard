@@ -4,806 +4,104 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>에스씨지랩 재무제표 2020–2025</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js" crossorigin="anonymous"></script>
-<style>
-:root {
-  --bg:#F8FAFC; --bg2:#FFFFFF; --bg3:#F1F5F9;
-  --border:#E2E8F0; --border2:#CBD5E1;
-  --text:#1E293B; --text2:#475569; --text3:#94A3B8;
-  --blue:#2563EB; --blue-dim:#EFF6FF;
-  --green:#059669; --green-dim:#ECFDF5;
-  --amber:#D97706; --amber-dim:#FFFBEB;
-  --red:#DC2626; --red-dim:#FEF2F2;
-  --purple:#7C3AED;
-  --radius:10px;
-  --shadow:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.04);
-}
-*{box-sizing:border-box;margin:0;padding:0;}
-body{background:var(--bg);color:var(--text);font-family:'Pretendard',sans-serif;font-size:14px;line-height:1.6;min-height:100vh;;letter-spacing:-.2px}
-
-/* Header */
-.header{background:#0F172A;padding:20px 40px;display:flex;align-items:center;justify-content:space-between;}
-.header-left{display:flex;align-items:center;gap:14px;}
-.header-logo{width:36px;height:36px;background:var(--blue);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff;font-weight:700;text-decoration:none;transition:transform .15s,box-shadow .15s;}
-.header-logo:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(37,99,235,.4);}
-.header-left h1{font-size:18px;font-weight:700;color:#fff;letter-spacing:-.4px;}
-.header-left p{font-size:11px;color:#64748B;font-family:'Pretendard',sans-serif;margin-top:2px;}
-.header-right{display:flex;gap:10px;align-items:center;}
-.badge{font-size:11px;font-family:'Pretendard',sans-serif;background:var(--blue-dim);color:var(--blue);border:1px solid rgba(37,99,235,.15);border-radius:20px;padding:3px 12px;}
-.back-btn{font-size:12px;font-weight:500;background:var(--bg3);color:var(--text2);border:1px solid var(--border);border-radius:8px;padding:6px 14px;cursor:pointer;text-decoration:none;transition:background .15s;}
-.back-btn:hover{background:var(--border);}
-.ai-btn{font-size:12px;font-weight:600;background:#2563EB;color:#fff;border:none;border-radius:8px;padding:6px 14px;cursor:pointer;text-decoration:none;transition:background .15s;}
-.ai-btn:hover{background:#1D4ED8;}
-
-/* Tabs */
-.tab-bar{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 40px;position:sticky;top:0;z-index:10;display:flex;gap:0;}
-.tab{font-size:13px;font-weight:400;padding:14px 22px;cursor:pointer;color:var(--text3);border:none;background:none;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .15s,border-color .15s;font-family:'Pretendard',sans-serif;white-space:nowrap;}
-.tab:hover{color:var(--text2);}
-.tab.active{color:var(--blue);border-bottom-color:var(--blue);font-weight:600;}
-
-/* Layout */
-.main{padding:28px 40px 48px;max-width:1180px;margin:0 auto;}
-.panel{display:none;}
-.panel.active{display:block;}
-
-/* KPI */
-.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px;}
-.cash-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:8px;}
-.cash-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:18px 20px;position:relative;overflow:hidden;}
-.cash-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:#2563EB;}
-.cash-card:nth-child(2)::before{background:#059669;}
-.cash-card:nth-child(3)::before{background:#D97706;}
-.cash-card:nth-child(4)::before{background:#7C3AED;}
-.cash-label{font-size:11px;color:var(--text3);font-weight:500;margin-bottom:8px;}
-.cash-value{font-size:26px;font-weight:800;color:var(--text);font-family:'Pretendard',sans-serif;letter-spacing:-1px;}
-.cash-value span{font-size:13px;font-weight:400;color:var(--text3);margin-left:3px;}
-.cash-sub{font-size:11px;color:var(--text3);margin-top:6px;}
-@media(max-width:700px){.cash-grid{grid-template-columns:repeat(2,1fr);}}
-.kpi{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);}
-.kpi-label{font-size:11px;color:var(--text3);font-weight:500;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;}
-.kpi-value{font-size:24px;font-weight:700;color:var(--text);font-family:'Pretendard',sans-serif;letter-spacing:-1px;}
-.kpi-value span{font-size:13px;font-weight:400;color:var(--text3);margin-left:3px;}
-.kpi-sub{font-size:12px;color:var(--text3);margin-top:4px;}
-.kpi-badge{display:inline-block;margin-top:6px;font-size:11px;font-weight:600;padding:2px 8px;border-radius:12px;font-family:'Pretendard',sans-serif;}
-.up{background:var(--green-dim);color:var(--green);}
-.down{background:var(--red-dim);color:var(--red);}
-.flat{background:var(--amber-dim);color:var(--amber);}
-
-/* Cards */
-.chart-grid{display:grid;gap:16px;}
-.chart-grid-2{grid-template-columns:1fr 1fr;}
-.chart-grid-1{grid-template-columns:1fr;}
-.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;box-shadow:var(--shadow);}
-.card-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px;}
-.card-sub{font-size:11px;color:var(--text3);margin-bottom:16px;}
-.chart-wrap{position:relative;height:240px;}
-
-/* Table */
-.fin-table{width:100%;border-collapse:collapse;font-size:14px;}
-.fin-table th{background:var(--bg3);color:var(--text);font-weight:700;padding:12px 16px;text-align:right;border-bottom:2px solid var(--border2);font-family:'Pretendard',sans-serif;font-size:13px;}
-.fin-table th:first-child{text-align:left;}
-.fin-table td{padding:11px 16px;text-align:right;border-bottom:1px solid var(--border);color:var(--text);font-weight:500;font-family:'Pretendard',sans-serif;font-size:14px;}
-.fin-table td:first-child{text-align:left;color:var(--text);font-weight:600;font-family:'Pretendard',sans-serif;}
-.fin-table tr:hover td{background:var(--bg3);}
-.fin-table .section-row td{background:#EFF2F7;color:var(--text);font-weight:700;font-size:14px;}
-.fin-table .highlight-row td{color:var(--blue);font-weight:800;background:#F5F8FF;font-size:14px;}
-.fin-table .neg{color:var(--red)!important;}
-.fin-table .pos-g{color:var(--green)!important;}
-.fin-table .term{display:block;font-size:11px;color:var(--text2);margin-top:2px;font-weight:500;}
-.table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius);}
-
-/* Tooltip */
-.tip{cursor:help;border-bottom:1px dashed var(--text3);}
-#tooltip{
-  position:fixed;
-  background:#1E293B;
-  color:#fff;
-  font-size:12px;
-  font-family:'Pretendard',sans-serif;
-  line-height:1.7;
-  padding:10px 14px;
-  border-radius:8px;
-  max-width:260px;
-  pointer-events:none;
-  opacity:0;
-  transition:opacity .15s;
-  z-index:9999;
-  box-shadow:0 4px 16px rgba(0,0,0,.25);
-  white-space:normal;
-}
-#tooltip.show{opacity:1;}
-#tooltip .tip-formula{color:#93C5FD;font-size:11px;margin-bottom:4px;font-family:'Pretendard',sans-serif;}
-#tooltip .tip-desc{color:#fff;}
-#tooltip .tip-note{color:#94A3B8;font-size:11px;margin-top:3px;}
-
-.legend{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:14px;}
-.legend-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text2);}
-.legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
-.legend-line{width:18px;height:2px;flex-shrink:0;}
-.sec-title{font-size:12px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;margin:24px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--border);}
-
-@media(max-width:900px){
-  .header,.tab-bar,.main{padding-left:20px;padding-right:20px;}
-  .kpi-grid{grid-template-columns:repeat(2,1fr);}
-  .chart-grid-2{grid-template-columns:1fr;}
-}
-
-/* ── 2026 진행/전망 컬럼 (확정치 아님을 시각적으로 구분) */
-.fin-table th.col-fcst, .fin-table td.col-fcst{
-  background:repeating-linear-gradient(45deg,rgba(148,163,184,.055) 0 6px,transparent 6px 12px);
-  color:#94A3B8; font-style:italic;
-  border-left:2px dashed #CBD5E1;
-}
-.fin-table th.col-fcst{ color:#94A3B8; font-style:normal; font-weight:600; }
-.fin-table th.col-act26, .fin-table td.col-act26{
-  background:rgba(59,130,246,.045);
-  border-left:2px solid #BFDBFE;
-}
-.fin-table td.col-fcst.pos-g, .fin-table td.col-fcst.neg{ opacity:.75; }
-.col-tag{ display:block; font-size:9px; font-weight:400; letter-spacing:.2px; margin-top:2px; opacity:.85; }
-.fcst-note{
-  background:#F8FAFC; border:1px dashed #CBD5E1; border-radius:8px;
-  padding:9px 13px; margin-top:10px; font-size:11.5px; color:#64748B; line-height:1.65;
-}
-</style>
+<meta name="generator" content="SCGLAB-SEALED-V1">
+<title>재무제표 대시보드</title>
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{min-height:100vh;display:flex;align-items:center;justify-content:center;
+  background:#0F172A;font-family:'Pretendard',sans-serif;padding:24px}
+.box{width:100%;max-width:380px;background:#fff;border-radius:14px;padding:34px 30px;
+  box-shadow:0 12px 40px rgba(0,0,0,.35)}
+.ico{width:46px;height:46px;border-radius:11px;background:linear-gradient(135deg,#2563EB,#1D4ED8);
+  display:flex;align-items:center;justify-content:center;font-size:21px;margin-bottom:17px}
+h1{font-size:17px;font-weight:800;color:#0F172A;letter-spacing:-.4px}
+.sub{font-size:12px;color:#64748B;margin-top:6px;line-height:1.6}
+label{display:block;font-size:11.5px;font-weight:600;color:#475569;margin:22px 0 7px}
+input{width:100%;padding:11px 13px;font-size:14px;font-family:'Pretendard',sans-serif;
+  border:1px solid #CBD5E1;border-radius:9px;outline:none;transition:.15s}
+input:focus{border-color:#2563EB;box-shadow:0 0 0 3px rgba(37,99,235,.13)}
+button{width:100%;margin-top:14px;padding:11px;font-size:13.5px;font-weight:700;
+  font-family:'Pretendard',sans-serif;color:#fff;background:#2563EB;border:none;
+  border-radius:9px;cursor:pointer;transition:.15s}
+button:hover:not(:disabled){background:#1D4ED8}
+button:disabled{background:#94A3B8;cursor:default}
+.msg{font-size:11.5px;margin-top:12px;min-height:17px;line-height:1.6}
+.err{color:#DC2626}.inf{color:#64748B}
+.foot{margin-top:22px;padding-top:15px;border-top:1px solid #F1F5F9;
+  font-size:10.5px;color:#94A3B8;line-height:1.7}
+</style>
 </head>
 <body>
-
-<div class="header">
-  <div class="header-left">
-    <a href="index.html" class="header-logo" title="허브로 이동">S</a>
-    <div>
-      <h1>에스씨지랩 재무제표</h1>
-      <p>SCGLAB Financial Statements · 2020 – 2025 실적 + 2026 전망(1~7월 실적 + 8~12월 3QF)</p>
-    </div>
-  </div>
-  <div class="header-right">
-    <span class="badge">단위: 억원 (표·차트 공통)</span>
-    <a href="chatbot.html" class="ai-btn">💬 AI에게 묻기</a>
-    <a href="index.html" class="back-btn">← 허브로</a>
-  </div>
+<div class="box">
+  <div class="ico">🔒</div>
+  <h1>재무제표 대시보드</h1>
+  <div class="sub">SCGLAB 내부 자료입니다.<br>열람 비밀번호를 입력하십시오.</div>
+  <label for="pw">비밀번호</label>
+  <input id="pw" type="password" autocomplete="current-password" autofocus>
+  <button id="go">열기</button>
+  <div class="msg inf" id="msg"></div>
+  <div class="foot">AES-256-GCM · PBKDF2-SHA256 310,000회<br>봉인 2026.08.20 15:17</div>
 </div>
 
-<div class="tab-bar">
-  <button class="tab active" onclick="sw('pl',this)">손익계산서</button>
-  <button class="tab" onclick="sw('bs',this)">재무상태표</button>
-  <button class="tab" onclick="sw('ratio',this)">재무비율</button>
-  <button class="tab" onclick="sw('cf',this)">현금흐름</button>
-</div>
-
-<div class="main">
-
-<!-- ① 손익계산서 -->
-<div id="panel-pl" class="panel active">
-  <div class="kpi-grid">
-    <div class="kpi">
-      <div class="kpi-label">2025 매출액</div>
-      <div class="kpi-value">63.5<span>억원</span></div>
-      <div class="kpi-sub">전년 58.7억원</div>
-      <div class="kpi-badge up">▲ +8.3%</div>
-    </div>
-    <div class="kpi">
-      <div class="kpi-label">2025 영업이익</div>
-      <div class="kpi-value">3.8<span>억원</span></div>
-      <div class="kpi-sub">영업이익률 6.0%</div>
-      <div class="kpi-badge down">▼ -46.3%</div>
-    </div>
-    <div class="kpi">
-      <div class="kpi-label">2025 당기순이익</div>
-      <div class="kpi-value">7.0<span>억원</span></div>
-      <div class="kpi-sub">순이익률 11.1%</div>
-      <div class="kpi-badge down">▼ -18.1%</div>
-    </div>
-    <div class="kpi">
-      <div class="kpi-label">2025 매출총이익률</div>
-      <div class="kpi-value">35.3<span>%</span></div>
-      <div class="kpi-sub">전년 39.3%</div>
-      <div class="kpi-badge down">▼ -4.0%p</div>
-    </div>
-  </div>
-
-  <div class="chart-grid chart-grid-2">
-    <div class="card">
-      <div class="card-title">손익 추이 (억원)</div>
-      <div class="card-sub">매출액 · 매출총이익 · 영업이익 · 순이익(꺾은선) <span style="color:#94A3B8">— 2026(F)는 전망: 1~7월 실적 + 8~12월 3QF(점선·연한 막대)</span></div>
-      <div class="legend">
-        <div class="legend-item"><div class="legend-dot" style="background:#3B82F6"></div>매출액</div>
-        <div class="legend-item"><div class="legend-dot" style="background:#10B981"></div>매출총이익</div>
-        <div class="legend-item"><div class="legend-dot" style="background:#F59E0B"></div>영업이익</div>
-        <div class="legend-item"><div class="legend-line" style="background:#7C3AED"></div>순이익(선)</div>
-      </div>
-      <div class="chart-wrap"><canvas id="plC"></canvas></div>
-    </div>
-    <div class="card">
-      <div class="card-title">이익률 추이 (%)</div>
-      <div class="card-sub">매출총이익률 · 영업이익률 · 순이익률 <span style="color:#94A3B8">— 2026(F)는 전망: 1~7월 실적 + 8~12월 3QF</span></div>
-      <div class="legend">
-        <div class="legend-item"><div class="legend-line" style="background:#10B981"></div>매출총이익률</div>
-        <div class="legend-item"><div class="legend-line" style="background:#F59E0B"></div>영업이익률</div>
-        <div class="legend-item"><div class="legend-line" style="background:#7C3AED"></div>순이익률</div>
-      </div>
-      <div class="chart-wrap"><canvas id="marginC"></canvas></div>
-    </div>
-  </div>
-
-  <div class="sec-title" style="margin-top:28px">손익계산서 연간 상세 (단위: 억원)</div>
-  <div class="table-wrap">
-    <table class="fin-table">
-      <thead>
-        <tr><th>항목</th><th>2020</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th><th class="col-fcst">2026<span class="col-tag">7월 반영 전망</span></th></tr>
-      </thead>
-      <tbody>
-        <tr class="highlight-row"><td>매출액</td><td>17.7</td><td>30.6</td><td>39.0</td><td>50.8</td><td>58.7</td><td>63.5</td><td class="col-fcst">90.1</td></tr>
-        <tr><td>　매출원가</td><td>8.7</td><td>13.3</td><td>24.8</td><td>34.7</td><td>35.6</td><td>41.1</td><td class="col-fcst">59.7</td></tr>
-        <tr class="section-row"><td>매출총이익</td><td>9.0</td><td>17.3</td><td>14.3</td><td>16.1</td><td>23.1</td><td>22.4</td><td class="col-fcst">30.4</td></tr>
-        <tr><td>　매출총이익률</td><td>50.7%</td><td>56.5%</td><td>36.5%</td><td>31.8%</td><td>39.3%</td><td>35.3%</td><td class="col-fcst">33.8%</td></tr>
-        <tr><td>　판매관리비</td><td>6.9</td><td>10.4</td><td>16.4</td><td>13.1</td><td>15.9</td><td>18.6</td><td class="col-fcst">21.4</td></tr>
-        <tr class="section-row"><td>영업이익</td><td class="pos-g">2.1</td><td class="pos-g">6.9</td><td class="neg">-2.2</td><td class="pos-g">3.0</td><td class="pos-g">7.1</td><td class="pos-g">3.8</td><td class="col-fcst pos-g">9.0</td></tr>
-        <tr><td>　영업이익률</td><td>11.7%</td><td>22.5%</td><td class="neg">-5.6%</td><td>5.9%</td><td>12.2%</td><td>6.0%</td><td class="col-fcst">10.0%</td></tr>
-        <tr><td>　영업외손익(순액)</td><td>0.1</td><td class="neg">-0.6</td><td>2.2</td><td>2.2</td><td>1.5</td><td>3.2</td><td class="col-fcst">5.7</td></tr>
-        <tr><td>　법인세비용</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="col-fcst">3.1</td></tr>
-        <tr class="highlight-row"><td>당기순이익</td><td class="pos-g">2.2</td><td class="pos-g">6.3</td><td class="neg">-0.0</td><td class="pos-g">5.2</td><td class="pos-g">8.6</td><td class="pos-g">7.0</td><td class="col-fcst pos-g">11.6</td></tr>
-        <tr><td>　순이익률</td><td>12.4%</td><td>20.6%</td><td class="neg">-0.1%</td><td>10.3%</td><td>14.7%</td><td>11.1%</td><td class="col-fcst">12.9%</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="fcst-note">
-    ※ <strong>2026년 열은 확정 실적이 아닌 전망치</strong>입니다 — <strong>1~7월 실적 + 8월~12월 추정(3QF 기준)</strong>으로 합산한 값이며, 2020~2025년은 연간 확정치입니다.<br>
-    ※ 3QF 발행 시점(6월 마감)의 전망은 매출 89.4억·영업이익 9.3억·순이익 11.9억이었으나, <strong>7월 실적이 추정을 대체</strong>하면서 매출 90.1억·영업이익 9.0억·순이익 11.6억이 되었습니다. 3QF 추정치 자체가 바뀐 것은 아닙니다.<br>
-    ※ 3QF의 8월~12월 과금 추정은 <strong>서울도시가스 리워드 미적용 기준</strong>으로 재계산되었습니다(리워드 150원은 26년 미적용·27년 연기 확정).<br>
-    ※ 2020~2024년 영업외손익(순액) = 영업외수익 − 영업외비용이며, 해당 연도 법인세비용은 별도 관리 데이터 미보유(당기순이익에는 반영됨).
-  </div>
-</div>
-
-<!-- ② 재무상태표 -->
-<div id="panel-bs" class="panel">
-  <div class="kpi-grid">
-    <div class="kpi">
-      <div class="kpi-label">2025 자산총계</div>
-      <div class="kpi-value">61.0<span>억원</span></div>
-      <div class="kpi-sub">전년 51.5억원</div>
-      <div class="kpi-badge up">▲ +18.5%</div>
-    </div>
-    <div class="kpi">
-      <div class="kpi-label">2025 자본총계</div>
-      <div class="kpi-value">43.3<span>억원</span></div>
-      <div class="kpi-sub">자기자본비율 71.0%</div>
-      <div class="kpi-badge up">▲ +19.4%</div>
-    </div>
-    <div class="kpi">
-      <div class="kpi-label">2025 부채총계</div>
-      <div class="kpi-value">17.7<span>억원</span></div>
-      <div class="kpi-sub">부채비율 40.9%</div>
-      <div class="kpi-badge flat">▲ +16.3%</div>
-    </div>
-    <div class="kpi">
-      <div class="kpi-label">2025 유동비율</div>
-      <div class="kpi-value">245<span>%</span></div>
-      <div class="kpi-sub">전년 263%</div>
-      <div class="kpi-badge down">▼ -18%p</div>
-    </div>
-  </div>
-
-  <div class="chart-grid chart-grid-1">
-    <div class="card">
-      <div class="card-title">자산 · 부채 · 자본 추이 (억원)</div>
-      <div class="card-sub">6개년 연말 + 2026년말(3QF 추정) <span style="color:#94A3B8">— 기중 실적은 아래 7월말 스냅샷 참조</span></div>
-      <div class="legend">
-        <div class="legend-item"><div class="legend-dot" style="background:#3B82F6"></div>자산총계</div>
-        <div class="legend-item"><div class="legend-dot" style="background:#EF4444"></div>부채총계</div>
-        <div class="legend-item"><div class="legend-dot" style="background:#10B981"></div>자본총계</div>
-      </div>
-      <div class="chart-wrap" style="height:280px"><canvas id="bsC"></canvas></div>
-    </div>
-  </div>
-
-  <div class="sec-title" style="margin-top:28px">재무상태표 연간 상세 (단위: 억원)</div>
-  <div class="table-wrap">
-    <table class="fin-table">
-      <thead>
-        <tr><th>항목</th><th>2020</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th><th class="col-fcst">2026<span class="col-tag">3QF 연말추정</span></th></tr>
-      </thead>
-      <tbody>
-        <tr class="section-row"><td>자산총계</td><td>19.9</td><td>33.4</td><td>30.9</td><td>39.7</td><td>51.5</td><td>61.0</td><td class="col-fcst">74.3</td></tr>
-        <tr class="section-row"><td>부채총계</td><td>3.7</td><td>10.9</td><td>8.4</td><td>12.0</td><td>15.2</td><td>17.7</td><td class="col-fcst">19.0</td></tr>
-        <tr class="highlight-row"><td>자본총계</td><td>16.2</td><td>22.5</td><td>22.4</td><td>27.7</td><td>36.3</td><td>43.3</td><td class="col-fcst">55.2</td></tr>
-        <tr><td>　자기자본비율</td><td>81.4%</td><td>67.3%</td><td>72.7%</td><td>69.8%</td><td>70.4%</td><td>71.0%</td><td class="col-fcst">74.3%</td></tr>
-        <tr><td>　부채비율</td><td>22.8%</td><td>48.5%</td><td>37.6%</td><td>43.3%</td><td>42.0%</td><td>40.9%</td><td class="col-fcst">34.5%</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="fcst-note">
-    ※ <strong>2026년 열은 확정 실적이 아닌 연말 추정치</strong>입니다 — <strong>3QF 기준 2026년말 추정 재무상태표</strong>이며, 2020~2025년은 연말 확정치입니다.<br>
-    ※ 전년말(2025) 대비 자산 <strong>+13.2억</strong> · 부채 +1.3억 · 자본 <strong>+11.9억</strong>(당기순이익 11.9억 반영).<br>
-    ※ 주요 증감 — 정기예금 10억 신규 불입(27.04 만기) · 회사채 5.0억 매수(27.09 만기) · 단기금융상품 5억↓ · 비품 2.85억↑(가상화장비 노후화 교체 외) · 미지급세금 3.09억↑(2026년 법인세).<br>
-    ※ <strong>손익 탭과 기준 시점이 다릅니다</strong> — 손익 2026년 열은 7월 실적까지 반영한 전망(순이익 11.6억)이지만, 이 연말 추정 재무상태표는 <strong>분기전망(3QF) 산출물</strong>이라 순이익 11.9억을 반영한 상태로 고정돼 있습니다. 재무상태표 연말 추정은 <strong>4QF 도착 시 교체</strong>됩니다.
-  </div>
-
-  <!-- 7월말 실적 스냅샷 -->
-  <div class="sec-title" style="margin-top:36px">2026년 7월말 재무상태표 <span style="font-size:12px;color:#94A3B8;font-weight:400">— 기중 확정 실적 (추정 아님)</span></div>
-  <div style="background:#ECFDF5;border:1px solid #A7F3D0;border-radius:8px;padding:10px 14px;margin-bottom:16px;font-size:12px;color:#065F46;">
-    ※ 위 표의 2026년 열이 <strong>연말 추정치</strong>인 것과 달리, 아래는 <strong>7월 말일 시점의 확정 실적</strong>입니다. "지금 재무상태"는 이 표를, "26년말 전망"은 위 표를 보십시오.
-  </div>
-  <div class="table-wrap">
-    <table class="fin-table">
-      <thead>
-        <tr><th>항목</th><th>2025년말<span class="col-tag">확정</span></th><th>2026년 6월말</th><th>2026년 7월말<span class="col-tag">최근 마감</span></th><th>전월비</th><th>전년말비</th></tr>
-      </thead>
-      <tbody>
-        <tr class="section-row"><td>자산총계</td><td>61.0</td><td>70.4</td><td>69.9</td><td class="neg">-0.4</td><td class="pos-g">+8.9</td></tr>
-        <tr><td>　유동자산</td><td>43.4</td><td>48.8</td><td>47.8</td><td class="neg">-1.0</td><td class="pos-g">+4.4</td></tr>
-        <tr><td>　비유동자산</td><td>17.6</td><td>21.6</td><td>22.1</td><td class="pos-g">+0.5</td><td class="pos-g">+4.5</td></tr>
-        <tr class="section-row"><td>부채총계</td><td>17.7</td><td>19.8</td><td>18.4</td><td class="pos-g">-1.5</td><td>+0.7</td></tr>
-        <tr><td>　유동부채</td><td>17.7</td><td>18.3</td><td>16.7</td><td class="pos-g">-1.6</td><td class="pos-g">-1.1</td></tr>
-        <tr><td>　비유동부채</td><td>0.0</td><td>1.5</td><td>1.7</td><td>+0.2</td><td>+1.7</td></tr>
-        <tr class="highlight-row"><td>자본총계</td><td>43.3</td><td>50.5</td><td>51.6</td><td class="pos-g">+1.0</td><td class="pos-g">+8.2</td></tr>
-        <tr><td>　당기순이익 누계</td><td>7.0</td><td>7.2</td><td>8.2</td><td class="pos-g">+1.0</td><td>—</td></tr>
-        <tr><td>　자기자본비율</td><td>71.0%</td><td>71.8%</td><td>73.7%</td><td class="pos-g">+1.9%p</td><td class="pos-g">+2.7%p</td></tr>
-        <tr><td>　부채비율</td><td>40.9%</td><td>39.3%</td><td>35.6%</td><td class="pos-g">-3.6%p</td><td class="pos-g">-5.2%p</td></tr>
-        <tr><td>　유동비율</td><td>245%</td><td>267%</td><td>287%</td><td class="pos-g">+20%p</td><td class="pos-g">+42%p</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="fcst-note">
-    ※ 자본 <strong>+1.0억</strong>은 전액 7월 당기순이익(1.02억)입니다. 자산이 0.4억 줄었는데도 자기자본비율·유동비율이 개선된 것은 <strong>부채가 1.5억 더 크게 줄었기</strong> 때문입니다.<br>
-    ※ 주요 감소 — 부가세예수금 1.82억↓·부가세대급금 0.54억↓(1기 확정 부가세 납부 1.85억) · 외상매입금 0.40억↓(가스몰 상품 매입 0.30억↓) · 현금및현금성자산 0.58억↓.<br>
-    ※ 주요 증가 — 무형자산 0.51억↑·미지급금 0.45억↑(EBPP 전자고지결제 시스템 구축 0.50억, 장비 구입·구축비 미지급) · 매출채권 0.40억↑(앱 이용료 0.18억·광고 0.24억) · 미지급세금 0.29억↑(7월 법인세) · 비품 0.18억↑(EBPP 망분리 방화벽·노트북 외).<br>
-    ※ ROE는 분자가 <strong>연간</strong> 순이익이라 기중 시점으로 산출하지 않습니다(연말 추정 기준은 재무비율 탭 참조).
-  </div>
-</div>
-
-<!-- ③ 재무비율 -->
-<div id="panel-ratio" class="panel">
-  <div class="kpi-grid">
-    <div class="kpi">
-      <div class="kpi-label"><span class="tip" data-formula="당기순이익 ÷ 자본총계 × 100" data-desc="보유 자본으로 얼마나 이익을 냈는지" data-note="높을수록 자본을 효율적으로 활용한 것">2025 ROE ⓘ</span></div>
-      <div class="kpi-value">16.2<span>%</span></div>
-      <div class="kpi-sub">전년 23.7%</div>
-      <div class="kpi-badge down">▼ -7.5%p</div>
-    </div>
-    <div class="kpi">
-      <div class="kpi-label"><span class="tip" data-formula="자본총계 ÷ 자산총계 × 100" data-desc="회사 자산 중 내 돈(빚 아닌 것)의 비율" data-note="높을수록 재무적으로 안정적">2025 자기자본비율 ⓘ</span></div>
-      <div class="kpi-value">71.0<span>%</span></div>
-      <div class="kpi-sub">전년 70.4%</div>
-      <div class="kpi-badge up">▲ +0.6%p</div>
-    </div>
-    <div class="kpi">
-      <div class="kpi-label"><span class="tip" data-formula="유동자산 ÷ 유동부채 × 100" data-desc="단기 빚을 갚을 수 있는 여유" data-note="200% 이상이면 안정적">2025 유동비율 ⓘ</span></div>
-      <div class="kpi-value">245<span>%</span></div>
-      <div class="kpi-sub">전년 263%</div>
-      <div class="kpi-badge down">▼ -18%p</div>
-    </div>
-    <div class="kpi">
-      <div class="kpi-label"><span class="tip" data-formula="부채총계 ÷ 자본총계 × 100" data-desc="내 돈 대비 빌린 돈의 비율" data-note="낮을수록 재무 안전">2025 부채비율 ⓘ</span></div>
-      <div class="kpi-value">40.9<span>%</span></div>
-      <div class="kpi-sub">전년 42.0%</div>
-      <div class="kpi-badge up">▼ -1.1%p 개선</div>
-    </div>
-  </div>
-
-  <div class="chart-grid chart-grid-2">
-    <div class="card">
-      <div class="card-title">안정성 지표 (%)</div>
-      <div class="card-sub">유동비율 · 자기자본비율 · 부채비율 · ROE</div>
-      <div class="legend">
-        <div class="legend-item"><div class="legend-line" style="background:#3B82F6"></div>유동비율</div>
-        <div class="legend-item"><div class="legend-line" style="background:#10B981"></div>자기자본비율</div>
-        <div class="legend-item"><div class="legend-line" style="background:#EF4444"></div>부채비율</div>
-        <div class="legend-item"><div class="legend-line" style="background:#F59E0B"></div>ROE</div>
-      </div>
-      <div class="chart-wrap"><canvas id="ratioC"></canvas></div>
-    </div>
-    <div class="card">
-      <div class="card-title">수익성 지표 (%)</div>
-      <div class="card-sub">영업이익률 · 순이익률</div>
-      <div class="legend">
-        <div class="legend-item"><div class="legend-line" style="background:#F59E0B"></div>영업이익률</div>
-        <div class="legend-item"><div class="legend-line" style="background:#7C3AED"></div>순이익률</div>
-      </div>
-      <div class="chart-wrap"><canvas id="profitC"></canvas></div>
-    </div>
-  </div>
-
-  <div class="sec-title" style="margin-top:28px">재무비율 연간 상세</div>
-  <div class="table-wrap">
-    <table class="fin-table">
-      <thead>
-        <tr><th>지표</th><th>2020</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th><th class="col-fcst">2026<span class="col-tag">전망</span></th></tr>
-      </thead>
-      <tbody>
-        <tr class="section-row"><td colspan="8">수익성</td></tr>
-        <tr><td><span class="tip" data-formula="매출총이익 ÷ 매출액 × 100" data-desc="물건 팔고 원가 빼고 남은 비율" data-note="높을수록 원가 경쟁력이 좋은 것">　매출총이익률 ⓘ</span></td><td>50.7%</td><td>56.5%</td><td>36.5%</td><td>31.8%</td><td>39.3%</td><td>35.3%</td><td class="col-fcst">33.8%</td></tr>
-        <tr><td><span class="tip" data-formula="영업이익 ÷ 매출액 × 100" data-desc="본업으로 얼마나 남겼는지" data-note="판관비까지 빼고 남은 비율">　영업이익률 ⓘ</span></td><td>11.7%</td><td>22.5%</td><td class="neg">-5.6%</td><td>5.9%</td><td>12.2%</td><td>6.0%</td><td class="col-fcst">10.0%</td></tr>
-        <tr><td><span class="tip" data-formula="당기순이익 ÷ 매출액 × 100" data-desc="세금·이자 다 내고 최종으로 남은 비율" data-note="회사의 실질적인 수익성 지표">　순이익률 ⓘ</span></td><td>12.4%</td><td>20.6%</td><td class="neg">-0.1%</td><td>10.3%</td><td>14.7%</td><td>11.1%</td><td class="col-fcst">12.9%</td></tr>
-        <tr><td><span class="tip" data-formula="당기순이익 ÷ 자본총계 × 100" data-desc="보유 자본으로 얼마나 이익을 냈는지" data-note="높을수록 자본을 효율적으로 활용한 것">　ROE ⓘ</span></td><td>13.6%</td><td>28.0%</td><td class="neg">-0.1%</td><td>18.9%</td><td>23.7%</td><td>16.2%</td><td class="col-fcst">21.1%</td></tr>
-        <tr class="section-row"><td colspan="8">안정성</td></tr>
-        <tr><td><span class="tip" data-formula="유동자산 ÷ 유동부채 × 100" data-desc="단기 빚을 갚을 수 있는 여유" data-note="200% 이상이면 안정적">　유동비율 ⓘ</span></td><td>596%</td><td>334%</td><td>274%</td><td>244%</td><td>263%</td><td>245%</td><td class="col-fcst">265%</td></tr>
-        <tr><td><span class="tip" data-formula="자본총계 ÷ 자산총계 × 100" data-desc="회사 자산 중 내 돈(빚 아닌 것)의 비율" data-note="높을수록 재무적으로 안정적">　자기자본비율 ⓘ</span></td><td>81.4%</td><td>67.3%</td><td>72.7%</td><td>69.8%</td><td>70.4%</td><td>71.0%</td><td class="col-fcst">74.3%</td></tr>
-        <tr><td><span class="tip" data-formula="부채총계 ÷ 자본총계 × 100" data-desc="내 돈 대비 빌린 돈의 비율" data-note="낮을수록 재무 안전">　부채비율 ⓘ</span></td><td>22.8%</td><td>48.5%</td><td>37.6%</td><td>43.3%</td><td>42.0%</td><td>40.9%</td><td class="col-fcst">34.5%</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="fcst-note">
-    ※ 2026년 열은 <strong>기준 시점이 둘로 나뉩니다</strong> — <strong>수익성</strong>(매출총이익률·영업이익률·순이익률)은 1~7월 실적 + 8월~12월 3QF 추정 기준이고, <strong>안정성</strong>(유동비율·자기자본비율·부채비율)은 3QF 기준 <strong>2026년말 추정 재무상태표</strong> 기준입니다. 재무상태표 연말 추정은 분기전망 산출물이라 4QF 도착 시 교체됩니다.<br>
-    ※ <strong>ROE 21.1%</strong>는 최신 순이익 전망 11.6억 ÷ 3QF 연말 추정 자본총계 55.2억으로 산출했습니다. 분모가 아직 3QF 기준(순이익 11.9억 반영)이라 4QF 반영 시 소폭 조정될 수 있으며, 확정 실적이 아닙니다.<br>
-    ※ 기중(7월말) 시점 실적 비율은 재무상태표 탭의 <strong>2026년 7월말 실적 스냅샷</strong>을 참고하십시오 — ROE는 분자가 연간 순이익이라 기중 시점으로 산출하지 않습니다.
-  </div>
-</div>
-
-<!-- ④ 현금흐름 -->
-<div id="panel-cf" class="panel">
-  <div class="kpi-grid">
-    <div class="kpi">
-      <div class="kpi-label">2025 영업활동 CF</div>
-      <div class="kpi-value">11.6<span>억원</span></div>
-      <div class="kpi-sub">전년 12.3억원</div>
-      <div class="kpi-badge down">▼ -5.6%</div>
-    </div>
-    <div class="kpi">
-      <div class="kpi-label">2025 투자활동 CF</div>
-      <div class="kpi-value" style="color:var(--red)">-13.1<span>억원</span></div>
-      <div class="kpi-sub">전년 -14.0억원</div>
-      <div class="kpi-badge up">투자규모 축소</div>
-    </div>
-    <div class="kpi">
-      <div class="kpi-label">2025 기말현금</div>
-      <div class="kpi-value">10.6<span>억원</span></div>
-      <div class="kpi-sub">전년 12.0억원</div>
-      <div class="kpi-badge down">▼ -11.8%</div>
-    </div>
-    <div class="kpi">
-      <div class="kpi-label">영업CF / 순이익</div>
-      <div class="kpi-value">165<span>%</span></div>
-      <div class="kpi-sub">현금전환율</div>
-      <div class="kpi-badge up">양호</div>
-    </div>
-  </div>
-
-  <div class="chart-grid chart-grid-1">
-    <div class="card">
-      <div class="card-title">현금흐름 추이 (억원)</div>
-      <div class="card-sub">영업 · 투자활동 현금흐름 및 기말현금(꺾은선)</div>
-      <div class="legend">
-        <div class="legend-item"><div class="legend-dot" style="background:#10B981"></div>영업활동</div>
-        <div class="legend-item"><div class="legend-dot" style="background:#EF4444"></div>투자활동</div>
-        <div class="legend-item"><div class="legend-line" style="background:#3B82F6"></div>기말현금(선)</div>
-      </div>
-      <div class="chart-wrap" style="height:280px"><canvas id="cfC"></canvas></div>
-    </div>
-  </div>
-
-  <div class="sec-title" style="margin-top:28px">현금흐름표 연간 상세 (단위: 억원)</div>
-  <div class="table-wrap">
-    <table class="fin-table">
-      <thead>
-        <tr><th>항목</th><th>2020</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th></tr>
-      </thead>
-      <tbody>
-        <tr class="highlight-row"><td>영업활동 현금흐름</td><td class="pos-g">2.5</td><td class="pos-g">10.9</td><td class="neg">-0.2</td><td class="pos-g">7.7</td><td class="pos-g">12.3</td><td class="pos-g">11.6</td></tr>
-        <tr class="highlight-row"><td>투자활동 현금흐름</td><td>-0.2</td><td class="neg">-8.8</td><td>1.8</td><td class="neg">-3.2</td><td class="neg">-14.0</td><td class="neg">-13.1</td></tr>
-        <tr><td>재무활동 현금흐름</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
-        <tr class="section-row"><td>기말현금</td><td>5.5</td><td>7.6</td><td>9.2</td><td>13.7</td><td>12.0</td><td>10.6</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- 2026 월별 자금수지 -->
-  <div class="sec-title" style="margin-top:36px">2026년 월별 자금수지 <span style="font-size:12px;color:#94A3B8;font-weight:400">— 1~7월 실적 (단위: 억원)</span></div>
-  <div class="table-wrap">
-    <table class="fin-table">
-      <thead>
-        <tr><th>구분</th><th>1월</th><th>2월</th><th>3월</th><th>4월</th><th>5월</th><th>6월</th><th>7월</th><th>1~7월 계</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>전월이월</td><td>10.6</td><td>11.1</td><td>14.4</td><td>18.0</td><td>10.5</td><td>11.3</td><td>14.8</td><td>10.6</td></tr>
-        <tr><td>　수입 계</td><td>10.0</td><td>12.1</td><td>14.3</td><td>22.9</td><td>10.4</td><td>12.0</td><td>9.8</td><td class="pos-g">91.5</td></tr>
-        <tr><td>　지출 계</td><td>9.5</td><td>8.8</td><td>10.6</td><td>30.3</td><td>9.7</td><td>8.5</td><td>10.4</td><td class="neg">87.9</td></tr>
-        <tr class="highlight-row"><td>가용자금(월말)</td><td>11.1</td><td>14.4</td><td>18.0</td><td>10.5</td><td>11.3</td><td>14.8</td><td>14.2</td><td>14.2</td></tr>
-        <tr><td>비가용자금(월말)</td><td>25.0</td><td>25.0</td><td>25.0</td><td>30.0</td><td>30.0</td><td>30.0</td><td>30.0</td><td>30.0</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="fcst-note">
-    ※ <strong>현금주의 자금수지</strong>입니다 — 위 연간 현금흐름표(발생주의 회계 기준)와 산출 기준이 달라 직접 비교할 수 없습니다.<br>
-    ※ <strong>4월</strong> 수입·지출이 큰 것은 금융상품 재배치 때문입니다(예적금 인출 10억 = 발행어음 만기, 불입 15억). 실제 영업 수지 변동이 아닙니다.<br>
-    ※ <strong>6월</strong> 가용자금 +3.5억은 마이데이터 사업 정부지원금 선금 1.4억 유입 등이 반영된 결과이고, <strong>7월</strong> −0.6억은 1기 확정 부가세 1.85억 납부가 주된 원인입니다(7월 세금 지출 1.86억으로 1~7월 중 최대).<br>
-    ※ 비가용자금은 발행어음·회사채·정기예금 등 사용제한 금융상품입니다(4월에 25억 → 30억으로 증가).
-  </div>
-
-  <!-- 자금현황 (마감 기준 스냅샷) -->
-  <div class="sec-title" style="margin-top:36px">보유 자금 현황 <span style="font-size:12px;color:#94A3B8;font-weight:400">— 2026년 7월 말일 기준 (정산 마감 시점)</span></div>
-  <div style="background:#FFFBEB;border:1px solid #FDE68A;border-radius:8px;padding:10px 14px;margin-bottom:16px;font-size:12px;color:#92400E;">
-    ※ 실시간 잔액이 아니라 <strong>정산 완료된 월의 말일 기준</strong> 스냅샷입니다. 가장 최근 마감 자료(7월) 기준이며, 이후 거래는 반영되지 않습니다.
-  </div>
-  <div class="cash-grid">
-    <div class="cash-card">
-      <div class="cash-label">현금성 자산 (가용시재+금융상품)</div>
-      <div class="cash-value">44.2<span>억원</span></div>
-      <div class="cash-sub">즉시·단기 동원 가능 <span style="color:#DC2626">(전월 44.8억)</span></div>
-    </div>
-    <div class="cash-card">
-      <div class="cash-label">가용시재 (즉시 사용 가능)</div>
-      <div class="cash-value">14.2<span>억원</span></div>
-      <div class="cash-sub">보통예금 2.2억 + MMT 12.0억</div>
-    </div>
-    <div class="cash-card">
-      <div class="cash-label">금융상품 (사용제한)</div>
-      <div class="cash-value">30.0<span>억원</span></div>
-      <div class="cash-sub">발행어음·회사채·정기예금</div>
-    </div>
-    <div class="cash-card">
-      <div class="cash-label">퇴직연금 (신한 DB)</div>
-      <div class="cash-value">10.6<span>억원</span></div>
-      <div class="cash-sub">사외적립 (운용수익 +260만·지급 269만)</div>
-    </div>
-  </div>
-  <div class="table-wrap" style="margin-top:16px">
-    <table class="fin-table">
-      <thead>
-        <tr><th>구분</th><th>상세</th><th>금액(억원)</th><th>금리</th><th>가입~만기</th><th>총 추정이자</th></tr>
-      </thead>
-      <tbody>
-        <tr class="highlight-row"><td>가용시재 합계</td><td>원화 보통예금 + MMT</td><td class="pos-g">14.2</td><td>—</td><td>—</td><td>—</td></tr>
-        <tr><td>　보통예금</td><td>신한 외 다수 계좌</td><td>2.2</td><td>—</td><td>수시</td><td>—</td></tr>
-        <tr><td>　MMT</td><td>NH투자증권</td><td>12.0</td><td>연 2.72%(수시물)</td><td>수시</td><td>변동</td></tr>
-        <tr class="highlight-row"><td>금융상품 소계</td><td>사용제한 예금</td><td>30.0</td><td>평균 3.23%</td><td>—</td><td class="pos-g">약 1억 506만원</td></tr>
-        <tr><td>　NH 발행어음</td><td>—</td><td>15.0</td><td>연 2.90%</td><td>25.10.29~26.10.29 <span class="term">(1년)</span></td><td>4,350만원</td></tr>
-        <tr><td>　NH 회사채(삼성에프엔리츠)</td><td>—</td><td>5.0</td><td>연 3.771%</td><td>26.04.10~27.09.13 <span class="term">(약 1년 5개월)</span></td><td>2,706만원</td></tr>
-        <tr><td>　NH 정기예금(지역수협)</td><td>—</td><td>10.0</td><td>연 3.45%</td><td>26.04.29~27.04.29 <span class="term">(1년)</span></td><td>3,450만원</td></tr>
-        <tr class="highlight-row"><td>퇴직연금</td><td>신한 DB형</td><td>10.6</td><td>—</td><td>사외적립</td><td>—</td></tr>
-        <tr class="section-row"><td>총 보유자금</td><td>가용시재 + 금융상품 + 퇴직연금</td><td>54.8</td><td>—</td><td>차입금 0</td><td>—</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div style="font-size:11px;color:#94A3B8;margin-top:8px;line-height:1.6">
-    ※ 총 추정이자는 각 상품의 <strong>원금 × 표면금리(세전) × 가입~만기 기간</strong>으로 산정한, 해당 상품을 만기까지 보유할 때 발생하는 전체 이자입니다(특정 연도 수익이 아님). 실제 수령액은 세금(이자소득세 등)에 따라 달라질 수 있고, MMT는 변동금리 수시물이라 별도입니다.<br>
-    ※ <strong>전월(6월말) 대비</strong> — 가용시재 14.77→14.19억(−0.58억, MMT 12.3→12.0억), 금융상품 30.01억 변동 없음, 퇴직연금 10.558→10.557억, 총 보유자금 55.34→54.76억(−0.58억). 감소분은 대부분 1기 확정 부가세 납부(1.85억)입니다.<br>
-    ※ <strong>차입금 0원 · 여신 부여한도 0원</strong>(무차입 경영). NH 발행어음 15억은 <strong>26.10.29 만기</strong>로 4분기 재배치 예정입니다.
-  </div>
-
-</div><!-- /main -->
-
+<script id="sealed" type="application/json">{"v":1,"alg":"AES-GCM","kdf":"PBKDF2-SHA256","iter":310000,"salt":"Xr4wjiUgB5uICjYvP1lvqg==","iv":"eJX4iyXTvmLp0ByK","ct":"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","gz":true,"sha256":"27bb02635bd3e4afcadcc8c277ef9ce716d87a6ab068439c8538d84670317e81"}</script>
 <script>
-// ── 공통 설정
-var yr  = ['2020','2021','2022','2023','2024','2025'];
-// 2026 열 포함 라벨. 손익·수익성비율 = 1~7월 실적+8~12월 3QF / BS·안정성비율 = 3QF 연말추정. 현금흐름 차트는 yr 그대로 사용.
-var yrF = ['2020','2021','2022','2023','2024','2025','2026(F)'];
-var yrA = ['2020','2021','2022','2023','2024','2025','2026(F)'];
-// 전망 막대: 채도를 낮추고 점선 테두리로 확정치와 구분
-function fcstBar(base){ return function(ctx){ return ctx.dataIndex === 6 ? base.replace(/[\d.]+\)$/,'0.22)') : base; }; }
-function fcstBorder(c){ return function(ctx){ return ctx.dataIndex === 6 ? c : 'transparent'; }; }
-var GC  = 'rgba(0,0,0,0.05)';
-var TC  = '#94A3B8';
+(function(){
+  "use strict";
+  var SK   = "scglab_seal_v1";
+  var D    = JSON.parse(document.getElementById('sealed').textContent);
+  var pwEl = document.getElementById('pw');
+  var btn  = document.getElementById('go');
+  var msg  = document.getElementById('msg');
 
-// 억원 단위 포맷 함수 (축 눈금용)
-function fmtAuk(v) {
-  var abs = Math.abs(v);
-  if (abs === 0) return '0';
-  if (abs >= 100) return (v / 100).toFixed(0) + '억';
-  return (v / 100).toFixed(1) + '억';
-}
+  function b2a(b){ var s='', u=new Uint8Array(b);
+    for(var i=0;i<u.length;i++) s+=String.fromCharCode(u[i]); return btoa(s); }
+  function a2b(a){ var s=atob(a), u=new Uint8Array(s.length);
+    for(var i=0;i<s.length;i++) u[i]=s.charCodeAt(i); return u; }
+  function say(t,cls){ msg.textContent=t; msg.className='msg '+(cls||'inf'); }
 
-// 툴팁용 포맷 (항상 소수점 1자리)
-function fmtAukTip(v) {
-  if (v === 0) return '0.0억';
-  return (v / 100).toFixed(1) + '억';
-}
-
-// 공통 플러그인 옵션
-var pluginOpts = {
-  legend: { display: false },
-  tooltip: {
-    callbacks: {
-      label: function(ctx) {
-        var v = ctx.parsed.y;
-        return ' ' + ctx.dataset.label + ': ' + fmtAukTip(v) + '원';
+  async function open_(pw, silent){
+    btn.disabled = true;
+    if(!silent) say('복호화 중입니다…','inf');
+    try{
+      var enc = new TextEncoder();
+      var base = await crypto.subtle.importKey('raw', enc.encode(pw), 'PBKDF2', false, ['deriveKey']);
+      var key  = await crypto.subtle.deriveKey(
+        { name:'PBKDF2', salt:a2b(D.salt), iterations:D.iter, hash:'SHA-256' },
+        base, { name:'AES-GCM', length:256 }, false, ['decrypt']);
+      var plain = await crypto.subtle.decrypt({ name:'AES-GCM', iv:a2b(D.iv) }, key, a2b(D.ct));
+      var bytes = new Uint8Array(plain);
+      if(D.gz){
+        if(typeof DecompressionStream === 'undefined')
+          throw new Error('이 브라우저는 압축 해제를 지원하지 않습니다. 최신 브라우저를 사용하십시오.');
+        var ds = new DecompressionStream('gzip');
+        var st = new Blob([bytes]).stream().pipeThrough(ds);
+        bytes = new Uint8Array(await new Response(st).arrayBuffer());
       }
+      var html = new TextDecoder('utf-8').decode(bytes);
+      try{ sessionStorage.setItem(SK, pw); }catch(e){}
+      document.open(); document.write(html); document.close();
+    }catch(e){
+      btn.disabled = false;
+      if(silent){ try{ sessionStorage.removeItem(SK); }catch(e2){} say(''); }
+      else { say(e && e.message && e.message.indexOf('브라우저')>=0
+               ? e.message : '비밀번호가 올바르지 않습니다.', 'err');
+             pwEl.select(); }
     }
   }
-};
 
-// 공통 스케일 (금액용)
-function moneyScale() {
-  return {
-    x: { grid: { color: GC }, ticks: { color: TC, font: { size: 11 } } },
-    y: { grid: { color: GC }, ticks: { color: TC, font: { size: 11 }, callback: fmtAuk } }
-  };
-}
-// 공통 스케일 (% 비율용)
-function pctScale() {
-  return {
-    x: { grid: { color: GC }, ticks: { color: TC, font: { size: 11 } } },
-    y: { grid: { color: GC }, ticks: { color: TC, font: { size: 11 }, callback: function(v){ return v + '%'; } } }
-  };
-}
-// 비율 tooltip
-var pctPlugin = {
-  legend: { display: false },
-  tooltip: {
-    callbacks: {
-      label: function(ctx) { return ' ' + ctx.dataset.label + ': ' + ctx.parsed.y + '%'; }
-    }
-  }
-};
-
-// 캔버스 재사용 오류 방지 — 기존 차트가 있으면 파괴 후 생성
-function mkChart(canvasId, cfg) {
-  var cv = document.getElementById(canvasId);
-  if (!cv) return null;
-  var prev = (Chart.getChart ? Chart.getChart(cv) : null);
-  if (prev) prev.destroy();
-  return new Chart(cv, cfg);
-}
-
-// ── 탭 전환
-function sw(id, el) {
-  document.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
-  document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('active'); });
-  el.classList.add('active');
-  document.getElementById('panel-' + id).classList.add('active');
-  if (id === 'pl'    && !window._pl)  { buildPL();    window._pl    = true; }
-  if (id === 'bs'    && !window._bs)  { buildBS();    window._bs    = true; }
-  if (id === 'ratio' && !window._rt)  { buildRatio(); window._rt    = true; }
-  if (id === 'cf'    && !window._cf)  { buildCF();    window._cf    = true; }
-}
-
-// ── 손익계산서
-function buildPL() {
-  // 손익 추이 (혼합 차트)
-  mkChart('plC', {
-    type: 'bar',
-    data: {
-      labels: yrF,
-      datasets: [
-        { label: '매출액',     data: [1771,3062,3904,5078,5866,6352,9011], backgroundColor: fcstBar('rgba(59,130,246,0.7)'), borderColor: fcstBorder('#3B82F6'), borderWidth: 1.5, borderDash: [4,2], order: 2 },
-        { label: '매출총이익', data: [898,1729,1425,1613,2307,2243,3044],  backgroundColor: fcstBar('rgba(16,185,129,0.7)'),  borderColor: fcstBorder('#10B981'), borderWidth: 1.5, borderDash: [4,2], order: 2 },
-        { label: '영업이익',   data: [207,689,-217,301,713,383,900],       backgroundColor: fcstBar('rgba(245,158,11,0.7)'),  borderColor: fcstBorder('#F59E0B'), borderWidth: 1.5, borderDash: [4,2], order: 2 },
-        { label: '순이익', type: 'line', data: [220,630,-3,524,860,704,1165],
-          borderColor: '#7C3AED', backgroundColor: 'transparent',
-          pointBackgroundColor: '#7C3AED', pointRadius: 5, tension: 0.35, order: 1,
-          segment: { borderDash: function(c){ return c.p1DataIndex === 6 ? [5,4] : undefined; } } }
-      ]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      plugins: pluginOpts,
-      scales: moneyScale()
-    }
+  btn.addEventListener('click', function(){
+    var v = pwEl.value;
+    if(!v){ say('비밀번호를 입력하십시오.','err'); pwEl.focus(); return; }
+    open_(v, false);
   });
+  pwEl.addEventListener('keydown', function(e){ if(e.key==='Enter') btn.click(); });
 
-  // 이익률
-  mkChart('marginC', {
-    type: 'line',
-    data: {
-      labels: yrF,
-      datasets: [
-        { label: '매출총이익률', data: [50.7,56.5,36.5,31.8,39.3,35.3,33.8], borderColor: '#10B981', backgroundColor: 'transparent', pointRadius: 4, tension: 0.3 },
-        { label: '영업이익률',   data: [11.7,22.5,-5.6,5.9,12.2,6.0,10.0],   borderColor: '#F59E0B', backgroundColor: 'transparent', pointRadius: 4, tension: 0.3, borderDash: [5,3] },
-        { label: '순이익률',     data: [12.4,20.6,-0.1,10.3,14.7,11.1,12.9], borderColor: '#7C3AED', backgroundColor: 'transparent', pointRadius: 4, tension: 0.3, borderDash: [3,3] }
-      ]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      plugins: pctPlugin,
-      scales: pctScale()
-    }
-  });
-}
-
-// ── 재무상태표
-function buildBS() {
-  mkChart('bsC', {
-    type: 'bar',
-    data: {
-      labels: yrA,
-      datasets: [
-        { label: '자산총계', data: [1986,3336,3087,3965,5150,6103,7426], backgroundColor: 'rgba(59,130,246,0.65)' },
-        { label: '부채총계', data: [369,1090,843,1197,1523,1771,1905],   backgroundColor: 'rgba(239,68,68,0.65)' },
-        { label: '자본총계', data: [1616,2246,2244,2767,3627,4332,5521], backgroundColor: 'rgba(16,185,129,0.65)' }
-      ]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      plugins: pluginOpts,
-      scales: moneyScale()
-    }
-  });
-}
-
-// ── 재무비율
-function buildRatio() {
-  mkChart('ratioC', {
-    type: 'line',
-    data: {
-      labels: yrA,
-      datasets: [
-        { label: '유동비율',     data: [596,334,274,244,263,245,265],     borderColor: '#3B82F6', backgroundColor: 'rgba(59,130,246,0.04)', fill: true, tension: 0.35, pointRadius: 5 },
-        { label: '자기자본비율', data: [81.4,67.3,72.7,69.8,70.4,71.0,74.3], borderColor: '#10B981', backgroundColor: 'transparent', tension: 0.35, pointRadius: 5, borderDash: [6,3] },
-        { label: '부채비율',     data: [22.8,48.5,37.6,43.3,42.0,40.9,34.5],  borderColor: '#EF4444', backgroundColor: 'transparent', tension: 0.35, pointRadius: 5, borderDash: [3,3] },
-        { label: 'ROE',          data: [13.6,28.0,-0.1,18.9,23.7,16.2,21.1],   borderColor: '#F59E0B', backgroundColor: 'transparent', tension: 0.35, pointRadius: 5, borderDash: [8,3] }
-      ]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      plugins: pctPlugin,
-      scales: pctScale()
-    }
-  });
-
-  mkChart('profitC', {
-    type: 'line',
-    data: {
-      labels: yrF,
-      datasets: [
-        { label: '영업이익률', data: [11.7,22.5,-5.6,5.9,12.2,6.0,10.0],   borderColor: '#F59E0B', backgroundColor: 'rgba(245,158,11,0.05)', fill: true, tension: 0.3, pointRadius: 5,
-          segment: { borderDash: function(c){ return c.p1DataIndex === 6 ? [5,4] : undefined; } } },
-        { label: '순이익률',   data: [12.4,20.6,-0.1,10.3,14.7,11.1,12.9], borderColor: '#7C3AED', backgroundColor: 'transparent', tension: 0.3, pointRadius: 5, borderDash: [4,3] }
-      ]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      plugins: pctPlugin,
-      scales: pctScale()
-    }
-  });
-}
-
-// ── 현금흐름
-function buildCF() {
-  mkChart('cfC', {
-    type: 'bar',
-    data: {
-      labels: yr,
-      datasets: [
-        { label: '영업활동', data: [249,1088,-16,770,1232,1163],    backgroundColor: 'rgba(16,185,129,0.7)',  order: 2 },
-        { label: '투자활동', data: [-17,-878,176,-321,-1401,-1305], backgroundColor: 'rgba(239,68,68,0.65)', order: 2 },
-        { label: '기말현금', type: 'line', data: [554,764,924,1373,1204,1062],
-          borderColor: '#3B82F6', backgroundColor: 'transparent',
-          pointBackgroundColor: '#3B82F6', pointRadius: 5, tension: 0.35, order: 1 }
-      ]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      plugins: pluginOpts,
-      scales: moneyScale()
-    }
-  });
-}
-
-// 초기 로드
-window.addEventListener('DOMContentLoaded', function() { buildPL(); window._pl = true; });
-</script>
-<!-- Tooltip -->
-<div id="tooltip">
-  <div class="tip-formula" id="tip-formula"></div>
-  <div class="tip-desc"   id="tip-desc"></div>
-  <div class="tip-note"   id="tip-note"></div>
-</div>
-<script>
-var tt = document.getElementById('tooltip');
-document.querySelectorAll('.tip').forEach(function(el) {
-  el.addEventListener('mouseenter', function(e) {
-    document.getElementById('tip-formula').textContent = '계산식: ' + (el.dataset.formula || '');
-    document.getElementById('tip-desc').textContent   = el.dataset.desc   || '';
-    document.getElementById('tip-note').textContent   = el.dataset.note   || '';
-    tt.classList.add('show');
-    posTooltip(e);
-  });
-  el.addEventListener('mousemove', posTooltip);
-  el.addEventListener('mouseleave', function() { tt.classList.remove('show'); });
-});
-function posTooltip(e) {
-  var x = e.clientX + 14;
-  var y = e.clientY - tt.offsetHeight - 14;
-  // 오른쪽 벗어나면 왼쪽으로
-  if (x + tt.offsetWidth > window.innerWidth - 10) x = e.clientX - tt.offsetWidth - 14;
-  // 위로 벗어나면 아래로
-  if (y < 8) y = e.clientY + 18;
-  tt.style.left = x + 'px';
-  tt.style.top  = y + 'px';
-}
+  /* 같은 세션에서 이미 인증했다면 자동 해제 */
+  var saved = null;
+  try{ saved = sessionStorage.getItem(SK); }catch(e){}
+  if(saved){ say('세션 인증 확인 중…','inf'); open_(saved, true); }
+})();
 </script>
 </body>
 </html>
