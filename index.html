@@ -4,104 +4,401 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<meta name="generator" content="SCGLAB-SEALED-V1">
-<title>경영정보 허브</title>
-<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<title>에스씨지랩 경영정보 허브</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{min-height:100vh;display:flex;align-items:center;justify-content:center;
-  background:#0F172A;font-family:'Pretendard',sans-serif;padding:24px}
-.box{width:100%;max-width:380px;background:#fff;border-radius:14px;padding:34px 30px;
-  box-shadow:0 12px 40px rgba(0,0,0,.35)}
-.ico{width:46px;height:46px;border-radius:11px;background:linear-gradient(135deg,#2563EB,#1D4ED8);
-  display:flex;align-items:center;justify-content:center;font-size:21px;margin-bottom:17px}
-h1{font-size:17px;font-weight:800;color:#0F172A;letter-spacing:-.4px}
-.sub{font-size:12px;color:#64748B;margin-top:6px;line-height:1.6}
-label{display:block;font-size:11.5px;font-weight:600;color:#475569;margin:22px 0 7px}
-input{width:100%;padding:11px 13px;font-size:14px;font-family:'Pretendard',sans-serif;
-  border:1px solid #CBD5E1;border-radius:9px;outline:none;transition:.15s}
-input:focus{border-color:#2563EB;box-shadow:0 0 0 3px rgba(37,99,235,.13)}
-button{width:100%;margin-top:14px;padding:11px;font-size:13.5px;font-weight:700;
-  font-family:'Pretendard',sans-serif;color:#fff;background:#2563EB;border:none;
-  border-radius:9px;cursor:pointer;transition:.15s}
-button:hover:not(:disabled){background:#1D4ED8}
-button:disabled{background:#94A3B8;cursor:default}
-.msg{font-size:11.5px;margin-top:12px;min-height:17px;line-height:1.6}
-.err{color:#DC2626}.inf{color:#64748B}
-.foot{margin-top:22px;padding-top:15px;border-top:1px solid #F1F5F9;
-  font-size:10.5px;color:#94A3B8;line-height:1.7}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #F8FAFC;
+  font-family: 'Pretendard', sans-serif;
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+}
+
+/* ── Header */
+.header {
+  background: #0F172A;
+  padding: 22px 48px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.brand { display: flex; align-items: center; gap: 14px; }
+.logo {
+  width: 44px; height: 44px;
+  background: linear-gradient(135deg, #2563EB, #1D4ED8);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; color: white; font-weight: 800;
+  box-shadow: 0 2px 8px rgba(37,99,235,.25);
+}
+.brand-text h1 { font-size: 20px; font-weight: 800; color: #fff; letter-spacing: -.6px; }
+.brand-text p  { font-size: 12px; color: #64748B; font-family: 'Pretendard', sans-serif; margin-top: 2px; }
+.header-meta { font-size: 11px; color: #64748B; font-family: 'Pretendard', sans-serif; }
+
+/* ── Hero */
+.hero {
+  background: linear-gradient(160deg, #EFF6FF 0%, #F8FAFC 60%);
+  border-bottom: 1px solid #E2E8F0;
+  padding: 52px 48px 44px;
+
+}
+.hero h2 { font-size: 32px; font-weight: 800; color: #0F172A; letter-spacing: -1px; line-height: 1.25; }
+.hero p  { font-size: 15px; color: #64748B; margin-top: 12px; line-height: 1.7; max-width: 520px; letter-spacing: -.2px; }
+.hero-badges { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+.hero-badge {
+  font-size: 11px; font-family: 'Pretendard', sans-serif;
+  padding: 4px 12px; border-radius: 20px; font-weight: 500;
+}
+.b-blue   { background: #EFF6FF; color: #2563EB; border: 1px solid rgba(37,99,235,.15); }
+.b-green  { background: #ECFDF5; color: #059669; border: 1px solid rgba(5,150,105,.15); }
+.b-amber  { background: #FFFBEB; color: #D97706; border: 1px solid rgba(217,119,6,.15); }
+
+/* ── Main Grid */
+.main { padding: 44px 48px 60px; flex: 1; }
+.grid-label {
+  font-size: 13px; font-weight: 700; color: #0F172A;
+  letter-spacing: -.3px; margin-bottom: 18px;
+  display: flex; align-items: center; gap: 8px;
+}
+.grid-label::before {
+  content: ''; width: 4px; height: 16px; background: #2563EB; border-radius: 2px;
+}
+
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+
+/* ── Dashboard Card */
+.dash-card {
+  background: #fff;
+  border: 1px solid #E2E8F0;
+  border-radius: 16px;
+  padding: 30px;
+  text-decoration: none;
+  transition: transform .18s, box-shadow .18s, border-color .18s;
+  display: block;
+  box-shadow: 0 2px 8px rgba(15,23,42,.05);
+}
+.dash-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 32px rgba(15,23,42,.12);
+  border-color: #BFDBFE;
+}
+.card-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 16px; }
+.card-icon {
+  width: 48px; height: 48px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+}
+.icon-blue   { background: #EFF6FF; }
+.icon-green  { background: #ECFDF5; }
+.icon-purple { background: #F5F3FF; }
+.icon-indigo { background: #EEF2FF; }
+.card-tag {
+  font-size: 10px; font-family: 'Pretendard', sans-serif;
+  padding: 3px 10px; border-radius: 20px; font-weight: 500;
+  background: #F1F5F9; color: #64748B;
+}
+
+.card-title { font-size: 18px; font-weight: 700; color: #0F172A; letter-spacing: -.5px; }
+.card-desc  { font-size: 13px; color: #64748B; margin-top: 6px; line-height: 1.6; }
+
+.card-meta { margin-top: 20px; padding-top: 16px; border-top: 1px solid #F1F5F9; }
+.meta-row { display: flex; justify-content: space-between; align-items: center; }
+.meta-items { display: flex; gap: 6px; flex-wrap: wrap; }
+.meta-chip {
+  font-size: 11px; padding: 3px 9px; border-radius: 6px;
+  background: #F8FAFC; color: #64748B; border: 1px solid #E2E8F0;
+}
+.meta-chip.active { background: #EFF6FF; color: #2563EB; border-color: rgba(37,99,235,.2); }
+.arrow-btn {
+  font-size: 12px; font-weight: 600; color: #2563EB;
+  display: flex; align-items: center; gap: 4px;
+  background: #EFF6FF; padding: 6px 14px; border-radius: 8px;
+  transition: background .15s;
+}
+.dash-card:hover .arrow-btn { background: #DBEAFE; }
+
+/* ── Stats row */
+.stats-row {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 18px; margin-top: 20px;
+}
+.stat-box {
+  position: relative; overflow: hidden;
+  background: #fff; border: 1px solid #E2E8F0;
+  border-radius: 14px; padding: 22px 24px;
+  box-shadow: 0 2px 10px rgba(15,23,42,.05);
+  transition: transform .15s, box-shadow .15s;
+}
+.stat-box:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(15,23,42,.09); }
+.stat-box::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+}
+.stat-box:nth-child(1)::before { background: #2563EB; }
+.stat-box:nth-child(2)::before { background: #059669; }
+.stat-box:nth-child(3)::before { background: #D97706; }
+.stat-box:nth-child(4)::before { background: #7C3AED; }
+.stat-label { font-size: 11px; color: #94A3B8; text-transform: uppercase; letter-spacing: .8px; font-weight: 600; }
+.stat-val   { font-size: 30px; font-weight: 800; color: #0F172A; font-family: 'Pretendard', sans-serif;
+              margin-top: 8px; letter-spacing: -1.2px; line-height: 1; }
+.stat-sub   { font-size: 12px; color: #64748B; margin-top: 8px; font-weight: 500; }
+.stat-ref   { font-size: 11px; color: #94A3B8; margin-top: 8px; font-weight: 400; }
+.data-notice {
+  display: flex; align-items: center; gap: 10px;
+  background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: 10px;
+  padding: 12px 18px; margin-bottom: 24px;
+}
+.notice-dot {
+  width: 8px; height: 8px; border-radius: 50%; background: #2563EB;
+  flex-shrink: 0; box-shadow: 0 0 0 3px rgba(37,99,235,.15);
+}
+.notice-text { font-size: 13px; color: #1E40AF; line-height: 1.5; }
+.notice-text strong { font-weight: 700; }
+
+/* ── Footer */
+.footer {
+  background: #fff; border-top: 1px solid #E2E8F0;
+  padding: 20px 48px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-left  { font-size: 12px; color: #94A3B8; font-family: 'Pretendard', sans-serif; }
+.footer-right { font-size: 11px; color: #CBD5E1; }
+
+@media (max-width: 768px) {
+  .header, .hero, .main, .footer { padding-left: 20px; padding-right: 20px; }
+  .hero { flex-direction: column; align-items: flex-start; }
+  .hero h2 { font-size: 24px; }
+  .stats-row { grid-template-columns: 1fr 1fr; }
+}
 </style>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 </head>
 <body>
-<div class="box">
-  <div class="ico">🔒</div>
-  <h1>경영정보 허브</h1>
-  <div class="sub">SCGLAB 내부 자료입니다.<br>열람 비밀번호를 입력하십시오.</div>
-  <label for="pw">비밀번호</label>
-  <input id="pw" type="password" autocomplete="current-password" autofocus>
-  <button id="go">열기</button>
-  <div class="msg inf" id="msg"></div>
-  <div class="foot">AES-256-GCM · PBKDF2-SHA256 310,000회<br>봉인 2026.09.28 15:44</div>
+
+<!-- Header -->
+<div class="header">
+  <div class="brand">
+    <div class="logo">S</div>
+    <div class="brand-text">
+      <h1>에스씨지랩</h1>
+      <p>SCGLAB · 경영정보 허브</p>
+    </div>
+  </div>
+  <div class="header-meta" id="curDate"></div>
 </div>
 
-<script id="sealed" type="application/json">{"v":1,"alg":"AES-GCM","kdf":"PBKDF2-SHA256","iter":310000,"salt":"nXTavXMUNQKu+KdxAMHGsw==","iv":"6EvtRYHQgQZtCW36","ct":"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","gz":true,"sha256":"66e178bc7a95ee2aef8b1d8c8f4792ce927341f7ab7f0f851ee6eb1bf51d64cd"}</script>
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-text">
+    <h2>경영정보 대시보드</h2>
+    <p>에스씨지랩의 경영현황과 재무성과를 한눈에 확인하세요.<br>월별 실적부터 6개년 재무제표까지 통합 제공합니다.</p>
+    <div class="hero-badges">
+      <span class="hero-badge b-blue">2020 – 2026</span>
+      <span class="hero-badge b-green">매출 · 손익 · 재무비율</span>
+      <span class="hero-badge b-amber">거래처별 · 사업부별</span>
+    </div>
+  </div>
+</div>
+
+<!-- Main -->
+<div class="main">
+
+  <!-- 데이터 기준 안내 -->
+  <div class="data-notice">
+    <span class="notice-dot"></span>
+    <span class="notice-text"><strong>2026년 9월 실적 반영 완료</strong> · 2026년 추정값은 <strong>1~9월 실적 + 10~12월 4QF 추정</strong> 기준입니다(★4Q는 손익만 반영). <span style="opacity:.75">(재무제표·자금현황 8월말 기준)</span></span>
+  </div>
+
+  <!-- Key Metrics -->
+  <div class="stats-row" style="margin-bottom:36px; margin-top:0">
+    <div class="stat-box">
+      <div class="stat-label">2025 연간 매출</div>
+      <div class="stat-val">63.5억</div>
+      <div class="stat-ref">PATH 46.6억 · 빌링 16.9억</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">2025 영업이익</div>
+      <div class="stat-val">3.8억</div>
+      <div class="stat-ref">당기순이익 7.0억</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">2026 추정 매출</div>
+      <div class="stat-val">98.3억</div>
+      <div class="stat-ref">PATH 78.9억 · 빌링 19.4억 · 4QF</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">2026 추정 영업이익</div>
+      <div class="stat-val">7.0억</div>
+      <div class="stat-ref">당기순이익 10.1억 · 4QF</div>
+    </div>
+  </div>
+
+  <div class="grid-label">대시보드 선택</div>
+  <div class="card-grid">
+
+    <!-- 경영현황 카드 -->
+    <a href="scglab_dashboard_12m.html" class="dash-card">
+      <div class="card-header">
+        <div class="card-icon icon-blue">📊</div>
+        <span class="card-tag">월별 · 사업부별</span>
+      </div>
+      <div class="card-title">경영현황 대시보드</div>
+      <div class="card-desc">
+        <span id="mgmt-desc"></span>
+      </div>
+      <div class="card-meta">
+        <div class="meta-row">
+          <div class="meta-items">
+            <span class="meta-chip active">2026 월별</span>
+            <span class="meta-chip active">성과비교</span>
+            <span class="meta-chip active">추정(4QF)</span>
+            <span class="meta-chip">히스토리</span>
+          </div>
+          <div class="arrow-btn">열기 →</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- 재무제표 카드 -->
+    <a href="financial.html" class="dash-card">
+      <div class="card-header">
+        <div class="card-icon icon-green">📑</div>
+        <span class="card-tag">6개년 · 연간</span>
+      </div>
+      <div class="card-title">재무제표 대시보드</div>
+      <div class="card-desc">
+        2020~2025년 손익계산서, 재무상태표, 재무비율,<br>
+        현금흐름을 연도별로 비교 분석합니다.
+      </div>
+      <div class="card-meta">
+        <div class="meta-row">
+          <div class="meta-items">
+            <span class="meta-chip active">손익계산서</span>
+            <span class="meta-chip active">재무상태표</span>
+            <span class="meta-chip active">재무비율</span>
+            <span class="meta-chip active">현금흐름</span>
+          </div>
+          <div class="arrow-btn" style="background:#ECFDF5; color:#059669;">열기 →</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- 챗봇 카드 -->
+    <a href="chatbot.html" class="dash-card">
+      <div class="card-header">
+        <div class="card-icon icon-purple">🤖</div>
+        <span class="card-tag">AI · 질의응답</span>
+      </div>
+      <div class="card-title">경영 AI 챗봇</div>
+      <div class="card-desc">
+        매출·손익·거래처 데이터를 자연어로 질문하면<br>
+        Claude AI가 즉시 분석해서 답변합니다.
+      </div>
+      <div class="card-meta">
+        <div class="meta-row">
+          <div class="meta-items">
+            <span class="meta-chip active">실적 조회</span>
+            <span class="meta-chip active">비교 분석</span>
+            <span class="meta-chip active">재무비율</span>
+          </div>
+          <div class="arrow-btn" style="background:#F5F3FF;color:#7C3AED;">열기 →</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- CEO 경영평가 카드 -->
+    <a href="ceo-eval.html" class="dash-card">
+      <div class="card-header">
+        <div class="card-icon" style="background:#FFFBEB;">📋</div>
+        <span class="card-tag" style="background:#FEF3C7;color:#92400E;">TRIAL</span>
+      </div>
+      <div class="card-title">대표이사 경영평가 <span style="font-size:11px;color:#D97706;font-weight:600;">TRIAL</span></div>
+      <div class="card-desc">
+        KAIPER 그룹 기준 K-PI² 기반 성과급·연봉을<br>
+        PEI 등급별로 시뮬레이션합니다.
+      </div>
+      <div class="card-meta">
+        <div class="meta-row">
+          <div class="meta-items">
+            <span class="meta-chip active" style="background:#FFFBEB;color:#92400E;border-color:#FDE68A;">성과급</span>
+            <span class="meta-chip active" style="background:#FFFBEB;color:#92400E;border-color:#FDE68A;">연봉책정</span>
+            <span class="meta-chip active" style="background:#FFFBEB;color:#92400E;border-color:#FDE68A;">ESI</span>
+          </div>
+          <div class="arrow-btn" style="background:#FFFBEB;color:#D97706;">열기 →</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- 임직원 명부 카드 -->
+    <a href="roster.html" class="dash-card">
+      <div class="card-header">
+        <div class="card-icon icon-indigo">👥</div>
+        <span class="card-tag">인사 · 조직</span>
+      </div>
+      <div class="card-title">임직원 명부</div>
+      <div class="card-desc">
+        실·팀·파트별 임직원 명단과 조직도를<br>
+        한눈에 확인합니다. 매월 갱신됩니다.
+      </div>
+      <div class="card-meta">
+        <div class="meta-row">
+          <div class="meta-items">
+            <span class="meta-chip active" style="background:#EEF2FF;color:#4F46E5;border-color:#C7D2FE;">명단</span>
+            <span class="meta-chip active" style="background:#EEF2FF;color:#4F46E5;border-color:#C7D2FE;">조직도</span>
+            <span class="meta-chip active" style="background:#EEF2FF;color:#4F46E5;border-color:#C7D2FE;">부서조회</span>
+          </div>
+          <div class="arrow-btn" style="background:#EEF2FF;color:#4F46E5;">열기 →</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- 경영정보 연구소 카드 -->
+    <a href="lab.html" class="dash-card" style="border-color:#FDE68A;">
+      <div class="card-header">
+        <div class="card-icon" style="background:#FFFBEB;">🧪</div>
+        <span class="card-tag" style="background:#FEF3C7;color:#92400E;">참고자료</span>
+      </div>
+      <div class="card-title">경영정보 연구소 <span style="font-size:11px;color:#B45309;font-weight:600;">TRIAL</span></div>
+      <div class="card-desc">
+        가정을 얹어 계산한 시나리오 분석입니다.<br>
+        <b style="color:#B45309;">회사 공식 전망·계획이 아닙니다.</b>
+      </div>
+      <div class="card-meta">
+        <div class="meta-row">
+          <div class="meta-items">
+            <span class="meta-chip active" style="background:#FFFBEB;color:#92400E;border-color:#FDE68A;">리워드 단가</span>
+            <span class="meta-chip active" style="background:#FFFBEB;color:#92400E;border-color:#FDE68A;">27년 전망</span>
+            <span class="meta-chip" style="background:#FFFBEB;color:#B45309;border-color:#FDE68A;">가정 명세</span>
+          </div>
+          <div class="arrow-btn" style="background:#FFFBEB;color:#B45309;">열기 →</div>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <div class="footer-left">SCGLAB · 경영정보 허브 · 내부용</div>
+  <div class="footer-right">Powered by Claude</div>
+</div>
+
 <script>
-(function(){
-  "use strict";
-  var SK   = "scglab_seal_v1";
-  var D    = JSON.parse(document.getElementById('sealed').textContent);
-  var pwEl = document.getElementById('pw');
-  var btn  = document.getElementById('go');
-  var msg  = document.getElementById('msg');
 
-  function b2a(b){ var s='', u=new Uint8Array(b);
-    for(var i=0;i<u.length;i++) s+=String.fromCharCode(u[i]); return btoa(s); }
-  function a2b(a){ var s=atob(a), u=new Uint8Array(s.length);
-    for(var i=0;i<s.length;i++) u[i]=s.charCodeAt(i); return u; }
-  function say(t,cls){ msg.textContent=t; msg.className='msg '+(cls||'inf'); }
+  const d    = new Date();
+  const yyyy = d.getFullYear();
+  const mm   = String(d.getMonth()+1).padStart(2,'0');
+  const dd   = String(d.getDate()).padStart(2,'0');
+  document.getElementById('curDate').textContent = yyyy + '.' + mm + '.' + dd;
 
-  async function open_(pw, silent){
-    btn.disabled = true;
-    if(!silent) say('복호화 중입니다…','inf');
-    try{
-      var enc = new TextEncoder();
-      var base = await crypto.subtle.importKey('raw', enc.encode(pw), 'PBKDF2', false, ['deriveKey']);
-      var key  = await crypto.subtle.deriveKey(
-        { name:'PBKDF2', salt:a2b(D.salt), iterations:D.iter, hash:'SHA-256' },
-        base, { name:'AES-GCM', length:256 }, false, ['decrypt']);
-      var plain = await crypto.subtle.decrypt({ name:'AES-GCM', iv:a2b(D.iv) }, key, a2b(D.ct));
-      var bytes = new Uint8Array(plain);
-      if(D.gz){
-        if(typeof DecompressionStream === 'undefined')
-          throw new Error('이 브라우저는 압축 해제를 지원하지 않습니다. 최신 브라우저를 사용하십시오.');
-        var ds = new DecompressionStream('gzip');
-        var st = new Blob([bytes]).stream().pipeThrough(ds);
-        bytes = new Uint8Array(await new Response(st).arrayBuffer());
-      }
-      var html = new TextDecoder('utf-8').decode(bytes);
-      try{ sessionStorage.setItem(SK, pw); }catch(e){}
-      document.open(); document.write(html); document.close();
-    }catch(e){
-      btn.disabled = false;
-      if(silent){ try{ sessionStorage.removeItem(SK); }catch(e2){} say(''); }
-      else { say(e && e.message && e.message.indexOf('브라우저')>=0
-               ? e.message : '비밀번호가 올바르지 않습니다.', 'err');
-             pwEl.select(); }
-    }
-  }
+  // 경영현황 설명 — 연도 자동
+  const cy   = yyyy;          // 현재연도 (예: 2027)
+  const py   = cy - 1;        // 전년도   (예: 2026)
+  const hist = cy - 5;        // 히스토리 시작 (예: 2022)
+  document.getElementById('mgmt-desc').innerHTML =
+    cy + '년 월별 확정·계획부터 ' + py + '년 연간 손익,<br>' +
+    hist + '~' + cy + '년 5개년 히스토리까지 사업부별로 확인합니다.';
 
-  btn.addEventListener('click', function(){
-    var v = pwEl.value;
-    if(!v){ say('비밀번호를 입력하십시오.','err'); pwEl.focus(); return; }
-    open_(v, false);
-  });
-  pwEl.addEventListener('keydown', function(e){ if(e.key==='Enter') btn.click(); });
 
-  /* 같은 세션에서 이미 인증했다면 자동 해제 */
-  var saved = null;
-  try{ saved = sessionStorage.getItem(SK); }catch(e){}
-  if(saved){ say('세션 인증 확인 중…','inf'); open_(saved, true); }
-})();
+
 </script>
 </body>
 </html>
